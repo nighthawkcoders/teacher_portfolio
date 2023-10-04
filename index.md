@@ -1,4 +1,6 @@
 ---
-layout: home
-search_exclude: true
+title: Alien World
+layout: base
 ---
+
+Future home of Alien World

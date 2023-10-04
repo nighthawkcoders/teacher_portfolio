@@ -1,8 +1,8 @@
 ---
 layout: base
-permalink: /search/
 title: Search
 search_exclude: true
+permalink: /search/
 ---
 
 <!-- adapted from https://github.com/pmarsceill/just-the-docs -->
