@@ -22,7 +22,7 @@ The remainder of the Trimester we will build a game for N@tM on Nov 2nd.  Teache
 
 - Create GitHub repository: https://github.com/jm1021/alienWorld.git
 
-- Creat a 2D game to mimic Mario example
+- Create a 2D game to mimic Mario example
 
   - Obtain assets
     - [Alien World]({{site.baseurl}}/images/alien_planet.jpg)
