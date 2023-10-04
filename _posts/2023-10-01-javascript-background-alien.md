@@ -5,7 +5,7 @@ description: Use JavaScript without external libraries to loop background moving
 categories: [C5.0, C7.0, C7.6]
 image: /images/alien_planet.jpg
 type: tangibles
-courses: { compsci: {week: 0} }
+courses: { compsci: {week: 1} }
 ---
 
 {% assign alienPlanetFile = site.baseurl | append: page.image %}
