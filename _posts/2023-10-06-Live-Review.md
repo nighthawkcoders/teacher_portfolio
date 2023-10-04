@@ -3,7 +3,7 @@ toc: true
 comments: true
 layout: post
 title: Live Review Planning
-description: 
+description: This live review is the kickoff for the N@tM final.
 type: tangibles
 courses: { compsci: {week: 0} }
 ---
