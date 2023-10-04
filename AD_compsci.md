@@ -1,6 +1,6 @@
 ---
 layout: scheduleStudent
-title: Lab Notebook
+title: Time Box
 units: "1,2"
 course: compsci
 permalink: /compsci/

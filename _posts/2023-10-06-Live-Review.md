@@ -15,8 +15,8 @@ The remainder of the Trimester we will build a game for N@tM on Nov 2nd.  Teache
 > Outline comes from Canvas Assignment
 
 - Pick your team
-  - John M (Mr M)
-  - Shane L (Mr L)
+  - John (Mr M)
+  - Shane (Mr L)
   - Rohan J
   - Safin
 
