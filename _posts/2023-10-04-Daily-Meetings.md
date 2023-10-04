@@ -18,11 +18,12 @@ Learning outcome for week.  Start shared GitHub, learn how to plan.
   - Start a planning document: Plan.ipynb
   - Brain write
   - Explore assets for the game
-  
+
 - Thursday. Bring together very initial ideation from team.
+  - Consolidate ideas from Brain write
+  - Start Issue tracking
   - Pick a drawing tool (ie Figma or Canvas)
-  - Consolidate ideas  
-  - Assign initial roles
+  - Assign initial Issues
     - Plan, Description, Story Board
     - Background Coding experiments on Looping and Parallax.
     - Main Character. Coding experiments on Animation and Direction movements (wasd).  Character needs to move left to right, jump and squish.
