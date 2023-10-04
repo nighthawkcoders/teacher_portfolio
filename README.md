@@ -1,6 +1,6 @@
 # IMPORTANT
 
-- Go to settings and configure pages, deploy from the branch, and then select the root folder. IF YOU DO NOT DO THIS YOUR PAGE WILL NOT BUILD. 
+- Go to settings and configure pages, configure Build and Deployment for "GitHub Actions". IF YOU DO NOT DO THIS YOUR PAGE WILL NOT BUILD. 
 
 - Incase of issues with the user for your repository not being able to be resolved resulting in the page not building do the following: instead of the usual `repository: yourNameHere` in the repository section write `repository: usr/yourNameHere`
 
