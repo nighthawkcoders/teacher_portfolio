@@ -28,8 +28,9 @@ The remainder of the Trimester we will build a game for N@tM on Nov 2nd.  Teache
     - [Alien World]({{site.baseurl}}/images/alien_planet.jpg)
     - [Shadow Dog]({{site.baseurl}}/images/shadow_dog.png) and [Video Series](https://youtu.be/GFO_txvwK_c?t=14)
 
-  - Draw a scene or story board of scenes
-    - Pick a tool and train (ie Figma, Canva)
+- Outline Scenes.  See plan, but this is determined to be ongoing plan
+  - Scene work from Brain Write has begun
+  - Pick a tool (ie Figma, Canva), have assigned coder develop scenes
 
 ### Other elements not in Canvas
 
