@@ -10,16 +10,6 @@ courses: { compsci: {week: 1} }
 
 {% assign alienPlanetFile = site.baseurl | append: page.image %}
 
-<style>
-    body {
-        margin: 0;
-        overflow: hidden; /* Hide vertical scrollbar */
-    }
-    canvas {
-        display: block; /* Remove any default margin */
-    }
-</style>
-
 <!-- Prepare alienWorld DOM canvas -->
 <canvas id="alienWorld"></canvas>
 
@@ -48,8 +38,8 @@ backgroundImg.onload = function () {
     const canvasTop = (maxHeight - canvasHeight) / 2;
 
     // Set Style properties
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
     canvas.style.width = `${canvasWidth}px`;
     canvas.style.height = `${canvasHeight}px`;
 
@@ -74,6 +64,7 @@ backgroundImg.onload = function () {
         }
         draw() {
             ctx.drawImage(this.image, this.x, this.y);
+            ctx.drawImage(this.image, this.x + this.width, this.y);
         }
     }
 
