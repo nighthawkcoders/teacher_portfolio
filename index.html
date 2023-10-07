@@ -4,11 +4,11 @@ title: Alien World Background
 image: /images/alien_planet.jpg
 ---
 
-{% assign alienPlanetFile = site.baseurl | append: page.image %}
+{% assign backgroundFile = site.baseurl | append: page.image %}
 
-<!-- Prepare alienWorld DOM canvas -->
+<!-- Prepare DOM elements -->
 <button id="toggleCanvasEffect">Invert</button>
-<canvas id="alienWorld"></canvas>
+<canvas id="backgroundID"></canvas>
 
 <script>
 /* Toggle "canvas filter propery" 
@@ -30,7 +30,7 @@ toggleCanvasEffect.addEventListener("click", function () {
  * scroll image
 */
 // Prepare Canvas
-const canvas = document.getElementById("alienWorld");
+const canvas = document.getElementById("backgroundID");
 const ctx = canvas.getContext('2d');
 
 // Prepare Window extents
@@ -39,7 +39,7 @@ const maxHeight = window.innerHeight;
 
 // Prepare Image
 const backgroundImg = new Image();
-backgroundImg.src = '{{alienPlanetFile}}';
+backgroundImg.src = '{{backgroundFile}}';
 
 backgroundImg.onload = function () {
     // Setup constants from image
