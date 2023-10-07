@@ -9,19 +9,35 @@ sprite: /images/dogSprite.png
 {% assign backgroundFile = site.baseurl | append: page.image %}
 {% assign spriteImage = site.baseurl | append: page.sprite %}
 
+<style>
+    /* Position the controls absolutely within the container */
+    #controls {
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 2; /* Ensure the controls are on top of the dog canvas */
+    }
+
+</style>
+
 <!-- Prepare DOM elements -->
-<div id="controls"> <!-- raise events -->
-    <button id="toggleCanvasEffect">Invert</button>
-    <input type="radio" name="animation" id="idle" checked>
-    <label for="idle">Idle</label>
-    <input type="radio" name="animation" id="barking">
-    <label for="barking">Barking</label>
-    <input type="radio" name="animation" id="walking">
-    <label for="walking">Walking</label>
+<!-- Wrap both the dog canvas and controls in a container div -->
+<div id="canvasContainer">
+    <div id="controls"> <!-- Controls -->
+        <button id="toggleCanvasEffect">Invert</button>
+        <input type="radio" name="animation" id="idle" checked>
+        <label for="idle">Idle</label>
+        <input type="radio" name="animation" id="barking">
+        <label for="barking">Barking</label>
+        <input type="radio" name="animation" id="walking">
+        <label for="walking">Walking</label>
+    </div>
+    <canvas id="backgroundID">
+        <img id="backgroundImage" src="{{backgroundFile}}">
+    </canvas>
+    <canvas id="dogCanvas"></canvas> <!-- Dog canvas -->
 </div>
-<canvas id="backgroundID">
-    <img id="dogSprite" src="{{spriteImage}}">
-</canvas>
+
 
 <script>
 /* Toggle "canvas filter propery" 
@@ -74,9 +90,7 @@ backgroundImg.onload = function () {
     const SPRITE_HEIGHT = 144; // matches sprite pixel height
     const FRAME_LIMIT = 48;  // matches number of frames per sprite row, this code assume each row is same
 
-    const SCALE_FACTOR = 2;  // control size of sprite on canvas
-    canvas.width = SPRITE_WIDTH * SCALE_FACTOR;
-    canvas.height = SPRITE_HEIGHT * SCALE_FACTOR;
+    const SCALE_FACTOR = 10;  // control size of sprite on canvas
 
     // Set Dimensions to match the image width
     const canvasWidth = maxWidth;
