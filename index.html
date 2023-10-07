@@ -2,14 +2,26 @@
 layout: base
 title: Alien World Background
 image: /images/alien_planet.jpg
+sprite: /images/dogSprite.png
 ---
 
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.image %}
+{% assign spriteImage = site.baseurl | append: page.image %}
 
 <!-- Prepare DOM elements -->
-<button id="toggleCanvasEffect">Invert</button>
-<canvas id="backgroundID"></canvas>
+<div id="controls"> <!-- raise events -->
+    <button id="toggleCanvasEffect">Invert</button>
+    <input type="radio" name="animation" id="idle" checked>
+    <label for="idle">Idle</label>
+    <input type="radio" name="animation" id="barking">
+    <label for="barking">Barking</label>
+    <input type="radio" name="animation" id="walking">
+    <label for="walking">Walking</label>
+</div>
+<canvas id="backgroundID">
+    <img id="dogSprite" src="{{spriteImage}}">
+</canvas>
 
 <script>
 /* Toggle "canvas filter propery" 
@@ -30,9 +42,13 @@ toggleCanvasEffect.addEventListener("click", function () {
 /* Background part of Game
  * scrolling 
 */
-// Prepare Image
+// Prepare Background Image
 const backgroundImg = new Image();
 backgroundImg.src = '{{backgroundFile}}';  // Jekyll/Liquid puts filename here
+
+// Prepare Sprite Image
+const dogImg = new Image();
+dogImg.src = '{{spriteImage}}';
 
 // Prepare Canvas
 const canvas = document.getElementById("backgroundID");
@@ -43,11 +59,20 @@ const maxWidth = window.innerWidth;
 const maxHeight = window.innerHeight;
 
 backgroundImg.onload = function () {
-    // Setup constants from image
+    // Setup background constants from bakground image
     const WIDTH = backgroundImg.width;  // Image() width (meta data)
     const HEIGHT = backgroundImg.height; // Image() height
     const ASPECT_RATIO = WIDTH / HEIGHT;
     const ADJUST = 1.42 // visual layer adjust, use "1"" for perfect loop 
+
+    // Setup sprite constraints
+    const SPRITE_WIDTH = 160;  // matches sprite pixel width
+    const SPRITE_HEIGHT = 144; // matches sprite pixel height
+    const FRAME_LIMIT = 48;  // matches number of frames per sprite row, this code assume each row is same
+
+    const SCALE_FACTOR = 2;  // control size of sprite on canvas
+    canvas.width = SPRITE_WIDTH * SCALE_FACTOR;
+    canvas.height = SPRITE_HEIGHT * SCALE_FACTOR;
 
     // Set Dimensions to match the image width
     const canvasWidth = maxWidth;
@@ -66,7 +91,6 @@ backgroundImg.onload = function () {
   
     // Game speed is common game variable
     var gameSpeed = 2;
-
     // Layer is setup to support Parallax, multiple layers
     class Layer {
             constructor(image, speedRatio) {
@@ -88,13 +112,43 @@ backgroundImg.onload = function () {
         }
     }
 
+    class Dog extends Layer {
+        constructor(image, speedRatio) {
+            super(image, speedRatio);
+            this.minFrame = 0;
+            this.maxFrame = FRAME_LIMIT;
+            this.frameX = 0;
+            this.frameY = 0;
+        }
+
+        // draw dog object
+        draw(context) {
+            ctx.drawImage(
+                this.image,
+                this.frameX * SPRITE_WIDTH,
+                this.frameY * SPRITE_HEIGHT,
+                SPRITE_WIDTH,
+                SPRITE_HEIGHT,
+                this.x,
+                this.y,
+                this.width,
+                this.y
+            );
+        }
+    }
+
     // Background object
     var backgroundObj = new Layer(backgroundImg, 0.5)
+    var dogObj = new Dog(dogImg, 1)
 
     // Amimation loop
     function animation() {
         backgroundObj.update();
         backgroundObj.draw();
+
+        dogObj.update();
+        dogObj.draw();
+
         requestAnimationFrame(animation);  // cycle animation, recursion
     }
 
