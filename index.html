@@ -7,6 +7,7 @@ image: /images/alien_planet.jpg
 {% assign alienPlanetFile = site.baseurl | append: page.image %}
 
 <!-- Prepare alienWorld DOM canvas -->
+<button id="toggleFilterButton">Toggle Filter</button>
 <canvas id="alienWorld"></canvas>
 
 <script>
@@ -18,11 +19,13 @@ const ctx = canvas.getContext('2d');
 const maxWidth = window.innerWidth;
 const maxHeight = window.innerHeight;
 
+
 // Prepare Image
 const backgroundImg = new Image();
 backgroundImg.src = '{{alienPlanetFile}}';
 
 backgroundImg.onload = function () {
+    // Setup constants from image
     const WIDTH = backgroundImg.width;
     const HEIGHT = backgroundImg.height;
     const ASPECT_RATIO = WIDTH / HEIGHT;
@@ -72,6 +75,20 @@ backgroundImg.onload = function () {
         requestAnimationFrame(background);
     }
     background();
+
+    // Obtain canvas filter property (from _sass)
+    var isFilterEnabled = false;
+    const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
+    toggleFilterButton.addEventListener("click", function () {
+        if (isFilterEnabled) {
+            canvas.style.filter = "none";
+        } else {
+            canvas.style.filter = defaultFilter; // Apply the default filter value
+        }
+
+        isFilterEnabled = !isFilterEnabled;
+    });
+
 };
 
 
