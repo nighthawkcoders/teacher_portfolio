@@ -7,10 +7,28 @@ image: /images/alien_planet.jpg
 {% assign alienPlanetFile = site.baseurl | append: page.image %}
 
 <!-- Prepare alienWorld DOM canvas -->
-<button id="toggleFilterButton">Invert</button>
+<button id="toggleCanvasEffect">Invert</button>
 <canvas id="alienWorld"></canvas>
 
 <script>
+/* Toggle "canvas filter propery" 
+ * look in _sass/minima/dark-mode.scss
+*/
+var isFilterEnabled = true;
+const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
+toggleCanvasEffect.addEventListener("click", function () {
+    if (isFilterEnabled) {
+        canvas.style.filter = "none";  // remove filter
+    } else {
+        canvas.style.filter = defaultFilter; // Apply the default filter value
+    }
+
+    isFilterEnabled = !isFilterEnabled;  // switch boolean value
+});
+
+/* Manage background
+ * scroll image
+*/
 // Prepare Canvas
 const canvas = document.getElementById("alienWorld");
 const ctx = canvas.getContext('2d');
@@ -18,7 +36,6 @@ const ctx = canvas.getContext('2d');
 // Prepare Window extents
 const maxWidth = window.innerWidth;
 const maxHeight = window.innerHeight;
-
 
 // Prepare Image
 const backgroundImg = new Image();
@@ -75,21 +92,6 @@ backgroundImg.onload = function () {
         requestAnimationFrame(background);
     }
     background();
-
-    // Obtain canvas filter property (from _sass)
-    var isFilterEnabled = false;
-    const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
-    toggleFilterButton.addEventListener("click", function () {
-        if (isFilterEnabled) {
-            canvas.style.filter = "none";
-        } else {
-            canvas.style.filter = defaultFilter; // Apply the default filter value
-        }
-
-        isFilterEnabled = !isFilterEnabled;
-    });
-
 };
-
 
 </script>
