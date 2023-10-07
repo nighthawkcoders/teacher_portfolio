@@ -12,8 +12,6 @@ sprite: /images/dogSprite.png
 <style>
     #controls {
         position: relative;
-        top: 0;
-        left: 0;
         z-index: 2; /* Ensure the controls are on top of the dog canvas */
     }
 </style>
@@ -23,12 +21,13 @@ sprite: /images/dogSprite.png
 <div id="canvasContainer">
     <div id="controls"> <!-- Controls -->
         <button id="toggleCanvasEffect">Invert</button>
-        <input type="radio" name="animation" id="idle" checked>
-        <label for="idle">Idle</label>
-        <input type="radio" name="animation" id="barking">
+
+        <input type="radio" name="animation" id="barking" checked>
         <label for="barking">Barking</label>
         <input type="radio" name="animation" id="walking">
         <label for="walking">Walking</label>
+        <input type="radio" name="animation" id="idle">
+        <label for="idle">Idle</label>
     </div>
     <canvas id="backgroundID">
         <img id="backgroundImage" src="{{backgroundFile}}">
@@ -38,21 +37,6 @@ sprite: /images/dogSprite.png
 
 
 <script>
-/* Toggle "canvas filter propery" 
- * look in _sass/minima/dark-mode.scss
-*/
-var isFilterEnabled = true;
-const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
-toggleCanvasEffect.addEventListener("click", function () {
-    if (isFilterEnabled) {
-        canvas.style.filter = "none";  // remove filter
-    } else {
-        canvas.style.filter = defaultFilter; // Apply the default filter value
-    }
-
-    isFilterEnabled = !isFilterEnabled;  // switch boolean value
-});
-
 /* Background part of Game
  * scrolling 
 */
@@ -87,8 +71,7 @@ backgroundImg.onload = function () {
     const SPRITE_WIDTH = 160;  // matches sprite pixel width
     const SPRITE_HEIGHT = 144; // matches sprite pixel height
     const FRAME_LIMIT = 48;  // matches number of frames per sprite row, this code assume each row is same
-
-    const SCALE_FACTOR = 10;  // control size of sprite on canvas
+    const SCALE_FACTOR = 1;  // control size of sprite on canvas
 
     // Set Dimensions to match the image width
     const canvasWidth = maxWidth;
@@ -134,15 +117,26 @@ backgroundImg.onload = function () {
             this.minFrame = 0;
             this.maxFrame = FRAME_LIMIT;
             this.frameX = 0;
-            this.frameY = 0;
+            this.frameY = 1;
+        }
+
+        update() {
+            super.update();
+            this.x = -this.x
+            // update frameX of object
+            if (this.frameX < this.maxFrame) {
+                this.frameX++;
+            } else {
+                this.frameX = 0;
+            }
         }
 
         // draw dog object
         draw() {
             dogCanvas.width = SPRITE_WIDTH * SCALE_FACTOR;
             dogCanvas.height = SPRITE_HEIGHT * SCALE_FACTOR;
-            dogCanvas.style.width = `${maxWidth}px`;
-            dogCanvas.style.height = `${maxHeight}px`;
+            dogCanvas.style.width = `${dogCanvas.width}px`;
+            dogCanvas.style.height = `${dogCanvas.height}px`;
             dogCanvas.style.position = 'absolute';
             dogCanvas.style.left = '0';
             dogCanvas.style.top = '0';
@@ -181,6 +175,46 @@ backgroundImg.onload = function () {
 
     // Start animation process
     animation();
+
+    /* Toggle "canvas filter propery" 
+    * look in _sass/minima/dark-mode.scss
+    */
+    var isFilterEnabled = true;
+    const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
+    toggleCanvasEffect.addEventListener("click", function () {
+        if (isFilterEnabled) {
+            canvas.style.filter = "none";  // remove filter
+            dogCanvas.style.filter = "none";
+        } else {
+            canvas.style.filter = defaultFilter; // Apply the default filter value
+            dogCanvas.style.filter = defaultFilter; 
+        }
+
+        isFilterEnabled = !isFilterEnabled;  // switch boolean value
+    });
+    /* Control "dog action" 
+     * changes y value, the row in sprite
+    */
+    // update frameY of dog object, action from idle, bark, walk radio control
+    const controls = document.getElementById('controls');
+    controls.addEventListener('click', function (event) {
+        if (event.target.tagName === 'INPUT') {
+            const selectedAnimation = event.target.id;
+            switch (selectedAnimation) {
+                case 'barking':
+                    dogObj.frameY = 1;
+                    break;
+                case 'walking':
+                    dogObj.frameY = 2;
+                    break;
+                case 'idle':
+                    dogObj.frameY = 0;
+                    break;
+                default:
+                    break;
+            }
+        }
+    });
 };
 
 </script>
