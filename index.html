@@ -7,7 +7,7 @@ sprite: /images/dogSprite.png
 
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.image %}
-{% assign spriteImage = site.baseurl | append: page.image %}
+{% assign spriteImage = site.baseurl | append: page.sprite %}
 
 <!-- Prepare DOM elements -->
 <div id="controls"> <!-- raise events -->
@@ -53,6 +53,10 @@ dogImg.src = '{{spriteImage}}';
 // Prepare Canvas
 const canvas = document.getElementById("backgroundID");
 const ctx = canvas.getContext('2d');
+
+// Dog animation part
+const dogCanvas = document.createElement("canvas");
+const dogCtx = dogCanvas.getContext("2d");
 
 // Prepare Window extents related to viewport
 const maxWidth = window.innerWidth;
@@ -122,8 +126,16 @@ backgroundImg.onload = function () {
         }
 
         // draw dog object
-        draw(context) {
-            ctx.drawImage(
+        draw() {
+            dogCanvas.width = SPRITE_WIDTH * SCALE_FACTOR;
+            dogCanvas.height = SPRITE_HEIGHT * SCALE_FACTOR;
+            dogCanvas.style.width = `${maxWidth}px`;
+            dogCanvas.style.height = `${maxHeight}px`;
+            dogCanvas.style.position = 'absolute';
+            dogCanvas.style.left = '0';
+            dogCanvas.style.top = '0';
+
+            dogCtx.drawImage(
                 this.image,
                 this.frameX * SPRITE_WIDTH,
                 this.frameY * SPRITE_HEIGHT,
@@ -131,8 +143,8 @@ backgroundImg.onload = function () {
                 SPRITE_HEIGHT,
                 this.x,
                 this.y,
-                this.width,
-                this.y
+                dogCanvas.width,
+                dogCanvas.height
             );
         }
     }
@@ -140,6 +152,9 @@ backgroundImg.onload = function () {
     // Background object
     var backgroundObj = new Layer(backgroundImg, 0.5)
     var dogObj = new Dog(dogImg, 1)
+
+    // Append the dog canvas to the body
+    document.body.appendChild(dogCanvas);
 
     // Amimation loop
     function animation() {
