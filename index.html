@@ -71,7 +71,7 @@ backgroundImg.onload = function () {
     const SPRITE_WIDTH = 160;  // matches sprite pixel width
     const SPRITE_HEIGHT = 144; // matches sprite pixel height
     const FRAME_LIMIT = 48;  // matches number of frames per sprite row, this code assume each row is same
-    const SCALE_FACTOR = 1;  // control size of sprite on canvas
+    const SCALE_FACTOR = 5;  // control size of sprite on canvas
 
     // Set Dimensions to match the image width
     const canvasWidth = maxWidth;
@@ -117,12 +117,11 @@ backgroundImg.onload = function () {
             this.minFrame = 0;
             this.maxFrame = FRAME_LIMIT;
             this.frameX = 0;
-            this.frameY = 1;
+            this.frameY = 2;
         }
 
         update() {
             super.update();
-            this.x = -this.x
             // update frameX of object
             if (this.frameX < this.maxFrame) {
                 this.frameX++;
@@ -140,6 +139,7 @@ backgroundImg.onload = function () {
             dogCanvas.style.position = 'absolute';
             dogCanvas.style.left = '0';
             dogCanvas.style.top = '0';
+            
 
             dogCtx.drawImage(
                 this.image,
