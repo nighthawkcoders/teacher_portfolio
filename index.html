@@ -22,12 +22,12 @@ sprite: /images/dogSprite.png
     <div id="controls"> <!-- Controls -->
         <button id="toggleCanvasEffect">Invert</button>
 
-        <input type="radio" name="animation" id="barking" checked>
-        <label for="barking">Barking</label>
-        <input type="radio" name="animation" id="walking">
-        <label for="walking">Walking</label>
         <input type="radio" name="animation" id="idle">
         <label for="idle">Idle</label>
+        <input type="radio" name="animation" id="barking">
+        <label for="barking">Barking</label>
+        <input type="radio" name="animation" id="walking" checked>
+        <label for="walking">Walking</label>
     </div>
     <canvas id="backgroundID">
         <img id="backgroundImage" src="{{backgroundFile}}">
@@ -71,7 +71,7 @@ backgroundImg.onload = function () {
     const SPRITE_WIDTH = 160;  // matches sprite pixel width
     const SPRITE_HEIGHT = 144; // matches sprite pixel height
     const FRAME_LIMIT = 48;  // matches number of frames per sprite row, this code assume each row is same
-    const SCALE_FACTOR = 5;  // control size of sprite on canvas
+    const SCALE_FACTOR = 5;  // controls size of sprite on canvas
 
     // Set Dimensions to match the image width
     const canvasWidth = maxWidth;
@@ -89,7 +89,7 @@ backgroundImg.onload = function () {
     canvas.style.top = `${canvasTop}px`;
   
     // Game speed is common game variable
-    var gameSpeed = 2;
+    var gameSpeed = 6;
     // Layer is setup to support Parallax, multiple layers
     class Layer {
             constructor(image, speedRatio) {
@@ -117,7 +117,7 @@ backgroundImg.onload = function () {
             this.minFrame = 0;
             this.maxFrame = FRAME_LIMIT;
             this.frameX = 0;
-            this.frameY = 2;
+            this.frameY = 2;  // walking as default
         }
 
         update() {
@@ -201,14 +201,14 @@ backgroundImg.onload = function () {
         if (event.target.tagName === 'INPUT') {
             const selectedAnimation = event.target.id;
             switch (selectedAnimation) {
+                case 'idle':
+                    dogObj.frameY = 0;
+                    break;
                 case 'barking':
                     dogObj.frameY = 1;
                     break;
                 case 'walking':
                     dogObj.frameY = 2;
-                    break;
-                case 'idle':
-                    dogObj.frameY = 0;
                     break;
                 default:
                     break;
