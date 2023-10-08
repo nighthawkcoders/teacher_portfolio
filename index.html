@@ -14,6 +14,16 @@ sprite: /images/dogSprite.png
         position: relative;
         z-index: 2; /* Ensure the controls are on top of the dog canvas */
     }
+
+    /* Style the dog canvas to be the same size as the viewport */
+    #dogCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0; /* Place it below the background */
+    }
 </style>
 
 <!-- Prepare DOM elements -->
@@ -32,9 +42,7 @@ sprite: /images/dogSprite.png
     <canvas id="backgroundID">
         <img id="backgroundImage" src="{{backgroundFile}}">
     </canvas>
-    <canvas id="dogCanvas"></canvas> <!-- Dog canvas -->
 </div>
-
 
 <script>
 /* Background part of Game
@@ -61,44 +69,39 @@ const maxWidth = window.innerWidth;
 const maxHeight = window.innerHeight;
 
 backgroundImg.onload = function () {
-    // Setup background constants from bakground image
+    // Setup background constants from background image
     const WIDTH = backgroundImg.width;  // Image() width (meta data)
     const HEIGHT = backgroundImg.height; // Image() height
     const ASPECT_RATIO = WIDTH / HEIGHT;
-    const ADJUST = 1.42 // visual layer adjust, use "1"" for perfect loop 
-
-    // Setup sprite constraints
-    const SPRITE_WIDTH = 160;  // matches sprite pixel width
-    const SPRITE_HEIGHT = 144; // matches sprite pixel height
-    const FRAME_LIMIT = 48;  // matches number of frames per sprite row, this code assume each row is same
-    const SCALE_FACTOR = 5;  // controls size of sprite on canvas
+    const ADJUST = 1.42 // visual layer adjust, use "1"" for a perfect loop 
 
     // Set Dimensions to match the image width
     const canvasWidth = maxWidth;
     const canvasHeight = canvasWidth / ASPECT_RATIO;  // height is oriented by width
-    const canvasLeft = 0; // Start imagr from the left edge horizontally
+    const canvasLeft = 0; // Start image from the left edge horizontally
     const canvasTop = (maxHeight - canvasHeight) / 2;  // center image vertically
 
-    // Set Style properties
-    canvas.width = WIDTH/ADJUST;
-    canvas.height = HEIGHT/ADJUST;
+    // Set Style properties for the background canvas
+    canvas.width = WIDTH / ADJUST;
+    canvas.height = HEIGHT / ADJUST;
     canvas.style.width = `${canvasWidth}px`;
     canvas.style.height = `${canvasHeight}px`;
     canvas.style.position = 'absolute';
     canvas.style.left = `${canvasLeft}px`;
     canvas.style.top = `${canvasTop}px`;
-  
-    // Game speed is common game variable
-    var gameSpeed = 6;
-    // Layer is setup to support Parallax, multiple layers
+
+    // Game speed is a common game variable
+    var gameSpeed = 2;
+
+    // Layer is set up to support Parallax, multiple layers
     class Layer {
-            constructor(image, speedRatio) {
+        constructor(image, speedRatio) {
             this.x = 0;
             this.y = 0;
             this.width = WIDTH;
             this.height = HEIGHT;
-            this.image = image
-            this.speedRatio = speedRatio
+            this.image = image;
+            this.speedRatio = speedRatio;
             this.speed = gameSpeed * this.speedRatio;
             this.frame = 0;
         }
@@ -111,58 +114,72 @@ backgroundImg.onload = function () {
         }
     }
 
+    // Setup Dog sprite constraints
+    const SPRITE_WIDTH = 160;  // matches sprite pixel width
+    const SPRITE_HEIGHT = 144; // matches sprite pixel height
+    const SPRITE_FRAMES = 48;  // matches number of frames per sprite row; this code assumes each row is the same
+    const SPRITE_SCALE = 1;  // controls the size of the sprite on the canvas
+
     class Dog extends Layer {
         constructor(image, speedRatio) {
             super(image, speedRatio);
             this.minFrame = 0;
-            this.maxFrame = FRAME_LIMIT;
+            this.maxFrame = SPRITE_FRAMES;
             this.frameX = 0;
             this.frameY = 2;  // walking as default
+            this.dogX = canvasWidth; // Initialize the dog's x position to the right edge of the canvas
         }
-
+    
         update() {
-            super.update();
-            // update frameX of object
+            if (this.frameY == 2) {
+                this.dogX -= this.speed;  // Move the dog to the left
+                // Check if the dog has moved off the left edge of the canvas
+                if (this.dogX < -dogCanvas.width) {
+                    this.dogX = canvasWidth; // Reset the dog's x position to the right edge
+                }
+            }
+            // Update frameX of the object
             if (this.frameX < this.maxFrame) {
                 this.frameX++;
             } else {
                 this.frameX = 0;
             }
         }
-
-        // draw dog object
+    
+        // Draw dog object
         draw() {
-            dogCanvas.width = SPRITE_WIDTH * SCALE_FACTOR;
-            dogCanvas.height = SPRITE_HEIGHT * SCALE_FACTOR;
+            // Set fixed dimensions and position for the dogCanvas
+            dogCanvas.width = SPRITE_WIDTH * SPRITE_SCALE;
+            dogCanvas.height = SPRITE_HEIGHT * SPRITE_SCALE;
             dogCanvas.style.width = `${dogCanvas.width}px`;
             dogCanvas.style.height = `${dogCanvas.height}px`;
             dogCanvas.style.position = 'absolute';
-            dogCanvas.style.left = '0';
-            dogCanvas.style.top = '0';
-            
-
+            dogCanvas.style.left = `${this.dogX}px`; // Set the dog's left position based on its x-coordinate
+            dogCanvas.style.top = `${canvasHeight}px`;
+    
             dogCtx.drawImage(
                 this.image,
                 this.frameX * SPRITE_WIDTH,
                 this.frameY * SPRITE_HEIGHT,
                 SPRITE_WIDTH,
                 SPRITE_HEIGHT,
-                this.x,
-                this.y,
+                0,
+                0,
                 dogCanvas.width,
                 dogCanvas.height
             );
         }
     }
+    
 
     // Background object
-    var backgroundObj = new Layer(backgroundImg, 0.5)
-    var dogObj = new Dog(dogImg, 1)
+    var backgroundObj = new Layer(backgroundImg, 0.2);
+    var dogObj = new Dog(dogImg, 0.5);
 
     // Append the dog canvas to the body
     document.body.appendChild(dogCanvas);
 
-    // Amimation loop
+    // Animation loop
     function animation() {
         backgroundObj.update();
         backgroundObj.draw();
@@ -176,7 +193,7 @@ backgroundImg.onload = function () {
     // Start animation process
     animation();
 
-    /* Toggle "canvas filter propery" 
+    /* Toggle "canvas filter property" 
     * look in _sass/minima/dark-mode.scss
     */
     var isFilterEnabled = true;
@@ -216,5 +233,4 @@ backgroundImg.onload = function () {
         }
     });
 };
-
 </script>
