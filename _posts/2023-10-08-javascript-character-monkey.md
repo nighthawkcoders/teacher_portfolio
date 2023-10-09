@@ -58,12 +58,10 @@ courses: { compsci: {week: 1} }
 
         // a class to store the differences in the animations to make it clear what the animation changes are for
         class AnimationType{
-            constructor(spriteWidth = SPRITE_WIDTH, spriteHeight = SPRITE_HEIGHT, 
-                maxFrame = FRAME_LIMIT, initFrameX = 0){
-                this.spriteWidth = spriteWidth;
-                this.spriteHeight = spriteHeight;
+            constructor(maxFrame = FRAME_LIMIT, initFrameX = 0, animationDelay = 75){
                 this.maxFrame = maxFrame;
                 this.initFrameX = initFrameX;
+                this.animationDelay = animationDelay;
             }
         }
 
@@ -82,10 +80,10 @@ courses: { compsci: {week: 1} }
             draw(context) {
                 context.drawImage(
                     this.image,
-                    this.frameX * this.animationType.spriteWidth,
-                    this.frameY * this.animationType.spriteHeight,
-                    this.animationType.spriteWidth,
-                    this.animationType.spriteHeight,
+                    this.frameX * SPRITE_WIDTH,
+                    this.frameY * SPRITE_HEIGHT,
+                    SPRITE_WIDTH,
+                    SPRITE_HEIGHT,
                     this.x,
                     this.y,
                     canvas.width,
@@ -110,8 +108,8 @@ courses: { compsci: {week: 1} }
 
         // Make the animations that deviate from the default use a class 
         // to make it more readible what the changes are doing
-        const jumpRightAnimation = new AnimationType(undefined, undefined, 7, undefined); // frames go from 0 to 7 but everything else is the same
-        const jumpLeftAnimation = new AnimationType(undefined, undefined, undefined, 8); // frames go from 8 to 14 but everything else is the same
+        const jumpRightAnimation = new AnimationType(7, undefined, undefined); // frames go from 0 to 7 but everything else is the same
+        const jumpLeftAnimation = new AnimationType(undefined, 8, undefined); // frames go from 8 to 14 but everything else is the same
 
         // update frameY of monkey object, action from radio controls
         const controls = document.getElementById('controls');
@@ -141,7 +139,6 @@ courses: { compsci: {week: 1} }
             }
         });
 
-        const animationDelay = 75;
         // Animation recursive control function
         function animate() {
             // Clears the canvas to remove the previous frame.
@@ -156,7 +153,7 @@ courses: { compsci: {week: 1} }
             // Uses `requestAnimationFrame` to synchronize the animation loop with the display's refresh rate,
             // ensuring smooth visuals.
             requestAnimationFrame(function() {
-                setTimeout(animate, animationDelay); // Adjust the delay (in milliseconds) to control the frame rate.
+                setTimeout(animate, monkey.animationType.animationDelay); // Adjust the delay (in milliseconds) to control the frame rate.
             });
         }
 
