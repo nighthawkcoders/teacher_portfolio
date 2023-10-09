@@ -58,7 +58,7 @@ courses: { compsci: {week: 1} }
 
         // a class to store the differences in the animations to make it clear what the animation changes are for
         class AnimationType{
-            constructor(maxFrame = FRAME_LIMIT, initFrameX = 0, animationDelay = 75){
+            constructor(initFrameX = 0, maxFrame = FRAME_LIMIT, animationDelay = 75){
                 this.maxFrame = maxFrame;
                 this.initFrameX = initFrameX;
                 this.animationDelay = animationDelay;
@@ -108,8 +108,8 @@ courses: { compsci: {week: 1} }
 
         // Make the animations that deviate from the default use a class 
         // to make it more readible what the changes are doing
-        const jumpRightAnimation = new AnimationType(7, undefined, undefined); // frames go from 0 to 7 but everything else is the same
-        const jumpLeftAnimation = new AnimationType(undefined, 8, undefined); // frames go from 8 to 14 but everything else is the same
+        const jumpRightAnimation = new AnimationType(undefined, 7, undefined); // frames go from 0 to 7 but everything else is the same
+        const jumpLeftAnimation = new AnimationType(8, undefined, undefined); // frames go from 8 to 14 but everything else is the same
 
         // update frameY of monkey object, action from radio controls
         const controls = document.getElementById('controls');
