@@ -18,6 +18,8 @@ courses: { compsci: {week: 1} }
         <label for="walkLeft">Walk Left</label>
         <input type="radio" name="animation" id="jumpRight">
         <label for="jumpRight">Jump Right</label>
+        <input type="radio" name="animation" id="jumpLeft">
+        <label for="jumpLeft">Jump Left</label>
     </div>
     <div>
         <canvas id="spriteContainer"> <!-- Within the base div is a canvas. An HTML canvas is used only for graphics. It allows the user to access some basic functions related to the image created on the canvas (including animation) -->
@@ -54,13 +56,24 @@ courses: { compsci: {week: 1} }
         canvas.width = SPRITE_WIDTH * SCALE_FACTOR;
         canvas.height = SPRITE_HEIGHT * SCALE_FACTOR;
 
+        // a class to store the differences in the animations to make it clear what the animation changes are for
+        class AnimationType{
+            constructor(spriteWidth = SPRITE_WIDTH, spriteHeight = SPRITE_HEIGHT, 
+                maxFrame = FRAME_LIMIT, initFrameX = 0){
+                this.spriteWidth = spriteWidth;
+                this.spriteHeight = spriteHeight;
+                this.maxFrame = maxFrame;
+                this.initFrameX = initFrameX;
+            }
+        }
+
         class Monkey {
             constructor() {
                 this.image = document.getElementById("monkeySprite");
                 this.x = 0;
                 this.y = 0;
                 this.minFrame = 0;
-                this.maxFrame = FRAME_LIMIT;
+                this.animationType = new AnimationType();
                 this.frameX = 0;
                 this.frameY = 0;
             }
@@ -69,10 +82,10 @@ courses: { compsci: {week: 1} }
             draw(context) {
                 context.drawImage(
                     this.image,
-                    this.frameX * SPRITE_WIDTH,
-                    this.frameY * SPRITE_HEIGHT,
-                    SPRITE_WIDTH,
-                    SPRITE_HEIGHT,
+                    this.frameX * this.animationType.spriteWidth,
+                    this.frameY * this.animationType.spriteHeight,
+                    this.animationType.spriteWidth,
+                    this.animationType.spriteHeight,
                     this.x,
                     this.y,
                     canvas.width,
@@ -82,16 +95,23 @@ courses: { compsci: {week: 1} }
 
             // update frameX of object
             update() {
-                if (this.frameX < this.maxFrame) {
+                // this sprite sheet uses a variable number of frames for different animations
+                if (this.frameX < this.animationType.maxFrame) {
                     this.frameX++;
                 } else {
-                    this.frameX = 0;
+                    // the start frame of the animations changes in this sprite sheet
+                    this.frameX = this.animationType.initFrameX;
                 }
             }
         }
 
         // Monkey object
         const monkey = new Monkey();
+
+        // Make the animations that deviate from the default use a class 
+        // to make it more readible what the changes are doing
+        const jumpRightAnimation = new AnimationType(undefined, undefined, 7, undefined); // frames go from 0 to 7 but everything else is the same
+        const jumpLeftAnimation = new AnimationType(undefined, undefined, undefined, 8); // frames go from 8 to 14 but everything else is the same
 
         // update frameY of monkey object, action from radio controls
         const controls = document.getElementById('controls');
@@ -101,16 +121,20 @@ courses: { compsci: {week: 1} }
                 switch (selectedAnimation) {
                     case 'walkRight':
                         monkey.frameY = 0;
-                        monkey.maxFrame = 15;
+                        monkey.animationType = new AnimationType();
                         break;
                     case 'walkLeft':
                         monkey.frameY = 1;
-                        monkey.maxFrame = 15;
+                        monkey.animationType = new AnimationType();
                         break;
                     case 'jumpRight':
                         monkey.frameY = 2;
-                        monkey.maxFrame = 7;
+                        monkey.animationType = jumpRightAnimation;
                         break;
+                    case 'jumpLeft':
+                        // this animation is on the same line as jumpRight
+                        monkey.frameY = 2;
+                        monkey.animationType = jumpLeftAnimation;
                     default:
                         break;
                 }
@@ -128,10 +152,6 @@ courses: { compsci: {week: 1} }
 
             // Updates the `frameX` property to prepare for the next frame in the sprite sheet.
             monkey.update();
-
-            // Uses `requestAnimationFrame` to synchronize the animation loop with the display's refresh rate,
-            // ensuring smooth visuals.
-            //requestAnimationFrame(animate);
 
             // Uses `requestAnimationFrame` to synchronize the animation loop with the display's refresh rate,
             // ensuring smooth visuals.
