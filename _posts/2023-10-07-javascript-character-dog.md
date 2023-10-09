@@ -1,6 +1,6 @@
 ---
 layout: base
-title: Shadow Dog Animation
+title: Dog Animation
 description: Use JavaScript without external libraries to animate a sprite. Layer is in OOP style.
 image: /images/dogSprite.png
 type: tangibles

@@ -1,8 +1,10 @@
 ---
 layout: base
-title: Alien World
+title: Alien World - Dog and Background
 image: /images/alien_planet.jpg
 sprite: /images/dogSprite.png
+type: hacks
+courses: { compsci: {week: 1} }
 ---
 
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
