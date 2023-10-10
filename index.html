@@ -39,7 +39,7 @@ sprite: /images/dogSprite.png
     // Prepare Background Image
     const backgroundImg = new Image();
     backgroundImg.src = '{{backgroundFile}}';  // Jekyll/Liquid puts filename here
-    // Prepare Background Canvas
+    // Prepare HTML for Background Canvas
     const backgroundCanvas = document.createElement("canvas");
     backgroundCanvas.id = "background";
     document.body.appendChild(backgroundCanvas);
@@ -47,7 +47,7 @@ sprite: /images/dogSprite.png
     // Prepare Dog Image
     const dogImg = new Image();
     dogImg.src = '{{spriteImage}}';
-    // Prepare Dog Canvas
+    // Prepare HTML for Dog Canvas
     const dogCanvas = document.createElement("canvas");
     dogCanvas.id = "dog";
     document.body.appendChild(dogCanvas);
