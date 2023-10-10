@@ -14,24 +14,15 @@ sprite: /images/dogSprite.png
         position: relative;
         z-index: 2; /* Ensure the controls are on top of the dog canvas */
     }
-
-    /* Style the dog canvas to be the same size as the viewport */
-    #dogCanvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0; /* Place it below the background */
-    }
 </style>
 
 <!-- Prepare DOM elements -->
 <!-- Wrap both the dog canvas and controls in a container div -->
 <div id="canvasContainer">
     <div id="controls"> <!-- Controls -->
+        <!-- Background controls -->
         <button id="toggleCanvasEffect">Invert</button>
-
+        <!-- Dog controls -->
         <input type="radio" name="animation" id="idle">
         <label for="idle">Idle</label>
         <input type="radio" name="animation" id="barking">
@@ -39,28 +30,27 @@ sprite: /images/dogSprite.png
         <input type="radio" name="animation" id="walking" checked>
         <label for="walking">Walking</label>
     </div>
-    <canvas id="background">
-        <img id="backgroundImage" src="{{backgroundFile}}">
-    </canvas>
 </div>
 
 <script type="module">
-    import Background, {initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
+
+    import {initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
     
-    /* Background part of Game
-    * scrolling 
-    */
     // Prepare Background Image
     const backgroundImg = new Image();
     backgroundImg.src = '{{backgroundFile}}';  // Jekyll/Liquid puts filename here
     // Prepare Background Canvas
-    const backgroundID = document.getElementById("background");
+    const backgroundCanvas = document.createElement("canvas");
+    backgroundCanvas.id = "background";
+    document.body.appendChild(backgroundCanvas);
 
     // Prepare Dog Image
     const dogImg = new Image();
     dogImg.src = '{{spriteImage}}';
-    // Dog animation part
+    // Prepare Dog Canvas
     const dogCanvas = document.createElement("canvas");
+    dogCanvas.id = "dog";
+    document.body.appendChild(dogCanvas);
     const dogCtx = dogCanvas.getContext("2d");
 
     backgroundImg.onload = function () {
@@ -68,10 +58,7 @@ sprite: /images/dogSprite.png
         var gameSpeed = 2;
 
         // Background object(s)
-        var backgroundObj = initBackground(backgroundID, backgroundImg, gameSpeed, 0.2);
-
-        // Append the dog canvas to the body
-        document.body.appendChild(dogCanvas);
+        var backgroundObj = initBackground(backgroundCanvas, backgroundImg, gameSpeed, 0.2);
 
         // Game loop
         function gameLoop() {
@@ -79,21 +66,21 @@ sprite: /images/dogSprite.png
             backgroundObj.draw();
 
             requestAnimationFrame(gameLoop);  // cycle game, aka recursion
+        }
+        // Start game
+        gameLoop();
     }
 
-    // Start game
-    gameLoop();
-
     /* Toggle "canvas filter property" 
-    * look in _sass/minima/dark-mode.scss
+    * look in _sass/minima/dark-mode.scss  for default canvas filter
     */
     var isFilterEnabled = true;
     const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
     toggleCanvasEffect.addEventListener("click", function () {
         if (isFilterEnabled) {
-            backgroundID.style.filter = "none";  // remove filter
+            backgroundCanvas.style.filter = "none";  // remove filter
         } else {
-            backgroundID.style.filter = defaultFilter; // Apply the default filter value
+            backgroundCanvas.style.filter = defaultFilter; // Apply the default filter value
         }
         isFilterEnabled = !isFilterEnabled;  // switch boolean value
     });
@@ -121,5 +108,5 @@ sprite: /images/dogSprite.png
             }
         }
     });
-};
+
 </script>
