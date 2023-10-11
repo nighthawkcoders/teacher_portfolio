@@ -1,59 +1,72 @@
+import Layer from './Layer.js';
+
 class Character extends Layer {
-    constructor(image, speedRatio) {
-        super(image, speedRatio);
+    constructor(characterCanvas, image, gameSpeed, speedRatio,
+        spriteWidth, spriteHeight, spriteScale, canvasWidth, canvasHeight) {
+        super(image, gameSpeed, speedRatio);
+        this.characterCanvas = characterCanvas;
+        this.characterCtx = characterCanvas.getContext('2d');
+        this.spriteWidth = spriteWidth;
+        this.spriteHeight = spriteHeight;
+        this.spriteScale = spriteScale;
+        this.canvasWidth = canvasWidth;
+        this.canvasHeight = canvasHeight;
         this.minFrame = 0;
-        this.maxFrame = SPRITE_FRAMES;
-        this.frameX = 0;
-        this.frameY = 2;  // walking as default
-        this.dogX = canvasWidth; // Initialize the dog's x position to the right edge of the canvas
+        this.maxFrame = 0;
+        this.frameX = 0;  // Starting frame of the animation
+        this.frameY = 0;  // Default animation for the character
+        // Initialize the character's default position on the canvas
+        this.charX = 0; 
+        this.charY = 0;
     }
 
-    update() {
-        if (this.frameY == 2) {
-            this.dogX -= this.speed;  // Move the dog to the left
-            // Check if the dog has moved off the left edge of the canvas
-            if (this.dogX < -dogCanvas.width) {
-                this.dogX = canvasWidth; // Reset the dog's x position to the right edge
-            }
-        }
-        // Update frameX of the object
-        if (this.frameX < this.maxFrame) {
-            this.frameX++;
-        } else {
-            this.frameX = 0;
-        }
+    setMinFrame(minFrame){
+        this.minFrame = minFrame;
+    }
+
+    setMaxFrame(maxFrame){
+        this.maxFrame = maxFrame;
+    }
+
+    setFrameX(frameX){
+        this.frameX = frameX;
+    }
+
+    setFrameY(frameY){
+        this.frameY = frameY;
+    }
+
+    setCharX(charX){
+        this.charX = charX;
+    }
+
+    setCharY(charY){
+        this.charY = charY;
     }
 
     // Draw dog object
     draw() {
         // Set fixed dimensions and position for the dogCanvas
-        dogCanvas.width = SPRITE_WIDTH * SPRITE_SCALE;
-        dogCanvas.height = SPRITE_HEIGHT * SPRITE_SCALE;
-        dogCanvas.style.width = `${dogCanvas.width}px`;
-        dogCanvas.style.height = `${dogCanvas.height}px`;
-        dogCanvas.style.position = 'absolute';
-        dogCanvas.style.left = `${this.dogX}px`; // Set the dog's left position based on its x-coordinate
-        dogCanvas.style.top = `${canvasHeight}px`;
+        this.characterCanvas.width = this.spriteWidth * this.spriteScale;
+        this.characterCanvas.height = this.spriteHeight * this.spriteScale;
+        this.characterCanvas.style.width = `${this.characterCanvas.width}px`;
+        this.characterCanvas.style.height = `${this.characterCanvas.height}px`;
+        this.characterCanvas.style.position = 'absolute';
+        this.characterCanvas.style.left = `${this.charX}px`; // Set the dog's left position based on its x-coordinate
+        this.characterCanvas.style.top = `${this.charY}px`; // Set the dog's up and down position based on its y-coordinate
 
-        dogCtx.drawImage(
+        this.characterCtx.drawImage(
             this.image,
-            this.frameX * SPRITE_WIDTH,
-            this.frameY * SPRITE_HEIGHT,
-            SPRITE_WIDTH,
-            SPRITE_HEIGHT,
+            this.frameX * this.spriteWidth,
+            this.frameY * this.spriteHeight,
+            this.spriteWidth,
+            this.spriteHeight,
             0,
             0,
-            dogCanvas.width,
-            dogCanvas.height
+            this.characterCanvas.width,
+            this.characterCanvas.height
         );
     }
 }
 
-export function initDog(imageUrl, canvasId, canvasWidth, canvasHeight, characterType) {
-    // Setup Dog sprite constraints
-    const SPRITE_WIDTH = 160;  // matches sprite pixel width
-    const SPRITE_HEIGHT = 144; // matches sprite pixel height
-    const SPRITE_FRAMES = 48;  // matches number of frames per sprite row; this code assumes each row is the same
-    const SPRITE_SCALE = 1;  // controls the size of the sprite on the canvas
-
-}
+export default Character;

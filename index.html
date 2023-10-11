@@ -2,12 +2,12 @@
 layout: base
 title: Alien World
 image: /images/alien_planet.jpg
-sprite: /images/dogSprite.png
+dogSprite: /images/dogSprite.png
 ---
 
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.image %}
-{% assign spriteImage = site.baseurl | append: page.sprite %}
+{% assign dogSpriteImage = site.baseurl | append: page.dogSprite %}
 
 <style>
     #controls {
@@ -35,6 +35,7 @@ sprite: /images/dogSprite.png
 <script type="module">
 
     import {initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
+    import {initDog} from '{{site.baseurl}}/assets/js/alienWorld/Character_Dog.js';
     
     // Prepare Background Image
     const backgroundImg = new Image();
@@ -46,7 +47,7 @@ sprite: /images/dogSprite.png
 
     // Prepare Dog Image
     const dogImg = new Image();
-    dogImg.src = '{{spriteImage}}';
+    dogImg.src = '{{dogSpriteImage}}';
     // Prepare HTML for Dog Canvas
     const dogCanvas = document.createElement("canvas");
     dogCanvas.id = "dog";
@@ -60,10 +61,45 @@ sprite: /images/dogSprite.png
         // Background object(s)
         var backgroundObj = initBackground(backgroundCanvas, backgroundImg, gameSpeed, 0.2);
 
+        // Character objects
+        var dogObj = initDog(dogCanvas, dogImg, gameSpeed, 0.2, 160, 144, 1, 
+        window.innerWidth, window.innerHeight);
+        dogObj.setMaxFrame(48);
+        dogObj.setCharX(window.innerWidth);
+        dogObj.setCharY(window.innerHeight / 1.5);
+        dogObj.setFrameY(2);
+
+        /* Control "dog action" 
+        * changes y value, the row in sprite
+        */
+        // update frameY of dog object, action from idle, bark, walk radio control
+        const controls = document.getElementById('controls');
+        controls.addEventListener('click', function (event) {
+            if (event.target.tagName === 'INPUT') {
+                const selectedAnimation = event.target.id;
+                switch (selectedAnimation) {
+                    case 'idle':
+                        dogObj.setFrameY(0);
+                        break;
+                    case 'barking':
+                        dogObj.setFrameY(1);
+                        break;
+                    case 'walking':
+                        dogObj.setFrameY(2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
         // Game loop
         function gameLoop() {
             backgroundObj.update();
             backgroundObj.draw();
+
+            dogObj.update();
+            dogObj.draw();
 
             requestAnimationFrame(gameLoop);  // cycle game, aka recursion
         }
@@ -79,34 +115,12 @@ sprite: /images/dogSprite.png
     toggleCanvasEffect.addEventListener("click", function () {
         if (isFilterEnabled) {
             backgroundCanvas.style.filter = "none";  // remove filter
+            dogCanvas.style.filter = "none";
         } else {
             backgroundCanvas.style.filter = defaultFilter; // Apply the default filter value
+            dogCanvas.style.filter = defaultFilter;
         }
         isFilterEnabled = !isFilterEnabled;  // switch boolean value
-    });
-
-    /* Control "dog action" 
-     * changes y value, the row in sprite
-    */
-    // update frameY of dog object, action from idle, bark, walk radio control
-    const controls = document.getElementById('controls');
-    controls.addEventListener('click', function (event) {
-        if (event.target.tagName === 'INPUT') {
-            const selectedAnimation = event.target.id;
-            switch (selectedAnimation) {
-                case 'idle':
-                    //dogObj.frameY = 0;
-                    break;
-                case 'barking':
-                    //dogObj.frameY = 1;
-                    break;
-                case 'walking':
-                    //dogObj.frameY = 2;
-                    break;
-                default:
-                    break;
-            }
-        }
     });
 
 </script>
