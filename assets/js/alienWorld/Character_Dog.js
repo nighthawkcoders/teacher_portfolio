@@ -27,40 +27,46 @@ export class Character_Dog extends Character{
 // Can add specific initialization parameters for the dog here
 // In this case the dog is following the default character initialization
 export function initDog(canvasId, image, gameSpeed, speedRatio, controls){
-    // Sprite properties
+    // Sprite frame properties
     const width = 160;
     const height = 144;
+
+    // Scale of Sprite on Screen
     const scale = 1;
 
-    // Create character
+    // Create the Dog character
     var dog = new Character_Dog(canvasId, image, gameSpeed, speedRatio,
         width, height, scale);
 
-    // Dog Frame position and extents
+    // Dog Frame position and Frame extents
     dog.setFrameY(2);
     dog.setMaxFrame(47);
 
-    // Dog Position
+    // Dog Screen Position
     dog.setX(window.innerWidth);
     dog.setY(window.innerHeight / 1.5);
 
     /* Dog Control 
     * changes y value, the row in sprite
+    * change number of frames in row
     */
-    // update frameY of dog object, action from idle, bark, walk radio control
+    // update action as either idle, bark, walk
     controls.addEventListener('click', function (event) {
         if (event.target.tagName === 'INPUT') {
             const selectedAnimation = event.target.id;
             switch (selectedAnimation) {
                 case 'idle':
-                    dog.frameY = 0;
+                    dog.setFrameY(0);
+                    dog.setMaxFrame(47);
                     break;
                 case 'barking':
-                    dog.frameY = 1;
+                    dog.setFrameY(1);
+                    dog.setMaxFrame(47);
                     break;
                 case 'walking':
-                    dog.frameY = 2;
-                    break;
+                    dog.setFrameY(2);
+                    dog.setMaxFrame(47);
+                     break;
                 default:
                     break;
             }

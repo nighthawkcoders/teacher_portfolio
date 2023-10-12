@@ -10,6 +10,14 @@ class Layer {
         this.speedRatio = speedRatio;
         this.speed = gameSpeed * this.speedRatio;
     }
+
+    setX(x){
+        this.x = x;
+    }
+
+    setY(y){
+        this.y = y;
+    }
 }
 
 export default Layer;

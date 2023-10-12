@@ -13,9 +13,6 @@ class Character extends Layer {
         this.maxFrame = 0;
         this.frameX = 0;  // Starting frame of the animation
         this.frameY = 0;  // Default animation for the character
-        // Initialize the character's default position on the canvas
-        this.x = 0; 
-        this.y = 0;
     }
 
     setMinFrame(minFrame){
@@ -32,14 +29,6 @@ class Character extends Layer {
 
     setFrameY(frameY){
         this.frameY = frameY;
-    }
-
-    setX(x){
-        this.x = x;
-    }
-
-    setY(y){
-        this.y = y;
     }
 
     // Draw dog object
