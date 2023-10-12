@@ -1,9 +1,9 @@
 import Character from './Character.js';
 
 const Dog_Animation = {
-	idle: 0,
-	barking: 1,
-	walking: 2
+	idle: { row: 0, frames: 47 },
+	barking: { row: 1, frames: 47 },
+	walking: { row: 2, frames: 47 }
 }
 
 export class Character_Dog extends Character{
@@ -14,7 +14,7 @@ export class Character_Dog extends Character{
     }
 
     update() {
-        if (this.frameY === Dog_Animation.walking) {
+        if (this.frameY === Dog_Animation.walking.row) {
             this.x -= this.speed;  // Move the dog to the left
             // Check if the dog has moved off the left edge of the canvas
             if (this.x < -this.characterCanvas.width) {
@@ -45,8 +45,8 @@ export function initDog(canvasId, image, gameSpeed, speedRatio, controls){
         width, height, scale);
 
     // Dog Frame position and Frame extents
-    dog.setFrameY(2);
-    dog.setMaxFrame(47);
+    dog.setFrameY(Dog_Animation.walking.row);
+    dog.setMaxFrame(Dog_Animation.walking.frames);
 
     // Dog Screen Position
     dog.setX(window.innerWidth);
@@ -55,13 +55,13 @@ export function initDog(canvasId, image, gameSpeed, speedRatio, controls){
     /* Dog Control 
     * changes y value, the row in sprite
     * change number of frames in row
+    * change animation to either idle, bark, walk
     */
-    // change animation to either idle, bark, walk
     controls.addEventListener('click', function (event) {
         if (event.target.tagName === 'INPUT') {
             const selectedAnimation = event.target.id;
-            dog.setFrameY(Dog_Animation[selectedAnimation]);
-            dog.setMaxFrame(47);
+            dog.setFrameY(Dog_Animation[selectedAnimation].row);
+            dog.setMaxFrame(Dog_Animation[selectedAnimation].frames);
         }
     });
 
