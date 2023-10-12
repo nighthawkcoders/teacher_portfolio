@@ -2,15 +2,13 @@ import Layer from './Layer.js';
 
 class Character extends Layer {
     constructor(characterCanvas, image, gameSpeed, speedRatio,
-        spriteWidth, spriteHeight, spriteScale, canvasWidth, canvasHeight) {
+        spriteWidth, spriteHeight, spriteScale) {
         super(image, gameSpeed, speedRatio);
         this.characterCanvas = characterCanvas;
         this.characterCtx = characterCanvas.getContext('2d');
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
         this.spriteScale = spriteScale;
-        this.canvasWidth = canvasWidth;
-        this.canvasHeight = canvasHeight;
         this.minFrame = 0;
         this.maxFrame = 0;
         this.frameX = 0;  // Starting frame of the animation
