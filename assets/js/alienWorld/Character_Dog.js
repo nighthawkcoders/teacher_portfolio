@@ -7,12 +7,14 @@ const Dog_Animation = {
 }
 
 export class Character_Dog extends Character{
+    // constructors sets up Character object 
     constructor(dogCanvas, image, gameSpeed, speedRatio,
         spriteWidth, spriteHeight, spriteScale){
         super(dogCanvas, image, gameSpeed, speedRatio,
             spriteWidth, spriteHeight, spriteScale);
     }
 
+    // Dog perform a unique update
     update() {
         if (this.frameY === Dog_Animation.walking.row) {
             this.x -= this.speed;  // Move the dog to the left
@@ -54,8 +56,8 @@ export function initDog(canvasId, image, gameSpeed, speedRatio, controls){
 
     /* Dog Control 
     * changes y value, the row in sprite
+    * which changes animation to either idle, bark, walk
     * change number of frames in row
-    * change animation to either idle, bark, walk
     */
     controls.addEventListener('click', function (event) {
         if (event.target.tagName === 'INPUT') {
@@ -65,6 +67,7 @@ export function initDog(canvasId, image, gameSpeed, speedRatio, controls){
         }
     });
 
+    // Dog Object
     return dog;
 }
 
