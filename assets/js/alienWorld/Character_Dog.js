@@ -1,5 +1,11 @@
 import Character from './Character.js';
 
+const Dog_Animation = {
+	idle: 0,
+	barking: 1,
+	walking: 2
+}
+
 export class Character_Dog extends Character{
     constructor(dogCanvas, image, gameSpeed, speedRatio,
         spriteWidth, spriteHeight, spriteScale){
@@ -8,14 +14,14 @@ export class Character_Dog extends Character{
     }
 
     update() {
-        if (this.frameY == 2) {
+        if (this.frameY === Dog_Animation.walking) {
             this.x -= this.speed;  // Move the dog to the left
             // Check if the dog has moved off the left edge of the canvas
             if (this.x < -this.characterCanvas.width) {
                 this.x = window.innerWidth; // Reset the dog's x position to the right edge
             }
         }
-        // Update frameX of the object
+        // Update animation frameX of the object
         if (this.frameX < this.maxFrame) {
             this.frameX++;
         } else {
@@ -50,26 +56,12 @@ export function initDog(canvasId, image, gameSpeed, speedRatio, controls){
     * changes y value, the row in sprite
     * change number of frames in row
     */
-    // update action as either idle, bark, walk
+    // change animation to either idle, bark, walk
     controls.addEventListener('click', function (event) {
         if (event.target.tagName === 'INPUT') {
             const selectedAnimation = event.target.id;
-            switch (selectedAnimation) {
-                case 'idle':
-                    dog.setFrameY(0);
-                    dog.setMaxFrame(47);
-                    break;
-                case 'barking':
-                    dog.setFrameY(1);
-                    dog.setMaxFrame(47);
-                    break;
-                case 'walking':
-                    dog.setFrameY(2);
-                    dog.setMaxFrame(47);
-                     break;
-                default:
-                    break;
-            }
+            dog.setFrameY(Dog_Animation[selectedAnimation]);
+            dog.setMaxFrame(47);
         }
     });
 
