@@ -14,8 +14,8 @@ class Character extends Layer {
         this.frameX = 0;  // Starting frame of the animation
         this.frameY = 0;  // Default animation for the character
         // Initialize the character's default position on the canvas
-        this.charX = 0; 
-        this.charY = 0;
+        this.x = 0; 
+        this.y = 0;
     }
 
     setMinFrame(minFrame){
@@ -34,12 +34,12 @@ class Character extends Layer {
         this.frameY = frameY;
     }
 
-    setCharX(charX){
-        this.charX = charX;
+    setX(x){
+        this.x = x;
     }
 
-    setCharY(charY){
-        this.charY = charY;
+    setY(y){
+        this.y = y;
     }
 
     // Draw dog object
@@ -50,8 +50,8 @@ class Character extends Layer {
         this.characterCanvas.style.width = `${this.characterCanvas.width}px`;
         this.characterCanvas.style.height = `${this.characterCanvas.height}px`;
         this.characterCanvas.style.position = 'absolute';
-        this.characterCanvas.style.left = `${this.charX}px`; // Set the dog's left position based on its x-coordinate
-        this.characterCanvas.style.top = `${this.charY}px`; // Set the dog's up and down position based on its y-coordinate
+        this.characterCanvas.style.left = `${this.x}px`; // Set the dog's left position based on its x-coordinate
+        this.characterCanvas.style.top = `${this.y}px`; // Set the dog's up and down position based on its y-coordinate
 
         this.characterCtx.drawImage(
             this.image,

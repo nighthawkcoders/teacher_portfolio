@@ -62,11 +62,7 @@ dogSprite: /images/dogSprite.png
         var backgroundObj = initBackground(backgroundCanvas, backgroundImg, gameSpeed, 0.2);
 
         // Character objects
-        var dogObj = initDog(dogCanvas, dogImg, gameSpeed, 0.2, 160, 144, 1, document.getElementById("controls"));
-        dogObj.setMaxFrame(47);
-        dogObj.setCharX(window.innerWidth);
-        dogObj.setCharY(window.innerHeight / 1.5);
-        dogObj.setFrameY(2);
+        var dogObj = initDog(dogCanvas, dogImg, gameSpeed, 0.2, document.getElementById("controls"));
 
         // Game loop
         function gameLoop() {
