@@ -7,7 +7,7 @@ baseurl: "/alienWorld"
 remote_theme: jekyll/minima
 minima:
   social_links:
-    - { platform: github, user_url: "https://github.com/nighthawkcoders"}
+    - { platform: github, user_url: "https://github.com/jm1021/alienWorld"}
 # remote_theme: pages-themes/dinky@v0.2.0
 # remote_theme: pages-themes/minimal@v0.2.0
 # remote_theme: pages-themes/hacker@v0.2.0
