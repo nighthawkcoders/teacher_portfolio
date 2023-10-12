@@ -12,7 +12,7 @@ export class Character_Dog extends Character{
             this.charX -= this.speed;  // Move the dog to the left
             // Check if the dog has moved off the left edge of the canvas
             if (this.charX < -this.characterCanvas.width) {
-                this.charX = window.canvasWidth; // Reset the dog's x position to the right edge
+                this.charX = window.innerWidth; // Reset the dog's x position to the right edge
             }
         }
         // Update frameX of the object
