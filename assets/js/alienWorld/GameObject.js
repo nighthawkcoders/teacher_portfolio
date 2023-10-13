@@ -13,17 +13,25 @@ class GameObject {
         this.speed = gameSpeed * this.speedRatio;
     }
 
+    // X position setter
     setX(x) {
         this.x = x;
     }
 
+    // Y position setter
     setY(y) {
         this.y = y;
     }
 
-    // Add collision detection methods here, or consider creating a separate Collision class.
-
-    // Other methods and properties specific to game objects.
+    // Collision detection method
+    isCollision(otherGameObject) {
+        return (
+            this.x + this.width > otherGameObject.x &&
+            this.x < otherGameObject.x + otherGameObject.width &&
+            this.y + this.height > otherGameObject.y &&
+            this.y < otherGameObject.y + otherGameObject.height
+        );
+    }
 }
 
 export default GameObject;
