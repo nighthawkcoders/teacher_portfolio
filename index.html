@@ -33,13 +33,13 @@ dogSprite: /images/dogSprite.png
 </div>
 
 <script type="module">
+    import { initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
+    import { initDog } from '{{site.baseurl}}/assets/js/alienWorld/Character_Dog.js';
 
-    import {initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
-    import {initDog} from '{{site.baseurl}}/assets/js/alienWorld/Character_Dog.js';
-    
     // Prepare Background Image
     const backgroundImg = new Image();
     backgroundImg.src = '{{backgroundFile}}';  // Jekyll/Liquid puts filename here
+
     // Prepare HTML for Background Canvas
     const backgroundCanvas = document.createElement("canvas");
     backgroundCanvas.id = "background";
@@ -48,11 +48,11 @@ dogSprite: /images/dogSprite.png
     // Prepare Dog Image
     const dogImg = new Image();
     dogImg.src = '{{dogSpriteImage}}';
+
     // Prepare HTML for Character Canvas
     const dogCanvas = document.createElement("canvas");
     dogCanvas.id = "characters";
     document.body.appendChild(dogCanvas);
-    const dogCtx = dogCanvas.getContext("2d");
 
     backgroundImg.onload = function () {
         // Game speed is a common game variable
@@ -61,7 +61,7 @@ dogSprite: /images/dogSprite.png
         // Background object(s)
         var backgroundObj = initBackground(backgroundCanvas, backgroundImg, gameSpeed, 0.2);
 
-        // Character objects
+        // Character object(s)
         var dogObj = initDog(dogCanvas, dogImg, gameSpeed, 0.2, document.getElementById("controls"));
 
         // Game loop
@@ -74,15 +74,15 @@ dogSprite: /images/dogSprite.png
 
             requestAnimationFrame(gameLoop);  // cycle game, aka recursion
         }
+
         // Start game
         gameLoop();
     }
 
-    /* Toggle "canvas filter property" 
-    * look in _sass/minima/dark-mode.scss  for default canvas filter
-    */
+    /* Toggle "canvas filter property" */
     var isFilterEnabled = true;
     const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
+
     toggleCanvasEffect.addEventListener("click", function () {
         if (isFilterEnabled) {
             backgroundCanvas.style.filter = "none";  // remove filter
@@ -93,5 +93,5 @@ dogSprite: /images/dogSprite.png
         }
         isFilterEnabled = !isFilterEnabled;  // switch boolean value
     });
-
 </script>
+
