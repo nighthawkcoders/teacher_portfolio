@@ -1,6 +1,6 @@
-import Layer from './Layer.js';
+import GameObject from './GameObject.js';
 
-export class Background extends Layer {
+export class Background extends GameObject {
     constructor(canvas, image, gameSpeed, speedRatio) {
         super(canvas, image, gameSpeed, speedRatio);
     }

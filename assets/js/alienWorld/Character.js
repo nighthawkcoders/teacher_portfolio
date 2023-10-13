@@ -1,6 +1,6 @@
-import Layer from './Layer.js';
+import GameObject from './GameObject.js';
 
-class Character extends Layer {
+class Character extends GameObject {
     constructor(canvas, image, gameSpeed, speedRatio,
         spriteWidth, spriteHeight, spriteScale) {
         super(canvas, image, gameSpeed, speedRatio);

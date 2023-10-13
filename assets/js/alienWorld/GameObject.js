@@ -1,4 +1,4 @@
-class Layer {
+class GameObject {
     constructor(canvas, image, gameSpeed, speedRatio) {
         this.x = 0;
         this.y = 0;
@@ -13,13 +13,17 @@ class Layer {
         this.speed = gameSpeed * this.speedRatio;
     }
 
-    setX(x){
+    setX(x) {
         this.x = x;
     }
 
-    setY(y){
+    setY(y) {
         this.y = y;
     }
+
+    // Add collision detection methods here, or consider creating a separate Collision class.
+
+    // Other methods and properties specific to game objects.
 }
 
-export default Layer;
+export default GameObject;
