@@ -1,11 +1,9 @@
 import Layer from './Layer.js';
 
 class Character extends Layer {
-    constructor(characterCanvas, image, gameSpeed, speedRatio,
+    constructor(canvas, image, gameSpeed, speedRatio,
         spriteWidth, spriteHeight, spriteScale) {
-        super(image, gameSpeed, speedRatio);
-        this.characterCanvas = characterCanvas;
-        this.characterCtx = characterCanvas.getContext('2d');
+        super(canvas, image, gameSpeed, speedRatio);
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
         this.spriteScale = spriteScale;
@@ -34,15 +32,15 @@ class Character extends Layer {
     // Draw dog object
     draw() {
         // Set fixed dimensions and position for the Character
-        this.characterCanvas.width = this.spriteWidth * this.spriteScale;
-        this.characterCanvas.height = this.spriteHeight * this.spriteScale;
-        this.characterCanvas.style.width = `${this.characterCanvas.width}px`;
-        this.characterCanvas.style.height = `${this.characterCanvas.height}px`;
-        this.characterCanvas.style.position = 'absolute';
-        this.characterCanvas.style.left = `${this.x}px`; // Set character horizontal position based on its x-coordinate
-        this.characterCanvas.style.top = `${this.y}px`; // Set character up and down position based on its y-coordinate
+        this.canvas.width = this.spriteWidth * this.spriteScale;
+        this.canvas.height = this.spriteHeight * this.spriteScale;
+        this.canvas.style.width = `${this.canvas.width}px`;
+        this.canvas.style.height = `${this.canvas.height}px`;
+        this.canvas.style.position = 'absolute';
+        this.canvas.style.left = `${this.x}px`; // Set character horizontal position based on its x-coordinate
+        this.canvas.style.top = `${this.y}px`; // Set character up and down position based on its y-coordinate
 
-        this.characterCtx.drawImage(
+        this.ctx.drawImage(
             this.image,
             this.frameX * this.spriteWidth,
             this.frameY * this.spriteHeight,
@@ -50,8 +48,8 @@ class Character extends Layer {
             this.spriteHeight,
             0,
             0,
-            this.characterCanvas.width,
-            this.characterCanvas.height
+            this.canvas.width,
+            this.canvas.height
         );
     }
 }

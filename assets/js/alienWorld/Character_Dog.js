@@ -1,6 +1,10 @@
 import Character from './Character.js';
 
 const Dog_Animation = {
+    // Sprite properties
+    scale: 1,
+    width: 160,
+    height: 144,
 	idle: { row: 0, frames: 47 },
 	barking: { row: 1, frames: 47 },
 	walking: { row: 2, frames: 47 }
@@ -8,10 +12,15 @@ const Dog_Animation = {
 
 export class Character_Dog extends Character{
     // constructors sets up Character object 
-    constructor(dogCanvas, image, gameSpeed, speedRatio,
-        spriteWidth, spriteHeight, spriteScale){
-        super(dogCanvas, image, gameSpeed, speedRatio,
-            spriteWidth, spriteHeight, spriteScale);
+    constructor(dogCanvas, image, gameSpeed, speedRatio){
+        super(dogCanvas, 
+            image, 
+            gameSpeed, 
+            speedRatio,
+            Dog_Animation.width, 
+            Dog_Animation.height, 
+            Dog_Animation.scale
+        );
     }
 
     // Dog perform a unique update
@@ -19,7 +28,7 @@ export class Character_Dog extends Character{
         if (this.frameY === Dog_Animation.walking.row) {
             this.x -= this.speed;  // Move the dog to the left
             // Check if the dog has moved off the left edge of the canvas
-            if (this.x < -this.characterCanvas.width) {
+            if (this.x < -this.canvas.width) {
                 this.x = window.innerWidth; // Reset the dog's x position to the right edge
             }
         }
@@ -35,16 +44,8 @@ export class Character_Dog extends Character{
 // Can add specific initialization parameters for the dog here
 // In this case the dog is following the default character initialization
 export function initDog(canvasId, image, gameSpeed, speedRatio, controls){
-    // Sprite frame properties
-    const width = 160;
-    const height = 144;
-
-    // Scale of Sprite on Screen
-    const scale = 1;
-
     // Create the Dog character
-    var dog = new Character_Dog(canvasId, image, gameSpeed, speedRatio,
-        width, height, scale);
+    var dog = new Character_Dog(canvasId, image, gameSpeed, speedRatio);
 
     // Dog Frame position and Frame extents
     dog.setFrameY(Dog_Animation.walking.row);

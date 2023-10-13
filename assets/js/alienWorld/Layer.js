@@ -1,8 +1,10 @@
 class Layer {
-    constructor(image, gameSpeed, speedRatio) {
+    constructor(canvas, image, gameSpeed, speedRatio) {
         this.x = 0;
         this.y = 0;
         this.frame = 0;
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
         this.image = image;
         this.width = image.width;  // Image() width (meta data)
         this.height = image.height; // Image() height
