@@ -23,7 +23,9 @@ class GameObject {
         this.y = y;
     }
 
-    // Collision detection method
+    /* Collision detection method
+     * usage: if (player.isCollision(platform)) { // action }
+    */
     isCollision(otherGameObject) {
         return (
             this.x + this.width > otherGameObject.x &&
