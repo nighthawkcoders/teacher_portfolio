@@ -1,3 +1,4 @@
+import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 
 const DogAnimation = {
@@ -12,10 +13,9 @@ const DogAnimation = {
 
 export class CharacterDog extends Character{
     // constructors sets up Character object 
-    constructor(dogCanvas, image, gameSpeed, speedRatio){
+    constructor(dogCanvas, image, speedRatio){
         super(dogCanvas, 
             image, 
-            gameSpeed, 
             speedRatio,
             DogAnimation.width, 
             DogAnimation.height, 
@@ -29,7 +29,7 @@ export class CharacterDog extends Character{
             this.x -= this.speed;  // Move the dog to the left
             // Check if the dog has moved off the left edge of the canvas
             if (this.x < -this.canvas.width) {
-                this.x = window.innerWidth; // Reset the dog's x position to the right edge
+                this.x = GameEnv.innerWidth; // Reset the dog's x position to the right edge
             }
         }
         // Update animation frameX of the object
@@ -43,17 +43,17 @@ export class CharacterDog extends Character{
 
 // Can add specific initialization parameters for the dog here
 // In this case the dog is following the default character initialization
-export function initDog(canvasId, image, gameSpeed, speedRatio, controls){
+export function initDog(canvasId, image, speedRatio, controls){
     // Create the Dog character
-    var dog = new CharacterDog(canvasId, image, gameSpeed, speedRatio);
+    var dog = new CharacterDog(canvasId, image, speedRatio);
 
     // Dog Frame position and Frame extents
     dog.setFrameY(DogAnimation.walking.row);
     dog.setMaxFrame(DogAnimation.walking.frames);
 
     // Dog Screen Position
-    dog.setX(window.innerWidth);
-    dog.setY(window.innerHeight / 1.5);
+    dog.setX(GameEnv.innerWidth);
+    dog.setY(GameEnv.innerHeight / 1.5);
 
     /* Dog Control 
     * changes y value, the row in sprite

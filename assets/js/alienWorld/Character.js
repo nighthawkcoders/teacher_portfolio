@@ -1,9 +1,9 @@
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    constructor(canvas, image, gameSpeed, speedRatio,
+    constructor(canvas, image, speedRatio,
         spriteWidth, spriteHeight, spriteScale) {
-        super(canvas, image, gameSpeed, speedRatio);
+        super(canvas, image, speedRatio);
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
         this.spriteScale = spriteScale;

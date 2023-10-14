@@ -33,6 +33,7 @@ dogSprite: /images/dogSprite.png
 </div>
 
 <script type="module">
+    import GameEnv from '{{site.baseurl}}/assets/js/alienWorld/GameEnv.js';
     import { initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
     import { initDog } from '{{site.baseurl}}/assets/js/alienWorld/CharacterDog.js';
 
@@ -54,15 +55,18 @@ dogSprite: /images/dogSprite.png
     dogCanvas.id = "characters";
     document.body.appendChild(dogCanvas);
 
+    // Setup Globals
+    GameEnv.gameSpeed = 2;
+
     backgroundImg.onload = function () {
-        // Game speed is a common game variable
-        var gameSpeed = 2;
 
         // Background object(s)
-        var backgroundObj = initBackground(backgroundCanvas, backgroundImg, gameSpeed, 0.2);
+        const backgroundSpeedRatio = 0.2
+        var backgroundObj = initBackground(backgroundCanvas, backgroundImg, backgroundSpeedRatio);
 
         // Character object(s)
-        var dogObj = initDog(dogCanvas, dogImg, gameSpeed, 0.2, document.getElementById("controls"));
+        const dogSpeedRatio = 0.2
+        var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio, document.getElementById("controls"));
 
         // Game loop
         function gameLoop() {

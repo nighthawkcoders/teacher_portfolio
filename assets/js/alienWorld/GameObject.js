@@ -1,5 +1,7 @@
+import GameEnv from './GameEnv.js';
+
 class GameObject {
-    constructor(canvas, image, gameSpeed, speedRatio) {
+    constructor(canvas, image, speedRatio) {
         this.x = 0;
         this.y = 0;
         this.frame = 0;
@@ -10,7 +12,7 @@ class GameObject {
         this.height = image.height; // Image() height
         this.aspect_ratio = this.width / this.height;
         this.speedRatio = speedRatio;
-        this.speed = gameSpeed * this.speedRatio;
+        this.speed = GameEnv.gameSpeed * this.speedRatio;
     }
 
     // X position setter

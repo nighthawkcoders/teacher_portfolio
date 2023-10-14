@@ -1,8 +1,8 @@
 import GameObject from './GameObject.js';
 
 export class Background extends GameObject {
-    constructor(canvas, image, gameSpeed, speedRatio) {
-        super(canvas, image, gameSpeed, speedRatio);
+    constructor(canvas, image, speedRatio) {
+        super(canvas, image, speedRatio);
     }
     update() {
         this.x = (this.x - this.speed) % this.width;
@@ -13,9 +13,9 @@ export class Background extends GameObject {
     }
 }
 
-export function initBackground(canvas, image, gameSpeed, speedRatio) {
+export function initBackground(canvas, image, speedRatio) {
     // Build game object
-    var background = new Background(canvas, image, gameSpeed, speedRatio);
+    var background = new Background(canvas, image, speedRatio);
 
     // Prepare Window extents related to viewport
     const maxWidth = window.innerWidth;
