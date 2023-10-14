@@ -3,7 +3,7 @@ import Character from './Character.js';
 
 const DogAnimation = {
     // Sprite properties
-    scale: 1,
+    scale: 0.6,
     width: 160,
     height: 144,
 	idle: { row: 0, frames: 47 },

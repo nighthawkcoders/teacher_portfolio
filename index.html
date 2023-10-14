@@ -3,11 +3,13 @@ layout: base
 title: Alien World
 image: /images/alien_planet.jpg
 dogSprite: /images/dogSprite.png
+monkeySprite: /images/monkeySprite.png
 ---
 
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.image %}
 {% assign dogSpriteImage = site.baseurl | append: page.dogSprite %}
+{% assign monkeySpriteImage = site.baseurl | append: page.monkeySprite %}
 
 <style>
     #controls {
@@ -36,12 +38,13 @@ dogSprite: /images/dogSprite.png
     import GameEnv from '{{site.baseurl}}/assets/js/alienWorld/GameEnv.js';
     import { initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
     import { initDog } from '{{site.baseurl}}/assets/js/alienWorld/CharacterDog.js';
+    import {initMonkey} from '{{site.baseurl}}/assets/js/alienWorld/CharacterMonkey.js';
 
     // Prepare Background Image
     const backgroundImg = new Image();
     backgroundImg.src = '{{backgroundFile}}';  // Jekyll/Liquid puts filename here
 
-    // Prepare HTML for Background Canvas
+    // Prepare HTML with Background Canvas
     const backgroundCanvas = document.createElement("canvas");
     backgroundCanvas.id = "background";
     document.body.appendChild(backgroundCanvas);
@@ -50,10 +53,19 @@ dogSprite: /images/dogSprite.png
     const dogImg = new Image();
     dogImg.src = '{{dogSpriteImage}}';
 
-    // Prepare HTML for Character Canvas
+    // Prepare HTML with Dog Canvas
     const dogCanvas = document.createElement("canvas");
     dogCanvas.id = "characters";
     document.body.appendChild(dogCanvas);
+
+    // Prepare Monkey Image
+    const monkeyImg = new Image();
+    monkeyImg.src = "{{monkeySpriteImage}}";
+
+    // Prepare HTML with Monkey Canvas
+    const monkeyCanvas = document.createElement("canvas");
+    monkeyCanvas.id = "characters";
+    document.body.appendChild(monkeyCanvas);
 
     // Setup Globals
     GameEnv.gameSpeed = 2;
@@ -67,6 +79,9 @@ dogSprite: /images/dogSprite.png
         // Character object(s)
         const dogSpeedRatio = 0.2
         var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio, document.getElementById("controls"));
+        const monkeySpeedRatio = 0.7
+        var monkeyObj = initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);
+
 
         // Game loop
         function gameLoop() {
@@ -75,6 +90,9 @@ dogSprite: /images/dogSprite.png
 
             dogObj.update();
             dogObj.draw();
+
+            monkeyObj.update();
+            monkeyObj.draw();
 
             requestAnimationFrame(gameLoop);  // cycle game, aka recursion
         }
@@ -91,9 +109,11 @@ dogSprite: /images/dogSprite.png
         if (isFilterEnabled) {
             backgroundCanvas.style.filter = "none";  // remove filter
             dogCanvas.style.filter = "none";
+            monkeyCanvas.style.filter = "none";
         } else {
             backgroundCanvas.style.filter = defaultFilter; // Apply the default filter value
             dogCanvas.style.filter = defaultFilter;
+            monkeyCanvas.style.filter = defaultFilter;
         }
         isFilterEnabled = !isFilterEnabled;  // switch boolean value
     });
