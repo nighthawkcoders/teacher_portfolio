@@ -60,7 +60,7 @@ export function initDog(canvasId, image, speedRatio, controls){
     * which changes animation to either idle, bark, walk
     * change number of frames in row
     */
-    controls.addEventListener('click', function (event) {
+    GameEnv.controls.addEventListener('click', function (event) {
         if (event.target.tagName === 'INPUT') {
             const selectedAnimation = event.target.id;
             dog.setFrameY(DogAnimation[selectedAnimation].row);

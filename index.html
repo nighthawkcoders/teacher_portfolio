@@ -69,6 +69,7 @@ monkeySprite: /images/monkeySprite.png
 
     // Setup Globals
     GameEnv.gameSpeed = 2;
+    GameEnv.controls = document.getElementById("controls");
 
     backgroundImg.onload = function () {
 
@@ -78,10 +79,9 @@ monkeySprite: /images/monkeySprite.png
 
         // Character object(s)
         const dogSpeedRatio = 0.2
-        var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio, document.getElementById("controls"));
+        var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio);
         const monkeySpeedRatio = 0.7
         var monkeyObj = initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);
-
 
         // Game loop
         function gameLoop() {

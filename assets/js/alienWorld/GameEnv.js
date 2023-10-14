@@ -1,7 +1,8 @@
 export class GameEnv {
     static innerWidth = window.innerWidth;
     static innerHeight = window.innerHeight;
-    static gameSpeed = 2;
+    static gameSpeed;
+    static controls;
 
     static initialize() {
         // Startup initialization logic here
