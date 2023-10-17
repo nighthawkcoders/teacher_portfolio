@@ -21,6 +21,12 @@ export function initBackground(canvas, image, speedRatio) {
     const maxWidth = window.innerWidth;
     const maxHeight = window.innerHeight;
 
+    // Account for the header height
+    const headerHeight = document.querySelector('header').offsetHeight;
+
+    // Calculate the top position
+    const topPosition = headerHeight + (maxHeight - headerHeight) / 2;
+
     // Setup background constant to adjust display size
     const ADJUST = 1.42 // visual layer adjust, use "1"" for a perfect loop 
 
@@ -28,7 +34,6 @@ export function initBackground(canvas, image, speedRatio) {
     const canvasWidth = maxWidth;
     const canvasHeight = canvasWidth / background.aspect_ratio;  // height is oriented by width
     const canvasLeft = 0; // Start image from the left edge horizontally
-    const canvasTop = (maxHeight - canvasHeight) / 2;  // center image vertically
 
     // Set dimensions for the background canvas
     canvas.width = background.width / ADJUST;
@@ -38,7 +43,7 @@ export function initBackground(canvas, image, speedRatio) {
     canvas.style.height = `${canvasHeight}px`;
     canvas.style.position = 'absolute';
     canvas.style.left = `${canvasLeft}px`;
-    canvas.style.top = `${canvasTop}px`;
+    canvas.style.top = `${topPosition}px`;
 
     return background;
 }
