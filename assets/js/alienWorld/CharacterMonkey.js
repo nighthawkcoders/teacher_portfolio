@@ -54,7 +54,7 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
 
     // Monkey Screen Position
     monkey.setX(GameEnv.innerWidth);
-    monkey.setY(GameEnv.bottom * .95);
+    monkey.setY(GameEnv.bottom * .92);
 
     /* Monkey Control 
     * changes y value, the row in sprite

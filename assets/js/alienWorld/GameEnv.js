@@ -17,6 +17,7 @@ export class GameEnv {
         GameEnv.innerWidth = window.innerHeight;
         // Account for the header height
         GameEnv.top = document.querySelector('header').offsetHeight;
+        GameEnv.bottom = document.querySelector('main').offsetHeight;;
     }
 }
 
