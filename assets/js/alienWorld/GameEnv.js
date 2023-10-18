@@ -1,7 +1,9 @@
 export class GameEnv {
     static innerWidth = window.innerWidth;
     static innerHeight = window.innerHeight;
-    static top = document.querySelector('header').offsetHeight;;
+    static top = document.querySelector('header').offsetHeight;
+    static bottom = document.querySelector('main').offsetHeight;;
+
     static gameSpeed;
     static controls;
 

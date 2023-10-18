@@ -53,7 +53,7 @@ export function initDog(canvasId, image, speedRatio, controls){
 
     // Dog Screen Position
     dog.setX(GameEnv.innerWidth);
-    dog.setY(GameEnv.innerHeight / 1.5);
+    dog.setY(GameEnv.bottom * .92);
 
     /* Dog Control 
     * changes y value, the row in sprite
