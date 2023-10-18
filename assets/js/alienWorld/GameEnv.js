@@ -4,19 +4,12 @@ export class GameEnv {
     static innerHeight;
     static top;
     static bottom;
+    static gameSpeed;
+    static controls;
     
     // Make the constructor private to prevent instantiation
     constructor() {
         throw new Error('GameEnv is a static class and cannot be instantiated.');
-    }
-
-    // Initialize the static variables with a method
-    static initialize() {
-        // Initial call to setGameEnv
-        this.setGameEnv();  
-        
-        // Trigger setGameEnv to reset on window resize event
-        window.addEventListener('resize', this.setGameEnv.bind(this));
     }
 
     // Setter for Game Environment 
@@ -32,8 +25,5 @@ export class GameEnv {
         }
     }
 }
-
-// Call the initialize method once with the required values
-GameEnv.initialize();
 
 export default GameEnv;

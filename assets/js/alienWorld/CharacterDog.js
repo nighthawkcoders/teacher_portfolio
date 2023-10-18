@@ -39,6 +39,15 @@ export class CharacterDog extends Character{
             this.frameX = 0;
         }
     }
+    size() {
+        // Dog Frame position and Frame extents
+        this.setFrameY(DogAnimation.walking.row);
+        this.setMaxFrame(DogAnimation.walking.frames);
+
+        // Dog Screen Position
+        this.setX(GameEnv.innerWidth);
+        this.setY(GameEnv.bottom * 1);
+    }
 }
 
 // Can add specific initialization parameters for the dog here
@@ -47,13 +56,7 @@ export function initDog(canvasId, image, speedRatio, controls){
     // Create the Dog character
     var dog = new CharacterDog(canvasId, image, speedRatio);
 
-    // Dog Frame position and Frame extents
-    dog.setFrameY(DogAnimation.walking.row);
-    dog.setMaxFrame(DogAnimation.walking.frames);
-
-    // Dog Screen Position
-    dog.setX(GameEnv.innerWidth);
-    dog.setY(GameEnv.bottom * 1);
+    dog.size();
 
     /* Dog Control 
     * changes y value, the row in sprite
