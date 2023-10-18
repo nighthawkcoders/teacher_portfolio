@@ -1,3 +1,4 @@
+import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 export class Background extends GameObject {
@@ -17,21 +18,11 @@ export function initBackground(canvas, image, speedRatio) {
     // Build game object
     var background = new Background(canvas, image, speedRatio);
 
-    // Prepare Window extents related to viewport
-    const maxWidth = window.innerWidth;
-    const maxHeight = window.innerHeight;
-
-    // Account for the header height
-    const headerHeight = document.querySelector('header').offsetHeight;
-
-    // Calculate the top position
-    const topPosition = headerHeight + (maxHeight - headerHeight) / 2;
-
     // Setup background constant to adjust display size
     const ADJUST = 1.42 // visual layer adjust, use "1"" for a perfect loop 
 
     // Set Dimensions to match the image width
-    const canvasWidth = maxWidth;
+    const canvasWidth = GameEnv.innerWidth;
     const canvasHeight = canvasWidth / background.aspect_ratio;  // height is oriented by width
     const canvasLeft = 0; // Start image from the left edge horizontally
 
@@ -43,7 +34,7 @@ export function initBackground(canvas, image, speedRatio) {
     canvas.style.height = `${canvasHeight}px`;
     canvas.style.position = 'absolute';
     canvas.style.left = `${canvasLeft}px`;
-    canvas.style.top = `${topPosition}px`;
+    canvas.style.top = `${GameEnv.top}px`;
 
     return background;
 }
