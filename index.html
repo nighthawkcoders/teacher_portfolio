@@ -37,7 +37,7 @@ monkeySprite: /images/monkeySprite.png
 <script type="module">
     import GameEnv from '{{site.baseurl}}/assets/js/alienWorld/GameEnv.js';
     import {initCollisionManager} from '{{site.baseurl}}/assets/js/alienWorld/CollisionManager.js';
-    import { initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
+    import Background from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
     import { initDog } from '{{site.baseurl}}/assets/js/alienWorld/CharacterDog.js';
     import {initMonkey} from '{{site.baseurl}}/assets/js/alienWorld/CharacterMonkey.js';
 
@@ -77,7 +77,7 @@ monkeySprite: /images/monkeySprite.png
 
         // Background object(s)
         const backgroundSpeedRatio = 0.2
-        var backgroundObj = initBackground(backgroundCanvas, backgroundImg, backgroundSpeedRatio);
+        var backgroundObj = new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);
 
         // Character object(s)
         const dogSpeedRatio = 0.2
@@ -106,7 +106,21 @@ monkeySprite: /images/monkeySprite.png
             requestAnimationFrame(gameLoop);  // cycle game, aka recursion
         }
 
+        // Window resize event
+        function setSize() {
+            GameEnv.setGameEnv();  // Update GameEnv dimensions
+
+            // Call the sizing method on game objects
+            backgroundObj.size();
+            //dog.resize();
+            //monkey.resize();
+        }
+
+        // Listen for window resize events and trigger the handleResize function
+        window.addEventListener('resize', setSize);
+
         // Start game
+        setSize();
         gameLoop();
     }
 
