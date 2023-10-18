@@ -110,10 +110,11 @@ monkeySprite: /images/monkeySprite.png
         function setSize() {
             GameEnv.setGameEnv();  // Update GameEnv dimensions
 
-            // Call the sizing method on game objects
+            // Call the sizing method on all game objects
             backgroundObj.size();
-            dogObj.size();
-            //monkeyObj.resize();
+            for (let character of characterArray){
+                character.size();
+            }
         }
 
         // Listen for window resize events and trigger the handleResize function

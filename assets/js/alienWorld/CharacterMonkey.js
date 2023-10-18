@@ -39,6 +39,16 @@ export class CharacterMonkey extends Character{
             this.frameX = 0;
         }
     }
+    size() {
+        // Monkey Frame position and Frame extents
+        this.setFrameY(MonkeyAnimation['a'].row);
+        this.setFrameX(MonkeyAnimation['a'].idleFrame.column)
+        this.setMaxFrame(MonkeyAnimation['a'].idleFrame.frames);
+
+        // Monkey Screen Position
+        this.setX(GameEnv.innerWidth);
+        this.setY(GameEnv.bottom * 1);
+    }
 }
 
 // Can add specific initialization parameters for the monkey here
@@ -46,15 +56,6 @@ export class CharacterMonkey extends Character{
 export function initMonkey(canvasId, image, gameSpeed, speedRatio){
     // Create the Monkey character
     var monkey = new CharacterMonkey(canvasId, image, gameSpeed, speedRatio);
-
-    // Monkey Frame position and Frame extents
-    monkey.setFrameY(MonkeyAnimation['a'].row);
-    monkey.setFrameX(MonkeyAnimation['a'].idleFrame.column)
-    monkey.setMaxFrame(MonkeyAnimation['a'].idleFrame.frames);
-
-    // Monkey Screen Position
-    monkey.setX(GameEnv.innerWidth);
-    monkey.setY(GameEnv.bottom * 1);
 
     /* Monkey Control 
     * changes y value, the row in sprite
