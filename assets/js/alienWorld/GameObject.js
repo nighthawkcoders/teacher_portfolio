@@ -17,12 +17,20 @@ class GameObject {
         this.speed = GameEnv.gameSpeed * this.speedRatio;
     }
 
-    // X position setter
+    // X position getter and setter
+    getX() {
+        return this.x;
+    }
+
     setX(x) {
         this.x = x;
     }
 
-    // Y position setter
+    // Y position getter and setter
+    getY() {
+        return this.y;
+    }
+
     setY(y) {
         this.y = y;
     }
