@@ -10,6 +10,8 @@ class GameObject {
         this.image = image;
         this.width = image.width;  // Image() width (meta data)
         this.height = image.height; // Image() height
+        this.collisionWidth = 0;
+        this.collisionHeight = 0;
         this.aspect_ratio = this.width / this.height;
         this.speedRatio = speedRatio;
         this.speed = GameEnv.gameSpeed * this.speedRatio;
@@ -30,10 +32,10 @@ class GameObject {
     */
     isCollision(otherGameObject) {
         return (
-            this.x + this.width > otherGameObject.x &&
-            this.x < otherGameObject.x + otherGameObject.width &&
-            this.y + this.height > otherGameObject.y &&
-            this.y < otherGameObject.y + otherGameObject.height
+            this.x + this.collisionWidth > otherGameObject.x &&
+            this.x < otherGameObject.x + otherGameObject.collisionWidth &&
+            this.y + this.collisionHeight > otherGameObject.y &&
+            this.y < otherGameObject.y + otherGameObject.collisionHeight
         );
     }
 }

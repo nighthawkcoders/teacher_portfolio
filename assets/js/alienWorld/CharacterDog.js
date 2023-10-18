@@ -68,6 +68,10 @@ export function initDog(canvasId, image, speedRatio, controls){
         }
     });
 
+    document.addEventListener('collision_' + dog.constructor.name, function (event){
+        console.log('dog collision detected');
+    });
+
     // Dog Object
     return dog;
 }

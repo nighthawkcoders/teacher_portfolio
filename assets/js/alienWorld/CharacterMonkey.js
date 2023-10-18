@@ -81,6 +81,10 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
         }
     });
 
+    document.addEventListener('collision_' + monkey.constructor.name, function (event){
+        console.log('monkey collision detected');
+    });
+
     // Monkey Object
     return monkey;
 }
