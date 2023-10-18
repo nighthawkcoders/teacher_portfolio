@@ -1,28 +1,39 @@
 export class GameEnv {
-    static innerWidth = window.innerWidth;
-    static innerHeight = window.innerHeight;
-    static top = document.querySelector('header').offsetHeight;
-    static bottom = document.querySelector('main').offsetHeight;;
-
-    static gameSpeed;
-    static controls;
-
-    static initialize() {
-        // Startup initialization logic here
-        window.addEventListener('resize', GameEnv.handleResize);
+    // Prototype static variables
+    static innerWidth;
+    static innerHeight;
+    static top;
+    static bottom;
+    
+    // Make the constructor private to prevent instantiation
+    constructor() {
+        throw new Error('GameEnv is a static class and cannot be instantiated.');
     }
 
-    static handleResize() {
-        GameEnv.innerWidth = window.innerWidth;
-        GameEnv.innerWidth = window.innerHeight;
-        // Account for the header height
-        GameEnv.top = document.querySelector('header').offsetHeight;
-        GameEnv.bottom = document.querySelector('main').offsetHeight;;
+    // Initialize the static variables with a method
+    static initialize() {
+        // Initial call to setGameEnv
+        this.setGameEnv();  
+        
+        // Trigger setGameEnv to reset on window resize event
+        window.addEventListener('resize', this.setGameEnv.bind(this));
+    }
+
+    // Setter for Game Environment 
+    static setGameEnv() {
+        this.innerWidth = window.innerWidth;
+        this.innerHeight = window.innerHeight;
+        
+        const header = document.querySelector('header');
+        const main = document.querySelector('main');
+        if (header && main) {
+            this.top = header.offsetHeight;
+            this.bottom = main.offsetHeight;
+        }
     }
 }
 
-// Initialize GameEnv at startup
+// Call the initialize method once with the required values
 GameEnv.initialize();
 
-// Share GameEnv
 export default GameEnv;
