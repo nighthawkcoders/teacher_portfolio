@@ -1,6 +1,9 @@
 export class GameEnv {
     static innerWidth = window.innerWidth;
     static innerHeight = window.innerHeight;
+    static top = document.querySelector('header').offsetHeight;
+    static bottom = document.querySelector('main').offsetHeight;;
+
     static gameSpeed;
     static controls;
 
@@ -12,7 +15,9 @@ export class GameEnv {
     static handleResize() {
         GameEnv.innerWidth = window.innerWidth;
         GameEnv.innerWidth = window.innerHeight;
-        // Add logic for window resize events here
+        // Account for the header height
+        GameEnv.top = document.querySelector('header').offsetHeight;
+        GameEnv.bottom = document.querySelector('main').offsetHeight;;
     }
 }
 
