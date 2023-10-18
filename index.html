@@ -36,6 +36,7 @@ monkeySprite: /images/monkeySprite.png
 
 <script type="module">
     import GameEnv from '{{site.baseurl}}/assets/js/alienWorld/GameEnv.js';
+    import {initCollisionManager} from '{{site.baseurl}}/assets/js/alienWorld/CollisionManager.js';
     import { initBackground } from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
     import { initDog } from '{{site.baseurl}}/assets/js/alienWorld/CharacterDog.js';
     import {initMonkey} from '{{site.baseurl}}/assets/js/alienWorld/CharacterMonkey.js';
@@ -84,16 +85,23 @@ monkeySprite: /images/monkeySprite.png
         const monkeySpeedRatio = 0.7
         var monkeyObj = initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);
 
+        var characterArray = [];
+        characterArray.push(dogObj);
+        characterArray.push(monkeyObj);
+
+        var collisionManager = initCollisionManager(characterArray);
+
         // Game loop
         function gameLoop() {
             backgroundObj.update();
             backgroundObj.draw();
 
-            dogObj.update();
-            dogObj.draw();
+            for (let character of characterArray){
+                character.update();
+                character.draw();
+            }
 
-            monkeyObj.update();
-            monkeyObj.draw();
+            collisionManager.checkForCollisions();
 
             requestAnimationFrame(gameLoop);  // cycle game, aka recursion
         }
