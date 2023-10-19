@@ -39,12 +39,31 @@ class GameObject {
      * usage: if (player.isCollision(platform)) { // action }
     */
     isCollision(otherGameObject) {
-        return (
-            this.x + this.collisionWidth > otherGameObject.x &&
+
+        var collisionData = {
+            hit: (this.x + this.collisionWidth > otherGameObject.x &&
             this.x < otherGameObject.x + otherGameObject.collisionWidth &&
             this.y + this.collisionHeight > otherGameObject.y &&
-            this.y < otherGameObject.y + otherGameObject.collisionHeight
-        );
+            this.y < otherGameObject.y + otherGameObject.collisionHeight),
+            touchPoints: {
+                this: {
+                    object: this,
+                    top: (this.y > otherGameObject.y), 
+                    bottom: (this.y < otherGameObject.setY), 
+                    left: (this.x > otherGameObject.x), 
+                    right: (this.x < otherGameObject.x) 
+                },
+                other: {
+                    object: otherGameObject,
+                    top: (this.y < otherGameObject.y), 
+                    bottom: (this.y > otherGameObject.y), 
+                    left: (this.x < otherGameObject.x), 
+                    right: (this.x > otherGameObject.x) 
+                }
+            } 
+            
+        };
+        return collisionData;
     }
 }
 
