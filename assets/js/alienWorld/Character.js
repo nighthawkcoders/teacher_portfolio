@@ -1,3 +1,4 @@
+import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
@@ -53,6 +54,18 @@ class Character extends GameObject {
             this.canvas.width,
             this.canvas.height
         );
+    }
+
+    size() {
+        // Calculate proportional x and y positions based on the new screen dimensions
+        if (GameEnv.prevInnerWidth) {
+            const proportionalX = (this.x / GameEnv.prevInnerWidth) * GameEnv.innerWidth;
+            const proportionalY = (this.y / GameEnv.prevBottom) * GameEnv.bottom;
+        } else {
+            // First Dog Screen Position
+            this.setX(GameEnv.innerWidth);
+            this.setY(GameEnv.bottom * 1);
+        }
     }
 }
 

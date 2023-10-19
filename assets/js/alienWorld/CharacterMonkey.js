@@ -44,15 +44,7 @@ export class CharacterMonkey extends Character{
         this.setFrameY(MonkeyAnimation['a'].row);
         this.setFrameX(MonkeyAnimation['a'].idleFrame.column)
         this.setMaxFrame(MonkeyAnimation['a'].idleFrame.frames);
-
-        if (GameEnv.prevInnerWidth) {
-            const proportionalX = (this.x / GameEnv.prevInnerWidth) * GameEnv.innerWidth;
-            const proportionalY = (this.y / GameEnv.prevBottom) * GameEnv.bottom;
-        } else {
-            // Monkey Screen Position
-            this.setX(GameEnv.innerWidth);
-            this.setY(GameEnv.bottom * 1);
-        }
+        super.size();
     }
 }
 
