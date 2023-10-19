@@ -69,7 +69,9 @@ export function initDog(canvasId, image, speedRatio, controls){
         }
     });
 
+    // An event listener to check if the dog has collided with another object
     document.addEventListener('collision_' + dog.constructor.name, function (event){
+        // If the scene has started then don't run the collision event code
         if (dog.sceneStarted === false){
             dog.sceneStarted = true;
 

@@ -1,5 +1,6 @@
 export class CollisionManager{
     constructor(gameObjectList = []){
+        // Make a game object array so we can keep track of all of the game objects that can collide
         this.gameObjectList = gameObjectList;
     }
 

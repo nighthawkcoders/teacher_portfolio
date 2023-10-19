@@ -56,7 +56,6 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
 
     /* Monkey Control 
     * changes y value, the row in sprite
-    * which changes animation to either idle, bark, walk
     * change number of frames in row
     */
     document.addEventListener('keydown', function (event) {
@@ -79,6 +78,7 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
         }
     });
 
+    // An event listener to check if the monkey has collided with another object
     document.addEventListener('collision_' + monkey.constructor.name, function (event){
     });
 
