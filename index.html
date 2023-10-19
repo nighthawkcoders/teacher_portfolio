@@ -89,6 +89,7 @@ monkeySprite: /images/monkeySprite.png
         characterArray.push(dogObj);
         characterArray.push(monkeyObj);
 
+        // Prepare the collision manager by adding in an array of game objects that will have collision
         var collisionManager = initCollisionManager(characterArray);
 
         // Game loop
@@ -101,6 +102,7 @@ monkeySprite: /images/monkeySprite.png
                 character.draw();
             }
 
+            // Check all objects for collision on each loop of the game
             collisionManager.checkForCollisions();
 
             requestAnimationFrame(gameLoop);  // cycle game, aka recursion
