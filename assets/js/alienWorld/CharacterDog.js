@@ -21,6 +21,7 @@ export class CharacterDog extends Character{
             DogAnimation.height, 
             DogAnimation.scale
         );
+        this.sceneStarted = false;
     }
 
     // Dog perform a unique update
@@ -78,7 +79,25 @@ export function initDog(canvasId, image, speedRatio, controls){
     });
 
     document.addEventListener('collision_' + dog.constructor.name, function (event){
-        console.log('dog collision detected');
+        if (dog.sceneStarted === false){
+            dog.sceneStarted = true;
+
+            // Dog starts to bark at monkey for three seconds
+            dog.setFrameY(DogAnimation['barking'].row);
+            dog.setMaxFrame(DogAnimation['barking'].frames);
+            setTimeout(function() {
+                // After 3 seconds, transition to the "idle" state
+                dog.setFrameY(DogAnimation['idle'].row);
+                dog.setMaxFrame(DogAnimation['idle'].frames);
+
+                // After 3 more seconds, transition to the "walking" state
+                setTimeout(function() {
+                    dog.setFrameY(DogAnimation['walking'].row);
+                    dog.setMaxFrame(DogAnimation['walking'].frames);
+                    dog.sceneStarted = false;
+                }, 3000);
+            }, 3000);
+        }
     });
 
     // Dog Object

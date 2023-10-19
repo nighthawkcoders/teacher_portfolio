@@ -2,7 +2,7 @@ import GameObject from './GameObject.js';
 
 class Character extends GameObject {
     constructor(canvas, image, speedRatio,
-        spriteWidth, spriteHeight, spriteScale, collisionBox) {
+        spriteWidth, spriteHeight, spriteScale) {
         super(canvas, image, speedRatio);
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
@@ -11,8 +11,8 @@ class Character extends GameObject {
         this.maxFrame = 0;
         this.frameX = 0;  // Default X frame of the animation
         this.frameY = 0;  // Default Y frame of the animation
-        this.collisionWidth = spriteWidth;
-        this.collisionHeight = spriteHeight;
+        this.collisionWidth = spriteWidth * spriteScale;
+        this.collisionHeight = spriteHeight * spriteScale;
     }
 
     setMinFrame(minFrame){
