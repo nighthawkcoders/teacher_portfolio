@@ -43,16 +43,7 @@ export class CharacterDog extends Character{
         // Dog Frame position and Frame extents
         this.setFrameY(DogAnimation.walking.row);
         this.setMaxFrame(DogAnimation.walking.frames);
-
-        // Calculate proportional x and y positions based on the new screen dimensions
-        if (GameEnv.prevInnerWidth) {
-            const proportionalX = (this.x / GameEnv.prevInnerWidth) * GameEnv.innerWidth;
-            const proportionalY = (this.y / GameEnv.prevBottom) * GameEnv.bottom;
-        } else {
-            // First Dog Screen Position
-            this.setX(GameEnv.innerWidth);
-            this.setY(GameEnv.bottom * 1);
-        }
+        super.size();
     }
 }
 
