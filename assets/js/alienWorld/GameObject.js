@@ -15,6 +15,7 @@ class GameObject {
         this.aspect_ratio = this.width / this.height;
         this.speedRatio = speedRatio;
         this.speed = GameEnv.gameSpeed * this.speedRatio;
+        this.collisionData = {};
     }
 
     // X position getter and setter
@@ -40,7 +41,7 @@ class GameObject {
     */
     isCollision(otherGameObject) {
 
-        var collisionData = {
+        this.collisionData = {
             hit: (this.x + this.collisionWidth > otherGameObject.x &&
             this.x < otherGameObject.x + otherGameObject.collisionWidth &&
             this.y + this.collisionHeight > otherGameObject.y &&
@@ -63,7 +64,10 @@ class GameObject {
             } 
             
         };
-        return collisionData;
+    }
+
+    triggerCollision(){
+        throw new Error("Subclass must implement collision function if collision is triggered");
     }
 }
 

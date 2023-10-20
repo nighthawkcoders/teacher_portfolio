@@ -39,6 +39,11 @@ export class CharacterMonkey extends Character{
             this.frameX = 0;
         }
     }
+
+    triggerCollision(){
+        // Add collision code here
+    }
+
     size() {
         // Monkey Frame position and Frame extents
         this.setFrameY(MonkeyAnimation['a'].row);
@@ -79,8 +84,8 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
     });
 
     // An event listener to check if the monkey has collided with another object
-    document.addEventListener('collision_' + monkey.constructor.name, function (event){
-    });
+    //document.addEventListener('collision_' + monkey.constructor.name, function (event){
+    //});
 
     // Monkey Object
     return monkey;

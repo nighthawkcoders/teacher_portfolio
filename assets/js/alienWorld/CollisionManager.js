@@ -17,16 +17,10 @@ export class CollisionManager{
             var subGameObjectList = this.gameObjectList.slice(thisObjectIndex + 1);
             for (var otherObject of subGameObjectList){
                 // If the two objects are colliding then inform the two objects that they have been in a collision
-                var collisionData = thisObject.isCollision(otherObject);
-                if (collisionData.hit){
-                    document.dispatchEvent(
-                        new CustomEvent('collision_' + thisObject.constructor.name, {
-                            detail: {eventData: collisionData.this}})
-                    );
-                    document.dispatchEvent(
-                        new CustomEvent('collision_' + otherObject.constructor.name, {
-                            detail: {eventData: collisionData.other}})
-                    );
+                thisObject.isCollision(otherObject);
+                if (thisObject.collisionData.hit){
+                   thisObject.triggerCollision();
+                   otherObject.triggerCollision();
                 }
             }
         }

@@ -40,6 +40,32 @@ export class CharacterDog extends Character{
             this.frameX = 0;
         }
     }
+
+    // Handle collisions and do something in this function
+    triggerCollision(){
+        // If the scene has started then don't run the collision event code
+        // With collision data we can even determine which side the dog is colliding on
+        if (this.sceneStarted === false && this.collisionData.touchPoints.this.left){
+            this.sceneStarted = true;
+
+            // Dog starts to bark at monkey for three seconds
+            this.frameY = DogAnimation['barking'].row;
+            this.maxFrame = DogAnimation['barking'].frames;
+            setTimeout(() => {
+                // After 3 seconds, transition to the "idle" state
+                this.frameY = DogAnimation['idle'].row;
+                this.maxFrame = DogAnimation['idle'].frames;
+
+                // After 3 more seconds, transition to the "walking" state
+                setTimeout(() => {
+                    this.frameY = DogAnimation['walking'].row;
+                    this.maxFrame = DogAnimation['walking'].frames;
+                    this.sceneStarted = false;
+                }, 3000);
+            }, 3000);
+        }
+    }
+
     size() {
         // Dog Frame position and Frame extents
         this.setFrameY(DogAnimation.walking.row);
@@ -66,30 +92,6 @@ export function initDog(canvasId, image, speedRatio, controls){
             const selectedAnimation = event.target.id;
             dog.setFrameY(DogAnimation[selectedAnimation].row);
             dog.setMaxFrame(DogAnimation[selectedAnimation].frames);
-        }
-    });
-
-    // An event listener to check if the dog has collided with another object
-    document.addEventListener('collision_' + dog.constructor.name, function (event){
-        // If the scene has started then don't run the collision event code
-        if (dog.sceneStarted === false){
-            dog.sceneStarted = true;
-
-            // Dog starts to bark at monkey for three seconds
-            dog.setFrameY(DogAnimation['barking'].row);
-            dog.setMaxFrame(DogAnimation['barking'].frames);
-            setTimeout(function() {
-                // After 3 seconds, transition to the "idle" state
-                dog.setFrameY(DogAnimation['idle'].row);
-                dog.setMaxFrame(DogAnimation['idle'].frames);
-
-                // After 3 more seconds, transition to the "walking" state
-                setTimeout(function() {
-                    dog.setFrameY(DogAnimation['walking'].row);
-                    dog.setMaxFrame(DogAnimation['walking'].frames);
-                    dog.sceneStarted = false;
-                }, 3000);
-            }, 3000);
         }
     });
 
