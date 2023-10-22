@@ -42,10 +42,12 @@ export class CharacterDog extends Character{
         } else {
             this.frameX = 0;
         }
+        // Perform super update actions (collision checks)
+        super.update();
     }
 
-    // Handle collisions and do something in this function
-    triggerCollision(){
+    // override default action
+    collisionAction(){
         // If the scene has started then don't run the collision event code
         // With collision data we can even determine which side the dog is colliding on
         if (this.sceneStarted === false && this.collisionData.touchPoints.this.left){
