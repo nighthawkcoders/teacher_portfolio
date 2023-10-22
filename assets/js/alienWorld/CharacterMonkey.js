@@ -38,10 +38,8 @@ export class CharacterMonkey extends Character{
         } else {
             this.frameX = 0;
         }
-    }
-
-    triggerCollision(){
-        // Add collision code here
+        // Perform super update actions (collision checks)
+        super.update();
     }
 
     size() {

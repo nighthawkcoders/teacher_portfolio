@@ -36,8 +36,8 @@ monkeySprite: /images/monkeySprite.png
 
 <script type="module">
     import GameEnv from '{{site.baseurl}}/assets/js/alienWorld/GameEnv.js';
-    import {initCollisionManager} from '{{site.baseurl}}/assets/js/alienWorld/CollisionManager.js';
     import Background from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
+    import Character from '{{site.baseurl}}/assets/js/alienWorld/Character.js';
     import { initDog } from '{{site.baseurl}}/assets/js/alienWorld/CharacterDog.js';
     import {initMonkey} from '{{site.baseurl}}/assets/js/alienWorld/CharacterMonkey.js';
 
@@ -85,26 +85,18 @@ monkeySprite: /images/monkeySprite.png
         const monkeySpeedRatio = 0.7
         var monkeyObj = initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);
 
-        var characterArray = [];
-        characterArray.push(dogObj);
-        characterArray.push(monkeyObj);
-
         // Prepare the collision manager by adding in an array of game objects that will have collision
-        var collisionManager = initCollisionManager(characterArray);
+        //var collisionManager = initCollisionManager(characterArray);
 
         // Game loop
         function gameLoop() {
             backgroundObj.update();
             backgroundObj.draw();
 
-            for (let character of characterArray){
-                character.update();
-                character.draw();
+            for (var characterObj of Character.characterArray){
+                characterObj.update();
+                characterObj.draw();
             }
-
-            // Check all objects for collision on each loop of the game
-            collisionManager.checkForCollisions();
-
             requestAnimationFrame(gameLoop);  // cycle game, aka recursion
         }
 
@@ -114,7 +106,7 @@ monkeySprite: /images/monkeySprite.png
 
             // Call the sizing method on all game objects
             backgroundObj.size();
-            for (let character of characterArray){
+            for (let character of Character.characterArray){
                 character.size();
             }
         }

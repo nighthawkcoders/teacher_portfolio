@@ -2,8 +2,11 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
+    static characterArray = [];
+
     constructor(canvas, image, speedRatio,
         spriteWidth, spriteHeight, spriteScale) {
+                var characterArray = [];
         super(canvas, image, speedRatio);
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
@@ -14,6 +17,7 @@ class Character extends GameObject {
         this.frameY = 0;  // Default Y frame of the animation
         this.collisionWidth = spriteWidth * spriteScale;
         this.collisionHeight = spriteHeight * spriteScale;
+        Character.characterArray.push(this);
     }
 
     setMinFrame(minFrame){
@@ -67,6 +71,26 @@ class Character extends GameObject {
             this.setY(GameEnv.bottom * 1);
         }
     }
+
+    update() {
+        this.collisionChecks();
+    }
+
+    collisionAction(){
+        // default is no action
+    }
+
+    collisionChecks() {
+        for (var characterObj of Character.characterArray){
+            if (this != characterObj ) {
+                this.isCollision(characterObj);
+                if (this.collisionData.hit){
+                    this.collisionAction();
+                }
+            }
+        }
+    }
+
 }
 
 export default Character;
