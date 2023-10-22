@@ -43,7 +43,7 @@ export class CharacterDog extends Character{
         super.update();
     }
 
-    // Handle collision actions
+    // override default action
     collisionAction(){
         // If the scene has started then don't run the collision event code
         // With collision data we can even determine which side the dog is colliding on

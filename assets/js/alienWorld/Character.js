@@ -77,7 +77,7 @@ class Character extends GameObject {
     }
 
     collisionAction(){
-        // default is no action
+        // default action is nothing
     }
 
     collisionChecks() {
