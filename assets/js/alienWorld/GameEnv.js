@@ -8,6 +8,7 @@ export class GameEnv {
     static prevBottom;
     static gameSpeed;
     static controls;
+    static gravity;
     
     // Make the constructor private to prevent instantiation
     constructor() {
