@@ -9,12 +9,17 @@ export class GameEnv {
     static gameSpeed;
     static controls;
     static gravity;
-    
+
     // Make the constructor private to prevent instantiation
     constructor() {
         throw new Error('GameEnv is a static class and cannot be instantiated.');
     }
 
+    // Setter for background bottom
+    static setBottom(bottom) {
+        this.bottom = bottom;
+    }
+    
     // Setter for Game Environment 
     static setGameEnv() {
         // store previous for ratio calcs
@@ -25,10 +30,8 @@ export class GameEnv {
         this.innerHeight = window.innerHeight;
         
         const header = document.querySelector('header');
-        const main = document.querySelector('main');
-        if (header && main) {
+        if (header) {
             this.top = header.offsetHeight;
-            this.bottom = main.offsetHeight;
         }
     }
 }
