@@ -57,6 +57,7 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
     */
     document.addEventListener('keydown', function (event) {
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
+            // Set variables based on the key that is pressed
             const selectedAnimation = event.key;
             monkey.setFrameY(MonkeyAnimation[selectedAnimation].row);
             monkey.setMaxFrame(MonkeyAnimation[selectedAnimation].frames);
@@ -74,10 +75,6 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
             monkey.isIdle = true;
         }
     });
-
-    // An event listener to check if the monkey has collided with another object
-    //document.addEventListener('collision_' + monkey.constructor.name, function (event){
-    //});
 
     // Monkey Object
     return monkey;

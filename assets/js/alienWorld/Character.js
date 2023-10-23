@@ -18,6 +18,7 @@ class Character extends GameObject {
         this.frameY = 0;  // Default Y frame of the animation
         this.collisionWidth = spriteWidth * spriteScale;
         this.collisionHeight = spriteHeight * spriteScale;
+        this.gravityEnabled = true;
         Character.characterArray.push(this);
     }
 
@@ -87,7 +88,7 @@ class Character extends GameObject {
      * be sure to have updated draw call super.update()
     */
     update() {
-        if (GameEnv.bottom > this.y)
+        if (GameEnv.bottom > this.y && this.gravityEnabled)
             this.y += GameEnv.gravity;
 
         // Update animation frameX of the object
@@ -99,29 +100,6 @@ class Character extends GameObject {
 
         this.collisionChecks();
     }
-
-    /* Default action is no action
-     * override when you extend for custom action
-    */
-    collisionAction(){
-        // no action
-    }
-
-    /* Collision checks
-     * uses GameObject isCollision to detect hit
-     * calls collisionAction on hit
-    */
-    collisionChecks() {
-        for (var characterObj of Character.characterArray){
-            if (this != characterObj ) {
-                this.isCollision(characterObj);
-                if (this.collisionData.hit){
-                    this.collisionAction();
-                }
-            }
-        }
-    }
-
 }
 
 export default Character;
