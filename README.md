@@ -44,19 +44,19 @@ This is a general help for NightHawk pages.
 
 - There is a new designed blog  page with all pages having images and a description of what the page is about. This is to help the viewer understand what the page is about and what they can expect to find on the page. The way to add images to a page is to have the following front matter `image: /images/file.jpg` and then the name of the image that you want to use. The image must be in the `images` folder. Furthermore if you would like the file to not show up on the blog page `hide: true` can be added to the front matter.
 
-### NEW FOR NIGHTHAWK-Pages -  SASS CHANGES
+### SASS support
 
 - NIGHTHAWK-Pages supports a variety of different themes that are each overlaid on top of minima. To use each theme, go to the custom-styles.scss file and simply uncomment the theme you want to use. To toggle the theme off, comment the line that imports the theme in the file. To add your own themes, find the desired theme’s Github repository and make a new folder in the sass directory that’s named the name of your theme. Copy the import statement format from the other styles on custom-styles.scss, add your own import statement, and you're done. Note that adding your own themes may cause things to break and a given theme’s compatibility with NIGHTHAWK-Pages may be suboptimal. To add your own styling twist, add your own .scss file to custom-styles via import. Here is an example import `@import "minima/NIGHTHAWK-Pages-styles";`. Note that you can also add your own SCSS in the file itself in area labeled specifically for that purpose. Also you can mix different styles together in NIGHTHAWK-Pages however the effects may vary.
 
-### NEW FOR NIGHTHAWK-Pages -  INCLUDES
+### INCLUDES
 
 - NIGHTHAWK-Pages uses liquid to import many common page elements that are present throughout the repository. These common elements are imported from the _includes directory. If you want to add one of these common elements, use liquid syntax to import the desired element to your file. Here’s an example of liquid syntax used to import: `{%- include post_list.html -%}` Note that the liquid syntax is surrounded by curly braces and percent signs. This can be used anywhere in the repository.
 
-### NEW FOR NIGHTHAWK-Pages -  LAYOUTS
+### LAYOUTS
 
 - To create your own page layout, make your own html page inside the _layouts directory, and when you want to use that layout in a file, use the following front matter `layout: [your layout here]` Using another pre-existing layout uses the same front matter syntax as defined above. This layout will have to be written in your own custom liquid defining the structure of the page.
 
-### NEW FOR NIGHTHAWK-Pages - CONFIG.YML
+### CONFIG.YML
 
 - NIGHTHAWK-Pages allows for social links to be added at the bottom of every page, along with other things. To change the pre-set social links and names, go to the _config.yml file and change the desired category to the desired nomenclature. There are only a few supported social links that you can choose from.
 
