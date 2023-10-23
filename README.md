@@ -1,10 +1,12 @@
 # IMPORTANT
 
-- Go to settings and configure pages, configure Build and Deployment for "GitHub Actions". IF YOU DO NOT DO THIS YOUR PAGE WILL NOT BUILD. 
+This is a general help for NightHawk pages.  
 
-- Incase of issues with the user for your repository not being able to be resolved resulting in the page not building do the following: instead of the usual `repository: yourNameHere` in the repository section write `repository: usr/yourNameHere`
+- Go to settings and configure pages, configure Build and Deployment for "GitHub Actions". IF YOU DO NOT DO THIS YOUR PAGE WILL NOT BUILD.
 
-## File Names
+- In case of issues with the user for your repository not being able to be resolved resulting in the page not building do the following: instead of the usual `repository: yourRepoName` in the repository section write `repository: usr/yourRepoName`
+
+## File Names in "_posts", "_notebooks"
 
 - To name a file, use the following structure (Note that dates should never be in the future and should always be in the format YYYY-MM-DD):
 
@@ -24,40 +26,39 @@
       - BAD EXAMPLE: first-day.ipynb
       - BAD EXAMPLE: 2069-12-31-First-Day.ipynb
 
-
 ## NIGHTHAWK-Pages CHANGES
 
-### NEW FOR NIGHTHAWK-Pages - TAGS
+### TAGS
 
-- Tags are used to organize pages by their tag the way to add tags is to add the following to your front matter such as the example seen here `categories: [C1.4]` each item in the same category will be lumped together to be seen easily on the tags page. 
+- Tags are used to organize pages by their tag the way to add tags is to add the following to your front matter such as the example seen here `categories: [C1.4]` each item in the same category will be lumped together to be seen easily on the tags page.
 
-### NEW FOR NIGHTHAWK-Pages - SEARCH
-- All pages can be searched for using the built in search bar. This search bar will search for any word in the title of a page or in the page itself. This allows for easily finding pages and information that you are looking for. However, sometimes this may not be desirable so to hide a page from search you can add `search_exclude: true` to the front matter of the page. This will hide the page from appearing when the viewer uses search. 
+### SEARCH
 
-### NEW FOR NIGHTHAWK-Pages -  NAVIGATION BAR
+- All pages can be searched for using the built in search bar. This search bar will search for any word in the title of a page or in the page itself. This allows for easily finding pages and information that you are looking for. However, sometimes this may not be desirable so to hide a page from search you can add `search_exclude: true` to the front matter of the page. This will hide the page from appearing when the viewer uses search.
 
-- To add pages to the navigation bar add them to general main directory then add the alpha tag that will order them in the way that you desire such as AA Being the first page and ZZ being the last page. 
+### NAVIGATION BAR
 
-### NEW FOR NIGHTHAWK-Pages - HOME PAGE 
+- To add pages to the navigation bar add them to general main directory then add the alpha tag that will order them in the way that you desire such as AA Being the first page and ZZ being the last page.
 
-- There is a new designed home page with all pages having images and a description of what the page is about. This is to help the viewer understand what the page is about and what they can expect to find on the page. The way to add images to a page is to have the following front matter `image: /images/file.jpg` and then the name of the image that you want to use. The image must be in the `images` folder. Furthermore if you would like the file to not show up on the main page `hide: true` can be added to the front matter.
+### BLOG PAGE
+
+- There is a new designed blog  page with all pages having images and a description of what the page is about. This is to help the viewer understand what the page is about and what they can expect to find on the page. The way to add images to a page is to have the following front matter `image: /images/file.jpg` and then the name of the image that you want to use. The image must be in the `images` folder. Furthermore if you would like the file to not show up on the blog page `hide: true` can be added to the front matter.
 
 ### NEW FOR NIGHTHAWK-Pages -  SASS CHANGES
 
-- NIGHTHAWK-Pages supports a variety of different themes that are each overlaid on top of minima. To use each theme, go to the custom-styles.scss file and simply uncomment the theme you want to use. To toggle the theme off, comment the line that imports the theme in the file. To add your own themes, find the desired theme’s Github repository and make a new folder in the sass directory that’s named the name of your theme. Copy the import statement format from the other styles on custom-styles.scss, add your own import statement, and you're done. Note that adding your own themes may cause things to break and a given theme’s compatibility with NIGHTHAWK-Pages may be suboptimal. To add your own styling twist, add your own .scss file to custom-styles via import. Here is an example import `@import "minima/NIGHTHAWK-Pages-styles";`. Note that you can also add your own SCSS in the file itself in area labeled specifically for that purpose. Also you can mix different styles together in NIGHTHAWK-Pages however the effects may vary. 
+- NIGHTHAWK-Pages supports a variety of different themes that are each overlaid on top of minima. To use each theme, go to the custom-styles.scss file and simply uncomment the theme you want to use. To toggle the theme off, comment the line that imports the theme in the file. To add your own themes, find the desired theme’s Github repository and make a new folder in the sass directory that’s named the name of your theme. Copy the import statement format from the other styles on custom-styles.scss, add your own import statement, and you're done. Note that adding your own themes may cause things to break and a given theme’s compatibility with NIGHTHAWK-Pages may be suboptimal. To add your own styling twist, add your own .scss file to custom-styles via import. Here is an example import `@import "minima/NIGHTHAWK-Pages-styles";`. Note that you can also add your own SCSS in the file itself in area labeled specifically for that purpose. Also you can mix different styles together in NIGHTHAWK-Pages however the effects may vary.
 
 ### NEW FOR NIGHTHAWK-Pages -  INCLUDES
 
-- NIGHTHAWK-Pages uses liquid to import many common page elements that are present throughout the repository. These common elements are imported from the _includes directory. If you want to add one of these common elements, use liquid syntax to import the desired element to your file. Here’s an example of liquid syntax used to import: `{%- include post_list.html -%}` Note that the liquid syntax is surrounded by curly braces and percent signs. This can be used anywhere in the repository. 
+- NIGHTHAWK-Pages uses liquid to import many common page elements that are present throughout the repository. These common elements are imported from the _includes directory. If you want to add one of these common elements, use liquid syntax to import the desired element to your file. Here’s an example of liquid syntax used to import: `{%- include post_list.html -%}` Note that the liquid syntax is surrounded by curly braces and percent signs. This can be used anywhere in the repository.
 
 ### NEW FOR NIGHTHAWK-Pages -  LAYOUTS
-- To create your own page layout, make your own html page inside the _layouts directory, and when you want to use that layout in a file, use the following front matter `layout: [your layout here]` Using another pre-existing layout uses the same front matter syntax as defined above. This layout will have to be written in your own custom liquid defining the structure of the page. 
 
+- To create your own page layout, make your own html page inside the _layouts directory, and when you want to use that layout in a file, use the following front matter `layout: [your layout here]` Using another pre-existing layout uses the same front matter syntax as defined above. This layout will have to be written in your own custom liquid defining the structure of the page.
 
 ### NEW FOR NIGHTHAWK-Pages - CONFIG.YML
 
-- NIGHTHAWK-Pages allows for social links to be added at the bottom of every page, along with other things. To change the pre-set social links and names, go to the _config.yml file and change the desired category to the desired nomenclature. There are only a few supported social links that you can choose from. 
-
+- NIGHTHAWK-Pages allows for social links to be added at the bottom of every page, along with other things. To change the pre-set social links and names, go to the _config.yml file and change the desired category to the desired nomenclature. There are only a few supported social links that you can choose from.
 
 ## Blog site using GitHub Pages and Jekyll
 
@@ -68,11 +69,13 @@
 - Front matter (aka meta data) in ipynb and md files is used to organize information according to week and column in running web site.
 
 ## GitHub Pages
+
 All `GitHub Pages` websites are managed on GitHub infrastructure. GitHub uses `Jekyll` to transform your content into static websites and blogs. Each time we change files in GitHub it initiates a GitHub Action that rebuilds and publishes the site with Jekyll.  
+
 - GitHub Pages is powered by: [Jekyll](https://jekyllrb.com/).
 - Published teacher website: [nighthawkcoders.github.io/teacher](https://nighthawkcoders.github.io/teacher/)
 
-## Preparing a Preview Site 
+## Preparing a Preview Site
 
 In all development, it is recommended to test your code before deployment.  The GitHub Pages development process is optimized by testing your development on your local machine, prior to files on GitHub
 
@@ -85,13 +88,13 @@ Deployment Cycle.  In the deployment cycle, `sync-github-action-review`, it is a
 - The result of these step is Ubuntu tools to run preview server.  These procedures were created using [jekyllrb.com](https://jekyllrb.com/docs/installation/ubuntu/)
 - Run scripts in scripts directory of student repo: setup_ubuntu.sh and activate.sh. Expected name of the repository to run these scripts is 'student'.
 
-### MacOs installation requirements 
+### MacOs installation requirements
 
 - Ihe result of these step are MacOS tools to run preview server.  These procedures were created using [jekyllrb.com](https://jekyllrb.com/docs/installation/macos/). Run scripts in scripts directory of student repo: setup_macos.sh and activate_macos.sh. Expected name of the repository to run these scripts is 'student'.
 
 ### Preview
 
-- The result of these step is server running on: http://0.0.0.0:4100/teacher/.  Regeneration messages will run in terminal on any save.  Press the Enter or Return key in the terminal at any time to enter commands.
+- The result of these step is server running on: <http://0.0.0.0:4100/teacher/>.  Regeneration messages will run in terminal on any save.  Press the Enter or Return key in the terminal at any time to enter commands.
 
 - Complete installation
 
@@ -108,20 +111,20 @@ bundle install
     make
     ```
 
-  - Terminal output of shows server address. Cmd or Ctl click http location to open preview server in browser. Example Server address message... 
+  - Terminal output of shows server address. Cmd or Ctl click http location to open preview server in browser. Example Server address message...
 
     ```text
     Server address: http://0.0.0.0:4100/teacher/
     ```
 
     - Save on ipynb or md activiates "regeneration". Refresh browser to see updates. Example terminal message...
+
     ```
     Regenerating: 1 file(s) changed at 2023-07-31 06:54:32
         _notebooks/2024-01-04-cockpit-setup.ipynb
     ```
 
-  - Terminal message are generated from background processes.  Click return or enter to obtain prompt and use terminal as needed for other tasks.  Alway return to root of project `cd ~/vscode/teacher` for all "make" actions. 
-
+  - Terminal message are generated from background processes.  Click return or enter to obtain prompt and use terminal as needed for other tasks.  Alway return to root of project `cd ~/vscode/teacher` for all "make" actions.
 
   - Stop preview server, but leave constructed files in project for your review.
 
@@ -145,7 +148,7 @@ bundle install
 
 - Meta data also known as front matter is a set of key value pairs that can provide additional information to github pages about .md and .ipynb files. This can and probably will be used in other file types (ie doc, pdf), if we added them to the system.
 
-- In the front matter you can also define things like a title and description for the page.  Additional front matter is defined to place content on "Computer Science Lab Notebook" page.  The `courses:` key will place data on a specific page with the nested `week:` placing data on a specific row on the page.  The `type:` key in front matter will place blog under the plans, hacks(ToDo), and tangibles column. 
+- In the front matter you can also define things like a title and description for the page.  Additional front matter is defined to place content on "Computer Science Lab Notebook" page.  The `courses:` key will place data on a specific page with the nested `week:` placing data on a specific row on the page.  The `type:` key in front matter will place blog under the plans, hacks(ToDo), and tangibles column.
 
 - In our files the front matter is defined at the top of the page or the first markdown cell.
 

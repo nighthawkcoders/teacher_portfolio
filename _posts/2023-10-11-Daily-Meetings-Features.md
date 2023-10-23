@@ -1,4 +1,5 @@
 ---
+hide: true
 toc: true
 comments: true
 layout: post
