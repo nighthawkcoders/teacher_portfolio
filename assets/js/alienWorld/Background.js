@@ -19,6 +19,7 @@ export class Background extends GameObject {
         const canvasWidth = GameEnv.innerWidth;
         const canvasHeight = canvasWidth / this.aspect_ratio;
         const canvasLeft = 0;
+        const canvasScale = 1500;
 
         this.canvas.width = this.width / ADJUST;
         this.canvas.height = this.height / ADJUST;

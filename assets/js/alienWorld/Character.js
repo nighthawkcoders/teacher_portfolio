@@ -71,10 +71,14 @@ class Character extends GameObject {
         if (GameEnv.prevInnerWidth) {
             const proportionalX = (this.x / GameEnv.prevInnerWidth) * GameEnv.innerWidth;
             const proportionalY = (this.y / GameEnv.prevBottom) * GameEnv.bottom;
+
+            // Update the x and y positions based on the proportions
+            this.setX(proportionalX);
+            this.setY(proportionalY);
         } else {
-            // First Dog Screen Position
-            this.setX(GameEnv.innerWidth);
-            this.setY(GameEnv.bottom * 1);
+            // First Screen Position
+            this.setX(GameEnv.innerWidth / (Math.random() * (4) + 1));
+            this.setY(GameEnv.top);
         }
     }
 
@@ -83,6 +87,16 @@ class Character extends GameObject {
      * be sure to have updated draw call super.update()
     */
     update() {
+        if (GameEnv.bottom > this.y)
+            this.y += GameEnv.gravity;
+
+        // Update animation frameX of the object
+        if (this.frameX < this.maxFrame) {
+            this.frameX++;
+        } else {
+            this.frameX = 0;
+        }
+
         this.collisionChecks();
     }
 

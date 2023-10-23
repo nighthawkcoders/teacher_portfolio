@@ -33,15 +33,7 @@ export class CharacterDog extends Character{
                 this.x = GameEnv.innerWidth; // Reset the dog's x position to the right edge
             }
         }
-
-        this.y += GameEnv.gravity;
-
-        // Update animation frameX of the object
-        if (this.frameX < this.maxFrame) {
-            this.frameX++;
-        } else {
-            this.frameX = 0;
-        }
+        
         // Perform super update actions (collision checks)
         super.update();
     }

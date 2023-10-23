@@ -32,13 +32,7 @@ export class CharacterMonkey extends Character{
             this.x += this.speed;
         }
 
-        // Update animation frameX of the object
-        if (this.frameX < this.maxFrame) {
-            this.frameX++;
-        } else {
-            this.frameX = 0;
-        }
-        // Perform super update actions (collision checks)
+        // Perform super update actions
         super.update();
     }
 
