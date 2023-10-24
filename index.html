@@ -1,16 +1,20 @@
 ---
 layout: base
 title: Alien World
-image: /images/alien_planet2.jpg
-dogSprite: /images/dogSprite.png
-monkeySprite: /images/monkeySprite.png
-
+image: /images/alien_planet.jpg
+images:
+  background:
+    src: /images/alien_planet2.jpg
+  dog:
+    src: /images/dogSprite.png
+  monkey:
+    src: /images/monkeySprite.png
 ---
 
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
-{% assign backgroundFile = site.baseurl | append: page.image %}
-{% assign dogSpriteImage = site.baseurl | append: page.dogSprite %}
-{% assign monkeySpriteImage = site.baseurl | append: page.monkeySprite %}
+{% assign backgroundFile = site.baseurl | append: page.images.background.src %}
+{% assign dogSpriteImage = site.baseurl | append: page.images.dog.src %}
+{% assign monkeySpriteImage = site.baseurl | append: page.images.monkey.src %}
 
 <style>
     #controls {
