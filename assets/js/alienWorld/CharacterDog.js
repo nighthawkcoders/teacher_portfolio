@@ -86,10 +86,9 @@ export function initDog(canvasId, image, speedRatio, controls){
 
     dog.size();
 
-    /* Dog Control 
-    * changes y value, the row in sprite
-    * which changes animation to either idle, bark, walk
-    * change number of frames in row
+    /* Dog Control for Animation
+    * changes FrameY value (selected animation is idle, bark, walk)
+    * change MaxFrame according to value in selected animation
     */
     GameEnv.controls.addEventListener('click', function (event) {
         if (event.target.tagName === 'INPUT') {
