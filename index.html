@@ -126,16 +126,13 @@ images:
             /* Toggle "canvas filter property" between alien and normal */
             var isFilterEnabled = true;
             const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
-
             toggleCanvasEffect.addEventListener("click", function () {
-                if (isFilterEnabled) {  // toggle off
-                    backgroundCanvas.style.filter = "none";  // remove filter
-                    dogCanvas.style.filter = "none";
-                    monkeyCanvas.style.filter = "none";
-                } else { // toggle on
-                    backgroundCanvas.style.filter = defaultFilter; // Apply the default filter value
-                    dogCanvas.style.filter = defaultFilter;
-                    monkeyCanvas.style.filter = defaultFilter;
+                for (var gameObj of GameObject.gameObjectArray){
+                    if (isFilterEnabled) {  // toggle off
+                        gameObj.canvas.style.filter = "none";  // remove filter
+                    } else { // toggle on
+                        gameObj.canvas.style.filter = defaultFilter;  // remove filter
+                    }
                 }
                 isFilterEnabled = !isFilterEnabled;  // switch boolean value
             });
