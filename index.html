@@ -41,7 +41,7 @@ monkeySprite: /images/monkeySprite.png
     import Character from '{{site.baseurl}}/assets/js/alienWorld/Character.js';
     import Platform from '{{site.baseurl}}/assets/js/alienWorld/Platform.js';
     import { initDog } from '{{site.baseurl}}/assets/js/alienWorld/CharacterDog.js';
-    import {initMonkey} from '{{site.baseurl}}/assets/js/alienWorld/CharacterMonkey.js';
+    import { initMonkey } from '{{site.baseurl}}/assets/js/alienWorld/CharacterMonkey.js';
 
     // Prepare Background Image
     const backgroundImg = new Image();
@@ -61,7 +61,6 @@ monkeySprite: /images/monkeySprite.png
     dogCanvas.id = "characters";
     document.querySelector("#canvasContainer").appendChild(dogCanvas);
 
-
     // Prepare Monkey Image
     const monkeyImg = new Image();
     monkeyImg.src = "{{monkeySpriteImage}}";
@@ -76,6 +75,7 @@ monkeySprite: /images/monkeySprite.png
     GameEnv.controls = document.getElementById("controls");
     GameEnv.gravity = 3;
 
+    // The background onload is critcal for timing
     backgroundImg.onload = function () {
 
         // Background object(s)
@@ -117,16 +117,16 @@ monkeySprite: /images/monkeySprite.png
         gameLoop();
     }
 
-    /* Toggle "canvas filter property" */
+    /* Toggle "canvas filter property" between alien and normal */
     var isFilterEnabled = true;
     const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
 
     toggleCanvasEffect.addEventListener("click", function () {
-        if (isFilterEnabled) {
+        if (isFilterEnabled) {  // toggle off
             backgroundCanvas.style.filter = "none";  // remove filter
             dogCanvas.style.filter = "none";
             monkeyCanvas.style.filter = "none";
-        } else {
+        } else { // toggle on
             backgroundCanvas.style.filter = defaultFilter; // Apply the default filter value
             dogCanvas.style.filter = defaultFilter;
             monkeyCanvas.style.filter = defaultFilter;
