@@ -36,13 +36,6 @@ export class CharacterMonkey extends Character{
         super.update();
     }
 
-    size() {
-        // Monkey Frame position and Frame extents
-        this.setFrameY(MonkeyAnimation['a'].row);
-        this.setFrameX(MonkeyAnimation['a'].idleFrame.column)
-        this.setMaxFrame(MonkeyAnimation['a'].idleFrame.frames);
-        super.size();
-    }
 }
 
 // Can add specific initialization parameters for the monkey here
@@ -51,9 +44,14 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
     // Create the Monkey character
     var monkey = new CharacterMonkey(canvasId, image, gameSpeed, speedRatio);
 
+    // Set initial Animation
+    monkey.setFrameY(MonkeyAnimation['a'].row);
+    monkey.setFrameX(MonkeyAnimation['a'].idleFrame.column)
+    monkey.setMaxFrame(MonkeyAnimation['a'].idleFrame.frames);
+
     /* Monkey Control 
-    * changes y value, the row in sprite
-    * change number of frames in row
+    * changes FrameY value (selected row in sprite)
+    * change MaxFrame according to value in selected animation
     */
     document.addEventListener('keydown', function (event) {
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
