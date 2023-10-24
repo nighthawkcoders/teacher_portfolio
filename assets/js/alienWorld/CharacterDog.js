@@ -70,21 +70,17 @@ export class CharacterDog extends Character{
         }
     }
 
-    size() {
-        // Dog Frame position and Frame extents
-        this.setFrameY(DogAnimation.walking.row);
-        this.setMaxFrame(DogAnimation.walking.frames);
-        super.size();
-    }
 }
 
 // Can add specific initialization parameters for the dog here
 // In this case the dog is following the default character initialization
-export function initDog(canvasId, image, speedRatio, controls){
+export function initDog(canvasId, image, speedRatio){
     // Create the Dog character
     var dog = new CharacterDog(canvasId, image, speedRatio);
 
-    dog.size();
+    // Set initial Animation
+    dog.setFrameY(DogAnimation.walking.row);
+    dog.setMaxFrame(DogAnimation.walking.frames);
 
     /* Dog Control for Animation
     * changes FrameY value (selected animation is idle, bark, walk)
