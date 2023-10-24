@@ -53,17 +53,38 @@ monkeySprite: /images/monkeySprite.png
         image.onerror = reject;
         });
     }
+
+    // Game loop
+    function gameLoop() {
+        for (var gameObj of GameObject.gameObjectArray){
+            gameObj.update();
+            gameObj.draw();
+        }
+        requestAnimationFrame(gameLoop);  // cycle game, aka recursion
+    }
+
+    // Window resize
+    function setSize() {
+        GameEnv.setGameEnv();  // Update GameEnv dimensions
+
+        // Call the sizing method on all game objects
+        for (var gameObj of GameObject.gameObjectArray){
+            gameObj.size();
+        }
+    }
+
     
     async function startGame() {
         // Resolve file dependencies before starting gam
         try {
+
+            // Define data for Game Objects
+
             const [backgroundImg, dogImg, monkeyImg] = await Promise.all([
                 loadImage('{{backgroundFile}}'),
                 loadImage('{{dogSpriteImage}}'),
                 loadImage('{{monkeySpriteImage}}'),
             ]);
-
-            // files loaded successfully, prepare game
 
             // Prepare HTML with Background Canvas
             const backgroundCanvas = document.createElement("canvas");
@@ -85,7 +106,7 @@ monkeySprite: /images/monkeySprite.png
             GameEnv.controls = document.getElementById("controls");
             GameEnv.gravity = 3;
         
-            // Setup Game Objects
+            // Create Game Objects
 
             // Background object(s)
             const backgroundSpeedRatio = 0.2
@@ -99,27 +120,7 @@ monkeySprite: /images/monkeySprite.png
 
             //var platform = new Platform(0, GameEnv.bottom - 50, GameEnv.innerWidth, 10);
 
-            // Game loop
-            function gameLoop() {
-                for (var gameObj of GameObject.gameObjectArray){
-                    gameObj.update();
-                    gameObj.draw();
-                }
-                requestAnimationFrame(gameLoop);  // cycle game, aka recursion
-            }
-
-
-            // Define Event Listeners
-
-            // Window resize event
-            function setSize() {
-                GameEnv.setGameEnv();  // Update GameEnv dimensions
-
-                // Call the sizing method on all game objects
-                for (let gameObj of GameObject.gameObjectArray){
-                    gameObj.size();
-                }
-            }
+            // Define Event Listeners 
 
             // Listen for window resize events and trigger the handleResize function
             window.addEventListener('resize', setSize);
@@ -143,6 +144,7 @@ monkeySprite: /images/monkeySprite.png
 
 
             // Start the game
+            
             setSize();
             gameLoop();
 
