@@ -31,7 +31,7 @@ export class Background extends GameObject {
     */ 
     size() {
         // Update canvas size
-        const ADJUST = 1 // visual layer adjust; alien_planet.jpg: 1.42, try 1 for others
+        const ADJUST = 1.42 // visual layer adjust; alien_planet.jpg: 1.42, try 1 for others
 
         const canvasWidth = GameEnv.innerWidth;
         const canvasHeight = canvasWidth / this.aspect_ratio;

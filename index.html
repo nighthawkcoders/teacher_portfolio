@@ -49,7 +49,7 @@ images:
     import { initMonkey } from '{{site.baseurl}}/assets/js/alienWorld/CharacterMonkey.js';
 
     // Create a function to load an image and return a Promise
-    function loadImage(src) {
+    async function loadImage(src) {
         return new Promise((resolve, reject) => {
         const image = new Image();
         image.src = src;
@@ -77,51 +77,45 @@ images:
         }
     }
 
-    
-    async function startGame() {
-        // Resolve file dependencies before starting gam
+    // Setup Game Objects and Event Listeners
+    async function setupGame() {   
         try {
-
-            // Define data for Game Objects
-
+            // Open image files for Game Objects
             const [backgroundImg, dogImg, monkeyImg] = await Promise.all([
                 loadImage('{{backgroundFile}}'),
                 loadImage('{{dogSpriteImage}}'),
                 loadImage('{{monkeySpriteImage}}'),
             ]);
 
+            // Setup Globals
+            GameEnv.gameSpeed = 2;
+            GameEnv.gravity = 3;
+            GameEnv.controls = document.getElementById("controls");
+
             // Prepare HTML with Background Canvas
             const backgroundCanvas = document.createElement("canvas");
             backgroundCanvas.id = "background";
             document.querySelector("#canvasContainer").appendChild(backgroundCanvas);
+            // Background object
+            const backgroundSpeedRatio = 0.2
+            var backgroundObj = new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);
 
             // Prepare HTML with Dog Canvas
             const dogCanvas = document.createElement("canvas");
             dogCanvas.id = "characters";
             document.querySelector("#canvasContainer").appendChild(dogCanvas);
+            // Dog object
+            const dogSpeedRatio = 0.2
+            var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio);
 
             // Prepare HTML with Monkey Canvas
             const monkeyCanvas = document.createElement("canvas");
             monkeyCanvas.id = "characters";
             document.querySelector("#canvasContainer").appendChild(monkeyCanvas);
-
-            // Setup Globals
-            GameEnv.gameSpeed = 2;
-            GameEnv.controls = document.getElementById("controls");
-            GameEnv.gravity = 3;
-        
-            // Create Game Objects
-
-            // Background object(s)
-            const backgroundSpeedRatio = 0.2
-            var backgroundObj = new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);
-
-            // Character object(s)
-            const dogSpeedRatio = 0.2
-            var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio);
+            // Monkey object
             const monkeySpeedRatio = 0.7
-            var monkeyObj = initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);
-
+            var monkeyObj = initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);              
+ 
             //var platform = new Platform(0, GameEnv.bottom - 50, GameEnv.innerWidth, 10);
 
             // Define Event Listeners 
@@ -145,13 +139,6 @@ images:
                 }
                 isFilterEnabled = !isFilterEnabled;  // switch boolean value
             });
-
-
-            // Start the game
-            
-            setSize();
-            gameLoop();
-
         
         // Trap errors on bad images
         } catch (error) {
@@ -159,8 +146,11 @@ images:
         }
     }
   
-    // Call the initializeGame function to start the game
-    startGame();
+    // Call and wait for Game Objects and Event Listeners to be ready
+    await setupGame();
+
+    // Start the game
+    setSize();
+    gameLoop();
   
 </script>
-
