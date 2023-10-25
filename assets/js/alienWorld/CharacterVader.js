@@ -3,7 +3,7 @@ import Character from './Character.js';
 
 const VaderAnimation = {
     // Sprite properties
-    scale: 5,
+    scale: 4,
     width: 128/8,
     height: 144/6,
 	idle: { row: 1, frames: 8 }
