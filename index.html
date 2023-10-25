@@ -91,7 +91,7 @@ images:
     });
   
 
-    // Setup Game Objects
+    // Setup and store Game Objects
     async function setupGame() {   
         try {
             // Open image files for Game Objects
@@ -111,7 +111,7 @@ images:
             document.querySelector("#canvasContainer").appendChild(backgroundCanvas);
             // Background object
             const backgroundSpeedRatio = 0.2
-            var backgroundObj = new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);
+            new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);
 
             // Prepare HTML with Dog Canvas
             const dogCanvas = document.createElement("canvas");
@@ -119,7 +119,7 @@ images:
             document.querySelector("#canvasContainer").appendChild(dogCanvas);
             // Dog object
             const dogSpeedRatio = 0.2
-            var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio, document.getElementById("controls"));
+            initDog(dogCanvas, dogImg, dogSpeedRatio, document.getElementById("controls"));
 
             // Prepare HTML with Monkey Canvas
             const monkeyCanvas = document.createElement("canvas");
@@ -127,7 +127,7 @@ images:
             document.querySelector("#canvasContainer").appendChild(monkeyCanvas);
             // Monkey object
             const monkeySpeedRatio = 0.7
-            var monkeyObj = initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);              
+            initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);              
  
             //var platform = new Platform(0, GameEnv.bottom - 50, GameEnv.innerWidth, 10);
         
@@ -137,13 +137,13 @@ images:
         }
     }
   
-    // Call and wait for Game Objects and Event Listeners to be ready
+    // Call and wait for Game Objects to be ready
     await setupGame();
 
-    // Trigger resize at start up
+    // Trigger a resize at start up
     window.dispatchEvent(new Event('resize'));
 
-    // ###### Start the game ######
+    // Start the game
     gameLoop();
 
 </script>
