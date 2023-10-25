@@ -11,12 +11,15 @@ images:
     src: /images/dogSprite.png
   monkey:
     src: /images/monkeySprite.png
+  vader:
+    src: /images/vaderSprite.png
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
 {% assign platformFile = site.baseurl | append: page.images.platform.src %}
 {% assign dogSpriteImage = site.baseurl | append: page.images.dog.src %}
 {% assign monkeySpriteImage = site.baseurl | append: page.images.monkey.src %}
+{% assign vaderSpriteImage = site.baseurl | append: page.images.vader.src %}
 
 <style>
     #controls {
@@ -49,6 +52,7 @@ images:
     import { initPlatform } from '{{site.baseurl}}/assets/js/alienWorld/Platform.js';
     import { initDog } from '{{site.baseurl}}/assets/js/alienWorld/CharacterDog.js';
     import { initMonkey } from '{{site.baseurl}}/assets/js/alienWorld/CharacterMonkey.js';
+    import { initVader } from '{{site.baseurl}}/assets/js/alienWorld/CharacterVader.js';
 
     // Create a function to load an image and return a Promise
     async function loadImage(src) {
@@ -98,11 +102,12 @@ images:
     async function setupGame() {   
         try {
             // Open image files for Game Objects
-            const [backgroundImg, platformImg, dogImg, monkeyImg] = await Promise.all([
+            const [backgroundImg, platformImg, dogImg, monkeyImg, vaderImg] = await Promise.all([
                 loadImage('{{backgroundFile}}'),
                 loadImage('{{platformFile}}'),
                 loadImage('{{dogSpriteImage}}'),
                 loadImage('{{monkeySpriteImage}}'),
+                loadImage('{{vaderSpriteImage}}')
             ]);
 
             // Setup Globals
@@ -141,6 +146,14 @@ images:
             const monkeySpeedRatio = 0.7
             initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);              
  
+            // Prepare HTML with Vader Canvas
+            const vaderCanvas = document.createElement("canvas");
+            vaderCanvas.id = "characters";
+            document.querySelector("#canvasContainer").appendChild(vaderCanvas);
+            // Vader object
+            const vaderSpeedRatio = 0.1
+            initVader(vaderCanvas, vaderImg, vaderSpeedRatio); 
+
             //var platform = new Platform(0, GameEnv.bottom - 50, GameEnv.innerWidth, 10);
         
         // Trap errors on failed image loads
