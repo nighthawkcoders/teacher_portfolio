@@ -10,7 +10,6 @@ images:
   monkey:
     src: /images/monkeySprite.png
 ---
-
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
 {% assign dogSpriteImage = site.baseurl | append: page.images.dog.src %}
@@ -68,16 +67,31 @@ images:
     }
 
     // Window resize
-    function setSize() {
+    window.addEventListener('resize', function () {
         GameEnv.setGameEnv();  // Update GameEnv dimensions
 
         // Call the sizing method on all game objects
         for (var gameObj of GameObject.gameObjectArray){
             gameObj.size();
         }
-    }
+    });
 
-    // Setup Game Objects and Event Listeners
+    // Toggle "canvas filter property" between alien and normal
+    var isFilterEnabled = true;
+    const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
+    toggleCanvasEffect.addEventListener("click", function () {
+        for (var gameObj of GameObject.gameObjectArray){
+            if (isFilterEnabled) {  // toggle off
+                gameObj.canvas.style.filter = "none";  // remove filter
+            } else { // toggle on
+                gameObj.canvas.style.filter = defaultFilter;  // remove filter
+            }
+        }
+        isFilterEnabled = !isFilterEnabled;  // switch boolean value
+    });
+  
+
+    // Setup Game Objects
     async function setupGame() {   
         try {
             // Open image files for Game Objects
@@ -116,27 +130,8 @@ images:
             var monkeyObj = initMonkey(monkeyCanvas, monkeyImg, monkeySpeedRatio);              
  
             //var platform = new Platform(0, GameEnv.bottom - 50, GameEnv.innerWidth, 10);
-
-            // Define Event Listeners 
-
-            // Listen for window resize events and trigger the handleResize function
-            window.addEventListener('resize', setSize);
-
-            /* Toggle "canvas filter property" between alien and normal */
-            var isFilterEnabled = true;
-            const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
-            toggleCanvasEffect.addEventListener("click", function () {
-                for (var gameObj of GameObject.gameObjectArray){
-                    if (isFilterEnabled) {  // toggle off
-                        gameObj.canvas.style.filter = "none";  // remove filter
-                    } else { // toggle on
-                        gameObj.canvas.style.filter = defaultFilter;  // remove filter
-                    }
-                }
-                isFilterEnabled = !isFilterEnabled;  // switch boolean value
-            });
         
-        // Trap errors on bad images
+        // Trap errors on failed image loads
         } catch (error) {
             console.error('Failed to load one or more images:', error);
         }
@@ -145,8 +140,10 @@ images:
     // Call and wait for Game Objects and Event Listeners to be ready
     await setupGame();
 
-    // Start the game
-    setSize();
+    // Trigger resize at start up
+    window.dispatchEvent(new Event('resize'));
+
+    // ###### Start the game ######
     gameLoop();
-  
+
 </script>
