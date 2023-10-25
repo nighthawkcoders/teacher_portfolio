@@ -1,13 +1,11 @@
 ---
 layout: base
 title: Alien World Background
-description: Use JavaScript without external libraries to loop background moving across screen. Layer is in OOP style.
-categories: [C5.0, C7.0, C7.6]
+description: Use JavaScript without external libraries to loop background moving across screen.
 image: /images/alien_planet.jpg
 type: tangibles
 courses: { compsci: {week: 1} }
 ---
-
 {% assign alienPlanetFile = site.baseurl | append: page.image %}
 
 <!-- Prepare alienWorld DOM canvas -->
