@@ -17,6 +17,7 @@ class GameObject {
         this.aspect_ratio = this.width / this.height;
         this.speedRatio = speedRatio;
         this.speed = GameEnv.gameSpeed * this.speedRatio;
+        this.invert = true;
         this.collisionData = {};
         // Add this object to the game object array so collision can be detected
         // among other things

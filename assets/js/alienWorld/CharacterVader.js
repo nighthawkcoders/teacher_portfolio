@@ -3,10 +3,10 @@ import Character from './Character.js';
 
 const VaderAnimation = {
     // Sprite properties
-    scale: 4,
-    width: 128/8,
-    height: 144/6,
-	idle: { row: 1, frames: 8 }
+    scale: 2,
+    width: 16,
+    height: 24,
+	idle: { row: 1, frames: 7 }
 }
 
 export class CharacterVader extends Character{
@@ -21,19 +21,18 @@ export class CharacterVader extends Character{
         );
 
         this.gravityEnabled = false;
-
-        this.count = 0;
+        this.delay = 0;
     }
 
     // Dog perform a unique update
     update() {
         // slower animation 
-        if (this.count === 5) {
-            this.count = 0;
+        if (this.delay === 20) {
+            this.delay = 0;
             // Perform super update actions (collision checks)
             super.update();
         } else {
-            this.count++;
+            this.delay++;
         }
     }
 
@@ -50,8 +49,8 @@ export class CharacterVader extends Character{
             this.setY(proportionalY);
         } else {
             // First Screen Position
-            this.setX(GameEnv.innerWidth / (1.2));
-            this.setY(GameEnv.top);
+            this.setX(GameEnv.innerWidth * .01);
+            this.setY(GameEnv.innerHeight * .01);
         }
     }
 }
@@ -65,6 +64,7 @@ export function initVader(canvasId, image, speedRatio){
     // Set initial Animation
     vader.setFrameY(VaderAnimation.idle.row);
     vader.setMaxFrame(VaderAnimation.idle.frames);
+    vader.invert = false;
 
     // Vader Object
     return vader;

@@ -84,14 +84,16 @@ images:
     });
 
     // Toggle "canvas filter property" between alien and normal
-    var isFilterEnabled = true;
+    var isFilterEnabled = false;
     const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
     toggleCanvasEffect.addEventListener("click", function () {
         for (var gameObj of GameObject.gameObjectArray){
-            if (isFilterEnabled) {  // toggle off
+            if (gameObj.invert && isFilterEnabled) {  // toggle off
                 gameObj.canvas.style.filter = "none";  // remove filter
-            } else { // toggle on
+            } else if (gameObj.invert) { // toggle on
                 gameObj.canvas.style.filter = defaultFilter;  // remove filter
+            } else {
+                gameObj.canvas.style.filter = "none";  // remove filter
             }
         }
         isFilterEnabled = !isFilterEnabled;  // switch boolean value
@@ -151,7 +153,7 @@ images:
             vaderCanvas.id = "characters";
             document.querySelector("#canvasContainer").appendChild(vaderCanvas);
             // Vader object
-            const vaderSpeedRatio = 0.1
+            const vaderSpeedRatio = 0
             initVader(vaderCanvas, vaderImg, vaderSpeedRatio); 
 
             //var platform = new Platform(0, GameEnv.bottom - 50, GameEnv.innerWidth, 10);
@@ -167,6 +169,7 @@ images:
 
     // Trigger a resize at start up
     window.dispatchEvent(new Event('resize'));
+    toggleCanvasEffect.dispatchEvent(new Event('click'));
 
     // Start the game
     gameLoop();
