@@ -115,7 +115,7 @@ images:
             document.querySelector("#canvasContainer").appendChild(backgroundCanvas);
             // Background object
             const backgroundSpeedRatio = 0.2
-            new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);
+            new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);  // Background Class calls GameObject Array which stores the instance
 
             // Prepare HTML with Platform Canvas
             const platformCanvas = document.createElement("canvas");
