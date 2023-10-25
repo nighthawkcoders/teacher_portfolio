@@ -74,7 +74,7 @@ export class CharacterDog extends Character{
 
 // Can add specific initialization parameters for the dog here
 // In this case the dog is following the default character initialization
-export function initDog(canvasId, image, speedRatio){
+export function initDog(canvasId, image, speedRatio, controls){
     // Create the Dog character
     var dog = new CharacterDog(canvasId, image, speedRatio);
 
@@ -86,7 +86,7 @@ export function initDog(canvasId, image, speedRatio){
     * changes FrameY value (selected animation is idle, bark, walk)
     * change MaxFrame according to value in selected animation
     */
-    GameEnv.controls.addEventListener('click', function (event) {
+    controls.addEventListener('click', function (event) {
         if (event.target.tagName === 'INPUT') {
             const selectedAnimation = event.target.id;
             dog.setFrameY(DogAnimation[selectedAnimation].row);

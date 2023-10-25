@@ -90,7 +90,6 @@ images:
             // Setup Globals
             GameEnv.gameSpeed = 2;
             GameEnv.gravity = 3;
-            GameEnv.controls = document.getElementById("controls");
 
             // Prepare HTML with Background Canvas
             const backgroundCanvas = document.createElement("canvas");
@@ -106,7 +105,7 @@ images:
             document.querySelector("#canvasContainer").appendChild(dogCanvas);
             // Dog object
             const dogSpeedRatio = 0.2
-            var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio);
+            var dogObj = initDog(dogCanvas, dogImg, dogSpeedRatio, document.getElementById("controls"));
 
             // Prepare HTML with Monkey Canvas
             const monkeyCanvas = document.createElement("canvas");
