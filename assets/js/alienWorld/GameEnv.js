@@ -14,24 +14,36 @@ export class GameEnv {
         throw new Error('GameEnv is a static class and cannot be instantiated.');
     }
 
-    // Setter for background bottom
-    static setBottom(bottom) {
-        this.bottom = bottom;
-    }
-    
-    // Setter for Game Environment 
-    static setGameEnv() {
-        // store previous for ratio calcs
-        this.prevInnerWidth = this.innerWidth;
-        this.prevBottom = this.bottom;
-    
-        this.innerWidth = window.innerWidth;
-        this.innerHeight = window.innerHeight;
-        
+     // Setter for Top position
+     static setTop() {
+        // set top of game as header height
         const header = document.querySelector('header');
         if (header) {
             this.top = header.offsetHeight;
         }
+    }
+
+    // Setter for Bottom position
+    static setBottom() {
+        // set bottom of game as background height
+        const background = document.querySelector('#background');
+        if (background) {
+            this.bottom = background.offsetHeight;
+        }
+    }
+    
+    // Setter for Game Environment 
+    static setGameEnv() {
+        // store previous for ratio calculatins on resize
+        this.prevInnerWidth = this.innerWidth;
+        this.prevBottom = this.bottom;
+    
+        // game uses available width and heith
+        this.innerWidth = window.innerWidth;
+        this.innerHeight = window.innerHeight;
+
+        this.setTop();
+        // this.setBottom() is ignored for now as resize of background object determinse bottom
     }
 }
 

@@ -45,11 +45,8 @@ export class Background extends GameObject {
         this.canvas.style.left = `${canvasLeft}px`;
         this.canvas.style.top = `${GameEnv.top}px`;
 
-        // set bottom of game as background height
-        const background = document.querySelector('#background');
-        if (background) {
-            GameEnv.setBottom(background.offsetHeight);
-        }
+        // set bottom of game to new background height
+        GameEnv.setBottom();
     }
 }
 
