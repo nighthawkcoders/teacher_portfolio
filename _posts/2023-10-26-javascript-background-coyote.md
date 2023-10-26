@@ -5,19 +5,19 @@ description: Use JavaScript without external libraries to loop background moving
 image: /images/alien_planet.jpg
 type: hacks
 courses: { compsci: {week: 2} }
-image: /images/alien_planet2.jpg
+image: /images/alien_planet1..jpg
 images:
   background:
-    src: /images/alien_planet2.jpg
-  vader:
-    src: /images/vaderSprite.png
+    src: /images/alien_planet1..jpg
+  chicken:
+    src: /images/chickenSprite.png
   coyote:
     src: /images/coyote.png
 
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
-{% assign vaderSpriteImage = site.baseurl | append: page.images.vader.src %}
+{% assign chickenSpriteImage = site.baseurl | append: page.images.chicken.src %}
 {% assign coyoteSpriteImage = site.baseurl | append: page.images.coyote.src %}
 
 <style>
@@ -41,7 +41,7 @@ images:
     import GameObject from '{{site.baseurl}}/assets/js/alienWorld/GameObject.js';
     import Background from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
     import Character from '{{site.baseurl}}/assets/js/alienWorld/Character.js';
-    import { initVader } from '{{site.baseurl}}/assets/js/alienWorld/CharacterVader.js';
+    import { initChicken } from '{{site.baseurl}}/assets/js/alienWorld/CharacterChicken.js';
     import { initCoyote } from '{{site.baseurl}}/assets/js/alienWorld/CharacterCoyote.js';
 
     // Create a function to load an image and return a Promise
@@ -74,7 +74,7 @@ images:
     });
 
     // Toggle "canvas filter property" between alien and normal
-    var isFilterEnabled = false;
+    var isFilterEnabled = true;
     const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
     toggleCanvasEffect.addEventListener("click", function () {
         for (var gameObj of GameObject.gameObjectArray){
@@ -93,9 +93,9 @@ images:
     async function setupGame() {
         try {
             // Open image files for Game Objects
-            const [backgroundImg, vaderImg, coyoteImg] = await Promise.all([
+            const [backgroundImg, chickenImg, coyoteImg] = await Promise.all([
                 loadImage('{{backgroundFile}}'),
-                loadImage('{{vaderSpriteImage}}'),
+                loadImage('{{chickenSpriteImage}}'),
                 loadImage('{{coyoteSpriteImage}}'),
             ]);
 
@@ -111,13 +111,13 @@ images:
             const backgroundSpeedRatio = 0
             new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);  // Background Class calls GameObject Array which stores the instance
 
-            // Prepare HTML with Vader Canvas
-            const vaderCanvas = document.createElement("canvas");
-            vaderCanvas.id = "characters";
-            document.querySelector("#canvasContainer").appendChild(vaderCanvas);
-            // Vader object
-            const vaderSpeedRatio = 0
-            initVader(vaderCanvas, vaderImg, vaderSpeedRatio);
+            // Prepare HTML with Chicken Canvas
+            const chickenCanvas = document.createElement("canvas");
+            chickenCanvas.id = "characters";
+            document.querySelector("#canvasContainer").appendChild(chickenCanvas);
+            // Chicken object
+            const chickenSpeedRatio = 0
+            initChicken(chickenCanvas, chickenImg, chickenSpeedRatio);
 
             // Prepare HTML with many Coyotes
             for (var i = 0; i < 10; i++) {
