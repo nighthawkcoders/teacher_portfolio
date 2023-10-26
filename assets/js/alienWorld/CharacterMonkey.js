@@ -38,6 +38,7 @@ export class CharacterMonkey extends Character{
             this.x += this.speed;
         }
         else if (this.frameY === MonkeyAnimation.w.row && !this.isIdle && GameEnv.bottom <= this.y) {
+            // jump by changing velocity (only can jump if on ground)
             this.yVelocity = -10;
         } else if (GameEnv.bottom <= this.y) {
             // do idle frame
@@ -48,8 +49,10 @@ export class CharacterMonkey extends Character{
         }
 
         if (GameEnv.bottom > this.y) {
+            // gravity (using acceleration instead of velocity, needed for jump implementation)
             this.yVelocity += 0.5;
         } else {
+            // normal force (basically disabels gravity if on the ground)
             this.yVelocity = Math.min(0, this.yVelocity);
         }
 
