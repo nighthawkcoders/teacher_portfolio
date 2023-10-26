@@ -1,8 +1,8 @@
 ---
 layout: base
 title: Refactored Alien World
-description: Use JavaScript without external libraries to stationary or looping background. Depends on Background.js, GameObject.js, CharacterObject, etc.
-image: /images/alien_planet2.jpg
+description: Use JavaScript without external libraries to loop background moving across screen. Depends on Background.js and GameObject.js.
+image: /images/alien_planet.jpg
 type: hacks
 courses: { compsci: {week: 2} }
 image: /images/alien_planet2.jpg
@@ -19,7 +19,7 @@ images:
 <style>
     #controls {
         position: relative;
-        z-index: 2; /*Ensure the controls are on top*/
+        z-index: 2; /* Ensure the controls are on top */
     }
 </style>
 
@@ -84,6 +84,7 @@ images:
         isFilterEnabled = !isFilterEnabled;  // switch boolean value
     });
   
+
     // Setup and store Game Objects
     async function setupGame() {
         try {
@@ -104,14 +105,15 @@ images:
             // Background object
             const backgroundSpeedRatio = 0
             new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);  // Background Class calls GameObject Array which stores the instance
-
+ 
             // Prepare HTML with Vader Canvas
             const vaderCanvas = document.createElement("canvas");
             vaderCanvas.id = "characters";
             document.querySelector("#canvasContainer").appendChild(vaderCanvas);
             // Vader object
             const vaderSpeedRatio = 0
-            initVader(vaderCanvas, vaderImg, vaderSpeedRatio);
+            initVader(vaderCanvas, vaderImg, vaderSpeedRatio); 
+
 
         // Trap errors on failed image loads
         } catch (error) {
