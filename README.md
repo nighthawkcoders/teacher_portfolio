@@ -6,6 +6,8 @@ This is a general help for NightHawk pages.
 
 - In case of issues with the user for your repository not being able to be resolved resulting in the page not building do the following: instead of the usual `repository: yourRepoName` in the repository section write `repository: usr/yourRepoName`
 
+- Alien World Project uses minima theme.   To understand files and organization read [Minima README.md](https://github.com/jekyll/minima#readme)
+
 ## File Names in "_posts", "_notebooks"
 
 - To name a file, use the following structure (Note that dates should never be in the future and should always be in the format YYYY-MM-DD):
