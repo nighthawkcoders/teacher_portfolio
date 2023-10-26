@@ -8,7 +8,10 @@ const MonkeyAnimation = {
     height: 40,
 	d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }, // Walk right with 'd' key
 	a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } }, // Walk left with 'a' key
+    w: { row: 9, frames: 15 }
 }
+
+const defaultIdleFrame = { row: 0, column: 7, frames: 0 };
 
 export class CharacterMonkey extends Character{
     // constructors sets up Character object 
@@ -21,6 +24,9 @@ export class CharacterMonkey extends Character{
             MonkeyAnimation.scale
         );
         this.isIdle = true;
+        this.gravityEnabled = false;
+
+        this.yVelocity = 0;
     }
 
     // Monkey perform a unique update
@@ -31,11 +37,27 @@ export class CharacterMonkey extends Character{
         else if (this.frameY === MonkeyAnimation.d.row && !this.isIdle){
             this.x += this.speed;
         }
+        else if (this.frameY === MonkeyAnimation.w.row && !this.isIdle && GameEnv.bottom <= this.y) {
+            this.yVelocity = -10;
+        } else if (GameEnv.bottom <= this.y) {
+            // do idle frame
+            this.setFrameY(defaultIdleFrame.row);
+            this.setFrameX(defaultIdleFrame.column)
+            this.setMaxFrame(defaultIdleFrame.frames);
+            this.idle = true;
+        }
+
+        if (GameEnv.bottom > this.y) {
+            this.yVelocity += 0.5;
+        } else {
+            this.yVelocity = Math.min(0, this.yVelocity);
+        }
+
+        this.y += this.yVelocity;
 
         // Perform super update actions
         super.update();
     }
-
 }
 
 // Can add specific initialization parameters for the monkey here
@@ -67,9 +89,12 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
             // If no button is pressed then idle
             const selectedAnimation = event.key;
-            monkey.setFrameY(MonkeyAnimation[selectedAnimation].row);
-            monkey.setFrameX(MonkeyAnimation[selectedAnimation].idleFrame.column)
-            monkey.setMaxFrame(MonkeyAnimation[selectedAnimation].idleFrame.frames);
+            if (MonkeyAnimation[selectedAnimation].idleFrame) {
+                monkey.setFrameY(MonkeyAnimation[selectedAnimation].row);
+                monkey.setFrameX(MonkeyAnimation[selectedAnimation].idleFrame.column)
+                monkey.setMaxFrame(MonkeyAnimation[selectedAnimation].idleFrame.frames);
+            }
+
             monkey.isIdle = true;
         }
     });
