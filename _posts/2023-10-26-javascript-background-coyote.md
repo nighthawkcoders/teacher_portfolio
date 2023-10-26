@@ -1,6 +1,6 @@
 ---
 layout: base
-title: Refactored Alien World
+title: Refactored Alien World with Coyote
 description: Use JavaScript without external libraries to loop background moving across screen. Depends on Background.js and GameObject.js.
 image: /images/alien_planet.jpg
 type: hacks
@@ -11,15 +11,19 @@ images:
     src: /images/alien_planet2.jpg
   vader:
     src: /images/vaderSprite.png
+  coyote:
+    src: /images/coyote.png
+
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
 {% assign vaderSpriteImage = site.baseurl | append: page.images.vader.src %}
+{% assign coyoteSpriteImage = site.baseurl | append: page.images.coyote.src %}
 
 <style>
     #controls {
         position: relative;
-        z-index: 2; /* Ensure the controls are on top */
+        z-index: 2; /*Ensure the controls are on top*/
     }
 </style>
 
@@ -38,6 +42,7 @@ images:
     import Background from '{{site.baseurl}}/assets/js/alienWorld/Background.js';
     import Character from '{{site.baseurl}}/assets/js/alienWorld/Character.js';
     import { initVader } from '{{site.baseurl}}/assets/js/alienWorld/CharacterVader.js';
+    import { initCoyote } from '{{site.baseurl}}/assets/js/alienWorld/CharacterCoyote.js';
 
     // Create a function to load an image and return a Promise
     async function loadImage(src) {
@@ -84,14 +89,14 @@ images:
         isFilterEnabled = !isFilterEnabled;  // switch boolean value
     });
   
-
     // Setup and store Game Objects
     async function setupGame() {
         try {
             // Open image files for Game Objects
-            const [backgroundImg, vaderImg] = await Promise.all([
+            const [backgroundImg, vaderImg, coyoteImg] = await Promise.all([
                 loadImage('{{backgroundFile}}'),
-                loadImage('{{vaderSpriteImage}}')
+                loadImage('{{vaderSpriteImage}}'),
+                loadImage('{{coyoteSpriteImage}}'),
             ]);
 
             // Setup Globals
@@ -105,15 +110,22 @@ images:
             // Background object
             const backgroundSpeedRatio = 0
             new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);  // Background Class calls GameObject Array which stores the instance
- 
+
             // Prepare HTML with Vader Canvas
             const vaderCanvas = document.createElement("canvas");
             vaderCanvas.id = "characters";
             document.querySelector("#canvasContainer").appendChild(vaderCanvas);
             // Vader object
             const vaderSpeedRatio = 0
-            initVader(vaderCanvas, vaderImg, vaderSpeedRatio); 
+            initVader(vaderCanvas, vaderImg, vaderSpeedRatio);
 
+            // Prepare HTML with Vader Canvas
+            const coyoteCanvas = document.createElement("canvas");
+            coyoteCanvas.id = "characters";
+            document.querySelector("#canvasContainer").appendChild(coyoteCanvas);
+            // Vader object
+            const coyoteSpeedRatio = 0
+            initCoyote(coyoteCanvas, coyoteImg, coyoteSpeedRatio);
 
         // Trap errors on failed image loads
         } catch (error) {
