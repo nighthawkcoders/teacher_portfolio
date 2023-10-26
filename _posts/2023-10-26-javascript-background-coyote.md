@@ -119,13 +119,15 @@ images:
             const vaderSpeedRatio = 0
             initVader(vaderCanvas, vaderImg, vaderSpeedRatio);
 
-            // Prepare HTML with Vader Canvas
-            const coyoteCanvas = document.createElement("canvas");
-            coyoteCanvas.id = "characters";
-            document.querySelector("#canvasContainer").appendChild(coyoteCanvas);
-            // Vader object
-            const coyoteSpeedRatio = 0
-            initCoyote(coyoteCanvas, coyoteImg, coyoteSpeedRatio);
+            // Prepare HTML with many Coyotes
+            for (var i = 0; i < 10; i++) {
+                const coyoteCanvas = document.createElement("canvas");
+                coyoteCanvas.id = "characters";
+                document.querySelector("#canvasContainer").appendChild(coyoteCanvas);
+                // Coyote object
+                const coyoteSpeedRatio = 0
+                initCoyote(coyoteCanvas, coyoteImg, coyoteSpeedRatio);
+            }
 
         // Trap errors on failed image loads
         } catch (error) {
