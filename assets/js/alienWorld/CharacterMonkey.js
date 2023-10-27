@@ -66,8 +66,7 @@ export class CharacterMonkey extends Character{
             this.x += this.speed;  // Move to right
         }
         else if (this.isGravityAnimation(MonkeyAnimation.w)) {
-            this.setY(this.getY() - GameEnv.gravity * 75);
-
+            this.y -= (GameEnv.bottom * .33);  // jump 33% higher than floor
         } 
 
         // Perform super update actions
