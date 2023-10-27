@@ -6,9 +6,10 @@ const MonkeyAnimation = {
     scale: 2,
     width: 40,
     height: 40,
-	d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }, // Walk right with 'd' key
-	a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } }, // Walk left with 'a' key
-    w: { row: 9, frames: 15 },
+    w: { row: 9, frames: 15 }, // jump key
+	a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } }, // Walk left key
+    s: { }, // no action
+	d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }, // Walk right key
 }
 
 export class CharacterMonkey extends Character{
@@ -83,9 +84,9 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
     document.addEventListener('keydown', function (event) {
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
             // Set variables based on the key that is pressed
-            const selectedAnimation = event.key;
-            monkey.setFrameY(MonkeyAnimation[selectedAnimation].row);
-            monkey.setMaxFrame(MonkeyAnimation[selectedAnimation].frames);
+            const key = event.key;
+            monkey.setFrameY(MonkeyAnimation[key].row);
+            monkey.setMaxFrame(MonkeyAnimation[key].frames);
             monkey.isIdle = false;
         }
     });
@@ -93,13 +94,12 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
     document.addEventListener('keyup', function (event) {
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
             // If no button is pressed then idle
-            const selectedAnimation = event.key;
-            if (MonkeyAnimation[selectedAnimation].idleFrame) {
-                monkey.setFrameY(MonkeyAnimation[selectedAnimation].row);
-                monkey.setFrameX(MonkeyAnimation[selectedAnimation].idleFrame.column)
-                monkey.setMaxFrame(MonkeyAnimation[selectedAnimation].idleFrame.frames);
+            const key = event.key;
+            if (MonkeyAnimation[key].idleFrame) {
+                monkey.setFrameY(MonkeyAnimation[key].row);
+                monkey.setFrameX(MonkeyAnimation[key].idleFrame.column)
+                monkey.setMaxFrame(MonkeyAnimation[key].idleFrame.frames);
             }
-
             monkey.isIdle = true;
         }
     });
