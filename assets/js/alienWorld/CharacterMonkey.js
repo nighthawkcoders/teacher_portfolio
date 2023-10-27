@@ -24,7 +24,7 @@ export class CharacterMonkey extends Character{
         this.isIdle = true;
         this.gravityEnabled = false;
         this.yVelocity = 0;
-        this.stashFrame = { };
+        this.stashFrame = MonkeyAnimation.d;
     }
 
     setAnimation(animation) {
@@ -75,9 +75,6 @@ export class CharacterMonkey extends Character{
 export function initMonkey(canvasId, image, gameSpeed, speedRatio){
     // Create the Monkey character
     var monkey = new CharacterMonkey(canvasId, image, gameSpeed, speedRatio);
-
-    // Set initial Animation
-    monkey.setAnimation(MonkeyAnimation.a);
 
     /* Monkey Control 
     * changes FrameY value (selected row in sprite)
