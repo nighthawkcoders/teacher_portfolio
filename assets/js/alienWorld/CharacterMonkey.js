@@ -23,7 +23,6 @@ export class CharacterMonkey extends Character{
             MonkeyAnimation.scale
         );
         this.isIdle = true;
-        this.gravityEnabled = false;
         this.yVelocity = 0;
         this.stashFrame = MonkeyAnimation.d;
     }
@@ -67,18 +66,9 @@ export class CharacterMonkey extends Character{
             this.x += this.speed;  // Move to right
         }
         else if (this.isGravityAnimation(MonkeyAnimation.w)) {
-            this.yVelocity = -10;  // Jump until gravity condition met
+            this.setY(this.getY() - GameEnv.gravity * 75);
+
         } 
-
-        if (GameEnv.bottom > this.y) {
-            // gravity (using acceleration instead of velocity, needed for jump implementation)
-            this.yVelocity += 0.5;
-        } else {
-            // normal force (basically disabels gravity if on the ground)
-            this.yVelocity = Math.min(0, this.yVelocity);
-        }
-
-        this.y += this.yVelocity;
 
         // Perform super update actions
         super.update();
