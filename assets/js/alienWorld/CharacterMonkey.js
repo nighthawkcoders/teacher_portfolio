@@ -29,11 +29,12 @@ export class CharacterMonkey extends Character{
     }
 
     setAnimation(animation) {
-        this.stashFrame = animation;
         this.setFrameY(animation.row);
-        this.setFrameX(animation.idleFrame.column)
-        this.setMinFrame(animation.idleFrame.frames);
         this.setMaxFrame(animation.frames);
+        if (this.isIdle && animation.idleFrame) {
+            this.setFrameX(animation.idleFrame.column)
+            this.setMinFrame(animation.idleFrame.frames);
+        }
     }
 
     // Monkey perform a unique update
@@ -51,9 +52,8 @@ export class CharacterMonkey extends Character{
             this.yVelocity = -10;
         } 
         else if (GameEnv.bottom <= this.y) {
-            // do idle frame
+            // restore frame
             this.setAnimation(this.stashFrame);
-            this.idle = true;
         }
 
         if (GameEnv.bottom > this.y) {
@@ -85,9 +85,8 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
             // Set variables based on the key that is pressed
             const key = event.key;
-            monkey.setFrameY(MonkeyAnimation[key].row);
-            monkey.setMaxFrame(MonkeyAnimation[key].frames);
             monkey.isIdle = false;
+            monkey.setAnimation(MonkeyAnimation[key]);
         }
     });
 
@@ -95,12 +94,8 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
             // If no button is pressed then idle
             const key = event.key;
-            if (MonkeyAnimation[key].idleFrame) {
-                monkey.setFrameY(MonkeyAnimation[key].row);
-                monkey.setFrameX(MonkeyAnimation[key].idleFrame.column)
-                monkey.setMaxFrame(MonkeyAnimation[key].idleFrame.frames);
-            }
             monkey.isIdle = true;
+            monkey.setAnimation(MonkeyAnimation[key]);
         }
     });
 
