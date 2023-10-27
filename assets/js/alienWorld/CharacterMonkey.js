@@ -37,6 +37,7 @@ export class CharacterMonkey extends Character{
         }
     }i
     
+    // check for matching animation
     isAnimation(key) {
        var result = (this.frameY === key.row && !this.isIdle);
        if (result) {
@@ -45,7 +46,7 @@ export class CharacterMonkey extends Character{
        return result;
     }
 
-    // W Key animation test
+    // check for gravity based animation
     isGravityAnimation(key) {
         var result = (this.frameY === key.row && !this.isIdle && GameEnv.bottom <= this.y);
         if (result) {
@@ -66,7 +67,7 @@ export class CharacterMonkey extends Character{
             this.x += this.speed;  // Move to right
         }
         else if (this.isGravityAnimation(MonkeyAnimation.w)) {
-            this.yVelocity = -10;  // Jump
+            this.yVelocity = -10;  // Jump until gravity condition met
         } 
 
         if (GameEnv.bottom > this.y) {
