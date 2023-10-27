@@ -8,10 +8,8 @@ const MonkeyAnimation = {
     height: 40,
 	d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }, // Walk right with 'd' key
 	a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } }, // Walk left with 'a' key
-    w: { row: 9, frames: 15 }
+    w: { row: 9, frames: 15 },
 }
-
-const defaultIdleFrame = { row: 0, column: 7, frames: 0 };
 
 export class CharacterMonkey extends Character{
     // constructors sets up Character object 
@@ -25,26 +23,35 @@ export class CharacterMonkey extends Character{
         );
         this.isIdle = true;
         this.gravityEnabled = false;
-
         this.yVelocity = 0;
+        this.stashFrame = { };
+    }
+
+    setAnimation(animation) {
+        this.stashFrame = animation;
+        this.setFrameY(animation.row);
+        this.setFrameX(animation.idleFrame.column)
+        this.setMinFrame(animation.idleFrame.frames);
+        this.setMaxFrame(animation.frames);
     }
 
     // Monkey perform a unique update
     update() {
         if (this.frameY === MonkeyAnimation.a.row && !this.isIdle) {
             this.x -= this.speed;  // Move the monkey to the left
+            this.stashFrame = MonkeyAnimation.a;
         }
         else if (this.frameY === MonkeyAnimation.d.row && !this.isIdle){
             this.x += this.speed;
+            this.stashFrame = MonkeyAnimation.d;
         }
         else if (this.frameY === MonkeyAnimation.w.row && !this.isIdle && GameEnv.bottom <= this.y) {
             // jump by changing velocity (only can jump if on ground)
             this.yVelocity = -10;
-        } else if (GameEnv.bottom <= this.y) {
+        } 
+        else if (GameEnv.bottom <= this.y) {
             // do idle frame
-            this.setFrameY(defaultIdleFrame.row);
-            this.setFrameX(defaultIdleFrame.column)
-            this.setMaxFrame(defaultIdleFrame.frames);
+            this.setAnimation(this.stashFrame);
             this.idle = true;
         }
 
@@ -70,9 +77,7 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
     var monkey = new CharacterMonkey(canvasId, image, gameSpeed, speedRatio);
 
     // Set initial Animation
-    monkey.setFrameY(MonkeyAnimation['a'].row);
-    monkey.setFrameX(MonkeyAnimation['a'].idleFrame.column)
-    monkey.setMaxFrame(MonkeyAnimation['a'].idleFrame.frames);
+    monkey.setAnimation(MonkeyAnimation.a);
 
     /* Monkey Control 
     * changes FrameY value (selected row in sprite)

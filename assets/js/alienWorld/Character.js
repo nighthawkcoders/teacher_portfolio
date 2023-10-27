@@ -22,16 +22,32 @@ class Character extends GameObject {
         Character.characterArray.push(this);
     }
 
+    getMinFrame(){
+        return this.manFrame;
+    }
+
     setMinFrame(minFrame){
         this.minFrame = minFrame;
+    }
+
+    getMaxFrame(){
+        return this.maxFrame;
     }
 
     setMaxFrame(maxFrame){
         this.maxFrame = maxFrame;
     }
 
+    getFrameX() {
+        return this.frameX;
+    }
+
     setFrameX(frameX){
         this.frameX = frameX;
+    }
+
+    getFrameY() {
+        return this.frameY;
     }
 
     setFrameY(frameY){
