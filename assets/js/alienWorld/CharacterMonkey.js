@@ -36,25 +36,49 @@ export class CharacterMonkey extends Character{
             this.setMinFrame(animation.idleFrame.frames);
         }
     }
+    
+    // A Key animation test
+    isA() {
+        var result = (this.frameY === MonkeyAnimation.a.row && !this.isIdle);
+        if (result) {
+            this.stashFrame = MonkeyAnimation.a;
+        }
+        return result;
+    }
+
+    // D Key animation test
+    isD() {
+        var result = (this.frameY === MonkeyAnimation.d.row && !this.isIdle);
+        if (result) {
+            this.stashFrame = MonkeyAnimation.d;
+        }
+        return result;
+    }
+
+    // W Key animation test
+    isW() {
+        var result = (this.frameY === MonkeyAnimation.w.row && !this.isIdle && GameEnv.bottom <= this.y);
+        if (result) {
+            return true;
+        }
+        if (GameEnv.bottom <= this.y) {
+            this.setAnimation(this.stashFrame);
+        }
+        return false;
+    }
 
     // Monkey perform a unique update
     update() {
-        if (this.frameY === MonkeyAnimation.a.row && !this.isIdle) {
-            this.x -= this.speed;  // Move the monkey to the left
-            this.stashFrame = MonkeyAnimation.a;
+        if (this.isA()) {
+            this.x -= this.speed;  // Move to left
         }
-        else if (this.frameY === MonkeyAnimation.d.row && !this.isIdle){
-            this.x += this.speed;
-            this.stashFrame = MonkeyAnimation.d;
+        else if (this.isD()) {  
+            this.x += this.speed;  // Move to right
         }
-        else if (this.frameY === MonkeyAnimation.w.row && !this.isIdle && GameEnv.bottom <= this.y) {
-            // jump by changing velocity (only can jump if on ground)
-            this.yVelocity = -10;
+        else if (this.isW()) {
+            this.yVelocity = -10;  // Jump
         } 
-        else if (GameEnv.bottom <= this.y) {
-            // restore frame
-            this.setAnimation(this.stashFrame);
-        }
+    
 
         if (GameEnv.bottom > this.y) {
             // gravity (using acceleration instead of velocity, needed for jump implementation)
