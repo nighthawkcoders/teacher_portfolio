@@ -35,29 +35,19 @@ export class CharacterMonkey extends Character{
             this.setFrameX(animation.idleFrame.column)
             this.setMinFrame(animation.idleFrame.frames);
         }
-    }
+    }i
     
-    // A Key animation test
-    isA() {
-        var result = (this.frameY === MonkeyAnimation.a.row && !this.isIdle);
-        if (result) {
-            this.stashFrame = MonkeyAnimation.a;
-        }
-        return result;
-    }
-
-    // D Key animation test
-    isD() {
-        var result = (this.frameY === MonkeyAnimation.d.row && !this.isIdle);
-        if (result) {
-            this.stashFrame = MonkeyAnimation.d;
-        }
-        return result;
+    isAnimation(key) {
+       var result = (this.frameY === key.row && !this.isIdle);
+       if (result) {
+            this.stashFrame = key;
+       }
+       return result;
     }
 
     // W Key animation test
-    isW() {
-        var result = (this.frameY === MonkeyAnimation.w.row && !this.isIdle && GameEnv.bottom <= this.y);
+    isGravityAnimation(key) {
+        var result = (this.frameY === key.row && !this.isIdle && GameEnv.bottom <= this.y);
         if (result) {
             return true;
         }
@@ -69,16 +59,15 @@ export class CharacterMonkey extends Character{
 
     // Monkey perform a unique update
     update() {
-        if (this.isA()) {
+        if (this.isAnimation(MonkeyAnimation.a)) {
             this.x -= this.speed;  // Move to left
         }
-        else if (this.isD()) {  
+        else if (this.isAnimation(MonkeyAnimation.d)) {
             this.x += this.speed;  // Move to right
         }
-        else if (this.isW()) {
+        else if (this.isGravityAnimation(MonkeyAnimation.w)) {
             this.yVelocity = -10;  // Jump
         } 
-    
 
         if (GameEnv.bottom > this.y) {
             // gravity (using acceleration instead of velocity, needed for jump implementation)
