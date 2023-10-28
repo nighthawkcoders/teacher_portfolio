@@ -1,4 +1,5 @@
 import Character from './Character.js';
+import GameEnv from './GameEnv.js';
 
 const CoyoteAnimation = {
     // Sprite properties
@@ -33,6 +34,14 @@ export class CharacterCoyote extends Character{
             this.delay++;
         }
     }
+
+    size() {
+        super.size();
+        if (!GameEnv.prevInnerWidth) {
+            this.setY(GameEnv.top);
+        }
+    }
+
 
 }
 
