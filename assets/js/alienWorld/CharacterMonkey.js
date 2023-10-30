@@ -88,6 +88,31 @@ export class CharacterMonkey extends Character{
         // Perform super update actions
         super.update();
     }
+
+    // override default action
+    collisionAction(){
+        // Check if the dog is colliding with a platform
+        if (this.collisionData.touchPoints.bottom)
+        {
+            // If the dog does collide on top of a platform disable gravity for that object
+            this.gravityEnabled = false;
+        }
+
+        // If the scene has started then don't run the collision event code
+        // With collision data we can even determine which side the dog is colliding on
+        if (this.sceneStarted === false && this.collisionData.touchPoints.this.right){
+            this.sceneStarted = true;
+
+            // Dog starts to bark at monkey for three seconds
+            this.frameY = MonkeyAnimation.a.row;
+            this.maxFrame = MonkeyAnimation.a.frames;
+            setTimeout(() => {
+                // After 3 seconds, transition to the "previous" state
+                this.frameY = MonkeyAnimation.d.row;
+                this.maxFrame = MonkeyAnimation.d.frames;
+            }, 3000);
+        }
+    }
 }
 
 // Can add specific initialization parameters for the monkey here
