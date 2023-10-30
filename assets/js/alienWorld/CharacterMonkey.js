@@ -25,6 +25,7 @@ export class CharacterMonkey extends Character{
         this.isIdle = true;
         this.yVelocity = 0;
         this.stashFrame = MonkeyAnimation.d;
+        this.pressedDirections = {};
     }
 
     setAnimation(animation) {
@@ -38,16 +39,31 @@ export class CharacterMonkey extends Character{
     
     // check for matching animation
     isAnimation(key) {
-       var result = (this.frameY === key.row && !this.isIdle);
-       if (result) {
-            this.stashFrame = key;
-       }
-       return result;
+        var result = false;
+        for (let direction in this.pressedDirections) {
+            if (this.pressedDirections[direction] === key.row) {
+                result = !this.isIdle;
+                break; // Exit the loop if there's a match
+            }
+        }
+        //result = (result && !this.isIdle);
+        if (result) {
+                this.stashFrame = key;
+        }
+        return result;
     }
 
     // check for gravity based animation
     isGravityAnimation(key) {
-        var result = (this.frameY === key.row && !this.isIdle && GameEnv.bottom <= this.y);
+        var result = false;
+        for (let direction in this.pressedDirections) {
+            if (this.pressedDirections[direction] === key.row) {
+                result = (!this.isIdle && GameEnv.bottom <= this.y);
+                break; // Exit the loop if there's a match
+            }
+        }
+        //result = (result && !this.isIdle && GameEnv.bottom <= this.y);
+        //var result = (this.frameY === key.row && !this.isIdle && GameEnv.bottom <= this.y);
         if (result) {
             return true;
         }
@@ -62,10 +78,10 @@ export class CharacterMonkey extends Character{
         if (this.isAnimation(MonkeyAnimation.a)) {
             this.x -= this.speed;  // Move to left
         }
-        else if (this.isAnimation(MonkeyAnimation.d)) {
+        if (this.isAnimation(MonkeyAnimation.d)) {
             this.x += this.speed;  // Move to right
         }
-        else if (this.isGravityAnimation(MonkeyAnimation.w)) {
+        if (this.isGravityAnimation(MonkeyAnimation.w)) {
             this.y -= (GameEnv.bottom * .33);  // jump 33% higher than floor
         } 
 
@@ -88,6 +104,9 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
             // Set variables based on the key that is pressed
             const key = event.key;
+            if (!(event.key in monkey.pressedDirections)){
+                monkey.pressedDirections[event.key] = MonkeyAnimation[key].row;
+            }
             monkey.isIdle = false;
             monkey.setAnimation(MonkeyAnimation[key]);
         }
@@ -97,6 +116,9 @@ export function initMonkey(canvasId, image, gameSpeed, speedRatio){
         if (MonkeyAnimation.hasOwnProperty(event.key)) {
             // If no button is pressed then idle
             const key = event.key;
+            if (event.key in monkey.pressedDirections){
+                delete monkey.pressedDirections[event.key];
+            }
             monkey.isIdle = true;
             monkey.setAnimation(MonkeyAnimation[key]);
         }
