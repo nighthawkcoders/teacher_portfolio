@@ -22,6 +22,7 @@ export class CharacterMonkey extends Character{
             MonkeyAnimation.height, 
             MonkeyAnimation.scale
         );
+        this.sceneStarted = false;
         this.isIdle = true;
         this.yVelocity = 0;
         this.stashFrame = MonkeyAnimation.d;
@@ -104,12 +105,15 @@ export class CharacterMonkey extends Character{
             this.sceneStarted = true;
 
             // Dog starts to bark at monkey for three seconds
-            this.frameY = MonkeyAnimation.a.row;
-            this.maxFrame = MonkeyAnimation.a.frames;
+            this.frameY = MonkeyAnimation.w.row;
+            this.maxFrame = MonkeyAnimation.w.frames;
+            this.y -= (GameEnv.bottom * .33);  // jump 33% higher than floor
+
             setTimeout(() => {
                 // After 3 seconds, transition to the "previous" state
                 this.frameY = MonkeyAnimation.d.row;
                 this.maxFrame = MonkeyAnimation.d.frames;
+                this.sceneStarted = false;
             }, 3000);
         }
     }
