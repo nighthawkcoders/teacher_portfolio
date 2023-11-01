@@ -45,8 +45,37 @@ export class CharacterCoyote extends Character{
 
     // override default GameObject action
     floorAction() {
-        this.destroy();  // remove coyotee from game
-    }
+        const object = this;
+        const canvas = this.canvas;
+        const duration = 1000; // Adjust the duration as needed
+        let startTime = null;
+
+        function spiral(timestamp) {
+            if (!startTime) {
+                startTime = timestamp;
+            }
+    
+            const elapsed = timestamp - startTime;
+            if (elapsed < duration) {
+                const progress = elapsed / duration;
+    
+                // Adjust opacity based on the progress
+                canvas.style.opacity = 1 - progress;
+    
+                // Rotate the canvas
+                const rotationAngle = progress * (Math.random() * 2880); // Adjust the rotation speed as needed
+                canvas.style.transform = `rotate(${rotationAngle}deg`;
+    
+                requestAnimationFrame(spiral); // continue the animation loop
+            } else {
+                object.destroy();  // remove object from game
+            }
+        }
+
+        // Start the animation
+        requestAnimationFrame(spiral);
+    }   
+
     
 }
 
