@@ -43,19 +43,13 @@ export class CharacterCoyote extends Character{
         }
     }
 
-     // override default action
-     collisionAction() {
-        // Check if the object is colliding with the ground (assuming GameEnv.bottom indicates ground collision)
+    // override default action
+    collisionAction() {
+        // Check if the object is colliding with the ground
         if (this.collisionData.atFloor) {
-            const index = GameObject.gameObjectArray.indexOf(this);
-            if (index !== -1) {
-                // Remove the canvas from the DOM
-                this.canvas.parentNode.removeChild(this.canvas);
-                GameObject.gameObjectArray.splice(index, 1);
-            }
+            this.destroy();
         }
     }
-    
     
 }
 

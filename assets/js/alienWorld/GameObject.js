@@ -42,6 +42,19 @@ class GameObject {
         this.y = y;
     }
 
+    /* Destroy Game Object
+    * remove canvas element of object
+    * remove object from GameObject array
+    */
+    destroy() {
+        const index = GameObject.gameObjectArray.indexOf(this);
+        if (index !== -1) {
+            // Remove the canvas from the DOM
+            this.canvas.parentNode.removeChild(this.canvas);
+            GameObject.gameObjectArray.splice(index, 1);
+        }
+    }
+
     /* Default action is no action
      * override when you extend for custom action
     */
