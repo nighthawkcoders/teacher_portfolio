@@ -40,13 +40,6 @@ export class CharacterDog extends Character{
 
     // override default action
     collisionAction(){
-        // Check if the dog is colliding with a platform
-        if (this.collisionData.touchPoints.bottom)
-        {
-            // If the dog does collide on top of a platform disable gravity for that object
-            this.gravityEnabled = false;
-        }
-
         // If the scene has started then don't run the collision event code
         // With collision data we can even determine which side the dog is colliding on
         if (this.sceneStarted === false && this.collisionData.touchPoints.this.left){

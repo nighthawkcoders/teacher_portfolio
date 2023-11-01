@@ -55,10 +55,17 @@ class GameObject {
         }
     }
 
-    /* Default action is no action
+    /* Default collision action is no action
      * override when you extend for custom action
     */
     collisionAction(){
+        // no action
+    }
+
+    /* Default floor action is no action
+     * override when you extend for custom action
+    */
+    floorAction(){
         // no action
     }
 
@@ -70,8 +77,11 @@ class GameObject {
         for (var gameObj of GameObject.gameObjectArray){
             if (this != gameObj ) {
                 this.isCollision(gameObj);
-                if (this.collisionData.hit || this.collisionData.atFloor){
+                if (this.collisionData.hit){
                     this.collisionAction();
+                }
+                if (this.collisionData.atFloor) {
+                    this.floorAction();
                 }
             }
         }
