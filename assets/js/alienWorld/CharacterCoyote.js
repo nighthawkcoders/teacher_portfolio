@@ -1,4 +1,5 @@
 import Character from './Character.js';
+import GameObject from './GameObject.js';
 import GameEnv from './GameEnv.js';
 
 const CoyoteAnimation = {
@@ -26,7 +27,7 @@ export class CharacterCoyote extends Character{
     // Perform a unique update
     update() {
         // slower animation 
-        if (this.delay === 20) {
+        if (this.delay === 3) {
             this.delay = 0;
             // Perform super update actions (collision checks)
             super.update();
@@ -42,7 +43,20 @@ export class CharacterCoyote extends Character{
         }
     }
 
-
+     // override default action
+     collisionAction() {
+        // Check if the object is colliding with the ground (assuming GameEnv.bottom indicates ground collision)
+        if (this.collisionData.atFloor) {
+            const index = GameObject.gameObjectArray.indexOf(this);
+            if (index !== -1) {
+                // Remove the canvas from the DOM
+                this.canvas.parentNode.removeChild(this.canvas);
+                GameObject.gameObjectArray.splice(index, 1);
+            }
+        }
+    }
+    
+    
 }
 
 // Can add specific initialization parameters for the dog here

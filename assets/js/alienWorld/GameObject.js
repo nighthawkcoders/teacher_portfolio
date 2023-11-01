@@ -57,7 +57,7 @@ class GameObject {
         for (var gameObj of GameObject.gameObjectArray){
             if (this != gameObj ) {
                 this.isCollision(gameObj);
-                if (this.collisionData.hit){
+                if (this.collisionData.hit || this.collisionData.atFloor){
                     this.collisionAction();
                 }
             }
@@ -74,6 +74,7 @@ class GameObject {
             this.x < otherGameObject.x + otherGameObject.collisionWidth &&
             this.y + this.collisionHeight > otherGameObject.y &&
             this.y < otherGameObject.y + otherGameObject.collisionHeight),
+            atFloor: (GameEnv.bottom <= this.y), // Check if the object's bottom edge is at or below the floor level
             touchPoints: {
                 this: {
                     object: this,
