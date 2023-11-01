@@ -2,9 +2,6 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    // container for all Character objects in game
-    static characterArray = [];
-
     constructor(canvas, image, speedRatio,
         spriteWidth, spriteHeight, spriteScale) {
                 var characterArray = [];
@@ -19,7 +16,6 @@ class Character extends GameObject {
         this.collisionWidth = spriteWidth * spriteScale;
         this.collisionHeight = spriteHeight * spriteScale;
         this.gravityEnabled = true;
-        Character.characterArray.push(this);
     }
 
     getMinFrame(){

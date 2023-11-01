@@ -43,12 +43,9 @@ export class CharacterCoyote extends Character{
         }
     }
 
-    // override default action
-    collisionAction() {
-        // Check if the object is colliding with the ground
-        if (this.collisionData.atFloor) {
-            this.destroy();
-        }
+    // override default GameObject action
+    floorAction() {
+        this.destroy();  // remove coyotee from game
     }
     
 }
