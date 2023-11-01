@@ -43,7 +43,7 @@ export class CharacterDog extends Character{
     collisionAction(){
         // If the scene has started then don't run the collision event code
         // With collision data we can even determine which side the dog is colliding on
-        if (this.sceneStarted === false && this.collisionData.hit && this.collisionData.touchPoints.this.left){
+        if (this.sceneStarted === false && this.collisionData.touchPoints.this.left){
             this.sceneStarted = true;
 
             // Dog starts to bark at monkey for three seconds
