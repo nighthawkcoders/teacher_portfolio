@@ -3,13 +3,10 @@ layout: default
 title: JS Mario Animation
 description: Use JavaScript without external libararies to animate Mario moving across screen, OOP style.
 categories: [C5.0, C7.0, C7.6]
-permalink: /frontend/home_motion
 image: /images/mario_animation.png
 courses: { csse: {week: 6} }
 type: ccc
 ---
-
-{% include nav_home.html %}
 
 {% assign sprite_file = site.baseurl | append: page.image %}  <!--- Liquid concatentation --->
 {% assign hash = site.data.mario_metadata %}  <!--- Liquid list variable created from file containing mario metatdata for sprite --->
