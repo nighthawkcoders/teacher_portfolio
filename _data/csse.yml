@@ -5,21 +5,21 @@ introduction_tools: &introduction_tools |
     | Tool Setup      | 
     +-----------------+
        |
-       | VS Code, Anaconda, Jupyter
+       | VS Code,  Markdown, Jupyter Notebook, JavaScript (.md, .html)
        v
     +-----------------+
     | VS Code, Develop|
     | Code Editor     | 
     +-----------------+
        |
-       | Write code, build, run localhost, test, debug
+       | Write code, make, run localhost, test, debug
        v
     +-----------------+
     | VS Code, Git    |
     | Version Control |       | 
     +-----------------+
        |
-       | Commit local versions, track change
+       | Commit local versions, comment, track changes
        v
     +-----------------+
     | VS Code, Project|

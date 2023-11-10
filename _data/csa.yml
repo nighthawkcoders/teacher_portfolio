@@ -5,21 +5,21 @@ introduction_tools: &introduction_tools |
     | Tool Setup      | 
     +-----------------+
        |
-       | VS Code, Anaconda, Jupyter, Java Kernel
+       | VS Code,  Markdown, Jupyter Notebook (.ipynb), JavaScript (.md, .html)
        v
     +-----------------+
     | VS Code, Develop|
     | Code Editor     | 
     +-----------------+
        |
-       | Code, build, test, debug
+       | Write code, make, run localhost, test, debug
        v
     +-----------------+
     | VS Code, Git    |
     | Version Control |       | 
     +-----------------+
        |
-       | Commit local versions, track change
+       | Commit local versions, comment, track changes
        v
     +-----------------+
     | VS Code, Project|
@@ -107,21 +107,21 @@ data_structures: &data_structures |
     | 5%-7.5%          |
     +------------------+
             |            
-    College Articulated Requirements
+    College Articulated Requirements, B or better
     +------------------+
     | Java Fundamental |
     | HashMap          | --> Key-value data structure
-    | B or better      |
+    |                  |
     +------------------+
     +------------------+
     | Algorithmic      |
     | Queue,Stack,...  | --> Collections Framework
-    | B or better      |
+    |                  |
     +------------------+
     +--------------------+
     | Abstract Data Type |
     | Graph              | --> Nodes, Vertices, Edges
-    | B or better        |
+    |                    |
     +--------------------+
 
   Required FRQ Types by College Board
