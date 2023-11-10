@@ -1,0 +1,74 @@
+# course illustrations
+introduction_tools: &introduction_tools |
+    +-----------------+
+    | Laptop, OS      |
+    | Tool Setup      | 
+    +-----------------+
+       |
+       | VS Code, Anaconda, Jupyter
+       v
+    +-----------------+
+    | VS Code, Develop|
+    | Code Editor     | 
+    +-----------------+
+       |
+       | Write code, build, run localhost, test, debug
+       v
+    +-----------------+
+    | VS Code, Git    |
+    | Version Control |       | 
+    +-----------------+
+       |
+       | Commit local versions, track change
+       v
+    +-----------------+
+    | VS Code, Project|
+    | GitHub Sync     |
+    +-----------------+
+       |
+       | Push changes to cloud Repository
+       v
+    +-----------------+
+    | GitHub,  Collab |
+    | Shared Code     |
+    +-----------------+
+       |
+       | Actions, Jekyll build
+       v
+    +-----------------+
+    | GitHub Pages    |
+    | Showcase Project|
+    +-----------------+
+
+# CSSE course meta data
+Sprint1:
+  title: Tools and Software Development Processes
+  description: By the end of Weeks 0-3, students will have gained practical experience in blogging, coding with Jupyter Notebooks, and GitHub Pages; learning will begin with Linux, Markdown, HTML, and JavaScript. Students will establish foundation using essential tools and software development processes to support their coding journey.
+  illustration: *introduction_tools
+  start: 0
+  end: 3
+Sprint2:
+  title: Introduction to Development with JavaScript
+  description: A key focus of this course is to make Web Games using JavaScript. These next few weeks we will perform the aspects of learning java and learning an animation and deploying the game to GitHub Pages.
+  start: 4
+  end: 6
+Sprint3:
+  title:  Building a Web Application with GitHub Pages for N@tM
+  description: Part of the process of becoming technically proficient is taking on challenges while coding, these challenges will often make a student feel uncomforatable.   But with some vision, questions, and AI research it is amazing what can be done.  Our goal is to participate in N@tM with the other CS classes and other classes from the Electives Department.
+  start: 7
+  end: 12
+Sprint4:
+  title: OOP Programming Fundamentals
+  description: Students, in pairs, will work on converting Mario game to OOP.  There will be a series of Tech Talks to support this activity.
+  start: 13
+  end: 14
+Sprint5:
+  title: Teaching and Game Innovation
+  description: Algorithmic "Student Team" will have a teaching assignment, the Teacher will be providing topics.  During Teach weeks teams will form and final project game ideas will begin.
+  start: 15
+  end: 17
+Sprint6:
+  title: Create a Final Project and N@tM 
+  description: Trimester 2 concludes with student presenting their CPT project at N@tM.  Each person within "Student Teams" will have their own specialty within the student project that satisfied all their Create Performance Task requirements.   Student should be able to talk about design, coding, and present features of their portion of the system.
+  start: 18
+  end: 24
