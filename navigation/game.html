@@ -1,13 +1,8 @@
 ---
 hide: true
 layout: base
-title: Alien World 23-24 Trimester 1
-description: Use JavaScript without external libraries to loop background moving across screen. Depends on Background.js and GameObject.js.
 image: /images/alien_planet.jpg
-type: hacks
-courses: { compsci: {week: 2} }
-image: /images/alien_planet1..jpg
-iimages:
+images:
   background:
     src: /images/alien_planet2.jpg
   platform:
@@ -19,7 +14,6 @@ iimages:
   vader:
     src: /images/vaderSprite.png
 ---
-
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
 {% assign platformFile = site.baseurl | append: page.images.platform.src %}
@@ -181,4 +175,3 @@ iimages:
     gameLoop();
 
 </script>
-
