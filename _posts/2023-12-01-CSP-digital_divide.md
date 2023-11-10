@@ -6,6 +6,7 @@ title: Big Idea 5.2 Digital Divide
 description: This tech talk discusses the digital divide in computing
 type: ccc
 courses: { csp: {week: 15} }
+image: /images/unit5/digitaldivide.jpeg
 categories: [5.C]
 ---
 

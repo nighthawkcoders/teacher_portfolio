@@ -6,6 +6,7 @@ title: Big Idea 5.4 Crowdsourcing
 description: This tech talk discusses crowdsourcing
 type: ccc
 courses: { csp: {week: 15} }
+image: /images/unit5/crowdsourcing.jpeg
 categories: [1.C]
 ---
 

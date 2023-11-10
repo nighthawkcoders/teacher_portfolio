@@ -6,6 +6,7 @@ title: Big Idea 5.5 Legal and Ethical Concerns
 description: This tech talk discusses legal and ethics in computing
 type: ccc
 courses: { csp: {week: 15} }
+image: /images/unit5/blackduck.png
 categories: [5.E]
 ---
 
@@ -15,7 +16,7 @@ In Mr Mortensen's most recent years in industry, there were many Lawyers making 
 
 Qualcomm makes its **money on patents**, if you use GPL software you could be voiding your rights to charge for software and patents.  **Open Source** by nature, specifically GPL, says any derivative work is free and code should be shared.   Qualcomm wants all derivative work to **require a royalty payment** payment, also anyone who uses the idea/patent pays royalty.
 
-![duck]({{site.baseurl}}/images/blackduck.png)
+![duck]({{site.baseurl}}/images/unit5/blackduck.png)
 
 From synopsis.com, "Black Duck® software composition analysis (SCA) helps teams manage the security, quality, and license compliance risks that come from the use of open source and third-party code in applications and containers."  Qualcomm has had 20 technical jobs and 3 lawyers analyzing all the code produced, analyzing code for Open Source inclusion, and analyzing impact of such licenses to its ability to charge royalties for the use of their Patents.  
 
