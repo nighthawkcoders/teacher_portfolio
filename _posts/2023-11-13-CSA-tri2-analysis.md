@@ -30,9 +30,19 @@ Create 2 additional methods to solve nth result in the Fibonacci Sequence. Build
 
 Using Abstract Class build a means to evaluate complexity and performance of serveral College Board sorting algorithms.
 
-In sots, you could share a progression of the algorithm.  This is a sample of capturing progressions using of a [Palindrome](https://jinja.nighthawkcodingsociety.com/algorithm/palindrome/) algorithm.
+In each sort, you could share a progression of the algorithm.  This is a sample of capturing progressions using of a [Palindrome](https://jinja.nighthawkcodingsociety.com/algorithm/palindrome/) algorithm.
 
-- Use Fibonacci Abstraction code as guide to build an init/sort method for each unique sort: bubble, insertion, selection, and merge.
-- In Parent Class store number iterations, comparisons, merges/swaps.   Amount of operations, time, and space used are key things to consider when constructing and algorithm.
-- Build and output methods to compare statistics from sorts and describe BigO complexity in relation to statistics.  
-- Start with Console and then work up to Frontend. The output will require thought and design. Be sure to create a mock up for visuals before coding.
+- Build a Sort class for each unique sort.  Use Fibonacci Abstraction heirarchy as guide to build an init/sort method for each unique sort.
+  - Sorts include bubble, insertion, selection, and merge.  
+  - Teacher expects to see usage pf ***extends***.  In Parent class store the number of iterations, comparisons, merges/swaps.
+  - In parent class contain logic for timing each sort algorithm, creating random elements for data structure, ...
+
+- Analyze the Big O complexity on Sorts.
+  - Consider the number of operations, time, and space used when analyzing a sort algorithm.  Establish analytics including: time to sort, number of comparisons and number of swaps.
+  - Average the results for each each Sort, run each at least 12 times with 5000 random elements.  You should throw out High and Low when doing analysis.
+  - Make your final/judgement on best sort: Number of Comparisons, Number of Swaps, Big O complexity, and Total Time.
+
+- Build frontend visualizationthe to compare statistics from sorts and describe BigO complexity in relation to statistics. 
+  - Be sure to create a mock up for visualization before coding.
+  - In visualization start with Console output
+  - Final visualization wll be in the Frontend. The output will require thought and design on how to paas data through API. 
