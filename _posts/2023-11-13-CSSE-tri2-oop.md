@@ -3,7 +3,6 @@ toc: false
 comments: false
 layout: post
 title: OOP, CSSE mini project
-permalink: /oop/home
 description: Convert Mario to Object Oriented Programming (OOP)
 type: ccc
 courses: { csse: {week: 13} }

@@ -2,8 +2,8 @@
 toc: true
 comments: false
 layout: post
-title: Binary Logic and Abstraction
-description: Real binary abstractions ASCII, Unicode, Images,logic gates, etc
+title: Binary Logic, CPT Warmup
+description: Real binary abstractions including ASCII, Unicode, Images,logic gates, etc
 type: ccc
 courses: { csp: {week: 13} }
 categories: [1.D, 2.B, 3.C, C4.4]
@@ -11,7 +11,7 @@ categories: [1.D, 2.B, 3.C, C4.4]
 
 ## Binary, Data, Data Structures, Data Abstraction (ASCII, Unicode, Color Codes)
 
-Algorithms, Data, Data Structures, and Visualization go together.  To start this project, it is ***required*** to have a data topic as you venture into Algorithms and Data mini project.  This blog is a collection of binary, data and data structures used as a sample and starter for your mini project.
+Algorithms, Data, Data Structures, and Visualization can go together.  To start this warmup project, use Classroom and CPT ***requirements*** to venture into Algorithms.  This blog is a collection of binary, data and data structures and should be a great CPT practice project.
 
 - ***Explore a topic in Computer Science manner*** (research, jupyter notebooks, frontend / backend coding)
 - Build a lesson that is more interesting, by explaining an algorithm and logic using data and visualization.
