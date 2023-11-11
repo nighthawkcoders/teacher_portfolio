@@ -2,7 +2,7 @@
 toc: false
 comments: false
 layout: post
-title: Innovation, CSSE Project
+title: OOP, CSSE mini project
 permalink: /oop/home
 description: Convert Mario to Object Oriented Programming (OOP)
 type: ccc
@@ -11,11 +11,16 @@ courses: { csse: {week: 13} }
 
 {% include nav_oop.html %}
 
-## OOP Conversion
+## OOP Conversion Outline
 
-The objective of this project is to covert functionalities of "Imperative Style" Mario Game to "Object Oriented Programming" paradigm.
+Teams will be a maximum size of 3 people.  The objective of this project is to covert functionalities of "Imperative Style" Mario Game to "Object Oriented Programming" paradigm.  Expectation is we will work on this, have tech talks, and complete activy in week 15.
 
-The hierarchy is designed to promote reusability, encapsulation, and a clear separation of entities. The GameEnv manages the overall game state, GameObject provides a common base for various game entities, and GameLevel holds level-specific assets and elements. The GameStateManager handles the transition between different game states.
+The OOP hierarchy show below is designed to promote reusability, encapsulation, and a clear separation of entities.
+
+- GameEnv manages the overall game state
+- GameObject provides a common base for various game entities
+- GameLevel holds level-specific assets and elements
+- GameStateManager handles the transition between different game states.
 
 ```text
 GameEnv
