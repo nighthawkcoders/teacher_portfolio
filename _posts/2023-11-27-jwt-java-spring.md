@@ -1,12 +1,12 @@
 ---
 layout: post
 toc: true
-title: JWT Implementation Review
+title: JWT Review
 description: Implementing JWT Tokens into spring boot project.
-courses: { csa: {week: 14, categories: [6.B]} }
+type: ccc
+courses: { csa: {week: 15, categories: [6.B]} }
 categories: [C7.0]
 author: Aidan Wu
-type: ccc
 ---
 
 ## The Code
