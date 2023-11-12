@@ -3,9 +3,9 @@ layout: post
 toc: true
 title:  Spring Security using Java Web Tokens
 description: Manage access and roles to a backend Java Spring Security Application using Java Web Tokens.
-courses: { csa: {week: 13, categories: [6.B]} }
-categories: [C7.0]
+courses: { csa: {week: 15, categories: [6.B]} }
 type: ccc
+categories: [C7.0]
 ---
 
 ## Spring Security using Java Web Tokens Competition
@@ -16,8 +16,9 @@ type: ccc
 
 JSON Web Token (JWT) is a popular way to authenticate users in a web application. It is a compact, URL-safe means of representing claims to be transferred between two parties. The claims in a JWT are encoded as a JSON object that is digitally signed using JSON Web Signature (JWS).
 Here is an example of how you might use JWT for authentication in a JavaScript application:
+
 1. The client sends a login request to the server with the user's credentials (e.g., username and password).
-    - Client/Origin: https://nighthawkcoders.github.io
+    - Client/Origin: <https://nighthawkcoders.github.io>
     - Server/Host: spring.nighthawkcodingsociety.com
 2. If the credentials are valid, the server generates a JWT and sends it back to the client.  Here ae some sample credentials.
     - Sec-Fetch-Mode: cors
@@ -36,20 +37,21 @@ It is important to use HTTPS when transmitting JWTs to ensure that the JWT is no
 #### Storing JWT
 
 There are a few different options for storing a JWT in a JavaScript application:
+
 1. Cookies: You can store the JWT in a cookie and send it back to the server with each request. This is a simple and widely-supported option, but it has some limitations. For example, you can't access cookies from JavaScript on a different domain, and some users may have cookies disabled in their browser settings.
 2. Local storage: You can store the JWT in the browser's local storage (localStorage) or session storage (sessionStorage). This option allows you to access the JWT from JavaScript on the same domain, but it is vulnerable to cross-site scripting (XSS) attacks, where an attacker can inject malicious code into your application and steal the JWT from the storage.
 3. ***HttpOnly cookie***: You can store the JWT in an HttpOnly cookie, which is a cookie that can only be accessed by the server and not by client-side JavaScript. This option provides some protection against XSS attacks, but it is still vulnerable to other types of attacks, such as cross-site request forgery (CSRF).
 
 ChatGPT says ... It is generally recommended to use a combination of options to provide the best security for your application. For example, you could store the JWT in an HttpOnly cookie and also in local storage, and use JavaScript to send the JWT from local storage to the server with each request. This way, you can still access the JWT from JavaScript on the same domain, while also protecting against XSS attacks.
 
-However, for this implementation we have used *** #3 HttpOnly Cookie ***.
-
+However, for this implementation we have used ***#3 HttpOnly Cookie***.
 
 ### Key Configuration Areas
 
-#### Nginx configuration snippet (Client to this Server):
-
+#### Nginx configuration snippet (Client to this Server)
+>
 > Nginx. Focus on add_header in preflight that allow cross domain (github.io) to access server.
+
 ```java
 location / {
         proxy_pass http://localhost:8085;
@@ -67,32 +69,33 @@ location / {
     }
 ```
 
-
 #### Java JWT / Authenticate API
 
 > Java. Focus on the response ResponseCookie to see type, path, age, and allowing for cross-origin (sameSite).
+
 ```java
 @PostMapping("/authenticate")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
-		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-		final UserDetails userDetails = personDetailsService
-				.loadUserByUsername(authenticationRequest.getEmail());
-		final String token = jwtTokenUtil.generateToken(userDetails);
-		final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
-			.httpOnly(true)
-			.secure(true)
-			.path("/")
-			.maxAge(3600)
-			.sameSite("None; Secure")
-			// .domain("example.com") // Set to backend domain
-			.build();
-		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
-	}
+public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
+    authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
+    final UserDetails userDetails = personDetailsService
+            .loadUserByUsername(authenticationRequest.getEmail());
+    final String token = jwtTokenUtil.generateToken(userDetails);
+    final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
+        .httpOnly(true)
+        .secure(true)
+        .path("/")
+        .maxAge(3600)
+        .sameSite("None; Secure")
+        // .domain("example.com") // Set to backend domain
+        .build();
+    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
+}
 ```
 
 #### Java WebMvcConfigurer addCorsMappings
 
 > Java. Focus on allowedOrigins, clients that can access this server server
+
 ```java
 @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -102,7 +105,8 @@ location / {
 
 #### Java Security Config
 
-> Java. CORS enablement and headers to allow access to API endpoints from cross origin. 
+> Java. CORS enablement and headers to allow access to API endpoints from cross origin.
+
 ```java
 .cors().and()
     .headers()
@@ -114,7 +118,7 @@ location / {
         //.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "https://nighthawkcoders.github.io", "http://localhost:4000"))
 ```
 
-#### Authenticate with JWT in a JavaScript application:
+#### Authenticate with JWT in a JavaScript application
 
 > This example sends a POST request to the /authorize endpoint with the user's credentials in the request body. If the login was successful, the server will return a 200 OK response with the JWT set to Application properties.
 
@@ -162,7 +166,7 @@ function login_user(){
 }
 ```
 
-You can then use the JWT for authentication in subsequent fetch requests as the browser sends JWT in the Authorization header.   Here is an example, but there is *** Nothing Unique *** in this example.  
+You can then use the JWT for authentication in subsequent fetch requests as the browser sends JWT in the Authorization header.   Here is an example, but there is ***Nothing Unique*** in this example.  
 
 ```javascript
 // prepare HTML result container for new output
@@ -233,21 +237,24 @@ You can then use the JWT for authentication in subsequent fetch requests as the 
   ```
 
 ## Hacks
+
 > This is first time that a nighthawkcoding society apps are under JWT.  There are some best practices, but these are simply preliminary thoughts.  These can be done in your project or on mine.
+
 - GitHub Pages Application
-    - Make a Login and SignUp option in upper left corner of page.  To handle this well it may require some them adjustment.  Login or Name should alway be displayed in upper right corner, review [csa.nighthawkcodingsociety.com](https://csa.nighthawkcodingsociety.com/) for example. 
+  - Make a Login and SignUp option in upper left corner of page.  To handle this well it may require some them adjustment.  Login or Name should alway be displayed in upper right corner, review [csa.nighthawkcodingsociety.com](https://csa.nighthawkcodingsociety.com/) for example.
     - Only block or present login/signup page when someone fails on a fetch of something that is unauthorized.
 - Spring Application
-    - Add Roles to authentication
-    - Bring JavaScript or Spring/Thymeleaf Admin operations into this page.  Some Thymeleaf exists in the project,
+  - Add Roles to authentication
+  - Bring JavaScript or Spring/Thymeleaf Admin operations into this page.  Some Thymeleaf exists in the project,
 - Blog or Video on your successes and how you got there.
 
 ## Hack Helpers
+
 > Additional user and security elements.
 
-* security/SecurityConfig.java.   
-    * This code sets up BCrypt as password encoder, this is wired into Spring Security
-    * HTTP security is changed so that you white list things that you want secure.  It is possible to do this either way, white list authenticated `.antMatchers("/api/person/**").authenticated()` or white list permitted `.antMatchers("/", "/frontend/**").permitAll()`.  In either case, it is valuable to have a convention on naming endpoints to simplify rules.
+- security/SecurityConfig.java.
+  - This code sets up BCrypt as password encoder, this is wired into Spring Security
+  - HTTP security is changed so that you white list things that you want secure.  It is possible to do this either way, white list authenticated `.antMatchers("/api/person/**").authenticated()` or white list permitted `.antMatchers("/", "/frontend/**").permitAll()`.  In either case, it is valuable to have a convention on naming endpoints to simplify rules.
 
 ```java
 /*
@@ -259,43 +266,42 @@ You can then use the JWT for authentication in subsequent fetch requests as the 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-	@Autowired
-	private JwtRequestFilter jwtRequestFilter;
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
 
-	@Autowired
-	private PersonDetailsService personDetailsService;
-	
+    @Autowired
+    private PersonDetailsService personDetailsService;
+
     @Bean  // Sets up password encoding style
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// configure AuthenticationManager so that it knows from where to load
-		// user for matching credentials
-		// Use BCryptPasswordEncoder
-		auth.userDetailsService(personDetailsService).passwordEncoder(passwordEncoder());
-	}
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // configure AuthenticationManager so that it knows from where to load
+        // user for matching credentials
+        // Use BCryptPasswordEncoder
+        auth.userDetailsService(personDetailsService).passwordEncoder(passwordEncoder());
+    }
 
-	@Override
-	@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
-    
     ...
 }
 
 ```
 
-* mvc\person\PersonDetailsService.java, implements UserDetailsService from JWT.
-    * UserDetailsService is how we train Spring Security to use Person and PersonRoles POJOs for security.
-    * PersonDetails makes sure each save use password encoding
-    * PersonDetails in my implementation is to build abstraction of all the Jpa complexities, allowing  API and MVC classes and methods to be simpler and reusable.
+- mvc\person\PersonDetailsService.java, implements UserDetailsService from JWT.
+  - UserDetailsService is how we train Spring Security to use Person and PersonRoles POJOs for security.
+  - PersonDetails makes sure each save use password encoding
+  - PersonDetails in my implementation is to build abstraction of all the Jpa complexities, allowing  API and MVC classes and methods to be simpler and reusable.
 
 ```java
 @Service
@@ -314,7 +320,7 @@ public class PersonDetailsService implements UserDetailsService {  // "implement
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Person person = personJpaRepository.findByEmail(email); // setting variable user equal to the method finding the username in the database
         if(person==null) {
-			    throw new UsernameNotFoundException("User not found with username: " + email);
+            throw new UsernameNotFoundException("User not found with username: " + email);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         person.getRoles().forEach(role -> { //loop through roles
@@ -345,11 +351,11 @@ public class PersonDetailsService implements UserDetailsService {  // "implement
 }
 ```
 
-* mvc\ModelInit.java, used to initialize database for testing
-   * The `CommandLineRunner run()` occurs prior to web site port being available.  Typically, there is only one Bean of type without application.properties override.  Thus, you see jokes and person in same runner.  Splitting this and having Person initialization in person package is desireable. 
-   * Class methods for Person (`Person.init`) is used to initialize object.  
-   * Each object is checked and saved using `personService` methods.
-   * Test Notes are added to ensure functionality.  Intention is to add notes into person package.
+- mvc\ModelInit.java, used to initialize database for testing
+  - The `CommandLineRunner run()` occurs prior to web site port being available.  Typically, there is only one Bean of type without application.properties override.  Thus, you see jokes and person in same runner.  Splitting this and having Person initialization in person package is desireable.
+  - Class methods for Person (`Person.init`) is used to initialize object.  
+  - Each object is checked and saved using `personService` methods.
+  - Test Notes are added to ensure functionality.  Intention is to add notes into person package.
 
 ```java
 @Component // Scans Application for ModelInit Bean, this detects CommandLineRunner
@@ -390,4 +396,3 @@ public class ModelInit {
 }
 
 ```
-
