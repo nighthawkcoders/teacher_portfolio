@@ -15,7 +15,6 @@ images:
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
 {% assign playerFile = site.baseurl | append: page.images.mario.src %}
 
-
 <style>
     #controls {
         position: relative;
