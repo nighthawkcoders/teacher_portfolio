@@ -3,9 +3,8 @@ comments: false
 layout: default
 title: JS Itunes API
 description: API's are a primary source for obtaining data from the internet.  There is imformation in API's for almost any interest.
-permalink: /frontend/home_table
 categories: [C7.0]
-courses: { csse: {week: 15}, csp: {week: 5, categories: [2.C]}, csa: {week: 2} }
+courses: { csse: {week: 16}, csp: {week: 5, categories: [2.C]}, csa: {week: 2} }
 type: ccc
 ---
 
@@ -128,12 +127,19 @@ type: ccc
 </script>
 
 ## Hacks
-The endpoint itunes.apple.com allows requests and responses on their `data`.   We provide the Input and Output interaction with the itunes data;  however, we do not create or manage the data.  There is a backend process that creates and stores data.  
 
-In this type of Website relationship we could provide..
-- A better starting screen.  Providing sample queries on screen.
--  Provide a local storage to show recent or liked queries by the user.
+The endpoint itunes.apple.com allows requests and they provide responses with their data.   Our formatting of the response provides the Input and Output interaction with the itunes data.  
 
-But, we would need backend help to..
+We do not create or manage their data.  The itunes system has  backend processes that create and store data.  
+
+In this type of Website relationship we itunes could provide.
+
+- A better starting screen.  Providing sample sample queries on screen.
+- Provide local storage to show recent or liked queries by the user.
+- Have interaction between this API and other functions on our site.  For instance, we could allow music selection to dictate background music while playing a game.
+
+But, we would need backend help from itunes to..
+
 - Show most popular queries.
-- Add or modify posts.
+- Show songs by genre.
+- Show songs by era.
