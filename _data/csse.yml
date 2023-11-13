@@ -63,8 +63,8 @@ Sprint4:
   start: 13
   end: 15
 Sprint5:
-  title: Teaching and Game Innovation
-  description: Algorithmic "Student Team" will have a teaching assignment, the Teacher will be providing topics.  During Teach weeks teams will form and final project game ideas will begin.
+  title: Research, Teaching and Game Innovation
+  description: Algorithmic "Student Team" will have a teaching assignment, the Teacher of Student requests will be providing topics (Local Storage, Phaser.js, RAWG apis).  During Teach weeks teams will research a topic, form a final project "game" plan.
   start: 16
   end: 17
 Sprint6:
