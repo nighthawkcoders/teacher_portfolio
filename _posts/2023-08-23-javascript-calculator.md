@@ -4,7 +4,6 @@ comments: true
 hide: true
 layout: default
 description: A common way to become familiar with a language is to build a calculator.  This calculator shows off button with actions.
-permalink: /techtalk/home_style
 categories: [C7.0]
 courses: { csse: {week: 2}, csp: {week: 2, categories: [2.C]}, csa: {week: 2} }
 type: ccc
@@ -31,7 +30,8 @@ HTML implementation of the calculator.
 -->
 <style>
   .calculator-output {
-    /* calulator output 
+    /*
+      calulator output
       top bar shows the results of the calculator;
       result to take up the entirety of the first row;
       span defines 4 columns and 1 row
@@ -46,6 +46,9 @@ HTML implementation of the calculator.
   
     display: flex;
     align-items: center;
+  }
+  canvas {
+    filter: none;
   }
 </style>
 
