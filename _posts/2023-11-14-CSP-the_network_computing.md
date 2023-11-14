@@ -2,40 +2,14 @@
 toc: true
 comments: false
 layout: post
-title: Computer System and Networks
+title: Big Idea 4.2 Routing | 4.3 Computing
 description: Discussion of systems and networks
 type: ccc
 courses: { csp: {week: 15} }
 categories: [C7.1, C9.3]
 ---
 
-## The Internet
-
-### College Board
-
-Internet, Word Wide Web, Local Area Network, HTTP, DNS, TCP, UDP, IP.   Discussion focuses on Letters and Jig Saw puzzles as analogy for Source, Destination, and Packets.
-
-### Web browsers and servers use TCP/IP protocols to connect to the Internet. Common TCP/IP protocols are
-
-* HTTP - Hyper Text Transfer Protocol, HTTPS - Secure HTTP
-
-  * HTTP takes care of the communication between a web server and the clients web browser. HTTP is used for sending **requests** from a web client to receive a **response** from the server.  Response could be HTML or JSON.
-
-  * HTTPS takes care of secure communication between a web server and a web browser.  In our deployment process we used **certbot** to make HTTP communication secure all the time.
-
-* TCP/IP - Transmission Control Protocol, Internet Protocol
-
-  * TPC/IP messages are broken up into small independent "packets" and sent between computers via the Internet.
-
-  * IP is responsible for "routing" each packet to the correct destination.  When an IP packet is sent from a computer, it arrives at an IP router. The IP router is responsible for "routing" the packet to the correct destination, directly or via another router.
-
-* Network Layer - The wireless and physical layers that move bits and bytes "11010001" across the internet.
-
-![http]({{site.baseurl}}/images/network/httpstack.png)
-
 ## Fault Tolerence
-
-### College Board
 
 Know how to determine if vertex of graph has more than one connection.  Multiple connections, in reference to a computing device, could be  considered "Fault Tolerant".  Building "Fault Tolerant" systems makes the network or internet stronger.
 
@@ -85,8 +59,6 @@ traceroute to yahoo.com (74.6.231.20), 64 hops max, 52 byte packets
 ```
 
 ## Parallel and Distributed Computing
-
-### College Board
 
 Single Core versus Multiple Cores allows allows parallel computing.  Using multiple Cores allows a sequential job to be split up with minimum time being the length of longest job(s).  What is best time for 30 seconds, 50 seconds, 40 seconds jobs on a two core computer?
 

@@ -2,7 +2,7 @@
 toc: true
 comments: false
 layout: post
-title: Big Idea 4 'The Internet'
+title: Big Idea 4.1 The Internet
 description: Reviewing the internet and protocols
 type: ccc
 courses: { csp: {week: 15} }
@@ -18,6 +18,26 @@ To date, with deployment individuals and teams have been very active Computing S
 3. IP Address.  Try to describe at least 6 IP addresses you use daily.  Try using and understanding [https://www.whatsmyip.org/](https://www.whatsmyip.org/).
 4. Observe Internet Traffic.  Try Linux tools bandwidth tools [Article](https://www.binarytides.com/linux-commands-monitor-network/)
 5. Finish up with OSI.  Try to make it real, according to what we have done.
+
+### Web browsers and servers use TCP/IP protocols to connect to the Internet. Common TCP/IP protocols are
+
+Internet, Word Wide Web, Local Area Network, HTTP, DNS, TCP, UDP, IP.   Discussion focuses on Letters and Jig Saw puzzles as analogy for Source, Destination, and Packets.
+
+* HTTP - Hyper Text Transfer Protocol, HTTPS - Secure HTTP
+
+  * HTTP takes care of the communication between a web server and the clients web browser. HTTP is used for sending **requests** from a web client to receive a **response** from the server.  Response could be HTML or JSON.
+
+  * HTTPS takes care of secure communication between a web server and a web browser.  In our deployment process we used **certbot** to make HTTP communication secure all the time.
+
+* TCP/IP - Transmission Control Protocol, Internet Protocol
+
+  * TPC/IP messages are broken up into small independent "packets" and sent between computers via the Internet.
+
+  * IP is responsible for "routing" each packet to the correct destination.  When an IP packet is sent from a computer, it arrives at an IP router. The IP router is responsible for "routing" the packet to the correct destination, directly or via another router.
+
+* Network Layer - The wireless and physical layers that move bits and bytes "11010001" across the internet.
+
+![http]({{site.baseurl}}/images/network/httpstack.png)
 
 ## Hacks
 
