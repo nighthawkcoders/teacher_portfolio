@@ -7,7 +7,7 @@ const PlayerAnimation = {
     width: 256,
     height: 256,
     w: { row: 12, frames: 15 }, // jump key
-	a: { row: 4, frames: 7, idleFrame: { column: 7, frames: 0 } }, // Walk left key
+	a: { row: 3, frames: 7, idleFrame: { column: 7, frames: 0 } }, // Walk left key
     s: { }, // no action
 	d: { row: 2, frames: 7, idleFrame: { column: 7, frames: 0 } }, // Walk right key
 }
