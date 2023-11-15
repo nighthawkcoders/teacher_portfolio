@@ -55,19 +55,8 @@ images:
     });
 
     // Toggle "canvas filter property" between alien and normal
-    var isFilterEnabled = false;
-    const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
     toggleCanvasEffect.addEventListener("click", function () {
-        for (var gameObj of GameEnv.gameObjects){
-            if (gameObj.invert && isFilterEnabled) {  // toggle off
-                gameObj.canvas.style.filter = "none";  // remove filter
-            } else if (gameObj.invert) { // toggle on
-                gameObj.canvas.style.filter = defaultFilter;  // remove filter
-            } else {
-                gameObj.canvas.style.filter = "none";  // remove filter
-            }
-        }
-        isFilterEnabled = !isFilterEnabled;  // switch boolean value
+        GameEnv.toggleInvert();
     });
   
     // Setup and store Game Objects
