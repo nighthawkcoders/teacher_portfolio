@@ -45,21 +45,13 @@ images:
 
     // Game loop
     function gameLoop() {
-        for (var gameObj of GameEnv.gameObjects){
-            gameObj.update();
-            gameObj.draw();
-        }
+        GameEnv.update();
         requestAnimationFrame(gameLoop);  // cycle game, aka recursion
     }
 
     // Window resize
     window.addEventListener('resize', function () {
-        GameEnv.setGameEnv();  // Update GameEnv dimensions
-
-        // Call the sizing method on all game objects
-        for (var gameObj of GameEnv.gameObjects){
-            gameObj.size();
-        }
+        GameEnv.resize();
     });
 
     // Toggle "canvas filter property" between alien and normal

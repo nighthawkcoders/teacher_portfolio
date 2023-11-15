@@ -42,8 +42,8 @@ export class GameEnv {
         }
     }
     
-    // Setter for Game Environment 
-    static setGameEnv() {
+    // Setup for Game Environment 
+    static initialize() {
         // store previous for ratio calculatins on resize
         this.prevInnerWidth = this.innerWidth;
         this.prevBottom = this.bottom;
@@ -54,6 +54,24 @@ export class GameEnv {
 
         this.setTop();
         // this.setBottom() is ignored for now as resize of background object determinse bottom
+    }
+
+    // Resize for Game Objects
+    static resize() {
+        GameEnv.initialize();  // Update GameEnv dimensions
+
+        // Call the sizing method on all game objects
+        for (var gameObj of GameEnv.gameObjects){
+            gameObj.size();
+        }
+    }
+
+    static update() {
+        // Update game state, including all game objects
+        for (const gameObject of this.gameObjects) {
+            gameObject.update();
+            gameObject.draw();
+        }
     }
 }
 
