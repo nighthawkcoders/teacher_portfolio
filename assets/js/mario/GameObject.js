@@ -2,7 +2,6 @@ import GameEnv from './GameEnv.js';
 
 class GameObject {
     // container for all game objects in game
-    static gameObjectArray = [];
     constructor(canvas, image, speedRatio) {
         this.x = 0;
         this.y = 0;
@@ -21,7 +20,7 @@ class GameObject {
         this.collisionData = {};
         // Add this object to the game object array so collision can be detected
         // among other things
-        GameObject.gameObjectArray.push(this); 
+        GameEnv.gameObjects.push(this); 
     }
 
     // X position getter and setter
@@ -47,11 +46,11 @@ class GameObject {
     * remove object from GameObject array
     */
     destroy() {
-        const index = GameObject.gameObjectArray.indexOf(this);
+        const index = GameEnv.gameObjects.indexOf(this);
         if (index !== -1) {
             // Remove the canvas from the DOM
             this.canvas.parentNode.removeChild(this.canvas);
-            GameObject.gameObjectArray.splice(index, 1);
+            GameEnv.gameObjects.splice(index, 1);
         }
     }
 
@@ -74,7 +73,7 @@ class GameObject {
      * calls collisionAction on hit
     */
     collisionChecks() {
-        for (var gameObj of GameObject.gameObjectArray){
+        for (var gameObj of GameEnv.gameObjects){
             if (this != gameObj ) {
                 this.isCollision(gameObj);
                 if (this.collisionData.hit){

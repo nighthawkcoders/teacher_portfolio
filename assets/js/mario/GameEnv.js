@@ -1,5 +1,7 @@
 export class GameEnv {
     // Prototype static variables
+    static gameObjects = [];
+
     static innerWidth;
     static prevInnerWidth;
     static innerHeight;
@@ -12,6 +14,14 @@ export class GameEnv {
     // Make the constructor private to prevent instantiation
     constructor() {
         throw new Error('GameEnv is a static class and cannot be instantiated.');
+    }
+
+    static update() {
+        // Update game state, including all game objects
+        for (const gameObject of this.gameObjects) {
+            gameObject.update();
+            gameObject.draw();
+        }
     }
 
      // Setter for Top position
