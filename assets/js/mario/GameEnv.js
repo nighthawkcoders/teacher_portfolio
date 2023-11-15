@@ -11,6 +11,9 @@ export class GameEnv {
     static gameSpeed;
     static gravity;
 
+    static isInverted = true;
+    static defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
+
     // Make the constructor private to prevent instantiation
     constructor() {
         throw new Error('GameEnv is a static class and cannot be instantiated.');
@@ -72,6 +75,20 @@ export class GameEnv {
             gameObject.update();
             gameObject.draw();
         }
+    }
+
+    // Toggle "canvas filter property" between alien and normal
+    static toggleInvert() {
+        for (var gameObj of GameEnv.gameObjects){
+            if (gameObj.invert && this.isInverted) {  // toggle off
+                gameObj.canvas.style.filter = "none";  // remove filter
+            } else if (gameObj.invert) { // toggle on
+                gameObj.canvas.style.filter = this.defaultFilter;  // remove filter
+            } else {
+                gameObj.canvas.style.filter = "none";  // remove filter
+            }
+        }
+        this.isInverted = !this.isInverted;  // switch boolean value
     }
 }
 
