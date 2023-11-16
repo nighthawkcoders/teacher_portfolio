@@ -19,7 +19,10 @@ const GameInitializer = {
         this.createGameObjectsForLevel(newLevel);
 
         // Trigger a resize at start up
-        GameEnv.resize();
+        window.dispatchEvent(new Event('resize'));
+        // need these to get Invert in Sync
+        toggleCanvasEffect.dispatchEvent(new Event('click'));
+        toggleCanvasEffect.dispatchEvent(new Event('click'));
 
         this.inTransition = false;
     },
@@ -94,29 +97,9 @@ const GameInitializer = {
     },
 
     async initGame(level) {
-        // Window resize
-        window.addEventListener('resize', GameEnv.resize);
-
-        // Toggle "canvas filter property" between alien and normal
-        var isFilterEnabled = false;
-        const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
-        toggleCanvasEffect.addEventListener("click", function () {
-            for (var gameObj of GameEnv.gameObjects){
-                if (gameObj.invert && isFilterEnabled) {  // toggle off
-                    gameObj.canvas.style.filter = "none";  // remove filter
-                } else if (gameObj.invert) { // toggle on
-                    gameObj.canvas.style.filter = defaultFilter;  // remove filter
-                } else {
-                    gameObj.canvas.style.filter = "none";  // remove filter
-                }
-            }
-            isFilterEnabled = !isFilterEnabled;  // switch boolean value
-        });
-
+        
         // init the level
         await this.transitionToLevel(level)
-
-        toggleCanvasEffect.dispatchEvent(new Event('click'));
 
         // Start the game
         this.gameLoop();

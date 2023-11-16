@@ -14,7 +14,6 @@ export class GameEnv {
     static player;
 
     static isInverted = true;
-    static defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
 
     // Make the constructor private to prevent instantiation
     constructor() {
@@ -60,7 +59,6 @@ export class GameEnv {
         this.setTop();
         // this.setBottom() is ignored for now as resize of background object determinse bottom
 
-        this.toggleInvert();
     }
 
     // Resize for Game Objects
@@ -87,7 +85,7 @@ export class GameEnv {
             if (gameObj.invert && this.isInverted) {  // toggle off
                 gameObj.canvas.style.filter = "none";  // remove filter
             } else if (gameObj.invert) { // toggle on
-                gameObj.canvas.style.filter = this.defaultFilter;  // remove filter
+                gameObj.canvas.style.filter = "invert(100%)";  // remove filter
             } else {
                 gameObj.canvas.style.filter = "none";  // remove filter
             }

@@ -90,7 +90,7 @@ class Character extends GameObject {
             this.setY(proportionalY);
         } else {
             // First Screen Position
-            this.setX(Math.random() * GameEnv.innerWidth);
+            this.setX(0);
             this.setY(GameEnv.bottom);
         }
     }

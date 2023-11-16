@@ -34,6 +34,7 @@ images:
     </div>
 </div>
 
+
 <script type="module">
     import GameEnv from '{{site.baseurl}}/assets/js/mario/GameEnv.js';
     import GameObject from '{{site.baseurl}}/assets/js/mario/GameObject.js';
@@ -54,8 +55,13 @@ images:
     var levelTwo = new GameLevel('{{playerFile}}', '{{backgroundFileAlt}}');
     var levelOne = new GameLevel('{{playerFile}}', '{{backgroundFile}}', levelTwo, levelOneCompletion);
 
-    // create the game
+    // create listeners
+    toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
+    window.addEventListener('resize', GameEnv.resize);
+
+    // create game
     await GameInitializer.initGame(
         levelOne
     );
+
 </script>
