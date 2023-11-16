@@ -7,6 +7,8 @@ const GameInitializer = {
     // ... (other init methods)
 
     async transitionToLevel(newLevel) {
+        this.inTransition = true;
+
         // Destroy existing game objects
         this.destroyGameObjects();
 
@@ -15,11 +17,20 @@ const GameInitializer = {
 
         // Create new game objects for the new level
         this.createGameObjectsForLevel(newLevel);
+
+        // Trigger a resize at start up
+        this.resize();
+
+        this.inTransition = false;
     },
 
     // Destroy all existing game objects
     destroyGameObjects() {
+        let toDestroy = []
         for (const gameObject of GameObject.gameObjectArray) {
+            toDestroy.push(gameObject);
+        }
+        for (const gameObject of toDestroy) {
             gameObject.destroy();
         }
     },
@@ -54,7 +65,7 @@ const GameInitializer = {
             document.querySelector("#canvasContainer").appendChild(playerCanvas);
             // Player object
             const playerSpeedRatio = 0.7
-            initPlayer(playerCanvas, playerImg, playerSpeedRatio);    
+            GameEnv.player = initPlayer(playerCanvas, playerImg, playerSpeedRatio);    
         // Trap errors on failed image loads
         } catch (error) {
             console.error('Failed to load one or more images:', error);
@@ -69,23 +80,31 @@ const GameInitializer = {
     },
 
     gameLoop() {
-        for (var gameObj of GameObject.gameObjectArray){
-            gameObj.update();
-            gameObj.draw();
+        if (!this.inTransition) {
+            for (var gameObj of GameObject.gameObjectArray){
+                gameObj.update();
+                gameObj.draw();
+            }
+
+            if (GameEnv.currentLevel?.isComplete?.()) {
+                this.transitionToLevel(GameEnv.currentLevel.nextLevel);
+            }
         }
         requestAnimationFrame(this.gameLoop.bind(this));  // cycle game, aka recursion
     },
 
+    resize() {
+        GameEnv.setGameEnv();  // Update GameEnv dimensions
+
+        // Call the sizing method on all game objects
+        for (var gameObj of GameObject.gameObjectArray){
+            gameObj.size();
+        }
+    },
+
     async initGame(level) {
         // Window resize
-        window.addEventListener('resize', function () {
-            GameEnv.setGameEnv();  // Update GameEnv dimensions
-
-            // Call the sizing method on all game objects
-            for (var gameObj of GameObject.gameObjectArray){
-                gameObj.size();
-            }
-        });
+        window.addEventListener('resize', this.resize);
 
         // Toggle "canvas filter property" between alien and normal
         var isFilterEnabled = false;
@@ -106,8 +125,6 @@ const GameInitializer = {
         // init the level
         await this.transitionToLevel(level)
 
-        // Trigger a resize at start up
-        window.dispatchEvent(new Event('resize'));
         toggleCanvasEffect.dispatchEvent(new Event('click'));
 
         // Start the game

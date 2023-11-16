@@ -8,11 +8,14 @@ image: /images/mario/hills.png
 images:
   background:
     src: /images/mario/hills.png
+  backgroundAlt:
+    src: /images/mario/background.png
   mario:
     src: /images/mario_animation.png
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
+{% assign backgroundFileAlt = site.baseurl | append: page.images.backgroundAlt.src %}
 {% assign playerFile = site.baseurl | append: page.images.mario.src %}
 
 <style>
@@ -39,8 +42,20 @@ images:
     import GameInitializer from '{{site.baseurl}}/assets/js/mario/GameInitializer.js';
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
 
+    function levelOneCompletion() {
+        console.log(GameEnv.player?.x)
+        if (GameEnv.player?.x > 500) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    var levelTwo = new GameLevel('{{playerFile}}', '{{backgroundFileAlt}}');
+    var levelOne = new GameLevel('{{playerFile}}', '{{backgroundFile}}', levelTwo, levelOneCompletion);
+
     // create the game
     await GameInitializer.initGame(
-        new GameLevel('{{playerFile}}', '{{backgroundFile}}')
+        levelOne
     );
 </script>
