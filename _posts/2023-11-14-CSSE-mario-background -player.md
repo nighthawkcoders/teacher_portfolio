@@ -11,7 +11,7 @@ images:
   backgroundAlt:
     src: /images/mario/background.png
   mario:
-    src: /images/mario_animation.png
+    src: /images/mario/player.png
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
@@ -26,7 +26,7 @@ images:
 </style>
 
 <!-- Prepare DOM elements -->
-<!-- Wrap both the dog canvas and controls in a container div -->
+<!-- Wrap both the canvas and controls in a container div -->
 <div id="canvasContainer">
     <div id="controls"> <!-- Controls -->
         <!-- Background controls -->

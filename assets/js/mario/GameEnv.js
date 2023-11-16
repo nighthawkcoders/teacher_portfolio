@@ -59,6 +59,8 @@ export class GameEnv {
 
         this.setTop();
         // this.setBottom() is ignored for now as resize of background object determinse bottom
+
+        this.toggleInvert();
     }
 
     // Resize for Game Objects
