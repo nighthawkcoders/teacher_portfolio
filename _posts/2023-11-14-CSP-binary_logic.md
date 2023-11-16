@@ -14,8 +14,6 @@ categories: [1.D, 2.B, 3.C, C4.4]
 Algorithms, Data, Data Structures, and Visualization can go together.  To start this warmup project, use Classroom and CPT ***requirements*** to venture into Algorithms.  This blog is a collection of binary, data and data structures and should be a great CPT practice project.
 
 - ***Explore a topic in Computer Science manner*** (research, jupyter notebooks, frontend / backend coding)
-- Build a lesson that is more interesting, by explaining an algorithm and logic using data and visualization.
-- Teach with examples... ***Segment from [CS50](https://youtu.be/1tnj3UCkuxU?t=336) and go to minute 13:15.***
 - Tour the Code.  ***Use [Binary Frontend Code](thttps://nighthawkcoders.github.io/teacher//c4.4/2023/09/14/javascript-binary-U2-1.html)*** to get you started. <mark>Obtain code form teacher project drag and drop _posts/2023-09-14-javascript-binary-U2-1.ipynb to your project and Debug</mark>
 - This Tech Talk will introduce requirements and finish with required ***hacks***.   Consider this blog and Binary Frontend Code as part of your research.
 
@@ -219,8 +217,6 @@ Basic concept is to invert/negate bits to produce negative. This allows numbers 
 Data, Data Structures, Algorithm, and Visualization work together.  Data helps supply an interests/topic to an algorithm.  It will be expected that you build topics above into your team mini project.
 
 - This project will be two weeks long and will incorporate Ideation, Design, Feature Implementation, Integration, Test Complete phases.
-- Teaching will be limited to 5 minutes and some coordination and planning needs to occur to make sure we share unique topics.
-- Make sure you learn and code Algorithms and Visualization for all of the above, but perform extra efforts on what you will be teaching.
 - Add "Science" into your process*** (research, jupyter notebook, and ultimately running application)
 - Topics used for teaching, not listed in this blog need to be approved by Teacher.  
 - Topics need to focus on data ideas from Unit 2 of AP Classroom.

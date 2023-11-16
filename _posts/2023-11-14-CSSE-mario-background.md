@@ -45,37 +45,18 @@ images:
 
     // Game loop
     function gameLoop() {
-        for (var gameObj of GameObject.gameObjectArray){
-            gameObj.update();
-            gameObj.draw();
-        }
+        GameEnv.update();
         requestAnimationFrame(gameLoop);  // cycle game, aka recursion
     }
 
     // Window resize
     window.addEventListener('resize', function () {
-        GameEnv.setGameEnv();  // Update GameEnv dimensions
-
-        // Call the sizing method on all game objects
-        for (var gameObj of GameObject.gameObjectArray){
-            gameObj.size();
-        }
+        GameEnv.resize();
     });
 
     // Toggle "canvas filter property" between alien and normal
-    var isFilterEnabled = false;
-    const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
     toggleCanvasEffect.addEventListener("click", function () {
-        for (var gameObj of GameObject.gameObjectArray){
-            if (gameObj.invert && isFilterEnabled) {  // toggle off
-                gameObj.canvas.style.filter = "none";  // remove filter
-            } else if (gameObj.invert) { // toggle on
-                gameObj.canvas.style.filter = defaultFilter;  // remove filter
-            } else {
-                gameObj.canvas.style.filter = "none";  // remove filter
-            }
-        }
-        isFilterEnabled = !isFilterEnabled;  // switch boolean value
+        GameEnv.toggleInvert();
     });
   
     // Setup and store Game Objects
