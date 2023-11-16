@@ -19,7 +19,7 @@ const GameInitializer = {
         this.createGameObjectsForLevel(newLevel);
 
         // Trigger a resize at start up
-        this.resize();
+        GameEnv.resize();
 
         this.inTransition = false;
     },
@@ -27,7 +27,7 @@ const GameInitializer = {
     // Destroy all existing game objects
     destroyGameObjects() {
         let toDestroy = []
-        for (const gameObject of GameObject.gameObjectArray) {
+        for (const gameObject of GameEnv.gameObjects) {
             toDestroy.push(gameObject);
         }
         for (const gameObject of toDestroy) {
@@ -81,7 +81,7 @@ const GameInitializer = {
 
     gameLoop() {
         if (!this.inTransition) {
-            for (var gameObj of GameObject.gameObjectArray){
+            for (var gameObj of GameEnv.gameObjects){
                 gameObj.update();
                 gameObj.draw();
             }
@@ -93,24 +93,15 @@ const GameInitializer = {
         requestAnimationFrame(this.gameLoop.bind(this));  // cycle game, aka recursion
     },
 
-    resize() {
-        GameEnv.setGameEnv();  // Update GameEnv dimensions
-
-        // Call the sizing method on all game objects
-        for (var gameObj of GameObject.gameObjectArray){
-            gameObj.size();
-        }
-    },
-
     async initGame(level) {
         // Window resize
-        window.addEventListener('resize', this.resize);
+        window.addEventListener('resize', GameEnv.resize);
 
         // Toggle "canvas filter property" between alien and normal
         var isFilterEnabled = false;
         const defaultFilter = getComputedStyle(document.documentElement).getPropertyValue('--default-canvas-filter');
         toggleCanvasEffect.addEventListener("click", function () {
-            for (var gameObj of GameObject.gameObjectArray){
+            for (var gameObj of GameEnv.gameObjects){
                 if (gameObj.invert && isFilterEnabled) {  // toggle off
                     gameObj.canvas.style.filter = "none";  // remove filter
                 } else if (gameObj.invert) { // toggle on
