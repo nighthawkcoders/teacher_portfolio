@@ -13,6 +13,8 @@ export class GameEnv {
     static currentLevel;
     static player;
 
+    static backgroundHeight;
+
     static isInverted = true;
 
     // Make the constructor private to prevent instantiation

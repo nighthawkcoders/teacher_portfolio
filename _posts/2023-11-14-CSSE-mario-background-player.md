@@ -8,6 +8,8 @@ image: /images/mario/hills.png
 images:
   background:
     src: /images/mario/hills.png
+  platform:
+    src: /images/mario/platform.png
   backgroundAlt:
     src: /images/mario/background.png
   mario:
@@ -15,6 +17,7 @@ images:
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
+{% assign platformFile = site.baseurl | append: page.images.platform.src %}
 {% assign backgroundFileAlt = site.baseurl | append: page.images.backgroundAlt.src %}
 {% assign playerFile = site.baseurl | append: page.images.mario.src %}
 
@@ -52,8 +55,8 @@ images:
         }
     }
 
-    var levelTwo = new GameLevel('{{playerFile}}', '{{backgroundFileAlt}}');
-    var levelOne = new GameLevel('{{playerFile}}', '{{backgroundFile}}', levelTwo, levelOneCompletion);
+    var levelTwo = new GameLevel('{{playerFile}}', '{{backgroundFileAlt}}', '{{platformFile}}');
+    var levelOne = new GameLevel('{{playerFile}}', '{{backgroundFile}}', '{{platformFile}}', levelTwo, levelOneCompletion);
 
     // create listeners
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);

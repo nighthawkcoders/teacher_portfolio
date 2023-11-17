@@ -1,6 +1,7 @@
 import GameObject from './GameObject.js';
-import Background from './Background.js';
 import GameEnv from './GameEnv.js';
+import Background from './Background.js';
+import Platform from './Platform.js';
 import { initPlayer } from './Player.js';
 
 const GameInitializer = {
@@ -45,8 +46,9 @@ const GameInitializer = {
         // ...        
         try {
             // Open image files for Game Objects
-            const [backgroundImg, playerImg] = await Promise.all([
+            const [backgroundImg, platformImg, playerImg] = await Promise.all([
                 loadImage(level.backgroundImg),
+                loadImage(level.platformImg),
                 loadImage(level.playerImg),
             ]);
     
@@ -61,6 +63,14 @@ const GameInitializer = {
             // Background object
             const backgroundSpeedRatio = 0
             new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);  // Background Class calls GameObject Array which stores the instance
+
+            // Prepare HTML with Platform Canvas
+            const platformCanvas = document.createElement("canvas");
+            platformCanvas.id = "platform";
+            document.querySelector("#canvasContainer").appendChild(platformCanvas);
+            // Platform object
+            const platformSpeedRatio = 0
+            new Platform(platformCanvas, platformImg, platformSpeedRatio);
 
             // Prepare HTML with Player Canvas
             const playerCanvas = document.createElement("canvas");
