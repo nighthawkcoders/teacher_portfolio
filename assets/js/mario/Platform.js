@@ -36,6 +36,8 @@ export class Platform extends GameObject {
         const canvasWidth = GameEnv.innerWidth;
         const canvasHeight = canvasWidth / this.aspect_ratio;
         const canvasLeft = 0;
+        GameEnv.platformHeight = canvasHeight * ADJUST;
+    
 
         this.canvas.width = this.width;
         this.canvas.height = this.height / ADJUST;
@@ -44,6 +46,9 @@ export class Platform extends GameObject {
         this.canvas.style.position = 'absolute';
         this.canvas.style.top = `${GameEnv.bottom}px`; 
         this.canvas.style.left = `${canvasLeft}px`;
+
+        // set bottom of game to new background height
+        GameEnv.setBottom();
     }
 }
 

@@ -56,8 +56,7 @@ export class GameEnv {
         this.innerHeight = window.innerHeight;
 
         this.setTop();
-        // this.setBottom() is ignored for now as resize of background object determinse bottom
-
+        //this.setBottom(); // must be called in platformer objects
     }
 
     // Resize for Game Objects

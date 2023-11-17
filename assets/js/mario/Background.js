@@ -47,7 +47,7 @@ export class Background extends GameObject {
         this.canvas.style.top = `${GameEnv.top}px`;
 
         // set bottom of game to new background height
-        GameEnv.setBottom();
+        GameEnv.setBottom(); 
     }
 }
 
