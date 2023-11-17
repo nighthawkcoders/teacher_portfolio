@@ -1,7 +1,7 @@
 ---
 layout: base
-title: Mario Player with Hills Background
-description: Early step in adding Mario into OOP Game
+title: Mario on Platform
+description: Early steps in adding Mario into OOP Game.  This also includes a level change.
 type: ccc
 courses: { csse: {week: 14} }
 image: /images/mario/hills.png
@@ -40,9 +40,6 @@ images:
 
 <script type="module">
     import GameEnv from '{{site.baseurl}}/assets/js/mario/GameEnv.js';
-    import GameObject from '{{site.baseurl}}/assets/js/mario/GameObject.js';
-    import Background from '{{site.baseurl}}/assets/js/mario/Background.js';
-    import { initPlayer } from '{{site.baseurl}}/assets/js/mario/Player.js';
     import GameInitializer from '{{site.baseurl}}/assets/js/mario/GameInitializer.js';
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
 
