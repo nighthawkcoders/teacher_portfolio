@@ -42,7 +42,11 @@ export class GameEnv {
 
     // Setter for Bottom position
     static setBottom() {
-        this.bottom = this.backgroundHeight - this.platformHeight;
+        // sets the bottom or gravity 0
+        this.bottom =
+        this.backgroundHeight - this.platformHeight > this.top?
+        this.backgroundHeight - this.platformHeight:
+        this.backgroundHeight;
     }
     
     // Setup for Game Environment 
