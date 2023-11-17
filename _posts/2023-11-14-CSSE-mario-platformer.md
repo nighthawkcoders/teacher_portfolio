@@ -43,6 +43,11 @@ images:
     import GameInitializer from '{{site.baseurl}}/assets/js/mario/GameInitializer.js';
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
 
+    // Setup Globals
+    GameEnv.gameSpeed = 2;
+    GameEnv.gravity = 3;
+
+    // Level One completion
     function levelOneCompletion() {
         console.log(GameEnv.player?.x)
         if (GameEnv.player?.x > 500) {
