@@ -36,6 +36,7 @@ class GameLevel {
     // Load level data
     async load() {
         
+        // test for presence of Images
         const imagesToLoad = [];
         if (this.backgroundImg) {
             imagesToLoad.push(this.loadImage(this.backgroundImg));
@@ -48,10 +49,11 @@ class GameLevel {
         }
 
         try {
+            // Do not proceed until images are loaded
             const loadedImages = await Promise.all(imagesToLoad);
             var i = 0;
 
-            // Prepare HTML with Background Canvas
+            // Prepare HTML with Background Canvas (if backgroundImg is defined)
             if (this.backgroundImg) {
                 const backgroundCanvas = document.createElement("canvas");
                 backgroundCanvas.id = "background";
@@ -71,7 +73,7 @@ class GameLevel {
                 i++;
             }
 
-            // Prepare HTML with Player Canvas
+            // Prepare HTML with Player Canvas (if playerImg is defined)
             if (this.playerImg) {
                 const playerCanvas = document.createElement("canvas");
                 playerCanvas.id = "characters";
@@ -85,8 +87,7 @@ class GameLevel {
             console.error('Failed to load one or more images:', error);
         }
 
-
-     }
+    }
 
     // Create a function to load an image and return a Promise
     async loadImage(src) {

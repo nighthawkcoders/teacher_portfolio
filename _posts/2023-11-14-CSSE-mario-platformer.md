@@ -12,6 +12,10 @@ images:
     src: /images/mario/platform.png
   backgroundAlt:
     src: /images/mario/planet.jpg
+  backgroundCastles:
+    src: /images/mario/castles.png
+  backgroundGameOver:
+    src: /images/mario/game_over.png
   mario:
     src: /images/mario/player.png
 ---
@@ -19,6 +23,9 @@ images:
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
 {% assign platformFile = site.baseurl | append: page.images.platform.src %}
 {% assign backgroundFileAlt = site.baseurl | append: page.images.backgroundAlt.src %}
+{% assign backgroundFileCastles = site.baseurl | append: page.images.backgroundCastles.src %}
+{% assign backgroundFileGameOver = site.baseurl | append: page.images.backgroundGameOver.src %}
+
 {% assign playerFile = site.baseurl | append: page.images.mario.src %}
 
 <style>
@@ -40,8 +47,8 @@ images:
 
 <script type="module">
     import GameEnv from '{{site.baseurl}}/assets/js/mario/GameEnv.js';
-    import GameInitializer from '{{site.baseurl}}/assets/js/mario/GameInitializer.js';
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
+    import GameManager from '{{site.baseurl}}/assets/js/mario/GameManager.js';
 
     // Setup Globals
     GameEnv.gameSpeed = 2;
@@ -71,23 +78,20 @@ images:
     levels[1].setPlayerFile(`{{playerFile}}`);
     levels[1].setNextLevel(levels[2]);
     levels[1].setIsComplete(testerCompletion);
-    // no background
-    //levels[2].setBackgroundFile('{{backgroundFileAlt}}');
+    // castles, no platform
+    levels[2].setBackgroundFile('{{backgroundFileCastles}}');
     //levels[2].setPlatformFile(`{{platformFile}}`);
     levels[2].setPlayerFile(`{{playerFile}}`);
     levels[2].setNextLevel(levels[3]);
     levels[2].setIsComplete(testerCompletion);
-    // no player
-    levels[3].setBackgroundFile('{{backgroundFile}}');
-
+    // mario hills, no player
+    levels[3].setBackgroundFile('{{backgroundFileGameOver}}');
 
     // create listeners
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
     window.addEventListener('resize', GameEnv.resize);
 
-    // create game
-    await GameInitializer.initGame(
-        levels[0]
-    );
+    // start game
+    await GameManager.startGame( levels[0] );
 
 </script>

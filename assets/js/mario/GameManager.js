@@ -1,6 +1,6 @@
 import GameEnv from './GameEnv.js';
 
-const GameInitializer = {
+const GameManager = {
     // ... (other init methods)
 
     async transitionToLevel(newLevel) {
@@ -11,9 +11,6 @@ const GameInitializer = {
 
         await newLevel.load();
         GameEnv.currentLevel = newLevel;
-
-        // Create new game objects for the new level
-        this.createGameObjectsForLevel(newLevel);
 
         // Trigger a resize at start up
         window.dispatchEvent(new Event('resize'));
@@ -35,13 +32,6 @@ const GameInitializer = {
         }
     },
 
-    // Create game objects for the given level
-    createGameObjectsForLevel(level) {
-        // Create game objects based on the level's configuration
-        // (similar to what you did in initLevel previously)
-        // ...
-    },
-
     gameLoop() {
         if (!this.inTransition) {
             for (var gameObj of GameEnv.gameObjects){
@@ -56,7 +46,7 @@ const GameInitializer = {
         requestAnimationFrame(this.gameLoop.bind(this));  // cycle game, aka recursion
     },
 
-    async initGame(level) {
+    async startGame(level) {
         
         // init the level
         await this.transitionToLevel(level)
@@ -66,4 +56,4 @@ const GameInitializer = {
     }
 };
 
-export default GameInitializer;
+export default GameManager;
