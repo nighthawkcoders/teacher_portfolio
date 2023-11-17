@@ -11,7 +11,7 @@ images:
   platform:
     src: /images/mario/platform.png
   backgroundAlt:
-    src: /images/mario/background.png
+    src: /images/mario/planet.jpg
   mario:
     src: /images/mario/player.png
 ---

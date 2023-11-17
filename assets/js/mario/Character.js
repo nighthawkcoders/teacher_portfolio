@@ -91,7 +91,7 @@ class Character extends GameObject {
         } else {
             // First Screen Position
             this.setX(0);
-            this.setY(GameEnv.bottom);
+            this.setY(GameEnv.floor);
         }
     }
 
@@ -100,7 +100,7 @@ class Character extends GameObject {
      * be sure to have updated draw call super.update()
     */
     update() {
-        if (GameEnv.bottom > this.y && this.gravityEnabled)
+        if (GameEnv.floor > this.y && this.gravityEnabled)
             this.y += GameEnv.gravity;
 
         // Update animation frameX of the object

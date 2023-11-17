@@ -7,7 +7,9 @@ export class GameEnv {
     static innerHeight;
     static top;
     static bottom;
-    static prevBottom;
+    static prevBottom
+    static floor;
+    static prevFloor;
     static gameSpeed;
     static gravity;
     static currentLevel;
@@ -44,16 +46,24 @@ export class GameEnv {
     static setBottom() {
         // sets the bottom or gravity 0
         this.bottom =
+        this.backgroundHeight;
+    }
+
+    static setFloor() {
+        // sets the bottom or gravity 0
+        this.floor =
         this.backgroundHeight - this.platformHeight > this.top?
         this.backgroundHeight - this.platformHeight:
         this.backgroundHeight;
     }
+
     
     // Setup for Game Environment 
     static initialize() {
         // store previous for ratio calculatins on resize
         this.prevInnerWidth = this.innerWidth;
         this.prevBottom = this.bottom;
+        this.prevFloor = this.floor;
     
         // game uses available width and heith
         this.innerWidth = window.innerWidth;

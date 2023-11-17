@@ -48,7 +48,7 @@ export class Platform extends GameObject {
         this.canvas.style.left = `${canvasLeft}px`;
 
         // set bottom of game to new background height
-        GameEnv.setBottom();
+        GameEnv.setFloor();
     }
 }
 

@@ -59,16 +59,16 @@ export class Player extends Character{
         var result = false;
         for (let direction in this.pressedDirections) {
             if (this.pressedDirections[direction] === key.row) {
-                result = (!this.isIdle && GameEnv.bottom <= this.y);
+                result = (!this.isIdle && GameEnv.floor <= this.y);
                 break; // Exit the loop if there's a match
             }
         }
-        //result = (result && !this.isIdle && GameEnv.bottom <= this.y);
-        //var result = (this.frameY === key.row && !this.isIdle && GameEnv.bottom <= this.y);
+        //result = (result && !this.isIdle && GameEnv.floor <= this.y);
+        //var result = (this.frameY === key.row && !this.isIdle && GameEnv.floor <= this.y);
         if (result) {
             return true;
         }
-        if (GameEnv.bottom <= this.y) {
+        if (GameEnv.floor <= this.y) {
             this.setAnimation(this.stashFrame);
         }
         return false;
@@ -83,7 +83,7 @@ export class Player extends Character{
             this.x += this.speed;  // Move to right
         }
         if (this.isGravityAnimation(PlayerAnimation.w)) {
-            this.y -= (GameEnv.bottom * .33);  // jump 33% higher than floor
+            this.y -= (GameEnv.floor * .33);  // jump 33% higher than floor
         } 
 
         // Perform super update actions
