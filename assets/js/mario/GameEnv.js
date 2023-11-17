@@ -13,7 +13,8 @@ export class GameEnv {
     static currentLevel;
     static player;
 
-    static backgroundHeight;
+    static backgroundHeight = 0;
+    static platformHeight = 0;
 
     static isInverted = true;
 
@@ -41,11 +42,7 @@ export class GameEnv {
 
     // Setter for Bottom position
     static setBottom() {
-        // set bottom of game as background height
-        const background = document.querySelector('#background');
-        if (background) {
-            this.bottom = background.offsetHeight;
-        }
+        this.bottom = this.backgroundHeight - this.platformHeight;
     }
     
     // Setup for Game Environment 
