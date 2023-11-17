@@ -34,42 +34,57 @@ class GameLevel {
     }
 
     // Load level data
-    async load() { 
-        try {
-            // Open image files for Game Objects
-            const [backgroundImg, platformImg, playerImg] = await Promise.all([
-                this.loadImage(this.backgroundImg),
-                this.loadImage(this.platformImg),
-                this.loadImage(this.playerImg),
-            ]);
+    async load() {
         
-            // Prepare HTML with Background Canvas
-            const backgroundCanvas = document.createElement("canvas");
-            backgroundCanvas.id = "background";
-            document.querySelector("#canvasContainer").appendChild(backgroundCanvas);
-            // Background object
-            const backgroundSpeedRatio = 0
-            new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);  // Background Class calls GameObject Array which stores the instance
+        const imagesToLoad = [];
+        if (this.backgroundImg) {
+            imagesToLoad.push(this.loadImage(this.backgroundImg));
+        }
+        if (this.platformImg) {
+            imagesToLoad.push(this.loadImage(this.platformImg));
+        }
+        if (this.playerImg) {
+            imagesToLoad.push(this.loadImage(this.playerImg));
+        }
 
-            // Prepare HTML with Platform Canvas
-            const platformCanvas = document.createElement("canvas");
-            platformCanvas.id = "platform";
-            document.querySelector("#canvasContainer").appendChild(platformCanvas);
-            // Platform object
-            const platformSpeedRatio = 0
-            new Platform(platformCanvas, platformImg, platformSpeedRatio);
+        try {
+            const loadedImages = await Promise.all(imagesToLoad);
+            var i = 0;
+
+            // Prepare HTML with Background Canvas
+            if (this.backgroundImg) {
+                const backgroundCanvas = document.createElement("canvas");
+                backgroundCanvas.id = "background";
+                document.querySelector("#canvasContainer").appendChild(backgroundCanvas);
+                const backgroundSpeedRatio = 0;
+                new Background(backgroundCanvas, loadedImages[i], backgroundSpeedRatio);
+                i++;
+            }
+
+            // Prepare HTML with Platform Canvas (if platformImg is defined)
+            if (this.platformImg) {
+                const platformCanvas = document.createElement("canvas");
+                platformCanvas.id = "platform";
+                document.querySelector("#canvasContainer").appendChild(platformCanvas);
+                const platformSpeedRatio = 0;
+                new Platform(platformCanvas, loadedImages[i], platformSpeedRatio);
+                i++;
+            }
 
             // Prepare HTML with Player Canvas
-            const playerCanvas = document.createElement("canvas");
-            playerCanvas.id = "characters";
-            document.querySelector("#canvasContainer").appendChild(playerCanvas);
-            // Player object
-            const playerSpeedRatio = 0.7
-            GameEnv.player = initPlayer(playerCanvas, playerImg, playerSpeedRatio);    
-        // Trap errors on failed image loads
+            if (this.playerImg) {
+                const playerCanvas = document.createElement("canvas");
+                playerCanvas.id = "characters";
+                document.querySelector("#canvasContainer").appendChild(playerCanvas);
+                const playerSpeedRatio = 0.7;
+                GameEnv.player = initPlayer(playerCanvas, loadedImages[i], playerSpeedRatio);
+                i++;
+            }
+
         } catch (error) {
             console.error('Failed to load one or more images:', error);
         }
+
 
      }
 
