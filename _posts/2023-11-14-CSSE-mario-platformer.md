@@ -52,8 +52,18 @@ images:
         }
     }
 
-    var levelTwo = new GameLevel('{{playerFile}}', '{{backgroundFileAlt}}', '{{platformFile}}');
-    var levelOne = new GameLevel('{{playerFile}}', '{{backgroundFile}}', '{{platformFile}}', levelTwo, levelOneCompletion);
+    var levels = [ new GameLevel(), new GameLevel() ];
+    // level0 data
+    levels[0].setBackgroundFile('{{backgroundFile}}');
+    levels[0].setPlatformFile(`{{platformFile}}`);
+    levels[0].setPlayerFile(`{{playerFile}}`);
+    levels[0].setNextLevel(levels[1]);
+    levels[0].setIsComplete(levelOneCompletion);
+    // level1 data
+    levels[1].setBackgroundFile('{{backgroundFileAlt}}');
+    levels[1].setPlatformFile(`{{platformFile}}`);
+    levels[1].setPlayerFile(`{{playerFile}}`);
+    
 
     // create listeners
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
@@ -61,7 +71,7 @@ images:
 
     // create game
     await GameInitializer.initGame(
-        levelOne
+        levels[0]
     );
 
 </script>
