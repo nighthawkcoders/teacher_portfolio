@@ -25,7 +25,7 @@ const GameManager = {
     // Destroy all existing game objects
     destroyGameObjects() {
         // Destroy objects in reverse order
-        for (let i = GameEnv.gameObjects.length - 1; i >= 0; i--) {
+        for (var i = GameEnv.gameObjects.length - 1; i >= 0; i--) {
             const gameObject = GameEnv.gameObjects[i];
             gameObject.destroy();
         }
@@ -33,31 +33,27 @@ const GameManager = {
 
     // Game control loop
     gameLoop() {
-        // Turn game loop off during transition of level
+        // Turn game loop off during transitions
         if (!this.inTransition) {
 
-            // Primary game loop actions
-            for (const gameObj of GameEnv.gameObjects) {
-                gameObj.update();
-                gameObj.draw();
-            }
-
             // Get current level
+            GameEnv.update();
             const currentLevel = GameEnv.currentLevel;
 
             // Test if there is and isComplete method
-            if (currentLevel && currentLevel.isComplete && currentLevel.isComplete()) {
-                const currentIndex = GameEnv.levels.indexOf(currentLevel);
-
-                // Transition to next level
-                if (currentIndex !== -1 && currentIndex + 1 < GameEnv.levels.length) {
-                    // Transition to the next level in the array
-                    this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
-                } else {
-                    // Handle no next level, perhaps recycle to start screen
-                    console.log('Game completed!');
+            if (currentLevel) {
+                if (currentLevel.isComplete && currentLevel.isComplete()) {
+                    const currentIndex = GameEnv.levels.indexOf(currentLevel);
+                    if (currentIndex !== -1 && currentIndex + 1 < GameEnv.levels.length) {
+                        // Transition to the next level in the array
+                        this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
+                    } 
                 }
+            } else {
+                // Back to start of Game
+                this.transitionToLevel(GameEnv.levels[0]);
             }
+            
         }
 
         // cycle game, aka recursion

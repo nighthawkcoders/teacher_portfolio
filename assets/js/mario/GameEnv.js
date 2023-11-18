@@ -50,6 +50,7 @@ export class GameEnv {
         this.backgroundHeight;
     }
 
+    // Setter for Floor of player
     static setFloor() {
         // sets the bottom or gravity 0
         this.floor =
@@ -58,7 +59,6 @@ export class GameEnv {
         this.backgroundHeight;
     }
 
-    
     // Setup for Game Environment 
     static initialize() {
         // store previous for ratio calculatins on resize

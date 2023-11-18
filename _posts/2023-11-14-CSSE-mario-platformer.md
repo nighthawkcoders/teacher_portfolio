@@ -29,7 +29,7 @@ images:
 {% assign playerFile = site.baseurl | append: page.images.mario.src %}
 
 <style>
-    #controls {
+    #controls, #gameover {
         position: relative;
         z-index: 2; /*Ensure the controls are on top*/
     }
@@ -41,6 +41,9 @@ images:
     <div id="controls"> <!-- Controls -->
         <!-- Background controls -->
         <button id="toggleCanvasEffect">Invert</button>
+    </div>
+    <div id="gameover" hidden>
+        <button id="restartGame">Restart</button>
     </div>
 </div>
 
@@ -54,7 +57,7 @@ images:
     GameEnv.gameSpeed = 2;
     GameEnv.gravity = 3;
 
-    // Level One completion
+    // Level completion tester
     function testerCompletion() {
         console.log(GameEnv.player?.x)
         if (GameEnv.player?.x > 500) {
@@ -63,6 +66,38 @@ images:
             return false;
         }
     }
+
+    // GameOver callback
+    async function gameOver() {
+      const gameover = document.getElementById("gameover");
+
+      // Show the game over restart button
+      gameover.hidden = false;
+
+      // Helper function to wait for the restart button click
+      function waitForRestart() {
+        return new Promise((resolve) => {
+            // Listen for the restart button click
+            const restartButton = document.getElementById('restartGame');
+            const restartButtonListener = () => {
+                // Restart the game when the button is clicked
+                gameover.hidden = true;
+
+                resolve(true);
+            };
+
+            // Attach the restart button listener
+            restartButton.addEventListener('click', restartButtonListener);
+        });
+      }
+      
+      // Use waitForRestart to wait for the restart button click
+      await waitForRestart();
+      GameEnv.currentLevel = null;
+
+      return true;
+    }
+
 
     // Store Game levels
     const levels = [];
@@ -84,7 +119,7 @@ images:
     // No Platform
     createLevel('{{backgroundFileCastles}}', '', '{{playerFile}}', testerCompletion);
     // Game Over
-    createLevel('{{backgroundFileGameOver}}', '', '', null);
+    createLevel('{{backgroundFileGameOver}}', '', '', gameOver);
 
     // Assign the levels to GameEnv
     GameEnv.levels = levels;
