@@ -64,26 +64,30 @@ images:
         }
     }
 
-    // Initalize different levels to game
-    var levels = [ new GameLevel(), new GameLevel(), new GameLevel(), new GameLevel() ];
+    // Store Game levels
+    const levels = [];
+
+    // Add a GameLevel to the array levels
+    function createLevel(backgroundFile, platformFile, playerFile, isComplete) {
+        const newLevel = new GameLevel();
+        newLevel.setBackgroundFile(backgroundFile);
+        newLevel.setPlatformFile(platformFile);
+        newLevel.setPlayerFile(playerFile);
+        newLevel.setIsComplete(isComplete);
+        levels.push(newLevel);
+    }
+
+    // Mario Hills
+    createLevel('{{backgroundFile}}', '{{platformFile}}', '{{playerFile}}', testerCompletion);
+    // Alien World
+    createLevel('{{backgroundFileAlt}}', '{{platformFile}}', '{{playerFile}}', testerCompletion);
+    // No Platform
+    createLevel('{{backgroundFileCastles}}', '', '{{playerFile}}', testerCompletion);
+    // Game Over
+    createLevel('{{backgroundFileGameOver}}', '', '', null);
+
+    // Assign the levels to GameEnv
     GameEnv.levels = levels;
-    // mario hills
-    levels[0].setBackgroundFile('{{backgroundFile}}');
-    levels[0].setPlatformFile(`{{platformFile}}`);
-    levels[0].setPlayerFile(`{{playerFile}}`);
-    levels[0].setIsComplete(testerCompletion);
-    // alien planet
-    levels[1].setBackgroundFile('{{backgroundFileAlt}}');
-    levels[1].setPlatformFile(`{{platformFile}}`);
-    levels[1].setPlayerFile(`{{playerFile}}`);
-    levels[1].setIsComplete(testerCompletion);
-    // castles, no platform
-    levels[2].setBackgroundFile('{{backgroundFileCastles}}');
-    //levels[2].setPlatformFile(`{{platformFile}}`);
-    levels[2].setPlayerFile(`{{playerFile}}`);
-    levels[2].setIsComplete(testerCompletion);
-    // mario hills, no player
-    levels[3].setBackgroundFile('{{backgroundFileGameOver}}');
 
     // create listeners
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
