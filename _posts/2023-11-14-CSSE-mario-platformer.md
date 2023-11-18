@@ -93,7 +93,7 @@ images:
       await waitForRestart();
       gameover.hidden = true;
       
-      // Change currentLevel to avoid recycling gameOver
+      // Change currentLevel to start/restart value of null
       GameEnv.currentLevel = null;
 
       return true;
@@ -117,8 +117,10 @@ images:
     createLevel('{{backgroundFile}}', '{{platformFile}}', '{{playerFile}}', testerCompletion);
     // Alien World
     createLevel('{{backgroundFileAlt}}', '{{platformFile}}', '{{playerFile}}', testerCompletion);
-    // No Platform
-    createLevel('{{backgroundFileCastles}}', '', '{{playerFile}}', testerCompletion);
+    // No Platform tester
+    // createLevel('{{backgroundFileCastles}}', '', '{{playerFile}}', testerCompletion);
+    // No Background tester
+    // createLevel('', '{{platformFile}}', '{{playerFile}}', testerCompletion);
     // Game Over
     createLevel('{{backgroundFileGameOver}}', '', '', gameOver);
 
@@ -130,6 +132,6 @@ images:
     window.addEventListener('resize', GameEnv.resize);
 
     // start game
-    await GameManager.startGame( levels[0] );
+    GameManager.gameLoop();
 
 </script>

@@ -51,25 +51,17 @@ const GameManager = {
                         this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
                     } 
                 }
-            // currentLevel is null, (ie GameOver restart)
+            // currentLevel is null, (ie start or restart game)
             } else {
                 // transition to beginning of game
                 this.transitionToLevel(GameEnv.levels[0]);
             }
-            
         }
 
         // recycle gameLoop, aka recursion
         requestAnimationFrame(this.gameLoop.bind(this));  
     },
 
-    async startGame(level) {
-        // Initialize the level
-        await this.transitionToLevel(level)
-
-        // Start the game
-        this.gameLoop();
-    }
 };
 
 export default GameManager;

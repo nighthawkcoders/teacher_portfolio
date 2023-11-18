@@ -12,13 +12,17 @@ export class GameEnv {
     static prevFloor;
     static gameSpeed;
     static gravity;
-    static levels;
-    static currentLevel;
     static player;
 
+    // control values for game levels
+    static levels = null;
+    static currentLevel = null;
+
+    // calculated size properties
     static backgroundHeight = 0;
     static platformHeight = 0;
 
+    // canvas filter property
     static isInverted = true;
 
     // Make the constructor private to prevent instantiation
