@@ -1,20 +1,21 @@
 import GameEnv from './GameEnv.js';
 
 const GameManager = {
-    // ... (other init methods)
 
+    // Level transition method (destroy then newlevel)
     async transitionToLevel(newLevel) {
         this.inTransition = true;
 
         // Destroy existing game objects
         this.destroyGameObjects();
 
+        // Load GameLevel objects
         await newLevel.load();
         GameEnv.currentLevel = newLevel;
 
-        // Trigger a resize at start up
+        // Trigger a resize to redraw canvas elements
         window.dispatchEvent(new Event('resize'));
-        // need these to get Invert in Sync
+        // Update invert property, twice means same as before
         toggleCanvasEffect.dispatchEvent(new Event('click'));
         toggleCanvasEffect.dispatchEvent(new Event('click'));
 
@@ -23,32 +24,48 @@ const GameManager = {
 
     // Destroy all existing game objects
     destroyGameObjects() {
-        let toDestroy = []
-        for (const gameObject of GameEnv.gameObjects) {
-            toDestroy.push(gameObject);
-        }
-        for (const gameObject of toDestroy) {
+        // Destroy objects in reverse order
+        for (let i = GameEnv.gameObjects.length - 1; i >= 0; i--) {
+            const gameObject = GameEnv.gameObjects[i];
             gameObject.destroy();
         }
     },
 
+    // Game control loop
     gameLoop() {
+        // Turn game loop off during transition of level
         if (!this.inTransition) {
-            for (var gameObj of GameEnv.gameObjects){
+
+            // Primary game loop actions
+            for (const gameObj of GameEnv.gameObjects) {
                 gameObj.update();
                 gameObj.draw();
             }
 
-            if (GameEnv.currentLevel?.isComplete?.()) {
-                this.transitionToLevel(GameEnv.currentLevel.nextLevel);
+            // Get current level
+            const currentLevel = GameEnv.currentLevel;
+
+            // Test if there is and isComplete method
+            if (currentLevel && currentLevel.isComplete && currentLevel.isComplete()) {
+                const currentIndex = GameEnv.levels.indexOf(currentLevel);
+
+                // Transition to next level
+                if (currentIndex !== -1 && currentIndex + 1 < GameEnv.levels.length) {
+                    // Transition to the next level in the array
+                    this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
+                } else {
+                    // Handle no next level, perhaps recycle to start screen
+                    console.log('Game completed!');
+                }
             }
         }
-        requestAnimationFrame(this.gameLoop.bind(this));  // cycle game, aka recursion
+
+        // cycle game, aka recursion
+        requestAnimationFrame(this.gameLoop.bind(this));  
     },
 
     async startGame(level) {
-        
-        // init the level
+        // Initialize the level
         await this.transitionToLevel(level)
 
         // Start the game

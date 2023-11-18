@@ -9,7 +9,6 @@ class GameLevel {
         this.backgroundImg = null;
         this.platformImg = null;
         this.playerImg = null;
-        this.nextLevel = null;
         this.isComplete = null; // function that determines if level is complete
     }
 
@@ -23,10 +22,6 @@ class GameLevel {
 
     setPlayerFile(file) {
         this.playerImg = file;
-    }
-
-    setNextLevel(gameLvl) {
-        this.nextLevel = gameLvl;
     }
 
     setIsComplete(callBack) {

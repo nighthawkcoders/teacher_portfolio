@@ -12,6 +12,7 @@ export class GameEnv {
     static prevFloor;
     static gameSpeed;
     static gravity;
+    static levels;
     static currentLevel;
     static player;
 

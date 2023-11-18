@@ -50,7 +50,7 @@ images:
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
     import GameManager from '{{site.baseurl}}/assets/js/mario/GameManager.js';
 
-    // Setup Globals
+    // Setup GameEnv
     GameEnv.gameSpeed = 2;
     GameEnv.gravity = 3;
 
@@ -66,23 +66,21 @@ images:
 
     // Initalize different levels to game
     var levels = [ new GameLevel(), new GameLevel(), new GameLevel(), new GameLevel() ];
+    GameEnv.levels = levels;
     // mario hills
     levels[0].setBackgroundFile('{{backgroundFile}}');
     levels[0].setPlatformFile(`{{platformFile}}`);
     levels[0].setPlayerFile(`{{playerFile}}`);
-    levels[0].setNextLevel(levels[1]);
     levels[0].setIsComplete(testerCompletion);
     // alien planet
     levels[1].setBackgroundFile('{{backgroundFileAlt}}');
     levels[1].setPlatformFile(`{{platformFile}}`);
     levels[1].setPlayerFile(`{{playerFile}}`);
-    levels[1].setNextLevel(levels[2]);
     levels[1].setIsComplete(testerCompletion);
     // castles, no platform
     levels[2].setBackgroundFile('{{backgroundFileCastles}}');
     //levels[2].setPlatformFile(`{{platformFile}}`);
     levels[2].setPlayerFile(`{{playerFile}}`);
-    levels[2].setNextLevel(levels[3]);
     levels[2].setIsComplete(testerCompletion);
     // mario hills, no player
     levels[3].setBackgroundFile('{{backgroundFileGameOver}}');
