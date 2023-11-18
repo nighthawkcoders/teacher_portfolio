@@ -40,23 +40,26 @@ const GameManager = {
             GameEnv.update();
             const currentLevel = GameEnv.currentLevel;
 
-            // Test if there is and isComplete method
+            // currentLevel is defined
             if (currentLevel) {
+                // currentLevel is complete
                 if (currentLevel.isComplete && currentLevel.isComplete()) {
                     const currentIndex = GameEnv.levels.indexOf(currentLevel);
+                    // currentIndex is in bounds
                     if (currentIndex !== -1 && currentIndex + 1 < GameEnv.levels.length) {
-                        // Transition to the next level in the array
+                        // transition to the next level
                         this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
                     } 
                 }
+            // currentLevel is null, (ie GameOver restart)
             } else {
-                // Back to start of Game
+                // transition to beginning of game
                 this.transitionToLevel(GameEnv.levels[0]);
             }
             
         }
 
-        // cycle game, aka recursion
+        // recycle gameLoop, aka recursion
         requestAnimationFrame(this.gameLoop.bind(this));  
     },
 

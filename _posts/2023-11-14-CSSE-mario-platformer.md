@@ -81,8 +81,6 @@ images:
             const restartButton = document.getElementById('restartGame');
             const restartButtonListener = () => {
                 // Restart the game when the button is clicked
-                gameover.hidden = true;
-
                 resolve(true);
             };
 
@@ -93,6 +91,9 @@ images:
       
       // Use waitForRestart to wait for the restart button click
       await waitForRestart();
+      gameover.hidden = true;
+      
+      // Change currentLevel to avoid recycling gameOver
       GameEnv.currentLevel = null;
 
       return true;
