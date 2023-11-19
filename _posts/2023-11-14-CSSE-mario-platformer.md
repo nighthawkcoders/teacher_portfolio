@@ -6,6 +6,8 @@ type: ccc
 courses: { csse: {week: 14} }
 image: /images/mario/hills.png
 images:
+  home:
+    src: /images/mario/home.png
   background:
     src: /images/mario/hills.png
   platform:
@@ -20,6 +22,7 @@ images:
     src: /images/mario/player.png
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
+{% assign homeFile = site.baseurl | append: page.images.home.src %}
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
 {% assign platformFile = site.baseurl | append: page.images.platform.src %}
 {% assign backgroundFileAlt = site.baseurl | append: page.images.backgroundAlt.src %}
@@ -70,7 +73,7 @@ images:
         }
     }
 
-    // Game Over callback
+    // Start button callback
     var isStarted = false;
     async function startGameCallback() {
       const gameOver = document.getElementById("gameBegin");
@@ -102,10 +105,10 @@ images:
       return true;
     }
 
+    // Start button verification call back
     function startSequenceCallback() {
       return isStarted;
     }
-
 
     // Game Over callback
     async function gameOverCallBack() {
@@ -155,7 +158,7 @@ images:
 
     // Start sequence, the 1st level authomacally cycles to second level
     createLevel('', '', '', startGameCallback);
-    createLevel('{{backgroundFile}}', '', '', startSequenceCallback);
+    createLevel('{{homeFile}}', '', '', startSequenceCallback);
 
     // Game Screens
     // Mario Hills
