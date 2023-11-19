@@ -59,13 +59,14 @@ images:
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
     import GameManager from '{{site.baseurl}}/assets/js/mario/GameManager.js';
 
-    // Setup GameEnv
-    GameEnv.gameSpeed = 2;
-    GameEnv.gravity = 3;
+    /*  ==========================================
+     *  ===== Game Level Call Backs ==============
+     *  ==========================================
+    */
 
     // Level completion tester
-    function testerCompletion() {
-        console.log(GameEnv.player?.x)
+    function testerCallBack() {
+        // console.log(GameEnv.player?.x)
         if (GameEnv.player?.x > 500) {
             return true;
         } else {
@@ -142,9 +143,13 @@ images:
       return true;
     }
 
+    /*  ==========================================
+     *  ========== Game Level setup ==============
+     *  ==========================================
+    */
 
     // Store Game levels
-    const levels = [];
+    GameEnv.levels = [];
 
     // Add a GameLevel to the array levels
     function createLevel(backgroundFile, platformFile, playerFile, isComplete) {
@@ -153,30 +158,36 @@ images:
         newLevel.setPlatformFile(platformFile);
         newLevel.setPlayerFile(playerFile);
         newLevel.setIsComplete(isComplete);
-        levels.push(newLevel);
+        GameEnv.levels.push(newLevel);
     }
 
-    // Start sequence, the 1st level authomacally cycles to second level
+    /* Start sequence (1st wo levels) 
+     * a.) the 1st level awaits for key
+     * b.) await authomacally cycles to next level, result of managing levels through list order
+     * c.) the second level looks at button is press from await
+    */
     createLevel('', '', '', startGameCallback);
     createLevel('{{homeFile}}', '', '', startSequenceCallback);
 
     // Game Screens
     // Mario Hills
-    createLevel('{{backgroundFile}}', '{{platformFile}}', '{{playerFile}}', testerCompletion);
+    createLevel('{{backgroundFile}}', '{{platformFile}}', '{{playerFile}}', testerCallBack);
     // Alien World
-    createLevel('{{backgroundFileAlt}}', '{{platformFile}}', '{{playerFile}}', testerCompletion);
+    createLevel('{{backgroundFileAlt}}', '{{platformFile}}', '{{playerFile}}', testerCallBack);
 
     // Test Game Screens, used during development and test
     // No Platform tester
-    // createLevel('{{backgroundFileCastles}}', '', '{{playerFile}}', testerCompletion);
+    // createLevel('{{backgroundFileCastles}}', '', '{{playerFile}}', testerCallBack);
     // No Background tester
-    // createLevel('', '{{platformFile}}', '{{playerFile}}', testerCompletion);
+    // createLevel('', '{{platformFile}}', '{{playerFile}}', testerCallBack);
 
     // Game Over
     createLevel('{{backgroundFileGameOver}}', '', '', gameOverCallBack);
 
-    // Assign the levels to GameEnv
-    GameEnv.levels = levels;
+    /*  ==========================================
+     *  ========== Game Control ==================
+     *  ==========================================
+    */
 
     // create listeners
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);

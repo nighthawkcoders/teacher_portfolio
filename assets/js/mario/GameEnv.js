@@ -10,8 +10,8 @@ export class GameEnv {
     static prevBottom
     static floor;
     static prevFloor;
-    static gameSpeed;
-    static gravity;
+    static gameSpeed = 2;
+    static gravity = 3;
     static player;
 
     // control values for game levels
