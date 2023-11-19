@@ -42,10 +42,10 @@ const GameControl = {
 
             // currentLevel is defined
             if (currentLevel) {
-                // currentLevel is complete
+                // run the isComplete callback function
                 if (currentLevel.isComplete && currentLevel.isComplete()) {
                     const currentIndex = GameEnv.levels.indexOf(currentLevel);
-                    // currentIndex is in bounds
+                    // next index is in bounds
                     if (currentIndex !== -1 && currentIndex + 1 < GameEnv.levels.length) {
                         // transition to the next level
                         this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
