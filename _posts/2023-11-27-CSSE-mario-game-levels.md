@@ -1,7 +1,7 @@
 ---
 layout: base
-title: Mario on Platform
-description: Early steps in adding Mario into OOP Game.  This also includes a level change.
+title: Mario Game Levels
+description: Early steps in adding levels to an OOP Game.  This includes basic animations left-right-jump, multiple background, and simple callback to terminate each level.
 type: ccc
 courses: { csse: {week: 14} }
 image: /images/mario/hills.png

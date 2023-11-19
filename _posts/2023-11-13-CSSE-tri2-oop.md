@@ -3,7 +3,7 @@ toc: false
 comments: false
 layout: post
 title: OOP, CSSE mini project
-description: Convert Mario to Object Oriented Programming (OOP)
+description: Fundamentals of OOP.  This describes outline of game object, game levels, and game control.
 type: ccc
 courses: { csse: {week: 13} }
 ---
@@ -11,8 +11,6 @@ courses: { csse: {week: 13} }
 {% include nav_oop.html %}
 
 ## OOP Conversion Outline
-
-Teams will be a maximum size of 3 people.  The objective of this project is to covert functionalities of "Imperative Style" Mario Game to "Object Oriented Programming" paradigm.  Expectation is we will work on this, have tech talks, and complete activy in week 15.
 
 The OOP hierarchy show below is designed to promote reusability, encapsulation, and a clear separation of entities.
 
@@ -23,22 +21,41 @@ The OOP hierarchy show below is designed to promote reusability, encapsulation, 
 
 ```text
 GameEnv
+|   ├── Attributes:
+│   |   ├── levels
+│   |   ├── gameObjects
+|   │   └── ...
+|   |
+|   ├── Methods: 
+│   |    ├── update: update, draw
+│   |    ├── destroy: all gameObjects
+│   |    └── ...
 │
 ├── GameObject
-│   ├── Player
-│   └── Platform
+│   ├── Player: sprite animation, wasd
+│   ├── Background: fit to screen, scrolling 
+│   ├── Platform: fixed to bottom, scrolling
 │   └── ...
 │
 ├── GameLevel
-│   ├── background
-│   ├── platform
-│   ├── player
-│   ├── enemies: Array
-│   ├── obstacles: Array
-│   ├── isComplete: Callback
-│   └── ...
-│
+|   ├── Tag: key
+│   ├── Attributes:
+│   |   ├── playerAssets
+│   |   ├── backgroundAssets
+│   |   ├── platformAssets
+│   |   └── ...
+|   |
+│   └── Methods: 
+│   |    ├── load: "new" GameObject created from assets
+│   |    └── ...
+|
 └── GameControl
+│   ├── Methods: 
+|   |    ├── gameLoop: drive action of game level
+│   |    ├── transitionToLevel: destroys and creates objects for game level
+│   |    └── ...
+|   |
+│   └── ...
 ```
 
 ### Game Environment

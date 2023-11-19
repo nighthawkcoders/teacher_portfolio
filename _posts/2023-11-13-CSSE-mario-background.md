@@ -3,7 +3,7 @@ layout: base
 title: Mario Hills Background
 description: Early step in turning Mario game into OOP
 type: ccc
-courses: { csse: {week: 14} }
+courses: { csse: {week: 13} }
 image: /images/mario/hills.png
 images:
   background:
