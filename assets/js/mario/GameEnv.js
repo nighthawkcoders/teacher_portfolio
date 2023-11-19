@@ -15,7 +15,7 @@ export class GameEnv {
     static player;
 
     // control values for game levels
-    static levels = null;
+    static levels = [];
     static currentLevel = null;
 
     // calculated size properties

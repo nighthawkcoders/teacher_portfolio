@@ -5,7 +5,8 @@ import { initPlayer } from './Player.js';
 
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
-    constructor() {
+    constructor(tag) {
+        this.tag = tag;
         this.backgroundImg = null;
         this.platformImg = null;
         this.playerImg = null;
@@ -25,7 +26,7 @@ class GameLevel {
     }
 
     setIsComplete(callBack) {
-        this.isComplete = callBack;
+        this.isComplete = callBack;  // callBack is function to test for level completion
     }
 
     // Load level data
@@ -94,9 +95,16 @@ class GameLevel {
         });
     }
 
-    // Generate level elements
-    generate() { /* Generate level elements */ }
-    // Additional level-specific methods
+    // Add a GameLevel to the array levels
+    static create(tag, backgroundFile, platformFile, playerFile, isComplete) {
+        const newLevel = new GameLevel(tag);
+        newLevel.setBackgroundFile(backgroundFile);
+        newLevel.setPlatformFile(platformFile);
+        newLevel.setPlayerFile(playerFile);
+        newLevel.setIsComplete(isComplete);
+        GameEnv.levels.push(newLevel);
+    }
+
 }
 
 export default GameLevel;

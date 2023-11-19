@@ -123,43 +123,21 @@ images:
     /*  ==========================================
      *  ========== Game Level setup ==============
      *  ==========================================
+     * Start/Homme sequence
+     * a.) the start level awaits for button selection
+     * b.) the start level automatically cycles to home level
+     * c.) the home advances to 1st game screen when button selection is made
     */
-
-    // Store Game levels
-    GameEnv.levels = [];
-
-    // Add a GameLevel to the array levels
-    function createLevel(backgroundFile, platformFile, playerFile, isComplete) {
-        const newLevel = new GameLevel();
-        newLevel.setBackgroundFile(backgroundFile);
-        newLevel.setPlatformFile(platformFile);
-        newLevel.setPlayerFile(playerFile);
-        newLevel.setIsComplete(isComplete);
-        GameEnv.levels.push(newLevel);
-    }
-
-    /* Start sequence (1st wo levels) 
-     * a.) the 1st level awaits for key
-     * b.) await authomacally cycles to next level, result of managing levels through list order
-     * c.) the second level looks at button is press from await
-    */
-    createLevel('', '', '', startGameCallback);
-    createLevel('{{homeFile}}', '', '', homeScreenCallback);
-
+    GameLevel.create('start', '', '', '', startGameCallback);
+    GameLevel.create('home', '{{homeFile}}', '', '', homeScreenCallback);
     // Game Screens
-    // Mario Hills
-    createLevel('{{backgroundFile}}', '{{platformFile}}', '{{playerFile}}', testerCallBack);
-    // Alien World
-    createLevel('{{backgroundFileAlt}}', '{{platformFile}}', '{{playerFile}}', testerCallBack);
-
+    GameLevel.create('hills', '{{backgroundFile}}', '{{platformFile}}', '{{playerFile}}', testerCallBack);
+    GameLevel.create('alien', '{{backgroundFileAlt}}', '{{platformFile}}', '{{playerFile}}', testerCallBack);
     // Test Game Screens, used during development and test
-    // No Platform tester
-    // createLevel('{{backgroundFileCastles}}', '', '{{playerFile}}', testerCallBack);
-    // No Background tester
-    // createLevel('', '{{platformFile}}', '{{playerFile}}', testerCallBack);
-
+    // GameLevel.create('noPlatform', '{{backgroundFileCastles}}', '', '{{playerFile}}', testerCallBack);
+    // GameLevel.create('noBackgroun', '', '{{platformFile}}', '{{playerFile}}', testerCallBack);
     // Game Over
-    createLevel('{{backgroundFileGameOver}}', '', '', gameOverCallBack);
+    GameLevel.create('gameOver', '{{backgroundFileGameOver}}', '', '', gameOverCallBack);
 
     /*  ==========================================
      *  ========== Game Control ==================

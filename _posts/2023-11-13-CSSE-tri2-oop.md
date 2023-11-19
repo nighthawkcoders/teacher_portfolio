@@ -207,11 +207,22 @@ GameLevel stores the assets and attributes specific to a particular level. It ha
 ```javascript
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
-    constructor() {
+    constructor(tag) {
+        this.tag = tag;
         this.backgroundImg = null;
         this.platformImg = null;
         this.playerImg = null;
-        this.isComplete = null; // callback function that determines if level is complete
+        this.isComplete = null; // function that determines if level is complete
+    }
+
+    setBackgroundFile(file) {
+        this.backgroundImg = file;
+    }
+
+    // ...
+
+    setIsComplete(callBack) {
+        this.isComplete = callBack;  // callBack is function to test for level completion
     }
 
     // Load level data
@@ -219,11 +230,21 @@ class GameLevel {
 
     // ...
 
+    // Add a GameLevel to the array levels
+    static create(tag, backgroundFile, platformFile, playerFile, isComplete) {
+        const newLevel = new GameLevel(tag);
+        newLevel.setBackgroundFile(backgroundFile);
+        newLevel.setPlatformFile(platformFile);
+        newLevel.setPlayerFile(playerFile);
+        newLevel.setIsComplete(isComplete);
+        GameEnv.levels.push(newLevel);
+    }
+
+
 }
 ```
 
 ### Game Control
-
 The gameLoop and the setup and teardown between game levels
 
 ```javascript
