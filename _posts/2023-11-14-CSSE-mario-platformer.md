@@ -110,29 +110,27 @@ images:
 
     // Game Over callback
     async function gameOverCallBack() {
-      const gameOver = document.getElementById("gameOver");
-
-      // Show the game over restart button
-      gameOver.hidden = false;
+      const id = document.getElementById("gameOver");
+      id.hidden = false;
 
       // Helper function to wait for the restart button click
-      function waitForRestart() {
+      function waitForButton() {
         return new Promise((resolve) => {
             // Listen for the restart button click
-            const restartButton = document.getElementById('restartGame');
-            const restartButtonListener = () => {
+            const waitButton = document.getElementById('restartGame');
+            const waitButtonListener = () => {
                 // Restart the game when the button is clicked
                 resolve(true);
             };
 
             // Attach the restart button listener
-            restartButton.addEventListener('click', restartButtonListener);
+            waitButton.addEventListener('click', waitButtonListener);
         });
       }
       
       // Use waitForRestart to wait for the restart button click
-      await waitForRestart();
-      gameOver.hidden = true;
+      await waitForButton();
+      id.hidden = true;
       
       // Change currentLevel to start/restart value of null
       GameEnv.currentLevel = null;
