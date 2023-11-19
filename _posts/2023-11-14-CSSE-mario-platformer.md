@@ -101,8 +101,8 @@ images:
       return true;
     }
 
-    // Start button verification call back
-    function startSequenceCallback() {
+    // Home screen exits on Game Begin button
+    function homeScreenCallback() {
       // gameBegin hidden means game has started
       const id = document.getElementById("gameBegin");
       return id.hidden;
@@ -162,7 +162,7 @@ images:
      * c.) the second level looks at button is press from await
     */
     createLevel('', '', '', startGameCallback);
-    createLevel('{{homeFile}}', '', '', startSequenceCallback);
+    createLevel('{{homeFile}}', '', '', homeScreenCallback);
 
     // Game Screens
     // Mario Hills
