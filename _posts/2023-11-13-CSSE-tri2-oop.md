@@ -47,7 +47,7 @@ GameEnv is the overarching environment class that holds the game levels, game ob
 
 ```javascript
 class GameEnv {
- // defined and current game levels
+    // defined and current game levels
     static levels = [];
     static currentLevel = null;
 

@@ -1,7 +1,13 @@
 export class GameEnv {
-    // Prototype static variables
+    // defined and current game levels
+    static levels = [];
+    static currentLevel = null;
+
+    // active Game Objects
     static gameObjects = [];
 
+    static gameSpeed = 2;
+    static gravity = 3;
     static innerWidth;
     static prevInnerWidth;
     static innerHeight;
@@ -10,14 +16,8 @@ export class GameEnv {
     static prevBottom
     static floor;
     static prevFloor;
-    static gameSpeed = 2;
-    static gravity = 3;
     static player;
-
-    // control values for game levels
-    static levels = [];
-    static currentLevel = null;
-
+    
     // calculated size properties
     static backgroundHeight = 0;
     static platformHeight = 0;
@@ -32,7 +32,7 @@ export class GameEnv {
 
     static update() {
         // Update game state, including all game objects
-        for (const gameObject of this.gameObjects) {
+        for (const gameObject of GameEnv.gameObjects) {
             gameObject.update();
             gameObject.draw();
         }
@@ -83,14 +83,14 @@ export class GameEnv {
         GameEnv.initialize();  // Update GameEnv dimensions
 
         // Call the sizing method on all game objects
-        for (var gameObj of GameEnv.gameObjects){
-            gameObj.size();
+        for (var gameObject of GameEnv.gameObjects){
+            gameObject.size();
         }
     }
 
     static update() {
         // Update game state, including all game objects
-        for (const gameObject of this.gameObjects) {
+        for (const gameObject of GameEnv.gameObjects) {
             gameObject.update();
             gameObject.draw();
         }
@@ -99,21 +99,21 @@ export class GameEnv {
     // Destroy all existing game objects
     static destroy() {
         // Destroy objects in reverse order
-        for (var i = this.gameObjects.length - 1; i >= 0; i--) {
-            const gameObject = this.gameObjects[i];
+        for (var i = GameEnv.gameObjects.length - 1; i >= 0; i--) {
+            const gameObject = GameEnv.gameObjects[i];
             gameObject.destroy();
         }
     }
 
     // Toggle "canvas filter property" between alien and normal
     static toggleInvert() {
-        for (var gameObj of GameEnv.gameObjects){
-            if (gameObj.invert && this.isInverted) {  // toggle off
-                gameObj.canvas.style.filter = "none";  // remove filter
-            } else if (gameObj.invert) { // toggle on
-                gameObj.canvas.style.filter = "invert(100%)";  // remove filter
+        for (var gameObject of GameEnv.gameObjects){
+            if (gameObject.invert && this.isInverted) {  // toggle off
+                gameObject.canvas.style.filter = "none";  // remove filter
+            } else if (gameObject.invert) { // toggle on
+                gameObject.canvas.style.filter = "invert(100%)";  // remove filter
             } else {
-                gameObj.canvas.style.filter = "none";  // remove filter
+                gameObject.canvas.style.filter = "none";  // remove filter
             }
         }
         this.isInverted = !this.isInverted;  // switch boolean value
