@@ -30,38 +30,50 @@ GameEnv
 │   └── ...
 │
 ├── GameLevel
-│   ├── platforms: Array
-│   └── enemies: Array
+│   ├── background
+│   ├── platform
+│   ├── player
+│   ├── enemies: Array
+│   ├── obstacles: Array
+│   ├── isComplete: Callback
+│   └── ...
 │
-└── GameStateManager
+└── GameControl
 ```
 
 ### Game Environment
 
-GameEnv is the overarching environment class that holds the game state, objects, and the current game level.
+GameEnv is the overarching environment class that holds the game levels, game objects, and manages environment updates.
 
 ```javascript
 class GameEnv {
+ // defined and current game levels
+    static levels = [];
+    static currentLevel = null;
+
+    // active Game Objects
     static gameObjects = [];
-    static height;
-    static width;
-    static currentLevel;
 
-    // sets up initial environment settings, like width and heigh
-    static initialize(width, height) {
-        this.width = width;
-        this.height = height;
-        // Additional initialization logic
+    // initialize for Game Environment 
+    static initialize() {
+        // store width and height based on screen size
+        this.setTop();
+        this.setBottom(); 
+
+        // ...
     }
 
-    // initializes the game by creating the first level and loading its elements
-    static startGame() {
-        // Initialize or load the first level
-        this.currentLevel = new GameLevel();
-        this.currentLevel.load(); // or generate
-        // Additional game start logic
+    // resize Game Objects
+    static resize() {
+        this.initialize();  // Update dimensions
+
+        // Call the sizing method on all game objects
+        for (var gameObj of GameEnv.gameObjects){
+            gameObj.size();
+        }
     }
 
+    // gameLoop method to update Game Objects
     static update() {
         // Update game state, including all game objects
         for (const gameObject of this.gameObjects) {
@@ -190,46 +202,27 @@ class Platform extends GameObject {
 
 ### Game Level
 
-GameLevel stores the assets and attributes specific to a particular level. It has properties like platforms and enemies.
+GameLevel stores the assets and attributes specific to a particular level. It has properties like background, platforms, player, ...
 
 ```javascript
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
     constructor() {
-        this.platforms = []; // Array of platforms in the level
-        this.enemies = [];   // Array of enemies in the level
-        // Additional level-specific properties
+        this.backgroundImg = null;
+        this.platformImg = null;
+        this.playerImg = null;
+        this.isComplete = null; // callback function that determines if level is complete
     }
 
     // Load level data
     load() { /* Load level data */ }
 
-    // Generate level elements
-    generate() { /* Generate level elements */ }
-    // Additional level-specific methods
+    // ...
+
 }
 ```
 
-### Game State Management
-
-GameStateManager is responsible for managing different game states and handling transitions between them.
-
-```javascript
-// Implement a system to manage different game states (e.g., menu, playing, game over).
-class GameStateManager {
-    constructor() {
-        this.currentState = "menu"; // Initial state
-    }
-
-    // Change level and handle transitions
-    changeLevel(newLevel) {
-        // Logic for transitioning between states
-        await GameInitializer.transitionToLevel(newLevel);
-    }
-}
-```
-
-### Game Initializer
+### Game Control
 
 Assist with setup and teardown between levels
 
