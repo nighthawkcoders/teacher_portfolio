@@ -224,57 +224,61 @@ class GameLevel {
 
 ### Game Control
 
-Assist with setup and teardown between levels
+The gameLoop and the setup and teardown between game levels
 
 ```javascript
-// Assist with setup and teardown between levels
-const GameInitializer = {
-    // ... (other init methods)
+const GameControl = {
 
+    // Level transition method (destroy then newlevel)
     async transitionToLevel(newLevel) {
+        this.inTransition = true;
+
         // Destroy existing game objects
-        this.destroyGameObjects();
+        GameEnv.destroy();
 
-        // Load images for the new level
-        const levelImages = await this.loadLevelImages(newLevel);
+        // Load GameLevel objects
+        await newLevel.load();
+        GameEnv.currentLevel = newLevel;
 
-        // Initialize the new level with loaded images
-        const level = this.initLevel(newLevel, levelImages);
-        GameEnv.currentLevel = level;
+        // Trigger a resize to redraw canvas elements
+        window.dispatchEvent(new Event('resize'));
+        // Update invert property, twice means same as before
+        toggleCanvasEffect.dispatchEvent(new Event('click'));
+        toggleCanvasEffect.dispatchEvent(new Event('click'));
 
-        // Create new game objects for the new level
-        this.createGameObjectsForLevel(level);
+        this.inTransition = false;
     },
 
-    // Destroy all existing game objects
-    destroyGameObjects() {
-        for (const gameObject of GameObject.gameObjects) {
-            gameObject.destroy();
+    // Game control loop
+    gameLoop() {
+        // Turn game loop off during transitions
+        if (!this.inTransition) {
+
+            // Get current level
+            GameEnv.update();
+            const currentLevel = GameEnv.currentLevel;
+
+            // currentLevel is defined
+            if (currentLevel) {
+                // run the isComplete callback function
+                if (currentLevel.isComplete && currentLevel.isComplete()) {
+                    const currentIndex = GameEnv.levels.indexOf(currentLevel);
+                    // next index is in bounds
+                    if (currentIndex !== -1 && currentIndex + 1 < GameEnv.levels.length) {
+                        // transition to the next level
+                        this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
+                    } 
+                }
+            // currentLevel is null, (ie start or restart game)
+            } else {
+                // transition to beginning of game
+                this.transitionToLevel(GameEnv.levels[0]);
+            }
         }
+
+        // recycle gameLoop, aka recursion
+        requestAnimationFrame(this.gameLoop.bind(this));  
     },
 
-    // Load images specific to the given level
-    async loadLevelImages(level) {
-        const levelImagePromises = level.imageFiles.map(file => loadImage(file));
-        return Promise.all(levelImagePromises);
-    },
-
-    // Initialize the level with loaded images
-    initLevel(level, levelImages) {
-        const initializedLevel = new GameLevel();
-
-        // Initialize and add platforms to the level
-        // (similar to what you did in initLevel previously)
-        // ...
-
-        return initializedLevel;
-    },
-
-    // Create game objects for the given level
-    createGameObjectsForLevel(level) {
-        // Create game objects based on the level's configuration
-        // (similar to what you did in initLevel previously)
-        // ...
-    }
 };
 ```

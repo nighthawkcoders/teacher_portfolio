@@ -96,6 +96,15 @@ export class GameEnv {
         }
     }
 
+    // Destroy all existing game objects
+    static destroy() {
+        // Destroy objects in reverse order
+        for (var i = this.gameObjects.length - 1; i >= 0; i--) {
+            const gameObject = this.gameObjects[i];
+            gameObject.destroy();
+        }
+    }
+
     // Toggle "canvas filter property" between alien and normal
     static toggleInvert() {
         for (var gameObj of GameEnv.gameObjects){

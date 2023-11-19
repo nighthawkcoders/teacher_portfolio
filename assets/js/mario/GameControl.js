@@ -7,7 +7,7 @@ const GameControl = {
         this.inTransition = true;
 
         // Destroy existing game objects
-        this.destroyGameObjects();
+        GameEnv.destroy();
 
         // Load GameLevel objects
         await newLevel.load();
@@ -20,15 +20,6 @@ const GameControl = {
         toggleCanvasEffect.dispatchEvent(new Event('click'));
 
         this.inTransition = false;
-    },
-
-    // Destroy all existing game objects
-    destroyGameObjects() {
-        // Destroy objects in reverse order
-        for (var i = GameEnv.gameObjects.length - 1; i >= 0; i--) {
-            const gameObject = GameEnv.gameObjects[i];
-            gameObject.destroy();
-        }
     },
 
     // Game control loop
