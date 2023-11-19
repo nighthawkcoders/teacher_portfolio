@@ -29,7 +29,7 @@ images:
 {% assign playerFile = site.baseurl | append: page.images.mario.src %}
 
 <style>
-    #controls, #gameover {
+    #gameBegin, #controls, #gameOver {
         position: relative;
         z-index: 2; /*Ensure the controls are on top*/
     }
@@ -38,11 +38,14 @@ images:
 <!-- Prepare DOM elements -->
 <!-- Wrap both the canvas and controls in a container div -->
 <div id="canvasContainer">
+    <div id="gameBegin" hidden>
+        <button id="startGame">Start Game</button>
+    </div>
     <div id="controls"> <!-- Controls -->
         <!-- Background controls -->
         <button id="toggleCanvasEffect">Invert</button>
     </div>
-    <div id="gameover" hidden>
+    <div id="gameOver" hidden>
         <button id="restartGame">Restart</button>
     </div>
 </div>
@@ -67,12 +70,49 @@ images:
         }
     }
 
-    // GameOver callback
-    async function gameOver() {
-      const gameover = document.getElementById("gameover");
+    // Game Over callback
+    var isStarted = false;
+    async function startGameCallback() {
+      const gameOver = document.getElementById("gameBegin");
+      isStarted = false;
 
       // Show the game over restart button
-      gameover.hidden = false;
+      gameOver.hidden = false;
+
+      // Helper function to wait for the restart button click
+      function waitForButton() {
+        return new Promise((resolve) => {
+            // Listen for the restart button click
+            const waitButton = document.getElementById('startGame');
+            const waitButtonListener = () => {
+                // Restart the game when the button is clicked
+                resolve(true);
+            };
+
+            // Attach the restart button listener
+            waitButton.addEventListener('click', waitButtonListener);
+        });
+      }
+      
+      // Use waitForRestart to wait for the restart button click
+      await waitForButton();
+      gameOver.hidden = true;
+      isStarted = true;
+      
+      return true;
+    }
+
+    function startSequenceCallback() {
+      return isStarted;
+    }
+
+
+    // Game Over callback
+    async function gameOverCallBack() {
+      const gameOver = document.getElementById("gameOver");
+
+      // Show the game over restart button
+      gameOver.hidden = false;
 
       // Helper function to wait for the restart button click
       function waitForRestart() {
@@ -91,7 +131,7 @@ images:
       
       // Use waitForRestart to wait for the restart button click
       await waitForRestart();
-      gameover.hidden = true;
+      gameOver.hidden = true;
       
       // Change currentLevel to start/restart value of null
       GameEnv.currentLevel = null;
@@ -113,16 +153,24 @@ images:
         levels.push(newLevel);
     }
 
+    // Start sequence, the 1st level authomacally cycles to second level
+    createLevel('', '', '', startGameCallback);
+    createLevel('{{backgroundFile}}', '', '', startSequenceCallback);
+
+    // Game Screens
     // Mario Hills
     createLevel('{{backgroundFile}}', '{{platformFile}}', '{{playerFile}}', testerCompletion);
     // Alien World
     createLevel('{{backgroundFileAlt}}', '{{platformFile}}', '{{playerFile}}', testerCompletion);
+
+    // Test Game Screens, used during development and test
     // No Platform tester
     // createLevel('{{backgroundFileCastles}}', '', '{{playerFile}}', testerCompletion);
     // No Background tester
     // createLevel('', '{{platformFile}}', '{{playerFile}}', testerCompletion);
+
     // Game Over
-    createLevel('{{backgroundFileGameOver}}', '', '', gameOver);
+    createLevel('{{backgroundFileGameOver}}', '', '', gameOverCallBack);
 
     // Assign the levels to GameEnv
     GameEnv.levels = levels;
