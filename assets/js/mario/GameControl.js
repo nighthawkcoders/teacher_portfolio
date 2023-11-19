@@ -1,6 +1,6 @@
 import GameEnv from './GameEnv.js';
 
-const GameManager = {
+const GameControl = {
 
     // Level transition method (destroy then newlevel)
     async transitionToLevel(newLevel) {
@@ -64,4 +64,4 @@ const GameManager = {
 
 };
 
-export default GameManager;
+export default GameControl;

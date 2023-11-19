@@ -57,7 +57,7 @@ images:
 <script type="module">
     import GameEnv from '{{site.baseurl}}/assets/js/mario/GameEnv.js';
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
-    import GameManager from '{{site.baseurl}}/assets/js/mario/GameManager.js';
+    import GameControl from '{{site.baseurl}}/assets/js/mario/GameControl.js';
 
     /*  ==========================================
      *  ===== Game Level Call Backs ==============
@@ -191,6 +191,6 @@ images:
     window.addEventListener('resize', GameEnv.resize);
 
     // start game
-    GameManager.gameLoop();
+    GameControl.gameLoop();
 
 </script>
