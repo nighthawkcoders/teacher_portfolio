@@ -75,13 +75,9 @@ images:
     }
 
     // Start button callback
-    var isStarted = false;
     async function startGameCallback() {
-      const gameOver = document.getElementById("gameBegin");
-      isStarted = false;
-
-      // Show the game over restart button
-      gameOver.hidden = false;
+      const id = document.getElementById("gameBegin");
+      id.hidden = false;
 
       // Helper function to wait for the restart button click
       function waitForButton() {
@@ -100,15 +96,16 @@ images:
       
       // Use waitForRestart to wait for the restart button click
       await waitForButton();
-      gameOver.hidden = true;
-      isStarted = true;
+      id.hidden = true;
       
       return true;
     }
 
     // Start button verification call back
     function startSequenceCallback() {
-      return isStarted;
+      // gameBegin hidden means game has started
+      const id = document.getElementById("gameBegin");
+      return id.hidden;
     }
 
     // Game Over callback
