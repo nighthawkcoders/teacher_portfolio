@@ -126,7 +126,7 @@ images:
      * Start/Homme sequence
      * a.) the start level awaits for button selection
      * b.) the start level automatically cycles to home level
-     * c.) the home advances to 1st game screen when button selection is made
+     * c.) the home advances to 1st game level when button selection is made
     */
     GameLevel.create('start', '', '', '', startGameCallback);
     GameLevel.create('home', '{{homeFile}}', '', '', homeScreenCallback);
