@@ -74,28 +74,25 @@ images:
         }
     }
 
+    // Helper function for button click
+    function waitForButton(buttonName) {
+      // resolve the button click
+      return new Promise((resolve) => {
+          const waitButton = document.getElementById(buttonName);
+          const waitButtonListener = () => {
+              resolve(true);
+          };
+          waitButton.addEventListener('click', waitButtonListener);
+      });
+    }
+
     // Start button callback
     async function startGameCallback() {
       const id = document.getElementById("gameBegin");
       id.hidden = false;
-
-      // Helper function to wait for the restart button click
-      function waitForButton() {
-        return new Promise((resolve) => {
-            // Listen for the restart button click
-            const waitButton = document.getElementById('startGame');
-            const waitButtonListener = () => {
-                // Restart the game when the button is clicked
-                resolve(true);
-            };
-
-            // Attach the restart button listener
-            waitButton.addEventListener('click', waitButtonListener);
-        });
-      }
       
       // Use waitForRestart to wait for the restart button click
-      await waitForButton();
+      await waitForButton('startGame');
       id.hidden = true;
       
       return true;
@@ -112,24 +109,9 @@ images:
     async function gameOverCallBack() {
       const id = document.getElementById("gameOver");
       id.hidden = false;
-
-      // Helper function to wait for the restart button click
-      function waitForButton() {
-        return new Promise((resolve) => {
-            // Listen for the restart button click
-            const waitButton = document.getElementById('restartGame');
-            const waitButtonListener = () => {
-                // Restart the game when the button is clicked
-                resolve(true);
-            };
-
-            // Attach the restart button listener
-            waitButton.addEventListener('click', waitButtonListener);
-        });
-      }
       
       // Use waitForRestart to wait for the restart button click
-      await waitForButton();
+      await waitForButton('restartGame');
       id.hidden = true;
       
       // Change currentLevel to start/restart value of null
