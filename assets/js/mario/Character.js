@@ -81,7 +81,7 @@ class Character extends GameObject {
      * intent is to place character in proportion to new size
     */
     size() {
-        // Set Character Canvas scale:  GameEnv.innerHeight * (80 / 832)
+        // Set Canvas scale,  80 represents size of Character height when inner Height is 832px
         var scaledCharacterHeight = GameEnv.innerHeight * (80 / 832);
         var canvasScale = scaledCharacterHeight/this.spriteHeight;
         this.canvasWidth = this.spriteWidth * canvasScale;
