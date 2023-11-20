@@ -31,14 +31,13 @@ export class Platform extends GameObject {
     */ 
     size() {
         // Update canvas size
-        const ADJUST = 0.2
+        const ADJUST = 0.2;
 
         const canvasWidth = GameEnv.innerWidth;
         const canvasHeight = canvasWidth / this.aspect_ratio;
         const canvasLeft = 0;
         GameEnv.platformHeight = canvasHeight * ADJUST;
     
-
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         this.canvas.style.width = `${canvasWidth}px`;
@@ -46,8 +45,6 @@ export class Platform extends GameObject {
         this.canvas.style.position = 'absolute';
         this.canvas.style.left = `${canvasLeft}px`;
         this.canvas.style.top = `${GameEnv.bottom}px`; 
-
-        
     }
 }
 

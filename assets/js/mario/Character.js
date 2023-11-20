@@ -87,17 +87,19 @@ class Character extends GameObject {
         this.canvasWidth = this.spriteWidth * canvasScale;
         this.canvasHeight = this.spriteHeight * canvasScale;
 
+        this.bottom = GameEnv.bottom - this.canvasHeight;
+
         // Calculate proportional x and y positions based on the new screen dimensions
         if (GameEnv.prevInnerWidth) {
             const proportionalX = (this.x / GameEnv.prevInnerWidth) * GameEnv.innerWidth;
-            const proportionalY = (this.y / GameEnv.prevBottom) * GameEnv.bottom;
 
             // Update the x and y positions based on the proportions
             this.setX(proportionalX);
-            this.setY(proportionalY);
+            this.setY(this.bottom);
         } else {
             // First Screen Position
             this.setX(0);
+            this.setY(this.bottom);
         }
     }
 
@@ -106,7 +108,7 @@ class Character extends GameObject {
      * be sure to have updated draw call super.update()
     */
     update() {
-        if (GameEnv.bottom > this.y && this.gravityEnabled)
+        if (this.bottom > this.y && this.gravityEnabled)
             this.y += GameEnv.gravity;
 
         // Update animation frameX of the object
