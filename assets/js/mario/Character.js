@@ -106,7 +106,7 @@ class Character extends GameObject {
      * be sure to have updated draw call super.update()
     */
     update() {
-        if (GameEnv.floor > this.y && this.gravityEnabled)
+        if (GameEnv.bottom > this.y && this.gravityEnabled)
             this.y += GameEnv.gravity;
 
         // Update animation frameX of the object
