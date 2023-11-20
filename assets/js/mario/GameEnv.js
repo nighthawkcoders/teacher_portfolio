@@ -51,16 +51,14 @@ export class GameEnv {
     static setBottom() {
         // sets the bottom or gravity 0
         this.bottom =
-        this.backgroundHeight;
+        this.top + this.backgroundHeight;
     }
 
-    // Setter for Floor of player
+    // Setter for Bottom position
     static setFloor() {
         // sets the bottom or gravity 0
         this.floor =
-        this.backgroundHeight - this.platformHeight > this.top?
-        this.backgroundHeight - this.platformHeight:
-        this.backgroundHeight;
+        this.bottom - 84;  // change 84 to be dynamic height of player
     }
 
     // Setup for Game Environment 
