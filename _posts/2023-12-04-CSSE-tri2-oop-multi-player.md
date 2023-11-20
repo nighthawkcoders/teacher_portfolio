@@ -180,3 +180,55 @@ def handle_player_action(action):
 if __name__ == '__main__':
     socketio.run(app)
 ```
+
+## Hacks
+
+An early step to building a multi player game requires thinking and structuring code so that data can be updated from server.
+
+### Review Elements and Data
+
+To abstract data to server, you must 1st study what that data might be.  Then, selializing data into JSON.  Inspecting on the browser enables developer to see some of the data describe in this article, here is Element data ...
+
+```xml
+<canvas id="background" width="754" height="331" style="width: 754px; height: 331px; position: absolute; left: 0px; top: 60px; filter: none;"></canvas>
+
+<canvas id="platform" width="540" height="160" style="width: 754px; height: 44.6815px; position: absolute; left: 0px; top: 391px; filter: none;"></canvas>
+
+<canvas id="character" width="74" height="74" style="filter: none; width: 74px; height: 74px; position: absolute; left: 0px; top: 316.481px;"></canvas>
+```
+
+### Serialize Data
+
+Objective is to log data in objects each time it is changed.  Since refresh rate is fast, it is probably a lot faster than change rate.  Logging should be assoicated with change rate.
+
+Sample of serializing Character data
+```javascript
+
+    // log Character element change
+    logElement() {
+        var jsonifiedElement = this.stringifyElement();
+        if (jsonifiedElement !== this.jsonifiedElement) {
+            console.log(jsonifiedElement);
+            this.jsonifiedElement = jsonifiedElement;
+        }
+    }
+
+    // strigify Character key data
+    stringifyElement() {
+        var element = this.canvas;
+        if (element && element.id) {
+            // Convert the relevant properties of the element to a string for comparison
+            return JSON.stringify({
+                id: element.id,
+                width: element.width,
+                height: element.height,
+                style: element.style.cssText,
+                position: {
+                    left: element.style.left,
+                    top: element.style.top
+                },
+                filter: element.style.filter
+            });
+        }
+    }
+```

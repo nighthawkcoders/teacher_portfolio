@@ -111,6 +111,7 @@ class Character extends GameObject {
      * be sure to have updated draw call super.update()
     */
     update() {
+
         if (this.bottom > this.y && this.gravityEnabled)
             this.y += GameEnv.gravity;
 

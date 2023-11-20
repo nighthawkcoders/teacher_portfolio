@@ -82,6 +82,7 @@ export class GameEnv {
         // Update game state, including all game objects
         for (const gameObject of GameEnv.gameObjects) {
             gameObject.update();
+            gameObject.serialize();
             gameObject.draw();
         }
     }

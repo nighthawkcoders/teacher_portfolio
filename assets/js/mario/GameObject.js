@@ -18,9 +18,43 @@ class GameObject {
         this.speed = GameEnv.gameSpeed * this.speedRatio;
         this.invert = true;
         this.collisionData = {};
+        this.jsonifiedElement = '';
         // Add this object to the game object array so collision can be detected
         // among other things
         GameEnv.gameObjects.push(this); 
+    }
+
+    // extract change from Game Objects into JSON
+    serialize() {
+        this.logElement();
+    }
+
+    // log Character element change
+    logElement() {
+        var jsonifiedElement = this.stringifyElement();
+        if (jsonifiedElement !== this.jsonifiedElement) {
+            console.log(jsonifiedElement);
+            this.jsonifiedElement = jsonifiedElement;
+        }
+    }
+
+    // strigify Character key data
+    stringifyElement() {
+        var element = this.canvas;
+        if (element && element.id) {
+            // Convert the relevant properties of the element to a string for comparison
+            return JSON.stringify({
+                id: element.id,
+                width: element.width,
+                height: element.height,
+                style: element.style.cssText,
+                position: {
+                    left: element.style.left,
+                    top: element.style.top
+                },
+                filter: element.style.filter
+            });
+        }
     }
 
     // X position getter and setter
@@ -54,6 +88,7 @@ class GameObject {
         }
     }
 
+    
     /* Default collision action is no action
      * override when you extend for custom action
     */
