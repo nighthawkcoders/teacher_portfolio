@@ -77,8 +77,8 @@ class Character extends GameObject {
         );
     }
 
-    /* Method should be called on resize events 
-     * intent is to place character in proportion to new size
+    /* Method should be called on initialization and resize events 
+     * intent is to size character in proportion to the screen size
     */
     size() {
         // set Canvas scale,  80 represents size of Character height when inner Height is 832px
