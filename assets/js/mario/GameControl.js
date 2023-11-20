@@ -1,5 +1,13 @@
 import GameEnv from './GameEnv.js';
 
+/* GameControl is an object literal.
+ *   Informerly GameControl looks like defining a variable with methods.
+ *   By definition GameControl is a singleton object, without a constructor.
+ *   This style of definition ensures one instance, an object literal.
+ *   
+ *   Observe, encapulation of this.inTransition and sharing between methods.
+*/
+
 const GameControl = {
 
     // Level transition method (destroy then newlevel)
