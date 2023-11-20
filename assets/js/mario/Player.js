@@ -3,7 +3,6 @@ import Character from './Character.js';
 
 const PlayerAnimation = {
     // Sprite properties
-    scale: 0.33,
     width: 256,
     height: 256,
     w: { row: 12, frames: 15 }, // jump key
@@ -20,13 +19,13 @@ export class Player extends Character{
             speedRatio,
             PlayerAnimation.width, 
             PlayerAnimation.height, 
-            PlayerAnimation.scale
         );
         this.sceneStarted = false;
         this.isIdle = true;
         this.yVelocity = 0;
         this.stashFrame = PlayerAnimation.d;
         this.pressedDirections = {};
+        GameEnv.playerHeight = this.collisionHeight;
     }
 
     setAnimation(animation) {

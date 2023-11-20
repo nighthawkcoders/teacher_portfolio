@@ -2,19 +2,20 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    constructor(canvas, image, speedRatio,
-        spriteWidth, spriteHeight, spriteScale) {
-                var characterArray = [];
+    constructor(canvas, image, speedRatio, spriteWidth, spriteHeight) {
         super(canvas, image, speedRatio);
+
+        // sprite sizes
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
-        this.spriteScale = spriteScale;
+
+        // sprint frame management
         this.minFrame = 0;
         this.maxFrame = 0;
         this.frameX = 0;  // Default X frame of the animation
         this.frameY = 0;  // Default Y frame of the animation
-        this.collisionWidth = spriteWidth * spriteScale;
-        this.collisionHeight = spriteHeight * spriteScale;
+        
+        // gravity for character enabled by default
         this.gravityEnabled = true;
     }
 
@@ -55,8 +56,8 @@ class Character extends GameObject {
     */
     draw() {
         // Set fixed dimensions and position for the Character
-        this.canvas.width = this.spriteWidth * this.spriteScale;
-        this.canvas.height = this.spriteHeight * this.spriteScale;
+        this.canvas.width = this.canvasWidth;
+        this.canvas.height = this.canvasHeight;
         this.canvas.style.width = `${this.canvas.width}px`;
         this.canvas.style.height = `${this.canvas.height}px`;
         this.canvas.style.position = 'absolute';
@@ -80,6 +81,12 @@ class Character extends GameObject {
      * intent is to place character in proportion to new size
     */
     size() {
+        // Set Character Canvas scale:  GameEnv.innerHeight * (80 / 1366)
+        var scaledCharacterHeight = GameEnv.innerHeight * (80 / 1366);
+        var canvasScale = scaledCharacterHeight/this.spriteHeight;
+        this.canvasWidth = this.spriteWidth * canvasScale;
+        this.canvasHeight = this.spriteHeight * canvasScale;
+
         // Calculate proportional x and y positions based on the new screen dimensions
         if (GameEnv.prevInnerWidth) {
             const proportionalX = (this.x / GameEnv.prevInnerWidth) * GameEnv.innerWidth;
@@ -91,7 +98,6 @@ class Character extends GameObject {
         } else {
             // First Screen Position
             this.setX(0);
-            this.setY(GameEnv.floor);
         }
     }
 
