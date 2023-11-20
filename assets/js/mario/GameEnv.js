@@ -58,7 +58,7 @@ export class GameEnv {
     static setFloor() {
         // sets the bottom or gravity 0
         this.floor =
-        this.bottom - 48;  // change 84 to be dynamic height of player
+        this.bottom - 64;  // change 84 to be dynamic height of player
     }
 
     // Setup for Game Environment 
