@@ -72,7 +72,7 @@ class GameLevel {
             // Prepare HTML with Player Canvas (if playerImg is defined)
             if (this.playerImg) {
                 const playerCanvas = document.createElement("canvas");
-                playerCanvas.id = "characters";
+                playerCanvas.id = "character";
                 document.querySelector("#canvasContainer").appendChild(playerCanvas);
                 const playerSpeedRatio = 0.7;
                 GameEnv.player = initPlayer(playerCanvas, loadedImages[i], playerSpeedRatio);
