@@ -5,31 +5,78 @@ description: Early steps in adding levels to an OOP Game.  This includes basic a
 type: ccc
 courses: { csse: {week: 14} }
 image: /images/mario/hills.png
-images:
-  home:
-    src: /images/mario/home.png
-  background:
-    src: /images/mario/hills.png
-  platform:
-    src: /images/mario/platform.png
-  backgroundAlt:
-    src: /images/mario/planet.jpg
-  backgroundCastles:
-    src: /images/mario/castles.png
-  backgroundGameOver:
-    src: /images/mario/game_over.png
-  mario:
-    src: /images/mario/player.png
+assets:
+  platforms:
+    grass:
+      src: /images/platformer/platforms/grass.png
+  backgrounds:
+    start:
+      src: /images/platformer/backgrounds/home.png
+    hills:
+      src: /images/platformer/backgrounds/hills.png
+    planet:
+      src: /images/platformer/backgrounds/planet.jpg
+    castles:
+      src: /images/platformer/backgrounds/castles.png
+    end:
+      src: /images/platformer/backgrounds/game_over.png
+  players:
+    mario:
+      src: /images/platformer/sprites/mario.png
+      width: 256
+      height: 256
+      w: 
+        row: 10 
+        frames: 15
+      a: 
+        row: 3
+        frames: 7
+        idleFrame: 
+          column: 7
+          frames: 0
+      s:
+        row: 12
+        frames: 15 
+      d:
+        row: 2
+        frames: 7
+        idleFrame: 
+          column: 7
+          frames: 0
+    monkey:
+      src: /images/platformer/sprites/monkey.png
+      width: 40
+      height: 40
+      w: 
+        row: 9 
+        frames: 15
+      a: 
+        row: 1
+        frames: 15
+        idleFrame: 
+          column: 7
+          frames: 0
+      s:
+        row: 12
+        frames: 15 
+      d:
+        row: 0
+        frames: 15
+        idleFrame: 
+          column: 7
+          frames: 0
 ---
-<!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
-{% assign homeFile = site.baseurl | append: page.images.home.src %}
-{% assign backgroundFile = site.baseurl | append: page.images.background.src %}
-{% assign platformFile = site.baseurl | append: page.images.platform.src %}
-{% assign backgroundFileAlt = site.baseurl | append: page.images.backgroundAlt.src %}
-{% assign backgroundFileCastles = site.baseurl | append: page.images.backgroundCastles.src %}
-{% assign backgroundFileGameOver = site.baseurl | append: page.images.backgroundGameOver.src %}
+<!-- Liquid code, run by Jekyll, used to define asset(s) 
+1. for each asset in page.assets.backgrounds 
+2.   assign asset.file  = asset.src -> site.baseurl | asset.src
+-->
+{% assign platformGrassFile = site.baseurl | append: page.assets.platforms.grass.src %}
+{% assign backgroundHomeFile = site.baseurl | append: page.assets.backgrounds.start.src %}
+{% assign backgroundHillsFile = site.baseurl | append: page.assets.backgrounds.hills.src %}
+{% assign backgroundPlanetFile = site.baseurl | append: page.assets.backgrounds.planet.src %}
+{% assign backgroundEndFile = site.baseurl | append: page.assets.backgrounds.end.src %}
+{% assign playerMarioFile = site.baseurl | append: page.assets.players.mario.src %}
 
-{% assign playerFile = site.baseurl | append: page.images.mario.src %}
 
 <style>
     #gameBegin, #controls, #gameOver {
@@ -129,15 +176,15 @@ images:
      * c.) the home advances to 1st game level when button selection is made
     */
     GameLevel.create('start', '', '', '', startGameCallback);
-    GameLevel.create('home', '{{homeFile}}', '', '', homeScreenCallback);
+    GameLevel.create('home', '{{backgroundHomeFile}}', '', '', homeScreenCallback);
     // Game Screens
-    GameLevel.create('hills', '{{backgroundFile}}', '{{platformFile}}', '{{playerFile}}', testerCallBack);
-    GameLevel.create('alien', '{{backgroundFileAlt}}', '{{platformFile}}', '{{playerFile}}', testerCallBack);
+    GameLevel.create('hills', '{{backgroundHillsFile}}', '{{platformGrassFile}}', '{{playerMarioFile}}', testerCallBack);
+    GameLevel.create('alien', '{{backgroundPlanetFile}}', '{{platformGrassFile}}', '{{playerMarioFile}}', testerCallBack);
     // Test Game Screens, used during development and test
     // GameLevel.create('noPlatform', '{{backgroundFileCastles}}', '', '{{playerFile}}', testerCallBack);
     // GameLevel.create('noBackgroun', '', '{{platformFile}}', '{{playerFile}}', testerCallBack);
     // Game Over
-    GameLevel.create('gameOver', '{{backgroundFileGameOver}}', '', '', gameOverCallBack);
+    GameLevel.create('gameOver', '{{backgroundEndFile}}', '', '', gameOverCallBack);
 
     /*  ==========================================
      *  ========== Game Control ==================
