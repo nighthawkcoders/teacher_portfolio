@@ -1,7 +1,7 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 
-var PlayerAnimation = null;
+var PlayerData = null;
 
 export class Player extends Character{
     // constructors sets up Character object 
@@ -12,7 +12,7 @@ export class Player extends Character{
             playerData.width, 
             playerData.height, 
         );
-        PlayerAnimation = playerData;
+        PlayerData = playerData;
         this.playerData = playerData;
         this.sceneStarted = false;
         this.isIdle = true;
@@ -96,26 +96,26 @@ export function initPlayer(canvas, image, gameSpeed, speedRatio, playerData){
     * change MaxFrame according to value in selected animation
     */
     document.addEventListener('keydown', function (event) {
-        if (PlayerAnimation.hasOwnProperty(event.key)) {
+        if (PlayerData.hasOwnProperty(event.key)) {
             // Set variables based on the key that is pressed
             const key = event.key;
             if (!(event.key in player.pressedDirections)){
-                player.pressedDirections[event.key] = PlayerAnimation[key].row;
+                player.pressedDirections[event.key] = PlayerData[key].row;
             }
             player.isIdle = false;
-            player.setAnimation(PlayerAnimation[key]);
+            player.setAnimation(PlayerData[key]);
         }
     });
 
     document.addEventListener('keyup', function (event) {
-        if (PlayerAnimation.hasOwnProperty(event.key)) {
+        if (PlayerData.hasOwnProperty(event.key)) {
             // If no button is pressed then idle
             const key = event.key;
             if (event.key in player.pressedDirections){
                 delete player.pressedDirections[event.key];
             }
             player.isIdle = true;
-            player.setAnimation(PlayerAnimation[key]);
+            player.setAnimation(PlayerData[key]);
         }
     });
 

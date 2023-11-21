@@ -155,7 +155,7 @@ image: /images/platformer/backgrounds/hills.png
     GameLevel.create('home', assets.backgrounds.start, '', '', homeScreenCallback);
     // Game Screens
     GameLevel.create('hills', assets.backgrounds.hills, assets.platforms.grass, assets.players.mario, testerCallBack);
-    GameLevel.create('alien', assets.backgrounds.planet, assets.platforms.grass, assets.players.mario, testerCallBack);
+    GameLevel.create('alien', assets.backgrounds.planet, assets.platforms.grass, assets.players.monkey, testerCallBack);
     // Test Game Screens, used during development and test
     //GameLevel.create('no platform', assets.backgrounds.hills.file, ''.file, assets.players.mario.file, testerCallBack);
     //GameLevel.create('no background', '', assets.platforms.grass.file, assets.players.mario.file, testerCallBack);
