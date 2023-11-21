@@ -1,11 +1,11 @@
 export class GameEnv {
-    // defined and current game levels
-    static levels = [];
+    // game managed object
     static currentLevel = null;
-
-    // active Game Objects
+    static player = null;
+    static levels = [];
     static gameObjects = [];
 
+    // game attributes
     static gameSpeed = 2;
     static gravity = 3;
     static innerWidth;
@@ -16,8 +16,6 @@ export class GameEnv {
     static prevBottom
     static floor;
     static prevFloor;
-    static player;
-    
     // calculated size properties
     static backgroundHeight = 0;
     static platformHeight = 0;

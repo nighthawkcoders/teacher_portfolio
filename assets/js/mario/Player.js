@@ -1,29 +1,23 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 
-const PlayerAnimation = {
-    // Sprite properties
-    width: 256,
-    height: 256,
-    w: { row: 12, frames: 15 }, // jump key
-	a: { row: 3, frames: 7, idleFrame: { column: 7, frames: 0 } }, // Walk left key
-    s: { row: 12, frames: 15 }, // no action
-	d: { row: 2, frames: 7, idleFrame: { column: 7, frames: 0 } }, // Walk right key
-}
+var PlayerAnimation = null;
 
 export class Player extends Character{
     // constructors sets up Character object 
-    constructor(canvas, image, speedRatio){
+    constructor(canvas, image, speedRatio, playerData){
         super(canvas, 
             image, 
             speedRatio,
-            PlayerAnimation.width, 
-            PlayerAnimation.height, 
+            playerData.width, 
+            playerData.height, 
         );
+        PlayerAnimation = playerData;
+        this.playerData = playerData;
         this.sceneStarted = false;
         this.isIdle = true;
         this.yVelocity = 0;
-        this.stashFrame = PlayerAnimation.d;
+        this.stashFrame = playerData.d;
         this.pressedDirections = {};
         GameEnv.playerHeight = this.collisionHeight;
     }
@@ -75,13 +69,13 @@ export class Player extends Character{
 
     // Player perform a unique update
     update() {
-        if (this.isAnimation(PlayerAnimation.a)) {
+        if (this.isAnimation(this.playerData.a)) {
             this.x -= this.speed;  // Move to left
         }
-        if (this.isAnimation(PlayerAnimation.d)) {
+        if (this.isAnimation(this.playerData.d)) {
             this.x += this.speed;  // Move to right
         }
-        if (this.isGravityAnimation(PlayerAnimation.w)) {
+        if (this.isGravityAnimation(this.playerData.w)) {
             this.y -= (this.bottom * .33);  // jump 33% higher than bottom
         } 
 
@@ -93,9 +87,9 @@ export class Player extends Character{
 
 // Can add specific initialization parameters for the player here
 // In this case the player is following the default character initialization
-export function initPlayer(canvas, image, gameSpeed, speedRatio){
+export function initPlayer(canvas, image, gameSpeed, speedRatio, playerData){
     // Create the Player
-    var player = new Player(canvas, image, gameSpeed, speedRatio);
+    var player = new Player(canvas, image, gameSpeed, speedRatio, playerData);
 
     /* Player Control 
     * changes FrameY value (selected row in sprite)

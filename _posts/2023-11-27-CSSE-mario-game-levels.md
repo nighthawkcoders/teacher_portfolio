@@ -152,15 +152,15 @@ image: /images/platformer/backgrounds/hills.png
      * c.) the home advances to 1st game level when button selection is made
     */
     GameLevel.create('start', '', '', '', startGameCallback);
-    GameLevel.create('home', assets.backgrounds.start.file, '', '', homeScreenCallback);
+    GameLevel.create('home', assets.backgrounds.start, '', '', homeScreenCallback);
     // Game Screens
-    GameLevel.create('hills', assets.backgrounds.hills.file, assets.platforms.grass.file, assets.players.mario.file, testerCallBack);
-    GameLevel.create('alien', assets.backgrounds.planet.file, assets.platforms.grass.file, assets.players.mario.file, testerCallBack);
+    GameLevel.create('hills', assets.backgrounds.hills, assets.platforms.grass, assets.players.mario, testerCallBack);
+    GameLevel.create('alien', assets.backgrounds.planet, assets.platforms.grass, assets.players.mario, testerCallBack);
     // Test Game Screens, used during development and test
     //GameLevel.create('no platform', assets.backgrounds.hills.file, ''.file, assets.players.mario.file, testerCallBack);
     //GameLevel.create('no background', '', assets.platforms.grass.file, assets.players.mario.file, testerCallBack);
     // Game Over
-    GameLevel.create('gameOver', assets.backgrounds.end.file, '', '', gameOverCallBack);
+    GameLevel.create('gameOver', assets.backgrounds.end, '', '', gameOverCallBack);
 
     /*  ==========================================
      *  ========== Game Control ==================

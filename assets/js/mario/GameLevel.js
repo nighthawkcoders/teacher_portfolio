@@ -10,6 +10,7 @@ class GameLevel {
         this.backgroundImg = null;
         this.platformImg = null;
         this.playerImg = null;
+        this.playerData = null;
         this.isComplete = null; // function that determines if level is complete
     }
 
@@ -23,6 +24,10 @@ class GameLevel {
 
     setPlayerFile(file) {
         this.playerImg = file;
+    }
+
+    setPlayerData(player) {
+        this.playerData = player;
     }
 
     setIsComplete(callBack) {
@@ -75,7 +80,7 @@ class GameLevel {
                 playerCanvas.id = "character";
                 document.querySelector("#canvasContainer").appendChild(playerCanvas);
                 const playerSpeedRatio = 0.7;
-                GameEnv.player = initPlayer(playerCanvas, loadedImages[i], playerSpeedRatio);
+                GameEnv.player = initPlayer(playerCanvas, loadedImages[i], playerSpeedRatio, this.playerData);
                 i++;
             }
 
@@ -96,11 +101,12 @@ class GameLevel {
     }
 
     // Add a GameLevel to the array levels
-    static create(tag, backgroundFile, platformFile, playerFile, isComplete) {
+    static create(tag, background, platform, player, isComplete) {
         const newLevel = new GameLevel(tag);
-        newLevel.setBackgroundFile(backgroundFile);
-        newLevel.setPlatformFile(platformFile);
-        newLevel.setPlayerFile(playerFile);
+        newLevel.setBackgroundFile(background.file);
+        newLevel.setPlatformFile(platform.file);
+        newLevel.setPlayerFile(player.file);
+        newLevel.setPlayerData(player);
         newLevel.setIsComplete(isComplete);
         GameEnv.levels.push(newLevel);
     }
