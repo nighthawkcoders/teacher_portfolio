@@ -31,12 +31,12 @@ export class Platform extends GameObject {
     */ 
     size() {
         // Update canvas size
-        const ADJUST = 0.2;
+        const scaledHeight = GameEnv.backgroundHeight / 6;
 
         const canvasWidth = GameEnv.innerWidth;
         const canvasHeight = canvasWidth / this.aspect_ratio;
         const canvasLeft = 0;
-        GameEnv.platformHeight = canvasHeight * ADJUST;
+        GameEnv.platformHeight = scaledHeight;
     
         this.canvas.width = this.width;
         this.canvas.height = this.height;
