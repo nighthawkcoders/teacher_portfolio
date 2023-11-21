@@ -4,79 +4,8 @@ title: Mario Game Levels
 description: Early steps in adding levels to an OOP Game.  This includes basic animations left-right-jump, multiple background, and simple callback to terminate each level.
 type: ccc
 courses: { csse: {week: 14} }
-image: /images/mario/hills.png
-assets:
-  platforms:
-    grass:
-      src: /images/platformer/platforms/grass.png
-  backgrounds:
-    start:
-      src: /images/platformer/backgrounds/home.png
-    hills:
-      src: /images/platformer/backgrounds/hills.png
-    planet:
-      src: /images/platformer/backgrounds/planet.jpg
-    castles:
-      src: /images/platformer/backgrounds/castles.png
-    end:
-      src: /images/platformer/backgrounds/game_over.png
-  players:
-    mario:
-      src: /images/platformer/sprites/mario.png
-      width: 256
-      height: 256
-      w: 
-        row: 10 
-        frames: 15
-      a: 
-        row: 3
-        frames: 7
-        idleFrame: 
-          column: 7
-          frames: 0
-      s:
-        row: 12
-        frames: 15 
-      d:
-        row: 2
-        frames: 7
-        idleFrame: 
-          column: 7
-          frames: 0
-    monkey:
-      src: /images/platformer/sprites/monkey.png
-      width: 40
-      height: 40
-      w: 
-        row: 9 
-        frames: 15
-      a: 
-        row: 1
-        frames: 15
-        idleFrame: 
-          column: 7
-          frames: 0
-      s:
-        row: 12
-        frames: 15 
-      d:
-        row: 0
-        frames: 15
-        idleFrame: 
-          column: 7
-          frames: 0
+image: /images/platformer/backgrounds/hills.png
 ---
-<!-- Liquid code, run by Jekyll, used to define asset(s) 
-1. for each asset in page.assets.backgrounds 
-2.   assign asset.file  = asset.src -> site.baseurl | asset.src
--->
-{% assign platformGrassFile = site.baseurl | append: page.assets.platforms.grass.src %}
-{% assign backgroundHomeFile = site.baseurl | append: page.assets.backgrounds.start.src %}
-{% assign backgroundHillsFile = site.baseurl | append: page.assets.backgrounds.hills.src %}
-{% assign backgroundPlanetFile = site.baseurl | append: page.assets.backgrounds.planet.src %}
-{% assign backgroundEndFile = site.baseurl | append: page.assets.backgrounds.end.src %}
-{% assign playerMarioFile = site.baseurl | append: page.assets.players.mario.src %}
-
 
 <style>
     #gameBegin, #controls, #gameOver {
@@ -100,11 +29,51 @@ assets:
     </div>
 </div>
 
-
 <script type="module">
     import GameEnv from '{{site.baseurl}}/assets/js/mario/GameEnv.js';
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
     import GameControl from '{{site.baseurl}}/assets/js/mario/GameControl.js';
+
+    // Define assets for the game
+    var assets = {
+      platforms: {
+        grass: { src: "/images/platformer/platforms/grass.png" }
+      },
+      backgrounds: {
+        start: { src: "/images/platformer/backgrounds/home.png" },
+        hills: { src: "/images/platformer/backgrounds/hills.png" },
+        planet: { src: "/images/platformer/backgrounds/planet.jpg" },
+        castles: { src: "/images/platformer/backgrounds/castles.png" },
+        end: { src: "/images/platformer/backgrounds/game_over.png" }
+      },
+      players: {
+        mario: {
+          src: "/images/platformer/sprites/mario.png",
+          width: 256,
+          height: 256,
+          w: { row: 10, frames: 15 },
+          a: { row: 3, frames: 7, idleFrame: { column: 7, frames: 0 } },
+          s: { row: 12, frames: 15 },
+          d: { row: 2, frames: 7, idleFrame: { column: 7, frames: 0 } }
+        },
+        monkey: {
+          src: "/images/platformer/sprites/monkey.png",
+          width: 40,
+          height: 40,
+          w: { row: 9, frames: 15 },
+          a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } },
+          s: { row: 12, frames: 15 },
+          d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
+        }
+      }
+    };
+
+    // add file asset that contains site.baseurl
+    Object.keys(assets).forEach(category => {
+      Object.keys(assets[category]).forEach(assetName => {
+        assets[category][assetName]['file'] = "{{site.baseurl}}" + assets[category][assetName].src;
+      });
+    });
 
     /*  ==========================================
      *  ===== Game Level Call Backs ==============
@@ -176,15 +145,15 @@ assets:
      * c.) the home advances to 1st game level when button selection is made
     */
     GameLevel.create('start', '', '', '', startGameCallback);
-    GameLevel.create('home', '{{backgroundHomeFile}}', '', '', homeScreenCallback);
+    GameLevel.create('home', assets.backgrounds.start.file, '', '', homeScreenCallback);
     // Game Screens
-    GameLevel.create('hills', '{{backgroundHillsFile}}', '{{platformGrassFile}}', '{{playerMarioFile}}', testerCallBack);
-    GameLevel.create('alien', '{{backgroundPlanetFile}}', '{{platformGrassFile}}', '{{playerMarioFile}}', testerCallBack);
+    GameLevel.create('hills', assets.backgrounds.hills.file, assets.platforms.grass.file, assets.players.mario.file, testerCallBack);
+    GameLevel.create('alien', assets.backgrounds.planet.file, assets.platforms.grass.file, assets.players.mario.file, testerCallBack);
     // Test Game Screens, used during development and test
-    // GameLevel.create('noPlatform', '{{backgroundFileCastles}}', '', '{{playerFile}}', testerCallBack);
-    // GameLevel.create('noBackgroun', '', '{{platformFile}}', '{{playerFile}}', testerCallBack);
+    //GameLevel.create('no platform', assets.backgrounds.hills.file, ''.file, assets.players.mario.file, testerCallBack);
+    //GameLevel.create('no background', '', assets.platforms.grass.file, assets.players.mario.file, testerCallBack);
     // Game Over
-    GameLevel.create('gameOver', '{{backgroundEndFile}}', '', '', gameOverCallBack);
+    GameLevel.create('gameOver', assets.backgrounds.end.file, '', '', gameOverCallBack);
 
     /*  ==========================================
      *  ========== Game Control ==================
