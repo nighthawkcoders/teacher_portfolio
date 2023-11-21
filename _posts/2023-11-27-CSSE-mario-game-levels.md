@@ -30,9 +30,16 @@ image: /images/platformer/backgrounds/hills.png
 </div>
 
 <script type="module">
+    // Imports
     import GameEnv from '{{site.baseurl}}/assets/js/mario/GameEnv.js';
     import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
     import GameControl from '{{site.baseurl}}/assets/js/mario/GameControl.js';
+
+
+    /*  ==========================================
+     *  ======= Data Definitions =================
+     *  ==========================================
+    */
 
     // Define assets for the game
     var assets = {
@@ -68,7 +75,7 @@ image: /images/platformer/backgrounds/hills.png
       }
     };
 
-    // add file asset that contains site.baseurl
+    // add File to assets, ensure valid site.baseurl
     Object.keys(assets).forEach(category => {
       Object.keys(assets[category]).forEach(assetName => {
         assets[category][assetName]['file'] = "{{site.baseurl}}" + assets[category][assetName].src;
