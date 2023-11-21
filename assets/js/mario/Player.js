@@ -19,7 +19,8 @@ export class Player extends Character{
         this.yVelocity = 0;
         this.stashFrame = playerData.d;
         this.pressedDirections = {};
-        GameEnv.playerHeight = this.collisionHeight;
+        this.setupEventListeners();
+        GameEnv.player = this;
     }
 
     setAnimation(animation) {
@@ -83,44 +84,30 @@ export class Player extends Character{
         super.update();
     }
 
-}
-
-// Can add specific initialization parameters for the player here
-// In this case the player is following the default character initialization
-export function initPlayer(canvas, image, gameSpeed, speedRatio, playerData){
-    // Create the Player
-    var player = new Player(canvas, image, gameSpeed, speedRatio, playerData);
-
-    /* Player Control 
-    * changes FrameY value (selected row in sprite)
-    * change MaxFrame according to value in selected animation
-    */
-    document.addEventListener('keydown', function (event) {
-        if (PlayerData.hasOwnProperty(event.key)) {
-            // Set variables based on the key that is pressed
-            const key = event.key;
-            if (!(event.key in player.pressedDirections)){
-                player.pressedDirections[event.key] = PlayerData[key].row;
+    setupEventListeners() {
+        document.addEventListener('keydown', (event) => {
+            if (this.playerData.hasOwnProperty(event.key)) {
+                const key = event.key;
+                if (!(event.key in this.pressedDirections)) {
+                    this.pressedDirections[event.key] = this.playerData[key].row;
+                }
+                this.isIdle = false;
+                this.setAnimation(this.playerData[key]);
             }
-            player.isIdle = false;
-            player.setAnimation(PlayerData[key]);
-        }
-    });
+        });
 
-    document.addEventListener('keyup', function (event) {
-        if (PlayerData.hasOwnProperty(event.key)) {
-            // If no button is pressed then idle
-            const key = event.key;
-            if (event.key in player.pressedDirections){
-                delete player.pressedDirections[event.key];
+        document.addEventListener('keyup', (event) => {
+            if (this.playerData.hasOwnProperty(event.key)) {
+                const key = event.key;
+                if (event.key in this.pressedDirections) {
+                    delete this.pressedDirections[event.key];
+                }
+                this.isIdle = true;
+                this.setAnimation(this.playerData[key]);
             }
-            player.isIdle = true;
-            player.setAnimation(PlayerData[key]);
-        }
-    });
+        });
+    }
 
-    // Player Object
-    return player;
 }
 
 export default Player;
