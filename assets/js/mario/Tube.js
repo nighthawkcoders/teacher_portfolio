@@ -23,7 +23,7 @@ export class Tube extends GameObject {
         const scaledWidth = scaledHeight * this.aspect_ratio;
         const bottom = (GameEnv.bottom - scaledHeight);
         const tubeX = .80 * GameEnv.innerWidth;
-        const tubeY = bottom + (bottom * .03);  // tube is not at bottom of image
+        const tubeY = bottom + (bottom * .025);  // tube is not at bottom of image
 
         // set variables used in Display and Collision algorithms
         this.bottom = tubeY;
