@@ -4,44 +4,40 @@ import GameObject from './GameObject.js';
 export class Tube extends GameObject {
     constructor(canvas, image) {
         super(canvas, image, 0);
-        // tube values
-        this.tubeX = 0;
-        this.tubeY = 0;
     }
 
-    // Tube is unchanging
+    // Required, but no update action
     update() {
-
     }
 
-    // Tube draws in same position
+    // Draw position is always 0,0
     draw() {
-        this.ctx.drawImage(this.image, this.tubeX, this.tubeY);
+        this.ctx.drawImage(this.image, 0, 0);
     }
 
-    /* Tube camvas is set to proportional size
-    */ 
+    // Set Tube position
     size() {
-        // Formula for Height should be on constant ration, using a proprotion of 832
-        var scaledHeight = GameEnv.innerHeight * (120 / 832);
+        // Formula for Height should be on constant ratio, using a proportion of 832
+        const scaledHeight = GameEnv.innerHeight * (100 / 832);
         // Formula for Width is scaled: scaledWidth/scaledHeight == this.width/this.height
-        var scaledWidth = scaledHeight * this.aspect_ratio;
-        var bottom = GameEnv.bottom - scaledHeight;
-        this.tubeX = .80 * GameEnv.innerWidth;
-        this.tubeY = GameEnv.bottom;
+        const scaledWidth = scaledHeight * this.aspect_ratio;
+        const bottom = (GameEnv.bottom - scaledHeight);
+        const tubeX = .80 * GameEnv.innerWidth;
+        const tubeY = bottom + (bottom * .06);
 
         // set variables used in Display and Collision algorithms
-        this.bottom = bottom;
+        this.bottom = tubeY;
         this.collisionHeight = scaledHeight;
         this.collisionWidth = scaledWidth;
     
-        this.canvas.width = this.width;
+        this.canvas.width = this.width; 
         this.canvas.height = this.height;
         this.canvas.style.width = `${scaledWidth}px`;
         this.canvas.style.height = `${scaledHeight}px`;
         this.canvas.style.position = 'absolute';
-        this.canvas.style.left = `${this.tubeX}px`;
-        this.canvas.style.top = `${bottom}px`; 
+        this.canvas.style.left = `${tubeX}px`;
+        this.canvas.style.top = `${tubeY}px`; 
+    
     }
 }
 

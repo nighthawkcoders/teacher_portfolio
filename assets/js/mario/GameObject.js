@@ -9,8 +9,8 @@ class GameObject {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
         this.image = image;
-        this.width = image.width;  // Image() width (meta data)
-        this.height = image.height; // Image() height
+        this.width = image.width;  // from Image() width
+        this.height = image.height; // from Image() height
         this.collisionWidth = 0;
         this.collisionHeight = 0;
         this.aspect_ratio = this.width / this.height;
