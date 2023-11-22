@@ -16,7 +16,15 @@ export class Player extends Character{
         this.yVelocity = 0;
         this.stashFrame = playerData.d;
         this.pressedDirections = {};
-        this.setupEventListeners();
+
+        // Store a reference to the event listener function
+        this.keydownListener = this.handleKeyDown.bind(this);
+        this.keyupListener = this.handleKeyUp.bind(this);
+
+        // Add event listeners
+        document.addEventListener('keydown', this.keydownListener);
+        document.addEventListener('keyup', this.keyupListener);
+
         GameEnv.player = this;
     }
 
@@ -81,28 +89,38 @@ export class Player extends Character{
         super.update();
     }
 
-    setupEventListeners() {
-        document.addEventListener('keydown', (event) => {
-            if (this.playerData.hasOwnProperty(event.key)) {
-                const key = event.key;
-                if (!(event.key in this.pressedDirections)) {
-                    this.pressedDirections[event.key] = this.playerData[key].row;
-                }
-                this.isIdle = false;
-                this.setAnimation(this.playerData[key]);
+    // Event listener key down
+    handleKeyDown(event) {
+        if (this.playerData.hasOwnProperty(event.key)) {
+            const key = event.key;
+            if (!(event.key in this.pressedDirections)) {
+                this.pressedDirections[event.key] = this.playerData[key].row;
             }
-        });
+            this.isIdle = false;
+            this.setAnimation(this.playerData[key]);
+        }
+    }
 
-        document.addEventListener('keyup', (event) => {
-            if (this.playerData.hasOwnProperty(event.key)) {
-                const key = event.key;
-                if (event.key in this.pressedDirections) {
-                    delete this.pressedDirections[event.key];
-                }
-                this.isIdle = true;
-                this.setAnimation(this.playerData[key]);
+    // Event listener key down
+    handleKeyUp(event) {
+        if (this.playerData.hasOwnProperty(event.key)) {
+            const key = event.key;
+            if (event.key in this.pressedDirections) {
+                delete this.pressedDirections[event.key];
             }
-        });
+            this.isIdle = true;
+            this.setAnimation(this.playerData[key]);
+        }
+    }
+
+    // Destroy override method to remove event listeners
+    destroy() {
+        // Remove event listeners
+        document.removeEventListener('keydown', this.keydownListener);
+        document.removeEventListener('keyup', this.keyupListener);
+
+        // Call the parent class's destroy method
+        super.destroy();
     }
 
 }
