@@ -1,8 +1,6 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 
-var PlayerData = null;
-
 export class Player extends Character{
     // constructors sets up Character object 
     constructor(canvas, image, speedRatio, playerData){
@@ -12,7 +10,6 @@ export class Player extends Character{
             playerData.width, 
             playerData.height, 
         );
-        PlayerData = playerData;
         this.playerData = playerData;
         this.sceneStarted = false;
         this.isIdle = true;
