@@ -94,7 +94,7 @@ image: /images/platformer/backgrounds/hills.png
     // Level completion tester
     function testerCallBack() {
         // console.log(GameEnv.player?.x)
-        if (GameEnv.player?.x > 500) {
+        if (GameEnv.player?.x > GameEnv.innerWidth) {
             return true;
         } else {
             return false;
