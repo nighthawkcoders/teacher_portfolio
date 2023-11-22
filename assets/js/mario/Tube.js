@@ -21,17 +21,16 @@ export class Tube extends GameObject {
         const scaledHeight = GameEnv.innerHeight * (100 / 832);
         // Formula for Width is scaled: scaledWidth/scaledHeight == this.width/this.height
         const scaledWidth = scaledHeight * this.aspect_ratio;
-        const bottom = (GameEnv.bottom - scaledHeight);
         const tubeX = .80 * GameEnv.innerWidth;
-        const tubeY = bottom + (bottom * .025);  // tube is not at bottom of image
+        const tubeY = (GameEnv.bottom - scaledHeight);
 
         // set variables used in Display and Collision algorithms
         this.bottom = tubeY;
         this.collisionHeight = scaledHeight;
         this.collisionWidth = scaledWidth;
     
-        this.canvas.width = this.width; 
-        this.canvas.height = this.height;
+        //this.canvas.width = this.width; 
+        //this.canvas.height = this.height;
         this.canvas.style.width = `${scaledWidth}px`;
         this.canvas.style.height = `${scaledHeight}px`;
         this.canvas.style.position = 'absolute';
