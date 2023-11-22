@@ -89,6 +89,11 @@ export class Player extends Character{
         super.update();
     }
 
+    // Log any hits
+    collisionAction(){
+        console.log(this.collisionData.touchPoints.other.object);
+    }
+
     // Event listener key down
     handleKeyDown(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
