@@ -5,33 +5,15 @@ import Player from './Player.js';
 
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
-    constructor(tag) {
-        this.tag = tag;
-        this.backgroundImg = null;
-        this.platformImg = null;
-        this.playerImg = null;
-        this.playerData = null;
-        this.isComplete = null; // function that determines if level is complete
-    }
-
-    setBackgroundFile(file) {
-        this.backgroundImg = file;
-    }
-
-    setPlatformFile(file) {
-        this.platformImg = file;
-    }
-
-    setPlayerFile(file) {
-        this.playerImg = file;
-    }
-
-    setPlayerData(player) {
-        this.playerData = player;
-    }
-
-    setIsComplete(callBack) {
-        this.isComplete = callBack;  // callBack is function to test for level completion
+    constructor(gameObject) {
+        // conditional assignments from GameObject to instance variables
+        this.tag = gameObject?.tag;
+        this.backgroundImg = gameObject.background?.file;
+        this.platformImg = gameObject.platform?.file;
+        this.playerImg = gameObject.player?.file;
+        this.playerData = gameObject?.player;
+        this.isComplete = gameObject?.callback; // function that determines if level is complete
+        GameEnv.levels.push(this);
     }
 
     // Load level data
@@ -99,18 +81,6 @@ class GameLevel {
             image.onerror = reject;
         });
     }
-
-    // Add a GameLevel to the array levels
-    static create(tag, background, platform, player, isComplete) {
-        const newLevel = new GameLevel(tag);
-        newLevel.setBackgroundFile(background.file);
-        newLevel.setPlatformFile(platform.file);
-        newLevel.setPlayerFile(player.file);
-        newLevel.setPlayerData(player);
-        newLevel.setIsComplete(isComplete);
-        GameEnv.levels.push(newLevel);
-    }
-
 }
 
 export default GameLevel;
