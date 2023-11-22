@@ -2,6 +2,7 @@ import GameEnv from './GameEnv.js';
 import Background from './Background.js';
 import Platform from './Platform.js';
 import Player from './Player.js';
+import Tube from './Tube.js';
 
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
@@ -12,6 +13,7 @@ class GameLevel {
         this.platformImg = gameObject.platform?.file;
         this.playerImg = gameObject.player?.file;
         this.playerData = gameObject?.player;
+        this.tubeImg = gameObject.tube?.file;
         this.isComplete = gameObject?.callback; // function that determines if level is complete
         GameEnv.levels.push(this);
     }
@@ -29,6 +31,9 @@ class GameLevel {
         }
         if (this.playerImg) {
             imagesToLoad.push(this.loadImage(this.playerImg));
+        }
+        if (this.tubeImg) {
+            imagesToLoad.push(this.loadImage(this.tubeImg));
         }
 
         try {
@@ -63,6 +68,15 @@ class GameLevel {
                 document.querySelector("#canvasContainer").appendChild(playerCanvas);
                 const playerSpeedRatio = 0.7;
                 new Player(playerCanvas, loadedImages[i], playerSpeedRatio, this.playerData);
+                i++;
+            }
+
+            // Prepare HTML with Player Canvas (if playerImg is defined)
+            if (this.tubeImg) {
+                const tubeCanvas = document.createElement("canvas");
+                tubeCanvas.id = "tube";
+                document.querySelector("#canvasContainer").appendChild(tubeCanvas);
+                new Tube(tubeCanvas, loadedImages[i]);
                 i++;
             }
 

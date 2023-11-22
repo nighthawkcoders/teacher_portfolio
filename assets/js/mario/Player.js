@@ -101,7 +101,7 @@ export class Player extends Character{
         }
     }
 
-    // Event listener key down
+    // Event listener key up
     handleKeyUp(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
             const key = event.key;
@@ -113,7 +113,7 @@ export class Player extends Character{
         }
     }
 
-    // Destroy override method to remove event listeners
+    // Override destroy() method from GameObject to remove event listeners
     destroy() {
         // Remove event listeners
         document.removeEventListener('keydown', this.keydownListener);
@@ -122,7 +122,7 @@ export class Player extends Character{
         // Call the parent class's destroy method
         super.destroy();
     }
-
 }
+
 
 export default Player;
