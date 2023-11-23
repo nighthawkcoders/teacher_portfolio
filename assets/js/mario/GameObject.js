@@ -125,22 +125,28 @@ class GameObject {
      * usage: if (player.isCollision(platform)) { // action }
     */
     isCollision(other) {
-        const percentage = 0.5; // Adjust this value to change the hitbox size as a percentage
-
-        // bounding rectangles
+        // Bounding rectangles from Canvas
         const thisRect = this.canvas.getBoundingClientRect();
         const otherRect = other.canvas.getBoundingClientRect();
-
+    
+        // Calculate center points of rectangles
+        const thisCenterX = (thisRect.left + thisRect.right) / 2;
+        const thisCenterY = (thisRect.top + thisRect.bottom) / 2;
+        const otherCenterX = (otherRect.left + otherRect.right) / 2;
+        const otherCenterY = (otherRect.top + otherRect.bottom) / 2;
+    
+        // Calculate hitbox constants
+        const percentage = 0.5; 
         const widthReduction = thisRect.width * percentage;
         const heightReduction = thisRect.height * percentage;
-
-        // Expand the hitbox by subtracting reductions from the left, right, top, and bottom
+    
+        // Build hitbox by subtracting reductions from the left, right, top, and bottom
         const thisLeft = thisRect.left + widthReduction;
         const thisTop = thisRect.top + heightReduction;
         const thisRight = thisRect.right - widthReduction;
         const thisBottom = thisRect.bottom - heightReduction;
-
-        // determine hit and points of hit
+    
+        // Determine hit and touch points of hit
         this.collisionData = {
             hit: (
                 thisLeft < otherRect.right &&
@@ -151,22 +157,22 @@ class GameObject {
             atFloor: (GameEnv.bottom <= this.y), // Check if the object's bottom edge is at or below the floor level
             touchPoints: {
                 this: {
-                    top: (this.y > other.y),
-                    bottom: (this.y < other.y),
-                    left: (this.x > other.x),
-                    right: (this.x < other.x),
+                    top: thisCenterY < otherCenterY,
+                    bottom: thisCenterY > otherCenterY,
+                    left: thisCenterX > otherCenterX,
+                    right: thisCenterX < otherCenterX,
                 },
                 other: {
                     id: other.canvas.id,
-                    top: (this.y < other.y),
-                    bottom: (this.y > other.y),
-                    left: (this.x < other.x),
-                    right: (this.x > other.x),
+                    top: thisCenterY > otherCenterY,
+                    bottom: thisCenterY < otherCenterY,
+                    left: thisCenterX < otherCenterX,
+                    right: thisCenterX > otherCenterX,
                 },
             },
         };
     }
-
+    
 }
 
 export default GameObject;
