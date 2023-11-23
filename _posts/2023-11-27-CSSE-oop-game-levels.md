@@ -74,6 +74,8 @@ image: /images/platformer/backgrounds/hills.png
           width: 40,
           height: 40,
           w: { row: 9, frames: 15 },
+          wa: { row: 9, frames: 15 },
+          wd: { row: 9, frames: 15 },
           a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } },
           s: { row: 12, frames: 15 },
           d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
