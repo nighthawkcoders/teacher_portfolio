@@ -124,33 +124,38 @@ class GameObject {
     /* Collision detection method
      * usage: if (player.isCollision(platform)) { // action }
     */
-    isCollision(otherGameObject) {
+    isCollision(other) {
+        // bounding rectangles
+        const thisRect = this.canvas.getBoundingClientRect();
+        const otherRect = other.canvas.getBoundingClientRect();
 
+        // determine hit and points of hit
         this.collisionData = {
-            hit: (this.x + this.collisionWidth > otherGameObject.x &&
-            this.x < otherGameObject.x + otherGameObject.collisionWidth &&
-            this.y + this.collisionHeight > otherGameObject.y &&
-            this.y < otherGameObject.y + otherGameObject.collisionHeight),
+            hit: (
+                thisRect.left < otherRect.right &&
+                thisRect.right > otherRect.left &&
+                thisRect.top < otherRect.bottom &&
+                thisRect.bottom > otherRect.top
+            ),
             atFloor: (GameEnv.bottom <= this.y), // Check if the object's bottom edge is at or below the floor level
             touchPoints: {
                 this: {
-                    object: this,
-                    top: (this.y > otherGameObject.y), 
-                    bottom: (this.y < otherGameObject.setY), 
-                    left: (this.x > otherGameObject.x), 
-                    right: (this.x < otherGameObject.x) 
+                    top: (this.y > other.y),
+                    bottom: (this.y < other.y),
+                    left: (this.x > other.x),
+                    right: (this.x < other.x),
                 },
                 other: {
-                    object: otherGameObject,
-                    top: (this.y < otherGameObject.y), 
-                    bottom: (this.y > otherGameObject.y), 
-                    left: (this.x < otherGameObject.x), 
-                    right: (this.x > otherGameObject.x) 
-                }
-            } 
-            
+                    id: other.canvas.id,
+                    top: (this.y < other.y),
+                    bottom: (this.y > other.y),
+                    left: (this.x < other.x),
+                    right: (this.x > other.x),
+                },
+            },
         };
     }
+
 }
 
 export default GameObject;

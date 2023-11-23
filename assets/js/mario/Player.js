@@ -91,7 +91,9 @@ export class Player extends Character{
 
     // Log any hits
     collisionAction(){
-        console.log(this.collisionData.touchPoints.other.object);
+        if (this.collisionData.touchPoints.other.id === "tube") {
+            console.log("Player and Tube collision");
+        }
     }
 
     // Event listener key down
