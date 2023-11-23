@@ -133,7 +133,7 @@ export class Player extends Character{
             if (!(event.key in this.pressedDirections)) {
                 this.pressedDirections[event.key] = this.playerData[key].row;
                 this.isIdle = false;
-                his.setAnimation(this.playerData[key]);
+                this.setAnimation(this.playerData[key]);
             }
         }
     }
