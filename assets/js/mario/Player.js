@@ -127,8 +127,14 @@ export class Player extends Character{
             const key = event.key;
             if (!(event.key in this.pressedDirections)) {
                 this.pressedDirections[event.key] = this.playerData[key].row;
-                this.isIdle = false;
                 this.setAnimation(this.playerData[key]);
+                // set jump animation to match player direction
+                this.playerData.w = 
+                    key === "a" ? this.playerData.wa : 
+                    key === "d" ? this.playerData.wd : 
+                    this.playerData.w;
+                // player active
+                this.isIdle = false;
             }
         }
     }
@@ -140,9 +146,9 @@ export class Player extends Character{
             if (event.key in this.pressedDirections) {
                 delete this.pressedDirections[event.key];
             }
-
-            this.isIdle = true;
-            this.setAnimation(this.playerData[key]);       
+            this.setAnimation(this.playerData[key]);  
+            // player idle
+            this.isIdle = true;     
         }
     }
 
