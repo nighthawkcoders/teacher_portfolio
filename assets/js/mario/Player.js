@@ -126,23 +126,14 @@ export class Player extends Character{
         }
     }
     
-
     // Event listener key down
     handleKeyDown(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
             const key = event.key;
             if (!(event.key in this.pressedDirections)) {
                 this.pressedDirections[event.key] = this.playerData[key].row;
-
-                // Handle directional animations for jumping based on the previous key
-                if (key === 'w' && this.previousKey === 'a' && this.playerData.hasOwnProperty('wa')) {
-                    this.setAnimation(this.playerData.wa);
-                } else if (key === 'w' && this.previousKey === 'd' && this.playerData.hasOwnProperty('wd')) {
-                    this.setAnimation(this.playerData.wd);
-                } else {
-                    this.isIdle = false;
-                    this.setAnimation(this.playerData[key]);
-                }
+                this.isIdle = false;
+                his.setAnimation(this.playerData[key]);
             }
         }
     }
@@ -157,16 +148,8 @@ export class Player extends Character{
 
             // Set the previous key
             this.previousKey = key;
-
-            // Handle directional animations for jumping based on the previous key
-            if (key === 'w' && this.previousKey === 'a' && this.playerData.hasOwnProperty('wa')) {
-                this.setAnimation(this.playerData.wa);
-            } else if (key === 'w' && this.previousKey === 'd' && this.playerData.hasOwnProperty('wd')) {
-                this.setAnimation(this.playerData.wd);
-            } else {
-                this.isIdle = true;
-                this.setAnimation(this.playerData[key]);
-            }
+            this.isIdle = true;
+            this.setAnimation(this.playerData[key]);       
         }
     }
 
