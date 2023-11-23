@@ -125,17 +125,28 @@ class GameObject {
      * usage: if (player.isCollision(platform)) { // action }
     */
     isCollision(other) {
+        const percentage = 0.5; // Adjust this value to change the hitbox size as a percentage
+
         // bounding rectangles
         const thisRect = this.canvas.getBoundingClientRect();
         const otherRect = other.canvas.getBoundingClientRect();
 
+        const widthReduction = thisRect.width * percentage;
+        const heightReduction = thisRect.height * percentage;
+
+        // Expand the hitbox by subtracting reductions from the left, right, top, and bottom
+        const thisLeft = thisRect.left + widthReduction;
+        const thisTop = thisRect.top + heightReduction;
+        const thisRight = thisRect.right - widthReduction;
+        const thisBottom = thisRect.bottom - heightReduction;
+
         // determine hit and points of hit
         this.collisionData = {
             hit: (
-                thisRect.left < otherRect.right &&
-                thisRect.right > otherRect.left &&
-                thisRect.top < otherRect.bottom &&
-                thisRect.bottom > otherRect.top
+                thisLeft < otherRect.right &&
+                thisRight > otherRect.left &&
+                thisTop < otherRect.bottom &&
+                thisBottom > otherRect.top
             ),
             atFloor: (GameEnv.bottom <= this.y), // Check if the object's bottom edge is at or below the floor level
             touchPoints: {
