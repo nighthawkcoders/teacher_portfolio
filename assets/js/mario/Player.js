@@ -82,7 +82,7 @@ export class Player extends Character{
     }
     
 
-    // Player perform a unique update
+    // Player updates
     update() {
         if (this.isAnimation(this.playerData.a)) {
             if (this.movement.left) this.x -= this.speed;  // Move to left
@@ -90,10 +90,7 @@ export class Player extends Character{
         if (this.isAnimation(this.playerData.d)) {
             if (this.movement.right) this.x += this.speed;  // Move to right
         }
-        if (this.isGravityAnimation(this.playerData.wa)) {
-            this.y -= (this.bottom * .33);  // jump 33% higher than bottom
-        } 
-        if (this.isGravityAnimation(this.playerData.wd)) {
+        if (this.isGravityAnimation(this.playerData.w)) {
             this.y -= (this.bottom * .33);  // jump 33% higher than bottom
         } 
 
