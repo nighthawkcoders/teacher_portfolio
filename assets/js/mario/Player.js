@@ -48,7 +48,7 @@ export class Player extends Character{
         }
         //result = (result && !this.isIdle);
         if (result) {
-                this.stashFrame = key;
+            this.stashFrame = key;
         }
         return result;
     }
@@ -56,22 +56,31 @@ export class Player extends Character{
     // check for gravity based animation
     isGravityAnimation(key) {
         var result = false;
+    
         for (let direction in this.pressedDirections) {
             if (this.pressedDirections[direction] === key.row) {
                 result = (!this.isIdle && this.bottom <= this.y);
                 break; // Exit the loop if there's a match
             }
         }
-        //result = (result && !this.isIdle && this.bottom <= this.y);
-        //var result = (this.frameY === key.row && !this.isIdle && this.bottom <= this.y);
+    
         if (result) {
-            return true;
+            // Adjust the vertical jump based on the horizontal speed
+            const horizontalSpeedFactor = 0.33; // Adjust this factor as needed
+            this.y -= this.bottom * horizontalSpeedFactor;
+    
+            // Adjust horizontal position during the jump
+            const horizontalJumpFactor = 0.1; // Adjust this factor as needed
+            this.x += this.speed * horizontalJumpFactor;
         }
+    
         if (this.bottom <= this.y) {
             this.setAnimation(this.stashFrame);
         }
-        return false;
+    
+        return result;
     }
+    
 
     // Player perform a unique update
     update() {
@@ -81,7 +90,10 @@ export class Player extends Character{
         if (this.isAnimation(this.playerData.d)) {
             this.x += this.speed;  // Move to right
         }
-        if (this.isGravityAnimation(this.playerData.w)) {
+        if (this.isGravityAnimation(this.playerData.wa)) {
+            this.y -= (this.bottom * .33);  // jump 33% higher than bottom
+        } 
+        if (this.isGravityAnimation(this.playerData.wd)) {
             this.y -= (this.bottom * .33);  // jump 33% higher than bottom
         } 
 
@@ -102,9 +114,17 @@ export class Player extends Character{
             const key = event.key;
             if (!(event.key in this.pressedDirections)) {
                 this.pressedDirections[event.key] = this.playerData[key].row;
+
+                // Handle directional animations for jumping based on the previous key
+                if (key === 'w' && this.previousKey === 'a' && this.playerData.hasOwnProperty('wa')) {
+                    this.setAnimation(this.playerData.wa);
+                } else if (key === 'w' && this.previousKey === 'd' && this.playerData.hasOwnProperty('wd')) {
+                    this.setAnimation(this.playerData.wd);
+                } else {
+                    this.isIdle = false;
+                    this.setAnimation(this.playerData[key]);
+                }
             }
-            this.isIdle = false;
-            this.setAnimation(this.playerData[key]);
         }
     }
 
@@ -115,8 +135,19 @@ export class Player extends Character{
             if (event.key in this.pressedDirections) {
                 delete this.pressedDirections[event.key];
             }
-            this.isIdle = true;
-            this.setAnimation(this.playerData[key]);
+
+            // Set the previous key
+            this.previousKey = key;
+
+            // Handle directional animations for jumping based on the previous key
+            if (key === 'w' && this.previousKey === 'a' && this.playerData.hasOwnProperty('wa')) {
+                this.setAnimation(this.playerData.wa);
+            } else if (key === 'w' && this.previousKey === 'd' && this.playerData.hasOwnProperty('wd')) {
+                this.setAnimation(this.playerData.wd);
+            } else {
+                this.isIdle = true;
+                this.setAnimation(this.playerData[key]);
+            }
         }
     }
 
