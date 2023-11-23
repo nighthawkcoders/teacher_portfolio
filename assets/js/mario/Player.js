@@ -11,10 +11,8 @@ export class Player extends Character{
             playerData.height, 
         );
         this.playerData = playerData;
-        this.sceneStarted = false;
         this.isIdle = true;
         this.movement = {left: true, right: true};
-        this.yVelocity = 0;
         this.stashFrame = playerData.d;
         this.pressedDirections = {};
 
