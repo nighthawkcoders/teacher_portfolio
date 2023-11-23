@@ -143,8 +143,6 @@ export class Player extends Character{
                 delete this.pressedDirections[event.key];
             }
 
-            // Set the previous key
-            this.previousKey = key;
             this.isIdle = true;
             this.setAnimation(this.playerData[key]);       
         }
