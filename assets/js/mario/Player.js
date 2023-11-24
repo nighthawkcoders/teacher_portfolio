@@ -12,7 +12,7 @@ export class Player extends Character{
         );
         this.playerData = playerData;
         this.isIdle = true;
-        this.movement = {left: true, right: true};
+        this.movement = {left: true, right: true, down: true};
         this.stashFrame = playerData.d;
         this.pressedDirections = {};
 
@@ -61,15 +61,21 @@ export class Player extends Character{
                 break; // Exit the loop if there's a match
             }
         }
+
+        if (!this.movement.down) {
+            this.gravityEnabled = false;
+            // Pause for two seconds
+            setTimeout(() => {
+                // This code will be executed after the two-second delay
+                this.movement.down = true;
+                this.gravityEnabled = true;
+            }, 2000); // 2000 milliseconds = 2 seconds
+        }
     
         if (result) {
-            // Adjust the vertical jump based on the horizontal speed
-            const horizontalSpeedFactor = 0.33; // Adjust this factor as needed
-            this.y -= this.bottom * horizontalSpeedFactor;
-    
             // Adjust horizontal position during the jump
             const horizontalJumpFactor = 0.1; // Adjust this factor as needed
-            this.x += this.speed * horizontalJumpFactor;
+            this.x += this.speed * horizontalJumpFactor;  
         }
     
         if (this.bottom <= this.y) {
@@ -89,7 +95,7 @@ export class Player extends Character{
             if (this.movement.right) this.x += this.speed;  // Move to right
         }
         if (this.isGravityAnimation(this.playerData.w)) {
-            this.y -= (this.bottom * .33);  // jump 33% higher than bottom
+            if (this.movement.down) this.y -= (this.bottom * .33);  // jump 33% higher than bottom
         } 
 
         // Perform super update actions
@@ -101,23 +107,22 @@ export class Player extends Character{
         if (this.collisionData.touchPoints.other.id === "tube") {
             // Collision with the left side of the Tube
             if (this.collisionData.touchPoints.other.left) {
-                console.log("Player and Tube collision on Player right, stop Player from x increase");
                 this.movement.right = false;
             }
             // Collision with the right side of the Tube
             if (this.collisionData.touchPoints.other.right) {
-                console.log("Player and Tube collision on Player left, stop Player from x decrease");
                 this.movement.left = false;
             }
             // Collision with the top of the player
-            if (this.collisionData.touchPoints.this.bottom ) {
-                console.log("Player on top of Tube, gravity stop. If aligned to center, player sinks in tube");
-                // You might want to stop gravity or perform other actions here
+            if (this.collisionData.touchPoints.other.ontop) {
+                this.movement.down = false;
+                this.x = this.collisionData.touchPoints.other.x;
             }
         } else {
             // Reset movement flags if not colliding with a tube
             this.movement.left = true;
             this.movement.right = true;
+            this.movement.down = true;
         }
     }
     
