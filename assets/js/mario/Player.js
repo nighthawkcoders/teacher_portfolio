@@ -13,7 +13,7 @@ export class Player extends Character{
         this.playerData = playerData;
         this.isIdle = true;
         this.movement = {left: true, right: true, down: true};
-        this.stashFrame = playerData.d;
+        this.stashKey = "d";
         this.pressedDirections = {};
 
         // Store a reference to the event listener function
@@ -27,7 +27,15 @@ export class Player extends Character{
         GameEnv.player = this;
     }
 
-    setAnimation(animation) {
+    setAnimation(key) {
+        // animation comes from playerData
+        var animation = this.playerData[key]
+        // set Jump according to direction
+        this.playerData.w = 
+            key === "a" ? this.playerData.wa : 
+            key === "d" ? this.playerData.wd : 
+            this.playerData.w;
+        // set frame and idle frame
         this.setFrameY(animation.row);
         this.setMaxFrame(animation.frames);
         if (this.isIdle && animation.idleFrame) {
@@ -40,13 +48,13 @@ export class Player extends Character{
     isAnimation(key) {
         var result = false;
         for (let direction in this.pressedDirections) {
-            if (this.pressedDirections[direction] === key.row) {
+            if (this.pressedDirections[direction] === this.playerData[key].row) {
                 result = !this.isIdle;
                 break; // Exit the loop if there's a match
             }
         }
         if (result) {
-            this.stashFrame = key;
+            this.stashKey = key;
         }
         return result;
     }
@@ -56,7 +64,7 @@ export class Player extends Character{
         var result = false;
     
         for (let direction in this.pressedDirections) {
-            if (this.pressedDirections[direction] === key.row) {
+            if (this.pressedDirections[direction] === this.playerData[key].row) {
                 result = (!this.isIdle && this.bottom <= this.y);
                 break; // Exit the loop if there's a match
             }
@@ -65,11 +73,14 @@ export class Player extends Character{
         if (!this.movement.down) {
             this.gravityEnabled = false;
             // Pause for two seconds
-            setTimeout(() => {
+            setTimeout(() => {   // animation in tube
                 // This code will be executed after the two-second delay
                 this.movement.down = true;
                 this.gravityEnabled = true;
-            }, 2000); // 2000 milliseconds = 2 seconds
+                setTimeout(() => { // move to end of game detection
+                    this.x = GameEnv.innerWidth + 1;
+                }, 1000);
+            }, 2000);
         }
     
         if (result) {
@@ -79,7 +90,7 @@ export class Player extends Character{
         }
     
         if (this.bottom <= this.y) {
-            this.setAnimation(this.stashFrame);
+            this.setAnimation(this.stashKey);
         }
     
         return result;
@@ -88,13 +99,13 @@ export class Player extends Character{
 
     // Player updates
     update() {
-        if (this.isAnimation(this.playerData.a)) {
+        if (this.isAnimation("a")) {
             if (this.movement.left) this.x -= this.speed;  // Move to left
         }
-        if (this.isAnimation(this.playerData.d)) {
+        if (this.isAnimation("d")) {
             if (this.movement.right) this.x += this.speed;  // Move to right
         }
-        if (this.isGravityAnimation(this.playerData.w)) {
+        if (this.isGravityAnimation("w")) {
             if (this.movement.down) this.y -= (this.bottom * .33);  // jump 33% higher than bottom
         } 
 
@@ -132,12 +143,7 @@ export class Player extends Character{
             const key = event.key;
             if (!(event.key in this.pressedDirections)) {
                 this.pressedDirections[event.key] = this.playerData[key].row;
-                this.setAnimation(this.playerData[key]);
-                // set jump animation to match player direction
-                this.playerData.w = 
-                    key === "a" ? this.playerData.wa : 
-                    key === "d" ? this.playerData.wd : 
-                    this.playerData.w;
+                this.setAnimation(key);
                 // player active
                 this.isIdle = false;
             }
@@ -151,7 +157,7 @@ export class Player extends Character{
             if (event.key in this.pressedDirections) {
                 delete this.pressedDirections[event.key];
             }
-            this.setAnimation(this.playerData[key]);  
+            this.setAnimation(key);  
             // player idle
             this.isIdle = true;     
         }
