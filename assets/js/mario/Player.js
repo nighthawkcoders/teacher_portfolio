@@ -30,11 +30,14 @@ export class Player extends Character{
     setAnimation(key) {
         // animation comes from playerData
         var animation = this.playerData[key]
-        // set Jump according to direction
-        this.playerData.w = 
-            key === "a" ? this.playerData.wa : 
-            key === "d" ? this.playerData.wd : 
-            this.playerData.w;
+        // direction setup
+        if (key === "a") {
+            this.stashKey = key;
+            this.playerData.w = this.playerData.wa;
+        } else if (key === "d") {
+            this.stashKey = key;
+            this.playerData.w = this.playerData.wd;
+        }
         // set frame and idle frame
         this.setFrameY(animation.row);
         this.setMaxFrame(animation.frames);
@@ -53,9 +56,7 @@ export class Player extends Character{
                 break; // Exit the loop if there's a match
             }
         }
-        if (result) {
-            this.stashKey = key;
-        }
+        
         return result;
     }
 
