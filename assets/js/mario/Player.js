@@ -14,7 +14,7 @@ export class Player extends Character{
         this.isIdle = true;
         this.movement = {left: true, right: true, down: true};
         this.stashKey = "d";
-        this.pressedDirections = {};
+        this.pressedKeys = {};
 
         // Store a reference to the event listener function
         this.keydownListener = this.handleKeyDown.bind(this);
@@ -50,11 +50,8 @@ export class Player extends Character{
     // check for matching animation
     isAnimation(key) {
         var result = false;
-        for (let direction in this.pressedDirections) {
-            if (this.pressedDirections[direction] === this.playerData[key].row) {
-                result = !this.isIdle;
-                break; // Exit the loop if there's a match
-            }
+        if (key in this.pressedKeys) {
+            result = !this.isIdle;
         }
         
         return result;
@@ -64,13 +61,12 @@ export class Player extends Character{
     isGravityAnimation(key) {
         var result = false;
     
-        for (let direction in this.pressedDirections) {
-            if (this.pressedDirections[direction] === this.playerData[key].row) {
-                result = (!this.isIdle && this.bottom <= this.y);
-                break; // Exit the loop if there's a match
-            }
+        // verify key is in active animations
+        if (key in this.pressedKeys) {
+            result = (!this.isIdle && this.bottom <= this.y);
         }
 
+        // scene for on top of tube animation
         if (!this.movement.down) {
             this.gravityEnabled = false;
             // Pause for two seconds
@@ -84,12 +80,14 @@ export class Player extends Character{
             }, 2000);
         }
     
+        // make sure jump has ssome velocity
         if (result) {
             // Adjust horizontal position during the jump
             const horizontalJumpFactor = 0.1; // Adjust this factor as needed
             this.x += this.speed * horizontalJumpFactor;  
         }
     
+        // return to directional animation (direction?)
         if (this.bottom <= this.y) {
             this.setAnimation(this.stashKey);
         }
@@ -142,8 +140,8 @@ export class Player extends Character{
     handleKeyDown(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
             const key = event.key;
-            if (!(event.key in this.pressedDirections)) {
-                this.pressedDirections[event.key] = this.playerData[key].row;
+            if (!(event.key in this.pressedKeys)) {
+                this.pressedKeys[event.key] = this.playerData[key];
                 this.setAnimation(key);
                 // player active
                 this.isIdle = false;
@@ -155,8 +153,8 @@ export class Player extends Character{
     handleKeyUp(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
             const key = event.key;
-            if (event.key in this.pressedDirections) {
-                delete this.pressedDirections[event.key];
+            if (event.key in this.pressedKeys) {
+                delete this.pressedKeys[event.key];
             }
             this.setAnimation(key);  
             // player idle
