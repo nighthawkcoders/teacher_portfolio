@@ -10,11 +10,14 @@ export class Player extends Character{
             playerData.width, 
             playerData.height, 
         );
+        // Player Data is required for Animations
         this.playerData = playerData;
-        this.isIdle = true;
-        this.movement = {left: true, right: true, down: true};
-        this.stashKey = "d";
+
+        // Player control data
         this.pressedKeys = {};
+        this.movement = {left: true, right: true, down: true};
+        this.isIdle = true;
+        this.stashKey = "d"; // initial key
 
         // Store a reference to the event listener function
         this.keydownListener = this.handleKeyDown.bind(this);
