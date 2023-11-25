@@ -31,9 +31,9 @@ image: /images/platformer/backgrounds/hills.png
 
 <script type="module">
     // Imports
-    import GameEnv from '{{site.baseurl}}/assets/js/mario/GameEnv.js';
-    import GameLevel from '{{site.baseurl}}/assets/js/mario/GameLevel.js';
-    import GameControl from '{{site.baseurl}}/assets/js/mario/GameControl.js';
+    import GameEnv from '{{site.baseurl}}/assets/js/platformer/GameEnv.js';
+    import GameLevel from '{{site.baseurl}}/assets/js/platformer/GameLevel.js';
+    import GameControl from '{{site.baseurl}}/assets/js/platformer/GameControl.js';
 
 
     /*  ==========================================
