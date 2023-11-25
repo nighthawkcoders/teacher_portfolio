@@ -13,13 +13,14 @@ Make a lesson and code around Enemies and Obstacles.  Integrate ideas so they ca
 
 Provided in code is the beginning of a tube obstacle.   This is a new GameObject class.  Review logic to detect when the player interacts with the obstacle.  This ultimately triggers a Callback that ends the level.
 
-Platforms for Jumping
-Introduce platforms for jumping and avoiding enemies.
-
-NPC Characters
+NPC Characters shoud extend Character
 Introduce new NPC GameObject class for Goombas.  Implement game logic for NPC movement and collision with the player.
 
-## Resources
+Collision Detection:
+- Implement collision detection between the player and enemies.
+Assign points based on successful interactions, considering the type of interaction (e.g., jumping on a Goomba versus colliding with a Gomba).
+
+## Google searches
 
 [Super Mario Glitches](https://www.mariowiki.com/List_of_Super_Mario_Bros._glitches
 )
