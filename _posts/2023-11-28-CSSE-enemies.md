@@ -1,0 +1,26 @@
+---
+toc: true
+comments: false
+layout: post
+title: Enemies
+description: Provide a lesson on enemies.
+type: ccc
+courses: { csse: {week: 16} }
+---
+
+### Spawning and Synchronization
+Make a lesson and code around Enemies and Obstacles.  Integrate ideas so they can be adapted by Teacher project. 
+
+Provided in code is the beginning of a tube obstacle.   This is a new GameObject class.  Review logic to detect when the player interacts with the obstacle.  This ultimately triggers a Callback that ends the level.
+
+Platforms for Jumping
+Introduce platforms for jumping and avoiding enemies.
+
+NPC Characters
+Introduce new NPC GameObject class for Goombas.  Implement game logic for NPC movement and collision with the player.
+
+## Resources
+
+[Super Mario Glitches](https://www.mariowiki.com/List_of_Super_Mario_Bros._glitches
+)
+[Spawning and Synchronization](https://www.reddit.com/r/MarioMaker/comments/3lcrqb/super_mario_maker_science_spawning_despawning_and/?rdt=43064)
