@@ -9,6 +9,8 @@ courses: { csse: {week: 16} }
 ---
 
 ## Player Selection Screen
+Make a lesson and code around Parallax.  Integrate ideas so they can be adapted by Teacher project. 
+
 Pick your Player.  Look into a technique to change player froom default Mario sprite to alternate Sprite.  Save the Player to personal settings.
 
 Sprite Selection
