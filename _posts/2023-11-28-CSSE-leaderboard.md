@@ -4,7 +4,7 @@ comments: false
 layout: post
 title: Leaderboard
 description: Provide a lesson on making a leaderboard.
-type: ccc
+type: collab
 courses: { csse: {week: 16} }
 ---
 

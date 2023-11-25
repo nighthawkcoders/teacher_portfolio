@@ -4,7 +4,7 @@ comments: false
 layout: post
 title: Enemies
 description: Provide a lesson on enemies.
-type: ccc
+type: collab
 courses: { csse: {week: 16} }
 ---
 
