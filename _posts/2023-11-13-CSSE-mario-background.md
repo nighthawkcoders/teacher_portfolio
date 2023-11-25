@@ -4,10 +4,10 @@ title: Mario Hills Background
 description: Early step in turning Mario game into OOP
 type: ccc
 courses: { csse: {week: 13} }
-image: /images/mario/hills.png
+image: /images/platformer/backgrounds//hills.png
 images:
   background:
-    src: /images/mario/hills.png
+    src: /images/platformer/backgrounds//hills.png
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
