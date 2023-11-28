@@ -35,18 +35,19 @@ export class Background extends GameObject {
 
         const canvasWidth = GameEnv.innerWidth;
         const canvasHeight = canvasWidth / this.aspect_ratio;
+        GameEnv.backgroundHeight = canvasHeight;
         const canvasLeft = 0;
 
-        this.canvas.width = this.width / ADJUST;
-        this.canvas.height = this.height / ADJUST;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
         this.canvas.style.width = `${canvasWidth}px`;
-        this.canvas.style.height = `${canvasHeight}px`;
+        this.canvas.style.height = `${GameEnv.backgroundHeight}px`;
         this.canvas.style.position = 'absolute';
         this.canvas.style.left = `${canvasLeft}px`;
         this.canvas.style.top = `${GameEnv.top}px`;
 
         // set bottom of game to new background height
-        GameEnv.setBottom();
+        GameEnv.setBottom(); 
     }
 }
 

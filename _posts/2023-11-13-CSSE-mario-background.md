@@ -1,19 +1,16 @@
 ---
 layout: base
-title: Mario Player with Hills Background
-description: Early step in adding Mario into OOP Game
+title: Mario Hills Background
+description: Early step in turning Mario game into OOP
 type: ccc
-courses: { csse: {week: 14} }
-image: /images/mario/hills.png
+courses: { csse: {week: 13} }
+image: /images/platformer/backgrounds//hills.png
 images:
   background:
-    src: /images/mario/hills.png
-  mario:
-    src: /images/mario_animation.png
+    src: /images/platformer/backgrounds//hills.png
 ---
 <!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
-{% assign playerFile = site.baseurl | append: page.images.mario.src %}
 
 <style>
     #controls {
@@ -32,10 +29,9 @@ images:
 </div>
 
 <script type="module">
-    import GameEnv from '{{site.baseurl}}/assets/js/mario/GameEnv.js';
-    import GameObject from '{{site.baseurl}}/assets/js/mario/GameObject.js';
-    import Background from '{{site.baseurl}}/assets/js/mario/Background.js';
-    import { initPlayer } from '{{site.baseurl}}/assets/js/mario/Player.js';
+    import GameEnv from '{{site.baseurl}}/assets/js/platformer/GameEnv.js';
+    import GameObject from '{{site.baseurl}}/assets/js/platformer/GameObject.js';
+    import Background from '{{site.baseurl}}/assets/js/platformer/Background.js';
 
     // Create a function to load an image and return a Promise
     async function loadImage(src) {
@@ -67,9 +63,8 @@ images:
     async function setupGame() {
         try {
             // Open image files for Game Objects
-            const [backgroundImg, playerImg] = await Promise.all([
+            const [backgroundImg, vaderImg] = await Promise.all([
                 loadImage('{{backgroundFile}}'),
-                loadImage('{{playerFile}}'),
             ]);
 
             // Setup Globals
@@ -83,14 +78,6 @@ images:
             // Background object
             const backgroundSpeedRatio = 0
             new Background(backgroundCanvas, backgroundImg, backgroundSpeedRatio);  // Background Class calls GameObject Array which stores the instance
-
-            // Prepare HTML with Player Canvas
-            const playerCanvas = document.createElement("canvas");
-            playerCanvas.id = "characters";
-            document.querySelector("#canvasContainer").appendChild(playerCanvas);
-            // Player object
-            const playerSpeedRatio = 0.7
-            initPlayer(playerCanvas, playerImg, playerSpeedRatio);
 
         // Trap errors on failed image loads
         } catch (error) {

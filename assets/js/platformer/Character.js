@@ -2,19 +2,20 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    constructor(canvas, image, speedRatio,
-        spriteWidth, spriteHeight, spriteScale) {
-                var characterArray = [];
+    constructor(canvas, image, speedRatio, spriteWidth, spriteHeight) {
         super(canvas, image, speedRatio);
+
+        // sprite sizes
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
-        this.spriteScale = spriteScale;
+
+        // sprint frame management
         this.minFrame = 0;
         this.maxFrame = 0;
         this.frameX = 0;  // Default X frame of the animation
         this.frameY = 0;  // Default Y frame of the animation
-        this.collisionWidth = spriteWidth * spriteScale;
-        this.collisionHeight = spriteHeight * spriteScale;
+        
+        // gravity for character enabled by default
         this.gravityEnabled = true;
     }
 
@@ -55,8 +56,8 @@ class Character extends GameObject {
     */
     draw() {
         // Set fixed dimensions and position for the Character
-        this.canvas.width = this.spriteWidth * this.spriteScale;
-        this.canvas.height = this.spriteHeight * this.spriteScale;
+        this.canvas.width = this.canvasWidth;
+        this.canvas.height = this.canvasHeight;
         this.canvas.style.width = `${this.canvas.width}px`;
         this.canvas.style.height = `${this.canvas.height}px`;
         this.canvas.style.position = 'absolute';
@@ -76,22 +77,32 @@ class Character extends GameObject {
         );
     }
 
-    /* Method should be called on resize events 
-     * intent is to place character in proportion to new size
+    /* Method should be called on initialization and resize events 
+     * intent is to size character in proportion to the screen size
     */
     size() {
-        // Calculate proportional x and y positions based on the new screen dimensions
+        // set Canvas scale,  80 represents size of Character height when inner Height is 832px
+        var scaledCharacterHeight = GameEnv.innerHeight * (80 / 832);
+        var canvasScale = scaledCharacterHeight/this.spriteHeight;
+        this.canvasHeight = this.spriteHeight * canvasScale;
+        this.canvasWidth = this.spriteWidth * canvasScale;
+
+        // set variables used in Display and Collision algorithms
+        this.bottom = GameEnv.bottom - this.canvasHeight;
+        this.collisionHeight = this.canvasHeight;
+        this.collisionWidth = this.canvasWidth;
+
+        // calculate Proportional x and y positions based on size of screen dimensions
         if (GameEnv.prevInnerWidth) {
             const proportionalX = (this.x / GameEnv.prevInnerWidth) * GameEnv.innerWidth;
-            const proportionalY = (this.y / GameEnv.prevBottom) * GameEnv.bottom;
 
             // Update the x and y positions based on the proportions
             this.setX(proportionalX);
-            this.setY(proportionalY);
+            this.setY(this.bottom);
         } else {
             // First Screen Position
-            this.setX(Math.random() * GameEnv.innerWidth);
-            this.setY(GameEnv.bottom);
+            this.setX(0);
+            this.setY(this.bottom);
         }
     }
 
@@ -100,7 +111,8 @@ class Character extends GameObject {
      * be sure to have updated draw call super.update()
     */
     update() {
-        if (GameEnv.bottom > this.y && this.gravityEnabled)
+
+        if (this.bottom > this.y && this.gravityEnabled)
             this.y += GameEnv.gravity;
 
         // Update animation frameX of the object
