@@ -41,7 +41,7 @@ courses: { csp: {week: 17 }}
             method: 'POST',
             mode: 'cors', // no-cors, cors, same-origin
             cache: 'no-cache', // default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, same-origin, omit
+            credentials: 'include', // include, same-origin, omit
             body: JSON.stringify(body),
             headers: {
                 "content-type": "application/json",
