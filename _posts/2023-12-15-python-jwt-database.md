@@ -39,7 +39,7 @@ courses: { csp: {week: 17 }}
     cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'include', // include, same-origin, omit
     headers: {
-      'Authorization': `Bearer ${jwt}`,
+      // 'Authorization': `Bearer ${jwt}`,
       'Content-Type': 'application/json',
     },
   };
