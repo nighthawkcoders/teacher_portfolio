@@ -22,9 +22,9 @@ courses: { csp: {week: 17 }}
 
 <script>
     // URL for deployment
-    // var url = "https://flask.nighthawkcodingsociety.com"
+    var url = "https://flask2.nighthawkcodingsociety.com"
     // Comment out next line for local testing
-    url = "http://localhost:8086"
+    //url = "http://localhost:8086"
     // Authenticate endpoint
     const login_url = url + '/api/users/authenticate';
 

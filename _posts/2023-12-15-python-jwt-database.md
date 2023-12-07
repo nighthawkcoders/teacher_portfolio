@@ -28,9 +28,9 @@ courses: { csp: {week: 17 }}
   const resultContainer = document.getElementById("result");
 
   // prepare URL
-  // var url = "https://flask.nighthawkcodingsociety.com/api/users/";
+  var url = "https://flask2.nighthawkcodingsociety.com/api/users/";
   // Uncomment next line for localhost testing
-  url = "http://localhost:8086/api/users/";
+  //url = "http://localhost:8086/api/users/";
 
   // set options for cross origin header request
   const options = {
