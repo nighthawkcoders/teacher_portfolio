@@ -31,7 +31,7 @@ courses: { csp: {week: 17 }}
   var uri = "https://flask2.nighthawkcodingsociety.com"
   // Uncomment a line below to match localhost testing
   // uri = "http://localhost:8086"
-  uri = "http://127.0.0.1:8086"
+  // uri = "http://127.0.0.1:8086"
   
   // Users endpoint
   const url = uri + '/api/users/';
