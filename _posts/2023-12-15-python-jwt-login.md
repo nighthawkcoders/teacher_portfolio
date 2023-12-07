@@ -22,12 +22,13 @@ courses: { csp: {week: 17 }}
 
 <script>
     // URL for deployment
-    // var url = "https://flask.nighthawkcodingsociety.com"
-    // Comment out next line for local testing
-    url = "http://localhost:8086"
-    // Authenticate endpoint
-    const login_url = url + '/api/users/authenticate';
+    var uri = "https://flask2.nighthawkcodingsociety.com"
+    // Uncomment a line below to match localhost testing
+    // uri = "http://localhost:8086"
+    // uri = "http://127.0.0.1:8086"
 
+    // Authenticate endpoint
+    const url = uri + '/api/users/authenticate';
 
     function login_user(){
         // Set body to include login data
@@ -49,7 +50,7 @@ courses: { csp: {week: 17 }}
         };
 
         // Fetch JWT
-        fetch(login_url, requestOptions)
+        fetch(url, requestOptions)
         .then(response => {
             // trap error response from Web API
             if (!response.ok) {
@@ -61,6 +62,10 @@ courses: { csp: {week: 17 }}
             // Redirect to Database location
             window.location.href = "{{site.baseurl}}/data/database";
         })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+            console.error(err);
+        });
     }
 
 
