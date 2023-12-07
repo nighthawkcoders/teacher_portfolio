@@ -27,10 +27,14 @@ courses: { csp: {week: 17 }}
   // prepare HTML result container for new output
   const resultContainer = document.getElementById("result");
 
-  // prepare URL
-  // var url = "https://flask.nighthawkcodingsociety.com/api/users/";
-  // Uncomment next line for localhost testing
-  url = "http://localhost:8086/api/users/";
+  // URL for deployment
+  var uri = "https://flask2.nighthawkcodingsociety.com"
+  // Uncomment a line below to match localhost testing
+  // uri = "http://localhost:8086"
+  // uri = "http://127.0.0.1:8086"
+  
+  // Users endpoint
+  const url = uri + '/api/users/';
 
   // set options for cross origin header request
   const options = {
@@ -39,6 +43,7 @@ courses: { csp: {week: 17 }}
     cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'include', // include, same-origin, omit
     headers: {
+      // 'Authorization': `Bearer ${jwt}`,
       'Content-Type': 'application/json',
     },
   };

@@ -5,7 +5,7 @@ layout: post
 title: OOP, Multi Player
 description: Start discussion on setting up two or more players in a game.  A key part of doing this is understanding all attributes in GameObject and GameEnv, serializing and esearilizing this information over the internet.
 type: ccc
-courses: { csse: {week: 15} }
+courses: { csse: {week: 17} }
 ---
 
 ## Multi Player
