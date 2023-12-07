@@ -2,7 +2,7 @@
 comments: true
 toc: true
 layout: post
-title: Enimies | Student
+title: Enemies | Student
 description: Goomba addition to GameLevels project
 type: ccc
 courses: { csse: {week: 15} }
