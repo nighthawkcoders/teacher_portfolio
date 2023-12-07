@@ -24,9 +24,9 @@ courses: { csp: {week: 17 }}
     // URL for deployment
     var url = "https://flask2.nighthawkcodingsociety.com"
     // Comment out next line for local testing
-    //url = "http://localhost:8086"
+    url = "http://localhost:8086"
     // Authenticate endpoint
-    const login_url = url + '/api/users/authenticate';
+    // const login_url = url + '/api/users/authenticate';
 
 
     function login_user(){
@@ -61,6 +61,10 @@ courses: { csp: {week: 17 }}
             // Redirect to Database location
             window.location.href = "{{site.baseurl}}/data/database";
         })
+        // catch fetch errors (ie ACCESS to server blocked)
+        .catch(err => {
+            console.error(err);
+        });
     }
 
 
