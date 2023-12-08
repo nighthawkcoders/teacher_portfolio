@@ -2,9 +2,9 @@
 comments: true
 toc: true
 layout: post
-title: Enemies | Student
+title: Mario | Enemies | Student
 description: Goomba addition to GameLevels project
-type: ccc
+type: collab
 courses: { csse: {week: 15} }
 authors: Daniel, Justin, Xavier
 ---
