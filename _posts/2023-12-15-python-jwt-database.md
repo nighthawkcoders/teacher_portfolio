@@ -1,14 +1,16 @@
 ---
 layout: base
 title: Database CRUD Operations
-description: An advanced example of do database create, read, update, delete operations working asynchronously between JavaScript and a Python/Flask backend Database.  This requires a set of Python RESTful API services for Get, Put, Delete, and Update.
+description: An advanced example of database CRUD (Create, Read, Update, Delete).  This articles is focussed on Read.  Each operation works asynchronously between JavaScript and a Python/Flask backend Database.  This requires a set of Python RESTful API services for Get, Put, Delete, and Update.
 permalink: /data/database
 type: ccc
 courses: { csp: {week: 17 }}
 ---
 
-## SQL Database
-<!-- HTML table fragment for page -->
+## SQL Database Fetch
+
+<!-- HTML table layout for page.  The table is filled by JavaScript below. 
+-->
 <table>
   <thead>
   <tr>
@@ -22,31 +24,20 @@ courses: { csp: {week: 17 }}
   </tbody>
 </table>
 
-<!-- Script is layed out in a sequence (no function) and will execute when page is loaded -->
-<script>
-  // prepare HTML result container for new output
-  const resultContainer = document.getElementById("result");
+<!-- 
+Below JavaScript code fetches user data from an API and displays it in a table. It uses the Fetch API to make a GET request to the '/api/users/' endpoint.   Refer to config.js to see additional options. 
 
-  // URL for deployment
-  var uri = "https://flask2.nighthawkcodingsociety.com"
-  // Uncomment a line below to match localhost testing
-  // uri = "http://localhost:8086"
-  // uri = "http://127.0.0.1:8086"
-  
-  // Users endpoint
+The script is laid out in a sequence (no function) and will execute when page is loaded.
+-->
+<script type="module">
+  // uri variable and options object are obtained from config.js
+  import { uri, options } from '{{site.baseurl}}/assets/js/api/config.js';
+
+  // Set Users endpoint (list of users)
   const url = uri + '/api/users/';
 
-  // set options for cross origin header request
-  const options = {
-    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'include', // include, same-origin, omit
-    headers: {
-      // 'Authorization': `Bearer ${jwt}`,
-      'Content-Type': 'application/json',
-    },
-  };
+  // prepare HTML result container for new output
+  const resultContainer = document.getElementById("result");
 
   // fetch the API
   fetch(url, options)
@@ -63,7 +54,7 @@ courses: { csp: {week: 17 }}
           resultContainer.appendChild(tr);
           return;
       }
-      // valid response will contain json data
+      // valid response will contain JSON data
       response.json().then(data => {
           console.log(data);
           for (const row of data) {
@@ -76,11 +67,11 @@ courses: { csp: {week: 17 }}
             name.innerHTML = row.name; 
             id.innerHTML = row.uid; 
             age.innerHTML = row.age; 
-            // this build td's into tr
+            // this builds td's into tr
             tr.appendChild(name);
             tr.appendChild(id);
             tr.appendChild(age);
-            // add HTML to container
+            // append the row to table
             resultContainer.appendChild(tr);
           }
       })

@@ -6,6 +6,11 @@ type: ccc
 courses: { csp: {week: 17 }}
 ---
 
+<!-- 
+A simple HTML login form with a Login action when button is pressed.  
+
+The form triggers the login_user function defined in the JavaScript below when the Login button is pressed.
+-->
 <form action="javascript:login_user()">
     <p><label>
         User ID:
@@ -20,46 +25,44 @@ courses: { csp: {week: 17 }}
     </p>
 </form>
 
-<script>
-    // URL for deployment
-    var uri = "https://flask2.nighthawkcodingsociety.com"
-    // Uncomment a line below to match localhost testing
-    // uri = "http://localhost:8086"
-    // uri = "http://127.0.0.1:8086"
+<!-- 
+Below JavaScript code is designed to handle user authentication in a web application. It's written to work with a backend server that uses JWT (JSON Web Tokens) for authentication.
 
-    // Authenticate endpoint
-    const url = uri + '/api/users/authenticate';
+The script defines a function when the page loads. This function is triggered when the Login button in the HTML form above is pressed. 
+ -->
+<script type="module">
+    // uri variable and options object are obtained from config.js
+    import { uri, options } from '{{site.baseurl}}/assets/js/api/config.js';
 
     function login_user(){
-        // Set body to include login data
+        // Set Authenticate endpoint
+        const url = uri + '/api/users/authenticate';
+
+        // Set body of request to include login data from DOM
         const body = {
             uid: document.getElementById("uid").value,
             password: document.getElementById("password").value,
         };
 
-        // Set Headers to support cross origin
-        const requestOptions = {
-            method: 'POST',
-            mode: 'cors', // no-cors, cors, same-origin
-            cache: 'no-cache', // default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'include', // include, same-origin, omit
-            body: JSON.stringify(body),
-            headers: {
-                "content-type": "application/json",
-            },
+        // Change options according to Authentication requirements
+        const authOptions = {
+            ...options, // This will copy all properties from options
+            method: 'POST', // Override the method property
+            cache: 'no-cache', // Set the cache property
+            body: JSON.stringify(body)
         };
 
         // Fetch JWT
-        fetch(url, requestOptions)
+        fetch(url, authOptions)
         .then(response => {
-            // trap error response from Web API
+            // handle error response from Web API
             if (!response.ok) {
                 const errorMsg = 'Login error: ' + response.status;
                 console.log(errorMsg);
                 return;
             }
             // Success!!!
-            // Redirect to Database location
+            // Redirect to the database page
             window.location.href = "{{site.baseurl}}/data/database";
         })
         // catch fetch errors (ie ACCESS to server blocked)
@@ -68,5 +71,6 @@ courses: { csp: {week: 17 }}
         });
     }
 
-
+    // Attach login_user to the window object, allowing access to form action
+    window.login_user = login_user;
 </script>
