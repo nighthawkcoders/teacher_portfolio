@@ -3,7 +3,7 @@ layout: base
 title: Dynamic Game Levels
 description: Early steps in adding levels to an OOP Game.  This includes basic animations left-right-jump, multiple background, and simple callback to terminate each level.
 type: ccc
-courses: { csse: {week: 14}, csp: {week: 14}, csa: {week: 14} }
+courses: { csse: {week: 14} }
 image: /images/platformer/backgrounds/hills.png
 ---
 

@@ -3,7 +3,7 @@ title: JWT Login (python/flask)
 layout: base
 description: A login screen that interacts with Python and obtains a JWT  
 type: ccc
-courses: { csp: {week: 17 }}
+courses: { csp: {week: 18 }}
 ---
 
 <!-- 

@@ -3,7 +3,7 @@ toc: true
 layout: post
 title: Sprite Sheet Intro
 description: An intro to sprite sheets for 2D game animation.
-courses: { csse: {week: 5}, csp: {week: 14, categories: [1.A, 3.B]}, csa: {week: 3} }
+courses: { csse: {week: 5} }
 type: ccc
 author: Ekamjot Kaire
 ---
