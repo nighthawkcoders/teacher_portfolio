@@ -92,18 +92,18 @@ Sprint3:
   start: 8
   end: 12
 Sprint4:
-  title: Warm-up Data Abstraction Project, Create Performance Task (CPT) kickoff
-  description: Trimester 2 will begin with a Mini-project.  Great projects begin with frontend style.  This project will be using SASS, JavaScript, managing user events and representing Algorithms.  Tech talks during this period will be preparing for College Board Create Performance Task.
+  title: Warm-up Data Abstraction Project, Computer Systems, Networks, Impact of Computing
+  description: Trimester 2 will begin with a Mini-project.  Great projects begin with frontend style.  This project will be using SASS, JavaScript, managing user events and representing Algorithms.  Student Teaching during this period will be preparing for College Board MCQ
   start: 13
-  end: 14
+  end: 16
 Sprint5:
-  title: CPT design and development, Computer Systems, Networks, Impact of Computing
-  description: Trimester 2 continues with CPT project design and development.  Student Teaching will focus on College Board Units 4 and 5.
-  start: 15
+  title: Create Performance Task (CPT) kickoff, CPT design and development
+  description: Trimester 2 continues with CPT project design and development.  Big focus on frontend/backend for data, databases, and login.
+  start: 17
   end: 21
 Sprint6:
-  title: Create Performance Task (CPT) and N@tM, MCQ Exam Practice 
-  description: Trimester 2 concludes with student presenting their CPT project at N@tM.  Each person within "Student Teams" will have their own specialty within the student project that satisfied all their Create Performance Task requirements.   Student should be able to talk about design, coding, and present features of their portion of the system.
+  title: N@tM and Create Performance Task (CPT) video and presentations. MCQ Exam Practice.
+  description: Trimester 2 concludes with student presenting their CPT project at N@tM.  Each person within "Student Teams" will have their own specialty within the student project that satisfied all their Create Performance Task requirements.   Student should be able to talk about design, coding, iteration, and present features of their portion of the system.
   start: 22
   end: 24
 Sprint7: 

@@ -5,7 +5,7 @@ layout: post
 title: Big Idea 4.1 The Internet
 description: Reviewing the internet and protocols
 type: ccc
-courses: { csp: {week: 15} }
+courses: { csp: {week: 14} }
 categories: [C7.2]
 ---
 

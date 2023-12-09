@@ -5,7 +5,7 @@ layout: post
 title: Big Idea 5.6 Safe Computing
 description: This tech talk discusses safe computing
 type: ccc
-courses: { csp: {week: 15} }
+courses: { csp: {week: 17} }
 categories: [5.D, 5.E]
 ---
 

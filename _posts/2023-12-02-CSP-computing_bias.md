@@ -5,7 +5,7 @@ layout: post
 title: Big Idea 5.3 Computing Bias
 description: This tech talk discusses bias in computing
 type: ccc
-courses: { csp: {week: 15} }
+courses: { csp: {week: 16} }
 categories: [5.E]
 ---
 
