@@ -1,10 +1,9 @@
 ---
 layout: base
-title: Database CRUD Operations
+title: Database Get
+hide: true
 description: An advanced example of database CRUD (Create, Read, Update, Delete).  This articles is focussed on Read.  Each operation works asynchronously between JavaScript and a Python/Flask backend Database.  This requires a set of Python RESTful API services for Get, Put, Delete, and Update.
 permalink: /data/database
-type: ccc
-courses: { csp: {week: 17 }}
 ---
 
 ## SQL Database Fetch
