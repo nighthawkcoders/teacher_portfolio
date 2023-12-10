@@ -49,16 +49,16 @@ Team Review "Scrum Master A" grading "Scrum Master B"
 - [ ] The team should have a Web Pages that teach: Binary, Data, Data Structures, Data Abstraction.   
 
 Team Review ticket containing key Team and individual contributions
-- [ ] Growth/Accomplishments in work according to Team Plan
-- [ ]  Short falls/Improvement that could be made in Work or Team Plan
+- [ ] Growth/Accomplishments in work is according to historical Team Plan, or they show revisions to plan according to work
+- [ ] Short falls/Improvement that could be made in Work or Team Plan, team highlights next steps or improvements that could be made
 - [ ] Showing key accomplishments according to requirement in Frontend such as Binary Math, ASCII, Unicode, Color Codes, Logic Gates, etc.
-- [ ] Show key user interaction and learning.  For instance how you visualized  Algorithms, Data, Data Structures.  Or, how you provided response and Feedback to user on their success in learning.
+- [ ] Showing key user interaction and learning(s).  For instance how you visualized  Algorithms, Data, Data Structures.  Or, how you provided response and Feedback to user on their success in learning.
 
 Freeform provide positivies and growth summary...
 ```
 
 #### Key Indicators Individual Template
-Grade each checkmark below on scale 0 to .9.   Total and divide by 5 for final score.
+Grade each checkmark below on scale 0 to .9.   Total and divide by number of bullets for final score.
 
 Cut Copy and Paste to Team Review Ticket
 
@@ -69,10 +69,10 @@ Individual Review "My name" grading "Their name"
 
 Individuals Video, Issue(s), Commits(s)
 
-- [ ] Video / demo of key contribution to project, 1 minute
-- [ ] Issue(s) that show progress to team objectives
-- [ ] Highlight of key commit(s) in Issues
-- [ ] Review GitHub analytics for key commits in each weeks during the project
+- [ ] Video in CPT caption style , includes Web demo of key contribution to project, 1 minute
+- [ ] Issue(s) that show plans/progress to team objectives
+- [ ] Highlights of key commit(s) in Issues, summarizes code contributions
+- [ ] Review GitHub analytics for key commits in each weeks during the project, shows consistent participation for 3 weeks
 
 Freeform provide positivies and growth summary...
 ```
