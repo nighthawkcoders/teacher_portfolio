@@ -2,14 +2,20 @@
 toc: true
 comments: true
 layout: post
-title: Binary Logic | CPT | Key Indicators
-description: This is a review of elements 
+title: Binary Logic | Key Indicators | Retrospective
+description: This is a review of elements requested in the project.  This review includes both written and verbal instructions that were provided.  The term retrospective an opportunity to make things better.
 type: ccc
 courses: { csp: {week: 16} }
 ---
 
 ## Key Indicator Grading
-Teams / Individuals will crossover grade another.  Use the templates below to assist in grading.  In team review ticket you will ... 
+Teams / Individuals will crossover grade another.  In the process of development their is a retrospective cycle.
+
+An agile retrospective is an opportunity for agile development teams to reflect on past work together and identify ways to improve. Agile teams hold retrospective meetings after a time-boxed period of work is complete (typically a sprint lasting two to four weeks). During the retrospective, the team discusses what went well, what did not go as planned, and how to make the next work period better.
+
+This week will be used for teams to improve their work (retrospective) and transition into design (ideation) for the College Board CPT.
+
+Use the templates below to assist in grading and retrospection.  In team review ticket you will ... 
 
 
 ### Team Grading Prep
