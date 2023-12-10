@@ -9,52 +9,52 @@ courses: { csp: {week: 16} }
 ---
 
 ## Key Indicator Grading and Retrospective
-This review includes both written and verbal instructions that were provided during <b>Sprint 4</b>.  The term "retrospective" in agile development is an opportunity to make things better.
+This review includes both written and verbal instructions that were provided during **Sprint 4**. The term "retrospective" in agile development is an opportunity to make things better.
 
-An agile retrospective is an opportunity for agile development teams to reflect on past work together and <b>identify ways to improve</b>. Agile teams hold retrospective meetings after a time-boxed period of work is complete (typically a sprint lasting two to four weeks). During the retrospective, the team discusses what went well, what did not go as planned, and how to make the next work period better.
+An agile retrospective is an opportunity for agile development teams to reflect on past work together and **identify ways to improve**. Agile teams hold retrospective meetings after a time-boxed period of work is complete (typically a sprint lasting two to four weeks). During the retrospective, the team discusses what went well, what did not go as planned, and how to make the next work period better.
 
 
-### Team Grading Prep (25 minuts)
-This <b>"retrospective" to "ideation"</b> week will be used for teams to improve their work (retrospective) and transition into design (ideation) for the Official College Board CPT.
+### Team Grading Prep (25 minutes)
+This **"retrospective" to "ideation"** week will be used for teams to improve their work (retrospective) and transition into design (ideation) for the Official College Board CPT.
 
-<b>Review Ticket Content</b>.  Teams will provide Teacher with a "Review Ticket" to capture scores, plans, hightlight project, what went well, and what needs improvement.
+**Review Ticket Content**. Teams will provide the Teacher with a "Review Ticket" to capture scores, plans, highlight projects, what went well, and what needs improvement.
 
-<b>Utternance Comment</b>.  Team review ticket will be an Utterance comment on this blog.
+**Utterance Comment**. Team review ticket will be an Utterance comment on this blog.
 
-<b>Crossover Grades</b>.  Teams / Individuals will crossover grade another team.  In the process of development, we often use this type of review to broaden our perspective.
+**Crossover Grades**. Teams / Individuals will crossover grade another team. In the process of development, we often use this type of review to broaden our perspective.
 
 
 ### Review Ticket Header
-Use the templates below to <b>assist in grading and retrospection</b> with Review Ticket. This Table is a summary of most important information between Student development teams and Teacher.
+Use the templates below to **assist in grading and retrospection** with Review Ticket. This Table is a summary of the most important information between Student development teams and Teacher.
   
 ### Team
 
-| Crossover Score | Runtime | Plan | GitHub | Anayltics |
+| Crossover Score | Runtime | Plan | GitHub | Analytics |
 | 0.87 | [Binary Calculator](https://nighthawkcoders.github.io/teacher_portfolio//c4.4/2023/09/14/javascript-binary-U2-1.html) | [Binary Logic](https://nighthawkcoders.github.io/teacher_portfolio//1.d/2.b/3.c/c4.4/2023/11/14/CSP-binary_logic.html) | [teacher_portfolio](https://github.com/nighthawkcoders/teacher_portfolio) | [Deployments](https://github.com/nighthawkcoders/teacher_portfolio/deployments)
 
 ### Individuals 
 
-| Name | Team+Indi+Teacher | Runtime | Issues | Key Commit(s) | Anayltics |
+| Name | Team+Indi+Teacher | Runtime | Issues | Key Commit(s) | Analytics |
 | John M | 1.71=0.87+0.84+? | [Binary Calculator](https://nighthawkcoders.github.io/teacher_portfolio//c4.4/2023/09/14/javascript-binary-U2-1.html) | [CORS example](https://github.com/nighthawkcoders/flask_portfolio/issues/42#issuecomment-1847595229) | [SASS buttons](https://github.com/nighthawkcoders/teacher_portfolio/commit/f43211b97d4d50e79cf15d6ae470c0fef241dfc5), [Binary Source](https://raw.githubusercontent.com/nighthawkcoders/teacher_portfolio/bf145ebe8113f0e009494ed736324aa276b8913b/_posts/2023-09-14-javascript-binary-U2-1.md) | [Commits](https://github.com/nighthawkcoders/teacher_portfolio/commits?author=jm1021), [Profile](https://github.com/jm1021)|
 
 
 ### Crossover Grade (25 minutes)
 
 Teams / Individuals will perform crossover grading.
-  - <b>Crossover Scrum Master grading</b>. Scrum Master Team A grades Scrum Master Team B.  Place grading in Header of Review Ticket according to templat.  Also, perform individual crossover gradding on each other.  Be sure to be retrospective.
-  - <b>Crossover individual grading</b>.   Grade individual by individual(Team A to Team B), if there is an odd person work in a trio.  Be sure that I know name of each grader and who you are grading (ie John M grading of Shane L)
-  - <b>After grading is complete</b> Scrum Master or Individuals update scores on top of the review ticket.  Scrum Master review sources for completeness and make sure addition is correct.
+  - **Crossover Scrum Master grading**. Scrum Master Team A grades Scrum Master Team B. Place grading in the Header of Review Ticket according to the template. Also, perform individual crossover grading on each other. Be sure to be retrospective.
+  - **Crossover individual grading**. Grade individual by individual (Team A to Team B), if there is an odd person working in a trio. Be sure that I know the name of each grader and who you are grading (i.e., John M grading of Shane L)
+  - **After grading is complete**, Scrum Master or Individuals update scores on top of the review ticket. Scrum Master reviews sources for completeness and makes sure the addition is correct.
 
 
 ### Final Grading
-Teacher Grading will be considering any change to final 0.1.  Note, this would be considered both in meeting guidelines of project or extra credit.
+Teacher Grading will consider any change to the final 0.1. Note, this would be considered both in meeting guidelines of the project or extra credit.
 
-- <b>Retrospective improvement</b>.  Teams and individuals will have time to make improvments during the week.   
-- <b>Indicators in Crossover are final</b>.  Do not change scoring after these initial indicators are made.  This will be considered "doctoring",
-- <b>Extra credit</b>.  If there is concerns on score, understanding, or completenss in this process...  It is possible to add to seed.  Individuals will be responsible to come up with action.
+- **Retrospective improvement**. Teams and individuals will have time to make improvements during the week.   
+- **Indicators in Crossover are final**. Do not change scoring after these initial indicators are made. This will be considered "doctoring",
+- **Extra credit**. If there are concerns about score, understanding, or completeness in this process... It is possible to add to seed. Individuals will be responsible to come up with action.
 
 #### Key Indicators Team Template 
-Grade each checkmark below on scale 0 to .9.   Total and divide by 5 for final score.
+Grade each checkmark below on a scale of 0 to .9. Total and divide by 5 for the final score.
 
 Cut Copy and Paste
 
