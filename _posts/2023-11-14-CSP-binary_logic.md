@@ -2,8 +2,8 @@
 toc: true
 comments: false
 layout: post
-title: Binary Logic, CPT Warmup
-description: Real binary abstractions including ASCII, Unicode, Images,logic gates, etc
+title: Binary Logic | CPT | Requirements
+description: This is a mini project, warming up to CPT guidelines.  Read this to article and starrt developing ideas for your Binary Logic requirements.  Real binary abstractions include ASCII, Unicode, RGB Colors, Images,Logic Gates, etc.
 type: ccc
 courses: { csp: {week: 13} }
 categories: [1.D, 2.B, 3.C, C4.4]
