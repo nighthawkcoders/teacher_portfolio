@@ -3,7 +3,7 @@ toc: true
 layout: post
 title: UX-BE, Spring/Thymeleaf
 description: Tour frontend server side capabilities using the Java Spring Thymeleaf framework. The Spring template engine is Thymeleaf and like all template engines it is used to process and create HTML on server side and for an HTML page.
-courses: { csa: {week: 15} }
+courses: { csa: {week: 16} }
 type: ccc
 image: /images/spring_thymeleaf.png
 ---

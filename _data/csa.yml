@@ -202,23 +202,23 @@ Sprint3:
   end: 12
 Sprint4:
   title: Warm-up Data Analysis and Sort Project,
-  description: Trimester 2 will begin with a Mini-project.  Focussing in on Sorting, Inheritance, and Polymorphic behavior.
-  illustration: *data_structures
+  description: Trimester 2 will begin with a Mini-project on Sorting and Analysis.  Focussing in on frontend JavaScript Visualization; Backend Java Sorting, Inheritance, and Polymorphic behavior.
   start: 13
-  end: 14
+  end: 16
 Sprint5:
-  title: Passion Projects
-  description: Objective of these weeks is to explore and create ideas and concepts for a Team two trimester project.  Adding frontend and creativity while using APIs/Databases.  This should be a project of personal and team interest.  Team projects that are most liked by Teachers and Students will be continued in Trimester 3.
-  start: 15
-  end: 20
+  title: Passion Project Ideas and Concepts
+  description: This will be most creative portion of year for CSA students.  Objective of these weeks is to explore and create ideas, concepts, and code that has the growth to enable a two trimester project.  Adding frontend and creativity while using APIs/Databases/JWT.  This should be a project of personal interest.  The ideas and code that are most liked by Teachers and Students will be continued through N@tM and used in Trimester 3.  Student should be able to talk about design, do fe/be coding, add database features and perform weekly live reviews.  You should work in teams of 3, and have a crossover team for reviews.
+  start: 17
+  end: 19
 Sprint6:
   title: Creative Development and N@tM
-  description: This will be most creative portion of year for CSA students.  Each person within "Student Teams" will have their own specialty within their student project that shows Full Stack competency, requiring Java as backend.  Intentions for this period is to have a free and creative period, driven by your Issues and Scrum Board.  Student should be able to talk about design, do fe/be coding, addd database features and perform weekly live reviews.  
-  start: 21
+  description: Each person within "Student Teams" will have their own specialty within their student project that shows Full Stack competency, requiring Java as backend.  Intentions for this period is to have a free and creative project, driven by your Issues and Scrum Board.  Only restriction is that your Java should be using CB 10 units.
+  start: 20
   end: 24
 Sprint7: 
   title: Data Structures
   description: A focus Data Structures that relate to the AP exam.  A key requirement is to make your own Algo Rythmic sorting video.   The theme is produce work that can be used to help you pass the AP Exam and improve your Passion Project.  Each student must cover key concepts from one of the Four AP FRQ types, contain a key Data Structure, and utilize sorting. These requirements are fairly generic and could complement any project.
+  illustration: *data_structures
   start: 25
   end: 29
 Sprint8:

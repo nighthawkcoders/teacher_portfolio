@@ -4,7 +4,7 @@ toc: true
 title: Java, Security | JWT
 description: Implementing JWT Tokens into spring boot project.
 type: ccc
-courses: { csa: {week: 15, categories: [6.B]} }
+courses: { csa: {week: 17, categories: [6.B]} }
 categories: [C7.0]
 author: Aidan Wu
 ---
