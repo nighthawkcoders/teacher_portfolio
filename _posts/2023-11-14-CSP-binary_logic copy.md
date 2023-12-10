@@ -3,46 +3,55 @@ toc: true
 comments: true
 layout: post
 title: Binary Logic | Key Indicators | Retrospective
-description: This is a review of elements requested in the project.  This review includes both written and verbal instructions that were provided.  The term retrospective an opportunity to make things better.
+description: This is a project review
 type: ccc
 courses: { csp: {week: 16} }
 ---
 
-## Key Indicator Grading
-Teams / Individuals will crossover grade another.  In the process of development their is a retrospective cycle.
+## Key Indicator Grading and Retrospective
+This review includes both written and verbal instructions that were provided during <b>Sprint 4</b>.  The term "retrospective" in agile development is an opportunity to make things better.
 
-An agile retrospective is an opportunity for agile development teams to reflect on past work together and identify ways to improve. Agile teams hold retrospective meetings after a time-boxed period of work is complete (typically a sprint lasting two to four weeks). During the retrospective, the team discusses what went well, what did not go as planned, and how to make the next work period better.
-
-This week will be used for teams to improve their work (retrospective) and transition into design (ideation) for the College Board CPT.
-
-Use the templates below to assist in grading and retrospection.  In team review ticket you will ... 
+An agile retrospective is an opportunity for agile development teams to reflect on past work together and <b>identify ways to improve</b>. Agile teams hold retrospective meetings after a time-boxed period of work is complete (typically a sprint lasting two to four weeks). During the retrospective, the team discusses what went well, what did not go as planned, and how to make the next work period better.
 
 
-### Team Grading Prep
-Team review ticket will be an Utterance comment on this blog.  Teams / Individuals will have 25 minutes in class to prepare for their Team Review Ticket, with links to Key Materials and Indiviual Review ticket.  Place tables at top of review ticket, follow with your project highlights, then conclude with crossover reviews.  Sample tables that must be at the top of the review ticket...
+### Team Grading Prep (25 minuts)
+This <b>"retrospective" to "ideation"</b> week will be used for teams to improve their work (retrospective) and transition into design (ideation) for the Official College Board CPT.
+
+<b>Review Ticket Content</b>.  Teams will provide Teacher with a "Review Ticket" to capture scores, plans, hightlight project, what went well, and what needs improvement.
+
+<b>Utternance Comment</b>.  Team review ticket will be an Utterance comment on this blog.
+
+<b>Crossover Grades</b>.  Teams / Individuals will crossover grade another team.  In the process of development, we often use this type of review to broaden our perspective.
 
 
-#### Team
+### Review Ticket Header
+Use the templates below to <b>assist in grading and retrospection</b> with Review Ticket. This Table is a summary of most important information between Student development teams and Teacher.
+  
+### Team
 
 | Crossover Score | Runtime | Plan | GitHub | Anayltics |
 | 0.87 | [Binary Calculator](https://nighthawkcoders.github.io/teacher_portfolio//c4.4/2023/09/14/javascript-binary-U2-1.html) | [Binary Logic](https://nighthawkcoders.github.io/teacher_portfolio//1.d/2.b/3.c/c4.4/2023/11/14/CSP-binary_logic.html) | [teacher_portfolio](https://github.com/nighthawkcoders/teacher_portfolio) | [Deployments](https://github.com/nighthawkcoders/teacher_portfolio/deployments)
 
-#### Individuals 
+### Individuals 
 
 | Name | Team+Indi+Teacher | Runtime | Issues | Key Commit(s) | Anayltics |
 | John M | 1.71=0.87+0.84+? | [Binary Calculator](https://nighthawkcoders.github.io/teacher_portfolio//c4.4/2023/09/14/javascript-binary-U2-1.html) | [CORS example](https://github.com/nighthawkcoders/flask_portfolio/issues/42#issuecomment-1847595229) | [SASS buttons](https://github.com/nighthawkcoders/teacher_portfolio/commit/f43211b97d4d50e79cf15d6ae470c0fef241dfc5), [Binary Source](https://raw.githubusercontent.com/nighthawkcoders/teacher_portfolio/bf145ebe8113f0e009494ed736324aa276b8913b/_posts/2023-09-14-javascript-binary-U2-1.md) | [Commits](https://github.com/nighthawkcoders/teacher_portfolio/commits?author=jm1021), [Profile](https://github.com/jm1021)|
 
 
-### Crossover Grade
+### Crossover Grade (25 minutes)
 
-Teams / Individuals will have 25 minutes for crossover grading.
-  - Scrum Master Team A grade Scrum Master Team B.  Place grading from template below in Team Review Ticket
-  - Crossover grade each individual (Team A grade Team B individual by individual, if there is an odd person work in a trio).  Place grading from template below for individual in Team Review Ticket.  Be sure that I know name of each grader and your your are grading (ie John M grading of Shane L)
-  - After grading is complete, Scrum Master or Individuals update scores on top of the review ticket.  Verify source and make sure addition is correct.
+Teams / Individuals will perform crossover grading.
+  - <b>Crossover Scrum Master grading</b>. Scrum Master Team A grades Scrum Master Team B.  Place grading in Header of Review Ticket according to templat.  Also, perform individual crossover gradding on each other.  Be sure to be retrospective.
+  - <b>Crossover individual grading</b>.   Grade individual by individual(Team A to Team B), if there is an odd person work in a trio.  Be sure that I know name of each grader and who you are grading (ie John M grading of Shane L)
+  - <b>After grading is complete</b> Scrum Master or Individuals update scores on top of the review ticket.  Scrum Master review sources for completeness and make sure addition is correct.
 
 
-Teacher Grading will be final 0.1.  This will start on Wednesday.  Teams and individuals will have time to make improvments prior to Wednesday live reviews.
+### Final Grading
+Teacher Grading will be considering any change to final 0.1.  Note, this would be considered both in meeting guidelines of project or extra credit.
 
+- <b>Retrospective improvement</b>.  Teams and individuals will have time to make improvments during the week.   
+- <b>Indicators in Crossover are final</b>.  Do not change scoring after these initial indicators are made.  This will be considered "doctoring",
+- <b>Extra credit</b>.  If there is concerns on score, understanding, or completenss in this process...  It is possible to add to seed.  Individuals will be responsible to come up with action.
 
 #### Key Indicators Team Template 
 Grade each checkmark below on scale 0 to .9.   Total and divide by 5 for final score.
@@ -60,8 +69,19 @@ Team Review ticket containing key Team and individual contributions
 - [ ] Showing key accomplishments according to requirement in Frontend such as Binary Math, ASCII, Unicode, Color Codes, Logic Gates, etc.
 - [ ] Showing key user interaction and learning(s).  For instance how you visualized  Algorithms, Data, Data Structures.  Or, how you provided response and Feedback to user on their success in learning.
 
-Freeform provide positivies and growth summary...
+ Per check.  
+ 0.55 not attempted/no check 
+ 0.7 attempted, incoomplete, but some runtime
+ 0.8 mastery and runtime 
+ 0.9 above and beyond. 
+
+ Freeform comment.  
+  Provide positivies and growth summary.  
+  Justify or comment on final score.  
+  Be sure to provide extra details on anything below 0.7 average or above 0.8. 
+
 ```
+
 
 #### Key Indicators Individual Template
 Grade each checkmark below on scale 0 to .9.   Total and divide by number of bullets for final score.
@@ -80,5 +100,17 @@ Individuals Video, Issue(s), Commits(s)
 - [ ] Highlights of key commit(s) in Issues, summarizes code contributions
 - [ ] Review GitHub analytics for key commits in each weeks during the project, shows consistent participation for 3 weeks
 
-Freeform provide positivies and growth summary...
+ Per check.  
+ 0.55 not attempted/no check 
+ 0.7 attempted, incoomplete, but some runtime
+ 0.8 mastery and runtime 
+ 0.9 above and beyond.
+
+ Freeform comment.  
+  Provide positivies and growth summary.  
+  Justify or comment on final score.  
+  Be sure to provide extra details on anything below 0.7 average or above 0.8. 
+
 ```
+
+
