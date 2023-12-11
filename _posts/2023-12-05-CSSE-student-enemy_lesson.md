@@ -6,7 +6,7 @@ title: Mario | Enemies | Student
 description: Goomba addition to GameLevels project
 type: collab
 courses: { csse: {week: 15} }
-authors: Daniel, Justin, Xavier
+author: Daniel, Justin, Xavier
 ---
 
 ## Lesson - Enemy
