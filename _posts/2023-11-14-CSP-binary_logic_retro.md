@@ -9,7 +9,7 @@ courses: { csp: {week: 16} }
 ---
 
 ## Key Indicator Grading and Retrospective
-This review includes both written and verbal instructions that were provided during **Sprint 4**. The term "retrospective" in agile development is an opportunity to make things better.
+This review includes requirements from both written and verbal instructions that were provided during **Sprint 4**. The term "retrospective" in agile development is an opportunity to make things better.
 
 An agile retrospective is an opportunity for agile development teams to reflect on past work together and **identify ways to improve**. Agile teams hold retrospective meetings after a time-boxed period of work is complete (typically a sprint lasting two to four weeks). During the retrospective, the team discusses what went well, what did not go as planned, and how to make the next work period better.
 
