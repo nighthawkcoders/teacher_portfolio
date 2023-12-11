@@ -12,7 +12,9 @@ const GameControl = {
 
     // Level transition method (destroy then newlevel)
     async transitionToLevel(newLevel) {
-        this.inTransition = true;
+        GameEnv.inTransition = true;
+
+        GameEnv.socket.off("stateUpdate", this.handleSocketMessage)
 
         // Destroy existing game objects
         GameEnv.destroy();
@@ -23,17 +25,18 @@ const GameControl = {
 
         // Trigger a resize to redraw canvas elements
         window.dispatchEvent(new Event('resize'));
-        // Update invert property, twice means same as before
+        // Update invert property, twice means same as befores
         toggleCanvasEffect.dispatchEvent(new Event('click'));
         toggleCanvasEffect.dispatchEvent(new Event('click'));
 
-        this.inTransition = false;
+        GameEnv.socket.on("stateUpdate", this.handleSocketMessage)
+        GameEnv.inTransition = false;
     },
 
     // Game control loop
     gameLoop() {
         // Turn game loop off during transitions
-        if (!this.inTransition) {
+        if (!GameEnv.inTransition) {
 
             // Get current level
             GameEnv.update();
@@ -48,9 +51,9 @@ const GameControl = {
                     if (currentIndex !== -1 && currentIndex + 1 < GameEnv.levels.length) {
                         // transition to the next level
                         this.transitionToLevel(GameEnv.levels[currentIndex + 1]);
-                    } 
+                    }
                 }
-            // currentLevel is null, (ie start or restart game)
+                // currentLevel is null, (ie start or restart game)
             } else {
                 // transition to beginning of game
                 this.transitionToLevel(GameEnv.levels[0]);
@@ -58,9 +61,17 @@ const GameControl = {
         }
 
         // recycle gameLoop, aka recursion
-        requestAnimationFrame(this.gameLoop.bind(this));  
+        requestAnimationFrame(this.gameLoop.bind(this));
     },
 
+    handleSocketMessage(data) {
+        console.log("update", data)
+        if (data.tag === GameEnv.currentLevel.tag) {
+            for (var gameObj of GameEnv.gameObjects) {
+                gameObj.updateInfo(data)
+            }
+        }
+    }
 };
 
 export default GameControl;

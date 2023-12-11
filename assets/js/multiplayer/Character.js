@@ -17,6 +17,9 @@ class Character extends GameObject {
         
         // gravity for character enabled by default
         this.gravityEnabled = true;
+
+        // characters should be synced with server
+        this.shouldBeSynced = true;
     }
 
     getMinFrame(){
@@ -111,7 +114,7 @@ class Character extends GameObject {
         var element = this.canvas;
         if (element && element.id) {
             return {
-                id: element.id,
+                ...super.jsonifyElement(),
                 x: this.x,
                 y: this.y,
                 frameY: this.frameY

@@ -83,7 +83,6 @@ class GameLevel {
         } catch (error) {
             console.error('Failed to load one or more images:', error);
         }
-
     }
 
     // Create a function to load an image and return a Promise

@@ -20,6 +20,7 @@ export class GameEnv {
     // calculated size properties
     static backgroundHeight = 0;
     static platformHeight = 0;
+    static inTransition = false;
 
     // canvas filter property
     static isInverted = true;
