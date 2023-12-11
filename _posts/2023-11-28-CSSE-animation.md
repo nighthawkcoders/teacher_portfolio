@@ -4,7 +4,7 @@ comments: false
 layout: post
 title: Animation Transitions
 description: Provide a lesson on enemies.
-type: collab
+type: ccc
 courses: { csse: {week: 16} }
 ---
 

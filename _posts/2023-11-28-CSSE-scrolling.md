@@ -4,7 +4,7 @@ comments: false
 layout: post
 title: Parallax / Scrolling
 description: Provide a lesson on screen effects.
-type: collab
+type: ccc
 courses: { csse: {week: 16} }
 ---
 

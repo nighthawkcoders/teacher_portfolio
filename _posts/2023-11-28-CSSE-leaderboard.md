@@ -4,8 +4,8 @@ comments: false
 layout: post
 title: Leaderboard
 description: Provide a lesson on making a leaderboard.
-type: collab
-courses: { csse: {week: 16} }
+type: ccc
+courses: { csse: {week: 17} }
 ---
 
 ## Player Selection Screens

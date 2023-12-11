@@ -4,8 +4,8 @@ comments: false
 layout: post
 title: Platforms
 description: Provide a lesson on enemies.
-type: collab
-courses: { csse: {week: 16} }
+type: ccc
+courses: { csse: {week: 15} }
 ---
 
 ### Spawning and Synchronization
