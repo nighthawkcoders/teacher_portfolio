@@ -84,6 +84,7 @@ class GameObject {
             this.canvas.style.top = json.style.top;
             this.canvas.filter = json.style.filter;
         }
+        return json.id === element.id
     }
 
     // X position getter and setter

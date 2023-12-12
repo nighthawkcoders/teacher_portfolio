@@ -26,7 +26,11 @@ export class GameEnv {
     static isInverted = true;
 
     // socket.io object
-    static socket = io("ws://localhost:3000");
+    static socket = io(`ws://${window.location.host.split(":")[0]}:3000`);
+    static id = '';
+    static {
+        this.socket.on("id", id => this.id = id)
+    }
 
     // Make the constructor private to prevent instantiation
     constructor() {
@@ -41,8 +45,8 @@ export class GameEnv {
         }
     }
 
-     // Setter for Top position
-     static setTop() {
+    // Setter for Top position
+    static setTop() {
         // set top of game as header height
         const header = document.querySelector('header');
         if (header) {

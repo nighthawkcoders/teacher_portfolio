@@ -18,8 +18,7 @@ class Character extends GameObject {
         // gravity for character enabled by default
         this.gravityEnabled = true;
 
-        // characters should be synced with server
-        this.shouldBeSynced = true;
+        this.size();
     }
 
     getMinFrame(){
@@ -123,12 +122,14 @@ class Character extends GameObject {
     }
 
     updateInfo(json) {
+        super.updateInfo(json)
         var element = this.canvas;
         if (json.id === element.id) {
             this.x = json.x;
             this.y = json.y;
             this.frameY = json.frameY
         }
+        return json.id === element.id
     }
 
     /* Update cycle check collisions

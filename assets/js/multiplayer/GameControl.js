@@ -15,6 +15,7 @@ const GameControl = {
         GameEnv.inTransition = true;
 
         GameEnv.socket.off("stateUpdate", this.handleSocketMessage)
+        GameEnv.socket.off("disconnect", this.handleSocketDisconnect)
 
         // Destroy existing game objects
         GameEnv.destroy();
@@ -30,6 +31,7 @@ const GameControl = {
         toggleCanvasEffect.dispatchEvent(new Event('click'));
 
         GameEnv.socket.on("stateUpdate", this.handleSocketMessage)
+        GameEnv.socket.on("disconnect", this.handleSocketDisconnect)
         GameEnv.inTransition = false;
     },
 
@@ -64,11 +66,24 @@ const GameControl = {
         requestAnimationFrame(this.gameLoop.bind(this));
     },
 
-    handleSocketMessage(data) {
+    async handleSocketMessage(data) {
         console.log("update", data)
+        let updated = false
         if (data.tag === GameEnv.currentLevel.tag) {
             for (var gameObj of GameEnv.gameObjects) {
-                gameObj.updateInfo(data)
+                updated = updated || gameObj.updateInfo(data)
+            }
+            if (!updated && data.id.includes("character")) {
+                const obj = await GameEnv.currentLevel.addCharacter(data.id.replace("character", ""))
+                obj.updateInfo(data)
+            }
+        }
+    },
+
+    handleSocketDisconnect(id) {
+        for (var gameObj of GameEnv.gameObjects) {
+            if (gameObj.canvas.id.includes(id)) {
+                gameObj.destroy();
             }
         }
     }
