@@ -5,7 +5,7 @@ layout: post
 title: Big Idea 5.5 Legal and Ethical Concerns
 description: This tech talk discusses legal and ethics in computing
 type: ccc
-courses: { csp: {week: 15} }
+courses: { csp: {week: 17} }
 image: /images/unit5/blackduck.png
 categories: [5.E]
 ---

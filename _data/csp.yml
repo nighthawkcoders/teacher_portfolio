@@ -5,7 +5,7 @@ introduction_tools: &introduction_tools |
     | Tool Setup      | 
     +-----------------+
        |
-       | VS Code,  Markdown, Jupyter Notebook (.ipynb), JavaScript (.md, .html)
+       | VS Code, Markdown, Jupyter Notebook (.ipynb), JavaScript (.md, .html)
        v
     +-----------------+
     | VS Code, Develop|
@@ -64,7 +64,7 @@ web_dev_layers: &web_dev_layers |
     |     Backend    |
     +----------------+
           |
-          | Python Server-Side Proccessing
+          | Python Server-Side Processing
           | Analysis, Computation, and Models
           | Communicate with Data Services
           v
@@ -76,7 +76,7 @@ web_dev_layers: &web_dev_layers |
 # CSP course meta data
 Sprint1:
   title: Tools and Software Development Processes
-  description: By the end of Weeks 0-3, students will have gained practical experience in blogging, coding with Jupyter Notebooks, and GitHub Pages; learning will begin with Linux, Python, Markdown, HTML, and JavaScript. Students will establish foundation using essential tools and software development processes to support their coding journey.
+  description: By the end of Weeks 0-3, students will have gained practical experience in blogging, coding with Jupyter Notebooks, and GitHub Pages; learning will begin with Linux, Python, Markdown, HTML, and JavaScript. Students will establish a foundation using essential tools and software development processes to support their coding journey.
   illustration: *introduction_tools
   start: 0
   end: 3
@@ -87,37 +87,37 @@ Sprint2:
   start: 4
   end: 7
 Sprint3:
-  title:  Web Application, Data, and N@tM
-  description: Student teams need to build their own Website and individuals need to blog their learnings. The team Website should include interests, but also requires the use of Python Flask and JavaScript programming.  By the end of the Sprint, students will be ready to start many of the technical coding aspects of Web Development; having established a Deployed Website, Frontend, and Backend.  In November, the Trimester will end by presenting team project at the Electives Department "Night at the Museum" (N@tM). 
+  title: Web Application, Data, and N@tM
+  description: Student teams need to build their own Website, and individuals need to blog their learnings. The team Website should include interests but also requires the use of Python Flask and JavaScript programming. By the end of the Sprint, students will be ready to start many of the technical coding aspects of Web Development; having established a Deployed Website, Frontend, and Backend. In November, the Trimester will end by presenting the team project at the Electives Department "Night at the Museum" (N@tM). 
   start: 8
   end: 12
 Sprint4:
-  title: Warm-up Data Abstraction Project, Create Performance Task (CPT) kickoff
-  description: Trimester 2 will begin with a Mini-project.  Great projects begin with frontend style.  This project will be using SASS, JavaScript, managing user events and representing Algorithms.  Tech talks during this period will be preparing for College Board Create Performance Task.
+  title: Warm-up Data Abstraction Project, Computer Systems, Networks, Impact of Computing
+  description: Trimester 2 will begin with a Mini-project, CPT warmup. Great projects begin with frontend style. This project will focus on frontend; using SASS, JavaScript, interacting with user events, and representing Binary Algorithm(s). Student Teaching during this period will be preparing for College Board MCQ.
   start: 13
-  end: 14
+  end: 16
 Sprint5:
-  title: CPT design and development, Computer Systems, Networks, Impact of Computing
-  description: Trimester 2 continues with CPT project design and development.  Student Teaching will focus on College Board Units 4 and 5.
-  start: 15
+  title: Create Performance Task (CPT) kickoff, CPT design and development
+  description: Trimester 2 continues with CPT project design and development. The big focus is on frontend/backend for data, databases, and login.
+  start: 17
   end: 21
 Sprint6:
-  title: Create Performance Task (CPT) and N@tM, MCQ Exam Practice 
-  description: Trimester 2 concludes with student presenting their CPT project at N@tM.  Each person within "Student Teams" will have their own specialty within the student project that satisfied all their Create Performance Task requirements.   Student should be able to talk about design, coding, and present features of their portion of the system.
+  title: N@tM and Create Performance Task (CPT) video and presentations. MCQ Exam Practice.
+  description: Trimester 2 concludes with students presenting their CPT project at N@tM. Each person within "Student Teams" will have their own specialty within the student project that satisfies all their Create Performance Task requirements. Students should be able to talk about design, coding, iteration, and present features of their portion of the system.
   start: 22
   end: 24
 Sprint7: 
   title: Data Structures and Data Science
-  description: This is the beginning of a college course following outline of CS113 Data Structures from Mira Costa CC.  Topics, using Python, include searching, sorting, hashing, algorithms, analysis, object-oriented design, collections, lists, stacks, queues, trees, sets, dictionaries, and graphs.
+  description: This is the beginning of a college course following the outline of CS113 Data Structures from Mira Costa CC. Topics, using Python, include searching, sorting, hashing, algorithms, analysis, object-oriented design, collections, lists, stacks, queues, trees, sets, dictionaries, and graphs.
   start: 25
   end: 29
 Sprint8:
   title: AP Weeks
-  description: Activities will be focused on supporting students in test preparations, including student teaching.  Days that are not focused on test preparation will be focused on planning for year end project/portfolio.
+  description: Activities will be focused on supporting students in test preparations, including student teaching. Days that are not focused on test preparation will be focused on planning for year-end project/portfolio.
   start: 30
   end: 32
 Sprint9:
   title: Passion Project and N@tM
-  description: Presenting accomplishments for the year by creating a passion project for N@tM.  This project will serve as the year end final exam.
+  description: Presenting accomplishments for the year by creating a passion project for N@tM. This project will serve as the year-end final exam.
   start: 33
   end: 36

@@ -5,7 +5,7 @@ layout: post
 title: Big Idea 4.2 Routing | 4.3 Computing
 description: Discussion of systems and networks
 type: ccc
-courses: { csp: {week: 15} }
+courses: { csp: {week: 14} }
 categories: [C7.1, C9.3]
 ---
 

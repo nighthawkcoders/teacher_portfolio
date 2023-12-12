@@ -5,7 +5,7 @@ introduction_tools: &introduction_tools |
     | Tool Setup      | 
     +-----------------+
        |
-       | VS Code,  Markdown, Jupyter Notebook, JavaScript (.md, .html)
+       | VS Code, Markdown, Jupyter Notebook, JavaScript (.md, .html)
        v
     +-----------------+
     | VS Code, Develop|
@@ -43,32 +43,32 @@ introduction_tools: &introduction_tools |
 # CSSE course meta data
 Sprint1:
   title: Tools and Software Development Processes
-  description: By the end of Weeks 0-3, students will have gained practical experience in blogging, coding with Jupyter Notebooks, and GitHub Pages; learning will begin with Linux, Markdown, HTML, and JavaScript. Students will establish foundation using essential tools and software development processes to support their coding journey.
+  description: By the end of Weeks 0-3, students will have gained practical experience in blogging, coding with Jupyter Notebooks, and GitHub Pages; learning will begin with Linux, Markdown, HTML, and JavaScript. Students will establish a foundation using essential tools and software development processes to support their coding journey.
   illustration: *introduction_tools
   start: 0
   end: 3
 Sprint2:
   title: Introduction to Development with JavaScript
-  description: A key focus of this course is to make Web Games using JavaScript. These next few weeks we will perform the aspects of learning java and learning an animation and deploying the game to GitHub Pages.
+  description: A key focus of this course is to make Web Games using JavaScript. These next few weeks we will cover the aspects of learning JavaScript, creating animations, and deploying the game to GitHub Pages.
   start: 4
   end: 6
 Sprint3:
-  title:  Building a Web Application with GitHub Pages for N@tM
-  description: Part of the process of becoming technically proficient is taking on challenges while coding, these challenges will often make a student feel uncomforatable.   But with some vision, questions, and AI research it is amazing what can be done.  Our goal is to participate in N@tM with the other CS classes and other classes from the Electives Department.
+  title: Building a Web Application with GitHub Pages for N@tM
+  description: Part of the process of becoming technically proficient is taking on challenges while coding. These challenges will often make a student feel uncomfortable. But with some vision, questions, and AI research, it is amazing what can be done. Our goal is to participate in N@tM with the other CS classes and other classes from the Electives Department.
   start: 7
   end: 12
 Sprint4:
   title: OOP Programming Fundamentals
-  description: Students, in pairs, will work on converting Mario game to OOP.  There will be a lot of code and some Tech Talks to support this activity.
+  description: Students, in pairs, will work on converting the Mario game to OOP. There will be a lot of code and some Tech Talks to support this activity.
   start: 13
   end: 15
 Sprint5:
-  title: Research, Teaching and Game Innovation
-  description: Algorithmic "Student Team" will have a teaching assignment, the Teacher of Student requests will be providing topics.  During Teach weeks teams will be teaching topics, integrating topcs, and form a mario game project.
+  title: Research, Teaching, and Game Innovation
+  description: The Algorithmic "Student Team" will have a teaching assignment. The Teacher of Student requests will be providing topics. During Teach weeks, teams will be teaching topics, integrating topics, and forming a Mario game project.
   start: 16
   end: 17
 Sprint6:
   title: Create a Final Project and N@tM 
-  description: Trimester 2 concludes with student presenting their project at N@tM.  Each person within "Student Teams" will have their own specialty feature within the student project.   Student should be able to talk about design, coding, and present features of their portion of the system.
+  description: Trimester 2 concludes with students presenting their project at N@tM. Each person within "Student Teams" will have their own specialty feature within the student project. Students should be able to talk about design, coding, and present features of their portion of the system.
   start: 18
   end: 24
