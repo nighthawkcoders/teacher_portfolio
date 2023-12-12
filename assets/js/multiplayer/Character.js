@@ -17,6 +17,8 @@ class Character extends GameObject {
         
         // gravity for character enabled by default
         this.gravityEnabled = true;
+
+        this.size();
     }
 
     getMinFrame(){
@@ -111,7 +113,7 @@ class Character extends GameObject {
         var element = this.canvas;
         if (element && element.id) {
             return {
-                id: element.id,
+                ...super.jsonifyElement(),
                 x: this.x,
                 y: this.y,
                 frameY: this.frameY
@@ -120,12 +122,14 @@ class Character extends GameObject {
     }
 
     updateInfo(json) {
+        super.updateInfo(json)
         var element = this.canvas;
         if (json.id === element.id) {
             this.x = json.x;
             this.y = json.y;
             this.frameY = json.frameY
         }
+        return json.id === element.id
     }
 
     /* Update cycle check collisions

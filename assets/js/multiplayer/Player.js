@@ -28,6 +28,9 @@ export class Player extends Character{
         document.addEventListener('keyup', this.keyupListener);
 
         GameEnv.player = this;
+
+        // players should be synced with server
+        this.shouldBeSynced = true;
     }
 
     setAnimation(key) {
@@ -117,7 +120,7 @@ export class Player extends Character{
 
     // Player action on collisions
     collisionAction() {
-        if (this.collisionData.touchPoints.other.id === "tube") {
+        if (this.collisionData.touchPoints.other.id === "tube" || this.collisionData.touchPoints.other.id?.includes("character")) {
             // Collision with the left side of the Tube
             if (this.collisionData.touchPoints.other.left) {
                 this.movement.right = false;

@@ -2,6 +2,7 @@ import GameEnv from './GameEnv.js';
 import Background from './Background.js';
 import Platform from './Platform.js';
 import Player from './Player.js';
+import Character from './Character.js';
 import Tube from './Tube.js';
 
 // Store the assets and attributes of the Game at the specific GameLevel.
@@ -64,7 +65,7 @@ class GameLevel {
             // Prepare HTML with Player Canvas (if playerImg is defined)
             if (this.playerImg) {
                 const playerCanvas = document.createElement("canvas");
-                playerCanvas.id = "character";
+                playerCanvas.id = "character" + GameEnv.id;
                 document.querySelector("#canvasContainer").appendChild(playerCanvas);
                 const playerSpeedRatio = 0.7;
                 new Player(playerCanvas, loadedImages[i], playerSpeedRatio, this.playerData);
@@ -83,7 +84,26 @@ class GameLevel {
         } catch (error) {
             console.error('Failed to load one or more images:', error);
         }
+    }
 
+    async addCharacter(id) {
+        const loadedImage = await this.loadImage(this.playerImg);
+
+        // search for player (prevent dupliactes after the `await`)
+        for (var gameObj of GameEnv.gameObjects) {
+            if (gameObj.canvas.id === "character" + id) {
+                return gameObj
+            }
+        }
+
+        // Prepare HTML with Player Canvas (if playerImg is defined)
+        if (this.playerImg) {
+            const playerCanvas = document.createElement("canvas");
+            playerCanvas.id = "character" + id;
+            document.querySelector("#canvasContainer").appendChild(playerCanvas);
+            const playerSpeedRatio = 0.7;
+            return new Character(playerCanvas, loadedImage, playerSpeedRatio, this.playerData.width, this.playerData.height);
+        }
     }
 
     // Create a function to load an image and return a Promise

@@ -19,6 +19,10 @@ class GameObject {
         this.invert = true;
         this.collisionData = {};
         this.jsonifiedElement = '';
+
+        // detemrines if this object should be synced via server
+        this.shouldBeSynced = false;
+
         // Add this object to the game object array so collision can be detected
         // among other things
         GameEnv.gameObjects.push(this); 
@@ -38,7 +42,9 @@ class GameObject {
             this.jsonifiedElement = jsonifiedElement;
 
             // send object
-            GameEnv.socket.emit("update", obj)
+            if (this.shouldBeSynced && !GameEnv.inTransition) {
+                GameEnv.socket.emit("update", obj)
+            }
         }
     }
 
@@ -54,7 +60,8 @@ class GameObject {
                     left: element.style.left,
                     top: element.style.top
                 },
-                filter: element.style.filter
+                filter: element.style.filter,
+                tag: GameEnv.currentLevel.tag
             };
         }
     }
@@ -77,6 +84,7 @@ class GameObject {
             this.canvas.style.top = json.style.top;
             this.canvas.filter = json.style.filter;
         }
+        return json.id === element.id
     }
 
     // X position getter and setter

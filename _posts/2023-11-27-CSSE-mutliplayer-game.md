@@ -178,14 +178,6 @@ image: /images/platformer/backgrounds/hills.png
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
     window.addEventListener('resize', GameEnv.resize);
 
-    // more listeners
-    GameEnv.socket.on("stateUpdate", (data) => {
-        console.log("update", data)
-        for (var gameObj of GameEnv.gameObjects) {
-            gameObj.updateInfo(data)
-        }
-    })
-
     // start game
     GameControl.gameLoop();
 
