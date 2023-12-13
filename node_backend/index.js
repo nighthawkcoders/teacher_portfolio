@@ -12,7 +12,7 @@ io.on("connection", (socket) => {
   })
 
   socket.on("disconnect", () => {
-    io.emit("disconnect", id)
+    io.emit("disconnection", id)
   })
 });
 

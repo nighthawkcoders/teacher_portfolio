@@ -114,8 +114,8 @@ class Character extends GameObject {
         if (element && element.id) {
             return {
                 ...super.jsonifyElement(),
-                x: this.x,
-                y: this.y,
+                x: this.x / GameEnv.innerWidth,
+                y: this.y / GameEnv.innerHeight,
                 frameY: this.frameY
             };
         }
@@ -125,8 +125,8 @@ class Character extends GameObject {
         super.updateInfo(json)
         var element = this.canvas;
         if (json.id === element.id) {
-            this.x = json.x;
-            this.y = json.y;
+            this.x = json.x * GameEnv.innerWidth;
+            this.y = json.y * GameEnv.innerHeight;
             this.frameY = json.frameY
         }
         return json.id === element.id
