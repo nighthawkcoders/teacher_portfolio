@@ -79,10 +79,7 @@ class GameObject {
         if (json.id === element.id) {
             this.canvas.width = json.width;
             this.canvas.height = json.height;
-            this.canvas.style = json.cssText;
-            this.canvas.style.left = json.position.left;
-            this.canvas.style.top = json.style.top;
-            this.canvas.filter = json.style.filter;
+            this.canvas.style.filter = json.filter;
         }
         return json.id === element.id
     }
