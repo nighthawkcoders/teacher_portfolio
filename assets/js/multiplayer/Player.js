@@ -31,6 +31,7 @@ export class Player extends Character{
 
         // players should be synced with server
         this.shouldBeSynced = true;
+        this.isOnTube = false;
     }
 
     setAnimation(key) {
@@ -73,7 +74,7 @@ export class Player extends Character{
         }
 
         // scene for on top of tube animation
-        if (!this.movement.down) {
+        if (!this.movement.down && this.isOnTube) {
             this.gravityEnabled = false;
             // Pause for two seconds
             setTimeout(() => {   // animation in tube
@@ -121,6 +122,7 @@ export class Player extends Character{
     // Player action on collisions
     collisionAction() {
         if (this.collisionData.touchPoints.other.id === "tube" || this.collisionData.touchPoints.other.id?.includes("character")) {
+            this.isOnTube = this.collisionData.touchPoints.other.id === "tube"
             // Collision with the left side of the Tube
             if (this.collisionData.touchPoints.other.left) {
                 this.movement.right = false;
@@ -139,6 +141,7 @@ export class Player extends Character{
             this.movement.left = true;
             this.movement.right = true;
             this.movement.down = true;
+            this.isOnTube = false;
         }
     }
     

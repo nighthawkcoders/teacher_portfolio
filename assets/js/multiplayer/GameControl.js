@@ -31,7 +31,7 @@ const GameControl = {
         toggleCanvasEffect.dispatchEvent(new Event('click'));
 
         GameEnv.socket.on("stateUpdate", this.handleSocketMessage)
-        GameEnv.socket.on("disconnect", this.handleSocketDisconnect)
+        GameEnv.socket.on("disconnection", this.handleSocketDisconnect)
         GameEnv.inTransition = false;
     },
 
