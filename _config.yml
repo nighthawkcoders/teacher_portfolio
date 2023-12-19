@@ -5,6 +5,8 @@ github_username: nighthawkcoders
 github_repo: "teacher_portfolio"
 baseurl: "/teacher_portfolio"
 future: true
+url: vibha-yganji.github.io
+baseurl: /vibha-yganji
 remote_theme: jekyll/minima
 minima:
   social_links:
