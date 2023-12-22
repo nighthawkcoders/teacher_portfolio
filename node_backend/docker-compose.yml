@@ -1,0 +1,7 @@
+version: '3'
+services:
+  web_t4:
+    image: multiplayergame
+    build: .
+    ports:
+      - "3000:3000"
