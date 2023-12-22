@@ -3,7 +3,6 @@ toc: true
 layout: post
 title: CB Quiz Reflection
 description: Collegeboard reflection
-type: collab
 ---
 
 ## Test Corrections
