@@ -163,7 +163,7 @@ image: /images/platformer/backgrounds/hills.png
      *  ==========================================
      * Start/Homme sequence
      * a.) the start level awaits for button selection
-     * b.) the start level automatically cycles to home level
+     * b.) the start level automatically cycles to the home level
      * c.) the home advances to 1st game level when button selection is made
     */
     // Start/Home screens
