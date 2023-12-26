@@ -1,9 +1,9 @@
 ---
 layout: base
-title: Dynamic Game Levels
-description: Early steps in adding levels to an OOP Game.  This includes basic player animations left-right-jump, multiple backgrounds, and a simple callback to terminate each level.
+title: Dynamic Game Levels v2.0 
+description: Increasing functionality of game objects and levels through student lessons.  This includes adding goombas, platforms, parallax backgrounds, etc.
 type: ccc
-courses: { csse: {week: 14} }
+courses: { csse: {week: 18} }
 image: /images/platformer/backgrounds/hills.png
 ---
 
@@ -31,9 +31,9 @@ image: /images/platformer/backgrounds/hills.png
 
 <script type="module">
     // Imports
-    import GameEnv from '{{site.baseurl}}/assets/js/platformer/GameEnv.js';
-    import GameLevel from '{{site.baseurl}}/assets/js/platformer/GameLevel.js';
-    import GameControl from '{{site.baseurl}}/assets/js/platformer/GameControl.js';
+    import GameEnv from '{{site.baseurl}}/assets/js/platformer2/GameEnv.js';
+    import GameLevel from '{{site.baseurl}}/assets/js/platformer2/GameLevel.js';
+    import GameControl from '{{site.baseurl}}/assets/js/platformer2/GameControl.js';
 
 
     /*  ==========================================

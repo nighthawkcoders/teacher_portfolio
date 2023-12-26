@@ -3,7 +3,7 @@ layout: base
 title: Socket.io Multiplayer Game
 description: Using socket.io for multiplayer game
 type: ccc
-courses: { csse: {week: 20} }
+courses: { csse: {week: 18} }
 image: /images/platformer/backgrounds/hills.png
 ---
 
