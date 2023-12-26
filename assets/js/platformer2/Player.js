@@ -117,6 +117,23 @@ export class Player extends Character{
 
     // Player action on collisions
     collisionAction() {
+        // Enemy collision
+        if (this.collisionData.touchPoints.other.id === "enemy") {
+            // Collision with the left side of the Enemy
+            if (this.collisionData.touchPoints.other.left) {
+                // Kill Player (Reset Game)
+            }
+            // Collision with the right side of the Enemy
+            if (this.collisionData.touchPoints.other.right) {
+                // deathController.setDeath(1);
+                // Kill Player (Reset Game)
+            }
+            // Collision with the top of the Enemy
+            if (this.collisionData.touchPoints.other.ontop) {
+                // Kill Goomba
+                // Make Mario Bounce
+            }
+        }
         if (this.collisionData.touchPoints.other.id === "tube") {
             // Collision with the left side of the Tube
             if (this.collisionData.touchPoints.other.left) {
