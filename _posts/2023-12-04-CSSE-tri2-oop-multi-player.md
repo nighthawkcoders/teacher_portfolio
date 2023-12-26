@@ -2,21 +2,21 @@
 toc: false
 comments: false
 layout: post
-title: OOP, Multi Player
-description: Start discussion on setting up two or more players in a game.  A key part of doing this is understanding all attributes in GameObject and GameEnv, serializing and esearilizing this information over the internet.
+title: OOP, Multiplayer
+description: Start a discussion on setting up two or more players in a game.  A key part of doing this is understanding all attributes in GameObject and GameEnv, serializing and deserializing this information over the internet.
 type: ccc
 courses: { csse: {week: 18} }
 ---
 
-## Multi Player
-This is a dialog on regarding consideration on how to make a Multi Player game.
+## Multiplayer
+This is a dialog on how to make a Multiplayer game.
 
 ### Multiplayer Game Loop
 Adjust the game loop to accommodate real-time updates from the server.
 Touch Point: Modify the game loop to integrate server updates and adjust the timing mechanism.
 
 ### Player Actions
-Player actions (like moving, jumping) are likely handled locally on the client side. In a multiplayer setup, these actions need to be sent to the server.
+Player actions (like moving and jumping) are likely handled locally on the client side. In a multiplayer setup, these actions need to be sent to the server.
 Touch Point: Modify handlePlayerAction to emit player actions to the server.
 
 ### JSON Representation
@@ -29,7 +29,7 @@ Touch Point: Modify GameObject and GameLevel methods to handle synchronization a
 
 ### Server-Side Game State
 The server needs to maintain the authoritative game state.
-Touch Point: Server listens for player actions, updates the game state, and broadcasts the updated state to all connected clients.
+Touch Point: The server listens for player actions, updates the game state, and broadcasts the updated state to all connected clients.
 
 ### Synchronization
 Ensure that all clients are synchronized with the server's authoritative game state.
@@ -88,7 +88,7 @@ GameEnv
 ```
 
 ## Game States
-Some of the definition above talk about "game state".
+Some of the definitions above talk about "game state".
 
 ### Positions and States of Game Objects
 The location, velocity, and state (e.g., alive, dead) of each game object (players, enemies, platforms, etc.).
@@ -115,12 +115,12 @@ Unique identifiers for players, their session information, and any relevant deta
 To make a game multiplayer or enable two machines to share the same GameLevel with different players, you would indeed need to introduce a mechanism for communication between the two instances. WebSockets are a commonly used technology for real-time bidirectional communication between clients and servers, and they can be a good choice for multiplayer games.
 
 - Server-Side Logic
-  - Implement a server to manage the game state, including the current GameLevel, player positions, and other relevant data.
+  - Implement a server to manage the game state, including the current game level, player positions, and other relevant data.
   - Use a WebSocket library on the server to handle communication with clients.
 
 - Client-Side Logic
   - Modify the existing game code on the client to interact with the server via WebSockets.
-  - When a player performs an action (e.g., moves the character), send that action to the server.
+  - When a player acts (e.g., moves the character), send that action to the server.
   - Receive updates from the server, such as the positions of other players, and update the local game state accordingly.
 
 - Synchronization
@@ -183,11 +183,11 @@ if __name__ == '__main__':
 
 ## Hacks
 
-An early step to building a multi player game requires thinking and structuring code so that data can be updated from server.
+An early step to building a multiplayer game requires thinking and structuring code so that data can be updated from the server.
 
 ### Review Elements and Data
 
-To abstract data to server, you must 1st study what that data might be.  Then, selializing data into JSON.  Inspecting on the browser enables developer to see some of the data describe in this article, here is Element data ...
+To abstract data to the server, you must 1st study what that data might be.  Then, serializing data into JSON.  Inspecting on the browser enables the developer to see some of the data described in this article, here is Element data ...
 
 ```xml
 <canvas id="background" width="754" height="331" style="width: 754px; height: 331px; position: absolute; left: 0px; top: 60px; filter: none;"></canvas>
@@ -198,8 +198,7 @@ To abstract data to server, you must 1st study what that data might be.  Then, s
 ```
 
 ### Serialize Data
-
-Objective is to log data in objects each time it is changed.  Since refresh rate is fast, it is probably a lot faster than change rate.  Logging should be assoicated with change rate.
+The objective is to log data in objects each time it is changed.  Since the refresh rate is fast, it is probably a lot faster than the change rate.  Logging should be associated with the change rate.
 
 Sample of serializing Character data
 ```javascript
