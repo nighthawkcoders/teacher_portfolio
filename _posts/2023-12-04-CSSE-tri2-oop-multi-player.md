@@ -9,7 +9,9 @@ courses: { csse: {week: 18} }
 ---
 
 ## Multiplayer
-This is a dialog on how to make a Multiplayer game.
+This is a dialog on how to make a Multiplayer game. 
+
+It may or may not be consistent with this [Implementation Ticket](https://github.com/nighthawkcoders/teacher_portfolio/issues/46)
 
 ### Multiplayer Game Loop
 Adjust the game loop to accommodate real-time updates from the server.
