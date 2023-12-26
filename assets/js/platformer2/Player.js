@@ -154,6 +154,46 @@ export class Player extends Character{
             this.movement.right = true;
             this.movement.down = true;
         }
+        if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
+            // Collision with the left side of the Platform
+            console.log("id")
+            if (this.collisionData.touchPoints.other.left && (this.topOfPlatform === true)) {
+                this.movement.right = false;
+                console.log("a")
+            }
+            // Collision with the right side of the platform
+            if (this.collisionData.touchPoints.other.right && (this.topOfPlatform === true)) {
+                this.movement.left = false;
+                console.log("b")
+            }
+            // Collision with the top of the player
+            if (this.collisionData.touchPoints.this.ontop) {
+                this.gravityEnabled = false;
+                console.log("c")
+            }
+            if (this.collisionData.touchPoints.this.bottom) {
+                this.gravityEnabled = false;
+                console.log("d")
+            }
+            if (this.collisionData.touchPoints.this.top) {
+                this.gravityEnabled = false;
+                this.topOfPlatform = true; 
+                console.log(this.topOfPlatform + "top")
+                console.log(this.gravityEnabled + "grav")
+                //console.log("e");
+            }
+            if (this.collisionData.touchPoints.this.top) {
+                this.gravityEnabled = false;
+                this.topOfPlatform = true; 
+                console.log(this.topOfPlatform + "top")
+                console.log(this.gravityEnabled + "grav")
+                //console.log("e");
+            }
+        } else {
+            // Reset colliding flags if not colliding with a platform
+            this.topOfPlatform = false;
+            this.gravityEnabled = true;
+        }
     }
     
     // Event listener key down

@@ -1,6 +1,7 @@
 import GameEnv from './GameEnv.js';
 import Background from './Background.js';
 import Platform from './Platform.js';
+import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
 import Tube from './Tube.js';
 import Enemy from './Enemy.js';
@@ -12,6 +13,7 @@ class GameLevel {
         this.tag = gameObject?.tag;
         this.backgroundImg = gameObject.background?.file;
         this.platformImg = gameObject.platform?.file;
+        this.jumpPlatformImg = gameObject.jumpPlatform?.file;
         this.playerImg = gameObject.player?.file;
         this.playerData = gameObject?.player;
         this.tubeImg = gameObject.tube?.file;
@@ -31,6 +33,9 @@ class GameLevel {
         }
         if (this.platformImg) {
             imagesToLoad.push(this.loadImage(this.platformImg));
+        }
+        if (this.jumpPlatformImg) {
+            imagesToLoad.push(this.loadImage(this.jumpPlatformImg));
         }
         if (this.playerImg) {
             imagesToLoad.push(this.loadImage(this.playerImg));
@@ -67,6 +72,16 @@ class GameLevel {
                 i++;
             }
 
+            if (this.jumpPlatformImg) {
+                const platformCanvas = document.createElement("canvas");
+                platformCanvas.id = "jumpPlatform";
+                document.querySelector("#canvasContainer").appendChild(platformCanvas);
+                const platformSpeedRatio = 0;
+                new JumpPlatform(platformCanvas, loadedImages[i], platformSpeedRatio);
+                i++;
+            }
+            
+
             // Prepare HTML with Player Canvas
             if (this.playerImg) {
                 const playerCanvas = document.createElement("canvas");
@@ -91,7 +106,8 @@ class GameLevel {
                 const enemyCanvas = document.createElement("canvas");
                 enemyCanvas.id = "enemy";
                 document.querySelector("#canvasContainer").appendChild(enemyCanvas);
-                new Enemy(enemyCanvas, loadedImages[i], 0, this.enemyData);
+                const enemySpeedRatio = 0.7;
+                new Enemy(enemyCanvas, loadedImages[i], enemySpeedRatio, this.enemyData);
                 i++;
             }
 
