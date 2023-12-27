@@ -176,7 +176,7 @@ export class Player extends Character{
         }
         else {
             this.topOfPlatform = false;
-            this.gravityEnabled = true;
+            //this.gravityEnabled = true;
         }
     }
     
