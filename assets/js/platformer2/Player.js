@@ -115,14 +115,13 @@ export class Player extends Character{
             // Collision with the top of the player
             if (this.collisionData.touchPoints.other.ontop) {
                 this.x = this.collisionData.touchPoints.other.x;
-                this.movement.down = false;
-                this.gravityEnabled = false;
+                this.movement.down = false; // stop falling
+                this.gravityEnabled = false; // stop gravity
                 // Pause for two seconds
-                setTimeout(() => {   // animation in tube
-                    // This code will be executed after the two-second delay
+                setTimeout(() => {   // animation in tube for 2 seconds
                     this.movement.down = true;
                     this.gravityEnabled = true;
-                    setTimeout(() => { // move to end of game detection
+                    setTimeout(() => { // move to end of screen for end of game detection
                         this.x = GameEnv.innerWidth + 1;
                     }, 1000);
                 }, 2000);
