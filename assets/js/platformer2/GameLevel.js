@@ -4,7 +4,7 @@ import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
 import Tube from './Tube.js';
-import Enemy from './Enemy.js';
+import Goomba from './Goomba.js';
 
 // Store the assets and attributes of the Game at the specific GameLevel.
 class GameLevel {
@@ -17,8 +17,8 @@ class GameLevel {
         this.playerImg = gameObject.player?.file;
         this.playerData = gameObject?.player;
         this.tubeImg = gameObject.tube?.file;
-        this.enemyImg = gameObject.enemy?.file;
-        this.enemyData = gameObject?.enemy;
+        this.goombaImg = gameObject.goomba?.file;
+        this.goombaData = gameObject?.goomba;
         this.isComplete = gameObject?.callback; // function that determines if level is complete
         GameEnv.levels.push(this);
     }
@@ -43,8 +43,8 @@ class GameLevel {
         if (this.tubeImg) {
             imagesToLoad.push(this.loadImage(this.tubeImg));
         }
-        if (this.enemyImg) {
-            imagesToLoad.push(this.loadImage(this.enemyImg));
+        if (this.goombaImg) {
+            imagesToLoad.push(this.loadImage(this.goombaImg));
         }
 
         try {
@@ -81,7 +81,6 @@ class GameLevel {
                 i++;
             }
             
-
             // Prepare HTML with Player Canvas
             if (this.playerImg) {
                 const playerCanvas = document.createElement("canvas");
@@ -101,13 +100,13 @@ class GameLevel {
                 i++;
             }
             
-            // Prepare HTML with Enemy Canvas
-            if (this.enemyImg) {
-                const enemyCanvas = document.createElement("canvas");
-                enemyCanvas.id = "enemy";
-                document.querySelector("#canvasContainer").appendChild(enemyCanvas);
-                const enemySpeedRatio = 0.7;
-                new Enemy(enemyCanvas, loadedImages[i], enemySpeedRatio, this.enemyData);
+            // Prepare HTML with goomba Canvas
+            if (this.goombaImg) {
+                const goombaCanvas = document.createElement("canvas");
+                goombaCanvas.id = "goomba";
+                document.querySelector("#canvasContainer").appendChild(goombaCanvas);
+                const goombaSpeedRatio = 0.7;
+                new Goomba(goombaCanvas, loadedImages[i], goombaSpeedRatio, this.goombaData);
                 i++;
             }
 

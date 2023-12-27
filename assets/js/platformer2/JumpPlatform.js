@@ -19,10 +19,9 @@ export class JumpPlatform extends GameObject {
     size() {
         // Formula for Height should be on constant ratio, using a proportion of 832
         const scaledHeight = GameEnv.innerHeight * (30/832);
-        // Formula for Width is scaled: scaledWidth/scaledHeight == this.width/this.height
-        const scaledWidth = GameEnv.innerHeight * .1;
-        const platformX = GameEnv.innerWidth * .1;
-        const platformY = GameEnv.bottom * .80;
+        const scaledWidth = GameEnv.innerHeight * .1;  // width of jump platform is 1/10 of height
+        const platformX = GameEnv.innerWidth * .2;
+        const platformY = (GameEnv.bottom - scaledHeight)  * .8;
 
         // set variables used in Display and Collision algorithms
         this.bottom = platformY;

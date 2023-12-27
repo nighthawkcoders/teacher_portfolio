@@ -34,7 +34,6 @@ export class Platform extends GameObject {
         const scaledHeight = GameEnv.backgroundHeight / 6;
 
         const canvasWidth = GameEnv.innerWidth;
-        const canvasHeight = canvasWidth / this.aspect_ratio;
         const canvasLeft = 0;
         GameEnv.platformHeight = scaledHeight;
     
