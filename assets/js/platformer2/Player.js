@@ -69,21 +69,7 @@ export class Player extends Character{
             result = (!this.isIdle && this.bottom <= this.y);
         }
 
-        // scene for on top of tube animation
-        if (!this.movement.down) {
-            this.gravityEnabled = false;
-            // Pause for two seconds
-            setTimeout(() => {   // animation in tube
-                // This code will be executed after the two-second delay
-                this.movement.down = true;
-                this.gravityEnabled = true;
-                setTimeout(() => { // move to end of game detection
-                    this.x = GameEnv.innerWidth + 1;
-                }, 1000);
-            }, 2000);
-        }
-    
-        // make sure jump has ssome velocity
+        // make sure jump has some velocity
         if (result) {
             // Adjust horizontal position during the jump
             const horizontalJumpFactor = 0.1; // Adjust this factor as needed
@@ -128,8 +114,18 @@ export class Player extends Character{
             }
             // Collision with the top of the player
             if (this.collisionData.touchPoints.other.ontop) {
-                this.movement.down = false;
                 this.x = this.collisionData.touchPoints.other.x;
+                this.movement.down = false;
+                this.gravityEnabled = false;
+                // Pause for two seconds
+                setTimeout(() => {   // animation in tube
+                    // This code will be executed after the two-second delay
+                    this.movement.down = true;
+                    this.gravityEnabled = true;
+                    setTimeout(() => { // move to end of game detection
+                        this.x = GameEnv.innerWidth + 1;
+                    }, 1000);
+                }, 2000);
             }
         } else {
             // Reset movement flags if not colliding with a tube
