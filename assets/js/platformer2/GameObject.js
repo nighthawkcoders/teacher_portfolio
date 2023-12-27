@@ -33,7 +33,7 @@ class GameObject {
     logElement() {
         var jsonifiedElement = this.stringifyElement();
         if (jsonifiedElement !== this.jsonifiedElement) {
-            console.log(jsonifiedElement);
+            //console.log(jsonifiedElement);
             this.jsonifiedElement = jsonifiedElement;
         }
     }
@@ -157,6 +157,7 @@ class GameObject {
             atFloor: (GameEnv.bottom <= this.y), // Check if the object's bottom edge is at or below the floor level
             touchPoints: {
                 this: {
+                    id: this.canvas.id,
                     top: thisCenterY < otherCenterY,
                     bottom: thisCenterY > otherCenterY,
                     left: thisCenterX > otherCenterX,

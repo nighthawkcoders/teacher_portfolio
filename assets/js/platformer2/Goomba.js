@@ -13,24 +13,41 @@ export class Goomba extends Character {
 
         //Initial Position of Goomba
         this.x = .6 * GameEnv.innerWidth;
-        this.x += this.speed;
     }
 
     update() {
-        // Check if the Goomba is at the left or right boundary
-        if (this.x <= 0 || this.x + this.width >= GameEnv.innerWidth) {
-            // Change direction by reversing the speed
+        super.update();
+        
+        // Check for boundaries
+        if (this.x <= 0 || (this.x + this.canvasWidth >= GameEnv.innerWidth) ) {
             this.speed = -this.speed;
         }
 
-        //Randomly change when the Goomba changes position
-        if (Math.random() < 0.006) {
+        // Every so often change direction
+        if (Math.random() < 0.005) {
             this.speed = Math.random() < 0.5 ? -this.speed : this.speed;
         }
-        
+
+        // Move the enemy
+        this.x += this.speed;
     }
-    
+
+    // Player action on collisions
+    collisionAction() {
+        if (this.collisionData.touchPoints.other.id === "tube") {
+            if (this.collisionData.touchPoints.other.left || this.collisionData.touchPoints.other.right) {
+                this.speed = -this.speed;            
+            }
+        }
+        if (this.collisionData.touchPoints.other.id === "player") {
+            // Collision with the top of the Enemy
+            if (this.collisionData.touchPoints.this.ontop) {
+                console.log("Bye Bye Goomba");
+                this.destroy();
+            }
+        }    
+    }
+
 }
 
-
-export default Goomba
+export default Goomba;
