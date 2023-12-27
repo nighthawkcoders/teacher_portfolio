@@ -63,6 +63,7 @@ image: /images/platformer/backgrounds/hills.png
           src: "/images/platformer/sprites/mario.png",
           width: 256,
           height: 256,
+          scaleSize: 80,
           w: { row: 10, frames: 15 },
           wa: { row: 11, frames: 15 },
           wd: { row: 10, frames: 15 },
@@ -74,6 +75,7 @@ image: /images/platformer/backgrounds/hills.png
           src: "/images/platformer/sprites/monkey.png",
           width: 40,
           height: 40,
+          scaleSize: 80,
           w: { row: 9, frames: 15 },
           wa: { row: 9, frames: 15 },
           wd: { row: 9, frames: 15 },
@@ -87,6 +89,7 @@ image: /images/platformer/backgrounds/hills.png
           src: "/images/platformer/sprites/goomba.png",
           width: 448,
           height: 452,
+          scaleSize: 60,
         }
       }
     };

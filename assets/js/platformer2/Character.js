@@ -2,12 +2,15 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    constructor(canvas, image, speedRatio, spriteWidth, spriteHeight) {
+    constructor(canvas, image, speedRatio, spriteWidth, spriteHeight, scaleSize=80) {
         super(canvas, image, speedRatio);
 
         // sprite sizes
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
+
+        // scale size
+        this.scaleSize = scaleSize;
 
         // sprint frame management
         this.minFrame = 0;
@@ -82,7 +85,7 @@ class Character extends GameObject {
     */
     size() {
         // set Canvas scale,  80 represents size of Character height when inner Height is 832px
-        var scaledCharacterHeight = GameEnv.innerHeight * (80 / 832);
+        var scaledCharacterHeight = GameEnv.innerHeight * (this.scaleSize / 832);
         var canvasScale = scaledCharacterHeight/this.spriteHeight;
         this.canvasHeight = this.spriteHeight * canvasScale;
         this.canvasWidth = this.spriteWidth * canvasScale;

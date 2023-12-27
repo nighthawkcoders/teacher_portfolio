@@ -9,6 +9,7 @@ export class Goomba extends Character {
             speedRatio,
             goombaData.width, 
             goombaData.height, 
+            goombaData.scaleSize, 
         );
 
         //Initial Position of Goomba
