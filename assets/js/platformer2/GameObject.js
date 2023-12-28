@@ -131,9 +131,9 @@ class GameObject {
     
         // Calculate center points of rectangles
         const thisCenterX = (thisRect.left + thisRect.right) / 2;
-        const thisCenterY = (thisRect.top + thisRect.bottom) / 2;
+        //const thisCenterY = (thisRect.top + thisRect.bottom) / 2;
         const otherCenterX = (otherRect.left + otherRect.right) / 2;
-        const otherCenterY = (otherRect.top + otherRect.bottom) / 2;
+        //const otherCenterY = (otherRect.top + otherRect.bottom) / 2;
     
         // Calculate hitbox constants
         const percentage = 0.5; 
@@ -158,15 +158,15 @@ class GameObject {
             touchPoints: {
                 this: {
                     id: this.canvas.id,
-                    top: thisCenterY < otherCenterY,
-                    bottom: thisCenterY > otherCenterY,
+                    top: thisTop < otherRect.bottom,
+                    bottom: thisBottom > otherRect.top,
                     left: thisCenterX > otherCenterX,
                     right: thisCenterX < otherCenterX,
                 },
                 other: {
                     id: other.canvas.id,
-                    top: thisCenterY > otherCenterY,
-                    bottom: thisCenterY < otherCenterY,
+                    top: thisBottom > otherRect.top,
+                    bottom: thisTop < otherRect.bottom,
                     left: thisCenterX < otherCenterX,
                     right: thisCenterX > otherCenterX,
                     ontop: Math.abs(thisBottom - otherRect.top) <= GameEnv.gravity,
