@@ -134,17 +134,15 @@ export class Player extends Character{
         }
         // Gomba collision
         if (this.collisionData.touchPoints.other.id === "goomba") {
-            if (!this.collisionData.touchPoints.other.bottom) {
-                // Collision with the left side of the Enemy
-                if (this.collisionData.touchPoints.other.left) {
-                    // Game over
-                    this.x = GameEnv.innerWidth + 1;
-                }
-                // Collision with the right side of the Enemy
-                if (this.collisionData.touchPoints.other.right) {
-                    // Game over
-                    this.x = GameEnv.innerWidth + 1;
-                }
+            // Collision with the left side of the Enemy
+            if (this.collisionData.touchPoints.other.left) {
+                // Game over
+                this.x = GameEnv.innerWidth + 1;
+            }
+            // Collision with the right side of the Enemy
+            if (this.collisionData.touchPoints.other.right) {
+                // Game over
+                this.x = GameEnv.innerWidth + 1;
             }
         }
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
@@ -157,7 +155,7 @@ export class Player extends Character{
                 this.movement.left = false;
             }
             if (this.collisionData.touchPoints.this.bottom) {
-                this.gravityEnabled = false;
+               this.gravityEnabled = false;
             }
             if (this.collisionData.touchPoints.this.top) {
                 this.topOfPlatform = true; 
