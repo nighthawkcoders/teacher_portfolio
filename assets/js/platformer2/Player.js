@@ -136,16 +136,13 @@ export class Player extends Character{
         if (this.collisionData.touchPoints.other.id === "goomba") {
             // Collision with the left side of the Enemy
             if (this.collisionData.touchPoints.other.left) {
-                GameEnv.setDeath();
+                // Game over
+                this.x = GameEnv.innerWidth + 1;
             }
             // Collision with the right side of the Enemy
             if (this.collisionData.touchPoints.other.right) {
-                GameEnv.setDeath();
-            }
-            // Collision with the top of the Enemy
-            if (this.collisionData.touchPoints.other.ontop) {
-                console.log("Bye Goomba");
-                //GameEnv.setDeath();
+                // Game over
+                this.x = GameEnv.innerWidth + 1;
             }
         }
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
@@ -157,21 +154,17 @@ export class Player extends Character{
             if (this.collisionData.touchPoints.other.right && (this.topOfPlatform === true)) {
                 this.movement.left = false;
             }
-            // Collision with the top of the player
-            if (this.collisionData.touchPoints.this.ontop) {
-                this.gravityEnabled = false;
-            }
             if (this.collisionData.touchPoints.this.bottom) {
                 this.gravityEnabled = false;
             }
             if (this.collisionData.touchPoints.this.top) {
-                this.gravityEnabled = false;
                 this.topOfPlatform = true; 
+                this.gravityEnabled = false;
             }
         }
-        else {
+        else if (this.topOfPlatform) {
             this.topOfPlatform = false;
-            //this.gravityEnabled = true;
+            this.gravityEnabled = true;
         }
     }
     
