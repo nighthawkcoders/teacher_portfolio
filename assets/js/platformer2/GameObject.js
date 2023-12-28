@@ -136,9 +136,13 @@ class GameObject {
         //const otherCenterY = (otherRect.top + otherRect.bottom) / 2;
     
         // Calculate hitbox constants
-        const percentage = 0.5; 
-        const widthReduction = thisRect.width * percentage;
-        const heightReduction = thisRect.height * percentage;
+        const widthPercentage = 0.5;
+        var heightPercentage = 0.5; 
+        if (this.canvas.id === "player" && other.canvas.id === "jumpPlatform") {
+            heightPercentage = 0.0;
+        }
+        const widthReduction = thisRect.width * widthPercentage;
+        const heightReduction = thisRect.height * heightPercentage;
     
         // Build hitbox by subtracting reductions from the left, right, top, and bottom
         const thisLeft = thisRect.left + widthReduction;
