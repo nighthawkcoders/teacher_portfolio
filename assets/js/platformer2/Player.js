@@ -113,7 +113,7 @@ export class Player extends Character{
                 this.movement.left = false;
             }
             // Collision with the top of the player
-            if (this.collisionData.touchPoints.other.ontop) {
+            if (this.collisionData.touchPoints.other.bottom) {
                 this.x = this.collisionData.touchPoints.other.x;
                 this.movement.down = false; // stop falling
                 this.gravityEnabled = false; // stop gravity

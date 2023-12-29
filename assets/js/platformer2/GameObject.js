@@ -176,7 +176,6 @@ class GameObject {
                     bottom: (thisRect.bottom >= otherRect.top) && !(Math.abs(thisRect.bottom - otherRect.bottom) <= GameEnv.gravity),
                     left: thisCenterX < otherCenterX, 
                     right: thisCenterX > otherCenterX,
-                    ontop: Math.abs(thisBottom - otherRect.top) <= GameEnv.gravity,
                     x: otherRect.left,
                 },
             },
