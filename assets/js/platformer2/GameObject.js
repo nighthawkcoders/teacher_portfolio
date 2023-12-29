@@ -172,14 +172,16 @@ class GameObject {
                 },
                 other: {
                     id: other.canvas.id,
-                    bottom: thisRect.bottom > otherRect.top, 
-                    top: thisRect.top < otherRect.bottom && (GameEnv.bottom - GameEnv.gravity) < otherRect.bottom,
+                    bottom: thisRect.bottom > otherRect.top, //backwards: lower number is on top 
+                    top: thisRect.bottom < otherRect.top,
+                    left: thisCenterX < otherCenterX,
+                    right: thisCenterX > otherCenterX,
+                    ontop: Math.abs(thisBottom - otherRect.top) <= GameEnv.gravity,
+                    thisRectTop: thisRect.top,
                     thisRectBottom: thisRect.bottom,
                     otherRectTop: otherRect.top,
+                    otherRectBottom: otherRect.bottom,
                     gameEnvBottom: GameEnv.bottom,
-                    left: thisCenterX < otherCenterX,
-                    right: thisCenterX > otherCenterX && thisRect.top > otherRect.bottom,
-                    ontop: Math.abs(thisBottom - otherRect.top) <= GameEnv.gravity,
                 },
             },
         };
