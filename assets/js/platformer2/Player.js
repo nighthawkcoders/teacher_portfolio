@@ -146,17 +146,6 @@ export class Player extends Character{
             }
         }
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
-            // Collision with the left side of the Tub
-            if (this.collisionData.touchPoints.other.left && (this.topOfPlatform === true)) {
-                this.movement.right = false;
-            }
-            // Collision with the right side of the Tube
-            if (this.collisionData.touchPoints.other.right && (this.topOfPlatform === true)) {
-                this.movement.left = false;
-            }
-            if (this.collisionData.touchPoints.this.bottom) {
-               this.gravityEnabled = false;
-            }
             if (this.collisionData.touchPoints.this.top) {
                 this.topOfPlatform = true; 
                 this.gravityEnabled = false;
