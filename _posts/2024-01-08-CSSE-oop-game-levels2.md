@@ -34,6 +34,14 @@ image: /images/platformer/backgrounds/hills.png
     import GameEnv from '{{site.baseurl}}/assets/js/platformer2/GameEnv.js';
     import GameLevel from '{{site.baseurl}}/assets/js/platformer2/GameLevel.js';
     import GameControl from '{{site.baseurl}}/assets/js/platformer2/GameControl.js';
+    import Background from '{{site.baseurl}}/assets/js/platformer2/Background.js'
+    import BackgroundHills from '{{site.baseurl}}/assets/js/platformer2/BackgroundHills.js';
+    import BackgroundMountains from '{{site.baseurl}}/assets/js/platformer2/BackgroundMountains.js';
+    import Platform from '{{site.baseurl}}/assets/js/platformer2/Platform.js';
+    import JumpPlatform from '{{site.baseurl}}/assets/js/platformer2/JumpPlatform.js';
+    import Player from '{{site.baseurl}}/assets/js/platformer2/Player.js';
+    import Tube from '{{site.baseurl}}/assets/js/platformer2/Tube.js';
+    import Goomba from '{{site.baseurl}}/assets/js/platformer2/Goomba.js';
 
 
     /*  ==========================================
@@ -172,12 +180,32 @@ image: /images/platformer/backgrounds/hills.png
      * c.) the home advances to 1st game level when button selection is made
     */
     // Start/Home screens
+    
     new GameLevel( {tag: "start", callback: startGameCallback } );
-    new GameLevel( {tag: "home", background: assets.backgrounds.start, callback: homeScreenCallback } );
-    // Game screens
-    new GameLevel( {tag: "hills", backgroundHills: assets.backgrounds.hills, backgroundMountains: assets.backgrounds.mountains, platform: assets.platforms.grass, jumpPlatform: assets.platforms.bricks, player: assets.players.mario, goomba: assets.enemies.goomba, tube: assets.obstacles.tube, callback: testerCallBack } );
+    var homeGameObjects = [
+      { name:'background', class: Background, id: 'background', speedRatio: 0, data: assets.backgrounds.start}
+    ];
+    new GameLevel( {tag: "home",  callback: homeScreenCallback, objects: homeGameObjects } );
+    
+    // Hills Game screens
+    var hillsGameObjects = [
+      // GameObject order is important
+      { name: 'backgroundMountains', class: BackgroundMountains, id: 'background', speedRatio: 0, data: assets.backgrounds.mountains },
+      { name: 'backgroundHills', class: BackgroundHills, id: 'background', speedRatio: 0, data: assets.backgrounds.hills },
+      { name: 'platform', class: Platform, id: 'platform', speedRatio: 0, data: assets.platforms.grass },
+      { name: 'jumpPlatform', class: JumpPlatform, id: 'jumpPlatform', speedRatio: 0, data: assets.platforms.bricks },
+      { name: 'goomba', class: Goomba, id: 'goomba', speedRatio: 0.7, data: assets.enemies.goomba },
+      { name: 'player', class: Player, id: 'player', speedRatio: 0.7, data: assets.players.mario },
+      { name: 'tube', class: Tube, id: 'tube', speedRatio: 0, data: assets.obstacles.tube },
+    ];
+    new GameLevel( {tag: "hills", callback: testerCallBack, objects: hillsGameObjects } );
+
     // Game Over screen
-    new GameLevel( {tag: "end", background: assets.backgrounds.end, callback: gameOverCallBack } );
+    var endGameObjects = [
+      { name:'background', class: Background, id: 'background', speedRatio: 0, data: assets.backgrounds.end}
+    ];
+    new GameLevel( {tag: "end",  callback: gameOverCallBack, objects: endGameObjects } );
+
 
     /*  ==========================================
      *  ========== Game Control ==================

@@ -1,36 +1,12 @@
 import GameEnv from './GameEnv.js';
-import Background from './Background.js'
-import BackgroundHills from './BackgroundHills.js';
-import BackgroundMountains from './BackgroundMountains.js';
-import Platform from './Platform.js';
-import JumpPlatform from './JumpPlatform.js';
-import Player from './Player.js';
-import Tube from './Tube.js';
-import Goomba from './Goomba.js';
 
 class GameLevel {
     constructor(levelObject) {
-        // order objects are loaded is important
-        this.gameObjects = [
-            { name: 'backgroundMountains', class: BackgroundMountains, id: 'background', speedRatio: 0 },
-            { name: 'backgroundHills', class: BackgroundHills, id: 'background', speedRatio: 0 },
-            { name: 'background', class: Background, id: 'background', speedRatio: 0 },
-            { name: 'platform', class: Platform, id: 'platform', speedRatio: 0 },
-            { name: 'jumpPlatform', class: JumpPlatform, id: 'jumpPlatform', speedRatio: 0 },
-            { name: 'player', class: Player, id: 'player', speedRatio: 0.7 },
-            { name: 'tube', class: Tube, id: 'tube', speedRatio: 0 },
-            { name: 'goomba', class: Goomba, id: 'goomba', speedRatio: 0.7 },
-        ];
-        
         this.tag = levelObject?.tag; // friendly name used to identify level
         this.isComplete = levelObject?.callback; // function that determines if level is complete
-
-        // associate data with each gameObject
-        this.gameObjects.forEach(obj => {
-            obj.file = levelObject[obj.name]?.file;
-            obj.data = levelObject[obj.name];
-        });
-
+        // assign game objects
+        this.levelObjects = levelObject;        
+        this.gameObjects = this.levelObjects?.objects || [];
         // store GameLevel instance in GameEnv
         GameEnv.levels.push(this);
     }
@@ -39,9 +15,9 @@ class GameLevel {
     async load() {
         try {
             for (const obj of this.gameObjects) {
-                if (obj.file) {
+                if (obj.data.file) {
                     // load image
-                    obj.image = await this.loadImage(obj.file);
+                    obj.image = await this.loadImage(obj.data.file);
                     const canvas = document.createElement("canvas");
                     canvas.id = obj.id;
                     document.querySelector("#canvasContainer").appendChild(canvas);
@@ -49,9 +25,9 @@ class GameLevel {
                     new obj.class(canvas, obj.image, obj.speedRatio, obj.data);
                 }
             }
-        // halt game if any images fail to load
+        // halt game if any images or new objects fail
         } catch (error) {
-            console.error('Failed to load one or more images:', error);
+            console.error('Failed to load one or more GameLevel objects:', error);
         }
     }
 
