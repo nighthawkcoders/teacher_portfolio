@@ -161,27 +161,23 @@ class GameObject {
                 thisTop < otherRect.bottom &&
                 thisBottom > otherRect.top
             ),
-            atFloor: (GameEnv.bottom <= this.y), // Check if the object's bottom edge is at or below the floor level
+            atFloor: (GameEnv.bottom <= this.y),
             touchPoints: {
                 this: {
                     id: this.canvas.id,
-                    top: thisTop < otherRect.bottom,
-                    bottom: thisBottom > otherRect.top,
+                    top: thisRect.bottom > otherRect.top,
+                    bottom: (thisRect.bottom <= otherRect.top) && !(Math.abs(thisRect.bottom - otherRect.bottom) <= GameEnv.gravity),
                     left: thisCenterX > otherCenterX,
                     right: thisCenterX < otherCenterX,
                 },
                 other: {
                     id: other.canvas.id,
-                    bottom: thisRect.bottom > otherRect.top, //backwards: lower number is on top 
                     top: thisRect.bottom < otherRect.top,
-                    left: thisCenterX < otherCenterX,
+                    bottom: (thisRect.bottom >= otherRect.top) && !(Math.abs(thisRect.bottom - otherRect.bottom) <= GameEnv.gravity),
+                    left: thisCenterX < otherCenterX, 
                     right: thisCenterX > otherCenterX,
                     ontop: Math.abs(thisBottom - otherRect.top) <= GameEnv.gravity,
-                    thisRectTop: thisRect.top,
-                    thisRectBottom: thisRect.bottom,
-                    otherRectTop: otherRect.top,
-                    otherRectBottom: otherRect.bottom,
-                    gameEnvBottom: GameEnv.bottom,
+                    x: otherRect.left,
                 },
             },
         };
