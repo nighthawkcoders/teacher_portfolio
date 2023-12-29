@@ -15,7 +15,7 @@ export class Player extends Character{
 
         // Player control data
         this.pressedKeys = {};
-        this.movement = {left: true, right: true};
+        this.movement = {left: true, right: true, down: true};
         this.isIdle = true;
         this.stashKey = "d"; // initial key
 
@@ -144,15 +144,15 @@ export class Player extends Character{
         }
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
             if (this.collisionData.touchPoints.this.top) {
-                this.topOfPlatform = true; 
+                this.movement.down = false; 
                 this.gravityEnabled = false;
-                this.setAnimation(this.stashKey);
+                this.setAnimation(this.stashKey); // set animation to direction
             }
         }
-        else if (this.topOfPlatform) {
-            this.topOfPlatform = false;
+        else if (this.movement.down === false) {
+            this.movement.down = true;             
             this.gravityEnabled = true;
-            this.isGravityAnimation("w");
+            this.isGravityAnimation("w"); // set animation to jump/falling
         }
     }
     
