@@ -15,7 +15,7 @@ export class Player extends Character{
 
         // Player control data
         this.pressedKeys = {};
-        this.movement = {left: true, right: true, down: true};
+        this.movement = {left: true, right: true};
         this.isIdle = true;
         this.stashKey = "d"; // initial key
 
@@ -94,7 +94,7 @@ export class Player extends Character{
             if (this.movement.right) this.x += this.speed;  // Move to right
         }
         if (this.isGravityAnimation("w")) {
-            if (this.movement.down) this.y -= (this.bottom * .50);  // jump 50% higher than bottom
+            if (this.gravityEnabled) this.y -= (this.bottom * .50);  // jump 50% higher than bottom
         } 
 
         // Perform super update actions
@@ -115,11 +115,9 @@ export class Player extends Character{
             // Collision with the top of the player
             if (this.collisionData.touchPoints.other.bottom) {
                 this.x = this.collisionData.touchPoints.other.x;
-                this.movement.down = false; // stop falling
                 this.gravityEnabled = false; // stop gravity
                 // Pause for two seconds
                 setTimeout(() => {   // animation in tube for 2 seconds
-                    this.movement.down = true;
                     this.gravityEnabled = true;
                     setTimeout(() => { // move to end of screen for end of game detection
                         this.x = GameEnv.innerWidth + 1;
@@ -130,7 +128,6 @@ export class Player extends Character{
             // Reset movement flags if not colliding with a tube
             this.movement.left = true;
             this.movement.right = true;
-            this.movement.down = true;
         }
         // Gomba collision
         if (this.collisionData.touchPoints.other.id === "goomba") {
