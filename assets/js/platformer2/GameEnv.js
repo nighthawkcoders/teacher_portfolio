@@ -16,9 +16,9 @@ export class GameEnv {
     static prevBottom
     static floor;
     static prevFloor;
-    // background speed
-    static backgroundSpeed = 0;
-    static backgroundSpeed2 = 0;
+    // background speed control
+    static backgroundHillsSpeed = 0;
+    static backgroundMountainsSpeed = 0;
     // calculated size properties
     static backgroundHeight = 0;
     static platformHeight = 0;

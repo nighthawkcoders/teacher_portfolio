@@ -12,7 +12,6 @@ export class Background extends GameObject {
     *  width is extent of background image
     */
     update() {
-        this.speed = GameEnv.backgroundSpeed;
         this.x = (this.x - this.speed) % this.width;
     }
 
@@ -21,7 +20,6 @@ export class Background extends GameObject {
      * x + width to y is wrap around draw
     */
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.drawImage(this.image, this.x, this.y);
         this.ctx.drawImage(this.image, this.x + this.width, this.y);
     }
