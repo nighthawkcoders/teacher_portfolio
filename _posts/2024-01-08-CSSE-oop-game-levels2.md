@@ -116,7 +116,7 @@ image: /images/platformer/backgrounds/hills.png
     */
 
     // Level completion tester
-    function testerCallBack() {
+    function playerOffScreenCallBack() {
         // console.log(GameEnv.player?.x)
         if (GameEnv.player?.x > GameEnv.innerWidth) {
             return true;
@@ -198,7 +198,8 @@ image: /images/platformer/backgrounds/hills.png
       { name: 'player', class: Player, id: 'player', speedRatio: 0.7, data: assets.players.mario },
       { name: 'tube', class: Tube, id: 'tube', speedRatio: 0, data: assets.obstacles.tube },
     ];
-    new GameLevel( {tag: "hills", callback: testerCallBack, objects: hillsGameObjects } );
+    new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
+
 
     // Game Over screen
     var endGameObjects = [
