@@ -9,7 +9,7 @@ import Tube from './Tube.js';
 import Goomba from './Goomba.js';
 
 class GameLevel {
-    constructor(gameObject) {
+    constructor(levelObject) {
         // order objects are loaded is important
         this.gameObjects = [
             { name: 'backgroundMountains', class: BackgroundMountains, id: 'background', speedRatio: 0 },
@@ -22,13 +22,13 @@ class GameLevel {
             { name: 'goomba', class: Goomba, id: 'goomba', speedRatio: 0.7 },
         ];
         
-        this.tag = gameObject?.tag; // friendly name used to identify level
-        this.isComplete = gameObject?.callback; // function that determines if level is complete
+        this.tag = levelObject?.tag; // friendly name used to identify level
+        this.isComplete = levelObject?.callback; // function that determines if level is complete
 
         // associate data with each gameObject
         this.gameObjects.forEach(obj => {
-            obj.file = gameObject[obj.name]?.file;
-            obj.data = gameObject[obj.name];
+            obj.file = levelObject[obj.name]?.file;
+            obj.data = levelObject[obj.name];
         });
 
         // store GameLevel instance in GameEnv
