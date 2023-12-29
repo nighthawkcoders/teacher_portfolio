@@ -41,8 +41,8 @@ export class Goomba extends Character {
             }
         }
         if (this.collisionData.touchPoints.other.id === "player") {
-            // Collision with the top of the Enemy
-            if (this.collisionData.touchPoints.this.bottom) {
+            // Collision: Top of Goomba with Bottom of Player
+            if (this.collisionData.touchPoints.other.bottom) {
                 console.log("Bye Bye Goomba");
                 this.x = GameEnv.innerWidth + 1;
                 this.destroy();

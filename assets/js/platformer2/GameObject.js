@@ -141,6 +141,9 @@ class GameObject {
         if (this.canvas.id === "player" && other.canvas.id === "jumpPlatform") {
             heightPercentage = 0.0;
         }
+        if (this.canvas.id === "goomba" && other.canvas.id === "player") {
+            heightPercentage = 0.0;
+        }
         const widthReduction = thisRect.width * widthPercentage;
         const heightReduction = thisRect.height * heightPercentage;
     
@@ -169,12 +172,14 @@ class GameObject {
                 },
                 other: {
                     id: other.canvas.id,
-                    top: thisBottom > otherRect.top,
-                    bottom: thisTop < otherRect.bottom,
+                    bottom: thisRect.bottom > otherRect.top, 
+                    top: thisRect.top < otherRect.bottom && (GameEnv.bottom - GameEnv.gravity) < otherRect.bottom,
+                    thisRectBottom: thisRect.bottom,
+                    otherRectTop: otherRect.top,
+                    gameEnvBottom: GameEnv.bottom,
                     left: thisCenterX < otherCenterX,
-                    right: thisCenterX > otherCenterX,
+                    right: thisCenterX > otherCenterX && thisRect.top > otherRect.bottom,
                     ontop: Math.abs(thisBottom - otherRect.top) <= GameEnv.gravity,
-                    x: otherRect.left
                 },
             },
         };
