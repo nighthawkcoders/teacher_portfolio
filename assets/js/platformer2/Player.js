@@ -15,7 +15,7 @@ export class Player extends Character{
 
         // Player control data
         this.pressedKeys = {};
-        this.movement = {left: true, right: true, down: true};
+        this.movement = {up: true, down: true, left: true, right: true};
         this.isIdle = true;
         this.stashKey = "d"; // initial key
 
@@ -66,7 +66,7 @@ export class Player extends Character{
     
         // verify key is in active animations
         if (key in this.pressedKeys) {
-            result = (!this.isIdle && this.bottom <= this.y);
+            result = (!this.isIdle && (this.bottom <= this.y || this.movement.down === false));
         }
 
         // make sure jump has some velocity
@@ -77,7 +77,7 @@ export class Player extends Character{
         }
     
         // return to directional animation (direction?)
-        if (this.bottom <= this.y) {
+        if (this.bottom <= this.y || this.movement.down === false) {
             this.setAnimation(this.stashKey);
         }
     
@@ -94,7 +94,7 @@ export class Player extends Character{
             if (this.movement.right) this.x += this.speed;  // Move to right
         }
         if (this.isGravityAnimation("w")) {
-            if (this.gravityEnabled) this.y -= (this.bottom * .50);  // jump 50% higher than bottom
+            if (this.gravityEnabled || !this.movement.down) this.y -= (this.bottom * .50);  // jump 50% higher than bottom
         } 
 
         // Perform super update actions
@@ -129,7 +129,7 @@ export class Player extends Character{
             this.movement.left = true;
             this.movement.right = true;
         }
-        // Gomba collision
+        // Gomba left/right collision
         if (this.collisionData.touchPoints.other.id === "goomba") {
             // Collision with the left side of the Enemy
             if (this.collisionData.touchPoints.other.left) {
@@ -142,13 +142,16 @@ export class Player extends Character{
                 this.x = GameEnv.innerWidth + 1;
             }
         }
+        // Jump platform collision
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
+            // Player is on top of the Jump platform
             if (this.collisionData.touchPoints.this.top) {
                 this.movement.down = false; 
                 this.gravityEnabled = false;
                 this.setAnimation(this.stashKey); // set animation to direction
             }
         }
+        // Fall Off edge of Jump platform
         else if (this.movement.down === false) {
             this.movement.down = true;             
             this.gravityEnabled = true;
