@@ -169,6 +169,13 @@ export class Player extends Character{
                 // player active
                 this.isIdle = false;
             }
+            // parallax background speed start
+            if (key === "a") {
+                GameEnv.backgroundSpeed2 = -0.1;
+            }
+            if (key === "d") {
+                GameEnv.backgroundSpeed2 = 0.1;
+            }
         }
     }
 
@@ -181,7 +188,14 @@ export class Player extends Character{
             }
             this.setAnimation(key);  
             // player idle
-            this.isIdle = true;     
+            this.isIdle = true; 
+            // parallax background speed stop
+            if (key === "a") {
+                GameEnv.backgroundSpeed2 = 0;
+            }
+            if (key === "d") {
+                GameEnv.backgroundSpeed2 = 0;
+            }    
         }
     }
 
