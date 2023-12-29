@@ -171,9 +171,11 @@ export class Player extends Character{
             }
             // parallax background speed start
             if (key === "a") {
+                GameEnv.backgroundSpeed = -0.4;
                 GameEnv.backgroundSpeed2 = -0.1;
             }
             if (key === "d") {
+                GameEnv.backgroundSpeed = 0.4;
                 GameEnv.backgroundSpeed2 = 0.1;
             }
         }
@@ -191,9 +193,11 @@ export class Player extends Character{
             this.isIdle = true; 
             // parallax background speed stop
             if (key === "a") {
+                GameEnv.backgroundSpeed = 0;
                 GameEnv.backgroundSpeed2 = 0;
             }
             if (key === "d") {
+                GameEnv.backgroundSpeed = 0;
                 GameEnv.backgroundSpeed2 = 0;
             }    
         }
