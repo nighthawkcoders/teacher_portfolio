@@ -48,7 +48,7 @@ export class Player extends Character{
             this.setFrameX(animation.idleFrame.column)
             this.setMinFrame(animation.idleFrame.frames);
         }
-    }i
+    }
     
     // check for matching animation
     isAnimation(key) {
