@@ -1,5 +1,6 @@
 import GameEnv from './GameEnv.js';
-import Background from './Background.js';
+import Background from './Background.js'
+import Background2 from './Background2.js';;
 import Platform from './Platform.js';
 import JumpPlatform from './JumpPlatform.js';
 import Player from './Player.js';
@@ -12,6 +13,7 @@ class GameLevel {
         // conditional assignments from GameObject to instance variables
         this.tag = gameObject?.tag;
         this.backgroundImg = gameObject.background?.file;
+        this.backgroundImg2 = gameObject.background2?.file;
         this.platformImg = gameObject.platform?.file;
         this.jumpPlatformImg = gameObject.jumpPlatform?.file;
         this.playerImg = gameObject.player?.file;
@@ -28,6 +30,9 @@ class GameLevel {
         
         // test for presence of Images
         const imagesToLoad = [];
+        if (this.backgroundImg2) {
+            imagesToLoad.push(this.loadImage(this.backgroundImg2));
+        }
         if (this.backgroundImg) {
             imagesToLoad.push(this.loadImage(this.backgroundImg));
         }
@@ -51,6 +56,15 @@ class GameLevel {
             // Do not proceed until images are loaded
             const loadedImages = await Promise.all(imagesToLoad);
             var i = 0;
+
+            if (this.backgroundImg2) {
+                const backgroundCanvas = document.createElement("canvas");
+                backgroundCanvas.id = "background";
+                document.querySelector("#canvasContainer").appendChild(backgroundCanvas);
+                const backgroundSpeedRatio = 0;
+                new Background2(backgroundCanvas, loadedImages[i], backgroundSpeedRatio);
+                i++;
+            }
 
             // Prepare HTML with Background Canvas (if backgroundImg is defined)
             if (this.backgroundImg) {
