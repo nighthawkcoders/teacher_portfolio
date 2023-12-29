@@ -146,11 +146,13 @@ export class Player extends Character{
             if (this.collisionData.touchPoints.this.top) {
                 this.topOfPlatform = true; 
                 this.gravityEnabled = false;
+                this.setAnimation(this.stashKey);
             }
         }
         else if (this.topOfPlatform) {
             this.topOfPlatform = false;
             this.gravityEnabled = true;
+            this.isGravityAnimation("w");
         }
     }
     
