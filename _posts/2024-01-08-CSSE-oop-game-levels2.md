@@ -149,9 +149,9 @@ image: /images/platformer/backgrounds/hills.png
       return true;
     }
 
-    // Home screen exits on Game Begin button
+    // Home screen exits on the Game Begin button
     function homeScreenCallback() {
-      // gameBegin hidden means game has started
+      // gameBegin hidden means the game has started
       const id = document.getElementById("gameBegin");
       return id.hidden;
     }
