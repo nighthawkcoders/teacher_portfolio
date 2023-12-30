@@ -74,6 +74,7 @@ image: /images/platformer/backgrounds/hills.png
           width: 256,
           height: 256,
           scaleSize: 80,
+          speedRatio: 0.7,
           w: { row: 10, frames: 15 },
           wa: { row: 11, frames: 15 },
           wd: { row: 10, frames: 15 },
@@ -86,6 +87,7 @@ image: /images/platformer/backgrounds/hills.png
           width: 40,
           height: 40,
           scaleSize: 80,
+          speedRatio: 0.7,
           w: { row: 9, frames: 15 },
           wa: { row: 9, frames: 15 },
           wd: { row: 9, frames: 15 },
@@ -98,15 +100,16 @@ image: /images/platformer/backgrounds/hills.png
           width: 46,
           height: 52.5,
           scaleSize: 60,
+          speedRatio: 0.7,
           w: {row: 1, frames: 4},
           wa: {row: 1, frames: 4},
           wd: {row: 2, frames: 4},
           idle: { row: 6, frames: 1, idleFrame: {column: 1, frames: 0} },
           a: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Right Movement
+          s: {}, // Stop the movement 
           d: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Left Movement 
           runningLeft: { row: 5, frames: 4, idleFrame: {column: 1, frames: 0} },
           runningRight: { row: 4, frames: 4, idleFrame: {column: 1, frames: 0} },
-          s: {}, // Stop the movement 
         }
       },
       enemies: {
@@ -115,6 +118,7 @@ image: /images/platformer/backgrounds/hills.png
           width: 448,
           height: 452,
           scaleSize: 60,
+          speedRatio: 0.7,
         }
       }
     };
@@ -200,37 +204,37 @@ image: /images/platformer/backgrounds/hills.png
     
     new GameLevel( {tag: "start", callback: startGameCallback } );
     var homeGameObjects = [
-      { name:'background', class: Background, id: 'background', speedRatio: 0, data: assets.backgrounds.start}
+      { name:'background', class: Background, id: 'background', data: assets.backgrounds.start}
     ];
     new GameLevel( {tag: "home",  callback: homeScreenCallback, objects: homeGameObjects } );
     
     // Hills Game screens
     var hillsGameObjects = [
       // GameObject order is important
-      { name: 'backgroundMountains', class: BackgroundMountains, id: 'background', speedRatio: 0, data: assets.backgrounds.mountains },
-      { name: 'backgroundHills', class: BackgroundHills, id: 'background', speedRatio: 0, data: assets.backgrounds.hills },
-      { name: 'platform', class: Platform, id: 'platform', speedRatio: 0, data: assets.platforms.grass },
-      { name: 'jumpPlatform', class: JumpPlatform, id: 'jumpPlatform', speedRatio: 0, data: assets.platforms.bricks },
-      { name: 'goomba', class: Goomba, id: 'goomba', speedRatio: 0.7, data: assets.enemies.goomba },
-      { name: 'player', class: Player, id: 'player', speedRatio: 0.7, data: assets.players.mario },
-      { name: 'tube', class: Tube, id: 'tube', speedRatio: 0, data: assets.obstacles.tube },
+      { name: 'backgroundMountains', class: BackgroundMountains, id: 'background', data: assets.backgrounds.mountains },
+      { name: 'backgroundHills', class: BackgroundHills, id: 'background', data: assets.backgrounds.hills },
+      { name: 'platform', class: Platform, id: 'platform', data: assets.platforms.grass },
+      { name: 'jumpPlatform', class: JumpPlatform, id: 'jumpPlatform', data: assets.platforms.bricks },
+      { name: 'goomba', class: Goomba, id: 'goomba', data: assets.enemies.goomba },
+      { name: 'player', class: Player, id: 'player', data: assets.players.mario },
+      { name: 'tube', class: Tube, id: 'tube', data: assets.obstacles.tube },
     ];
     new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
 
     // Lopez Game screens
     var lopezGameObjects = [
       // GameObject order is important
-      { name: 'avenida', class: Background, id: 'background', speedRatio: 0, data: assets.backgrounds.avenida },
-      { name: 'platform', class: Platform, id: 'platform', speedRatio: 0, data: assets.platforms.grass },
-      { name: 'goomba', class: Goomba, id: 'goomba', speedRatio: 0.7, data: assets.enemies.goomba },
-      { name: 'lopez', class: Player, id: 'player', speedRatio: 0.7, data: assets.players.lopez },
+      { name: 'avenida', class: Background, id: 'background', data: assets.backgrounds.avenida },
+      { name: 'platform', class: Platform, id: 'platform', data: assets.platforms.grass },
+      { name: 'goomba', class: Goomba, id: 'goomba', data: assets.enemies.goomba },
+      { name: 'lopez', class: Player, id: 'player', data: assets.players.lopez },
     ];
     new GameLevel( {tag: "lopez", callback: playerOffScreenCallBack, objects: lopezGameObjects } );
 
 
     // Game Over screen
     var endGameObjects = [
-      { name:'background', class: Background, id: 'background', speedRatio: 0, data: assets.backgrounds.end}
+      { name:'background', class: Background, id: 'background', data: assets.backgrounds.end}
     ];
     new GameLevel( {tag: "end",  callback: gameOverCallBack, objects: endGameObjects } );
 

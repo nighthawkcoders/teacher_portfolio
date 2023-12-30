@@ -2,7 +2,7 @@ import GameEnv from './GameEnv.js';
 
 class GameObject {
     // container for all game objects in game
-    constructor(canvas, image, speedRatio) {
+    constructor(canvas, image, data) {
         this.x = 0;
         this.y = 0;
         this.frame = 0;
@@ -14,7 +14,7 @@ class GameObject {
         this.collisionWidth = 0;
         this.collisionHeight = 0;
         this.aspect_ratio = this.width / this.height;
-        this.speedRatio = speedRatio;
+        this.speedRatio = data?.speedRatio || 0;
         this.speed = GameEnv.gameSpeed * this.speedRatio;
         this.invert = true;
         this.collisionData = {};

@@ -2,8 +2,8 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 export class Platform extends GameObject {
-    constructor(canvas, image, speedRatio) {
-        super(canvas, image, speedRatio);
+    constructor(canvas, image, data) {
+        super(canvas, image, data);
     }
 
     /* Update uses modulo math to cycle to start at width extent

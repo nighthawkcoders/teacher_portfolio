@@ -3,14 +3,8 @@ import Character from './Character.js';
 
 export class Player extends Character{
     // constructors sets up Character object 
-    constructor(canvas, image, speedRatio, data){
-        super(canvas, 
-            image, 
-            speedRatio,
-            data.width, 
-            data.height, 
-            data.scaleSize, 
-        );
+    constructor(canvas, image, data){
+        super(canvas, image, data);
         // Player Data is required for Animations
         this.playerData = data;
 

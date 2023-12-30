@@ -22,7 +22,7 @@ class GameLevel {
                     canvas.id = obj.id;
                     document.querySelector("#canvasContainer").appendChild(canvas);
                     // game element instance
-                    new obj.class(canvas, obj.image, obj.speedRatio, obj.data);
+                    new obj.class(canvas, obj.image, obj.data);
                 }
             }
         // halt game if any images or new objects fail

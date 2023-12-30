@@ -2,15 +2,15 @@ import GameEnv from './GameEnv.js';
 import GameObject from './GameObject.js';
 
 class Character extends GameObject {
-    constructor(canvas, image, speedRatio, spriteWidth, spriteHeight, scaleSize=80) {
-        super(canvas, image, speedRatio);
+    constructor(canvas, image, data) {
+        super(canvas, image, data);
 
         // sprite sizes
-        this.spriteWidth = spriteWidth;
-        this.spriteHeight = spriteHeight;
+        this.spriteWidth = data.width;
+        this.spriteHeight = data.height;
 
         // scale size
-        this.scaleSize = scaleSize;
+        this.scaleSize = data?.scaleSize || 80;
 
         // sprint frame management
         this.minFrame = 0;
