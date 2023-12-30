@@ -94,7 +94,11 @@ export class Player extends Character{
             if (this.movement.right) this.x += this.speed;  // Move to right
         }
         if (this.isGravityAnimation("w")) {
-            if (this.gravityEnabled || !this.movement.down) this.y -= (this.bottom * .50);  // jump 50% higher than bottom
+            if (this.gravityEnabled) {
+                this.y -= (this.bottom * .50);  // bottom jump height
+            } else if (this.movement.down===false) {
+                this.y -= (this.bottom * .30);  // platform jump height
+            }
         } 
 
         // Perform super update actions
@@ -146,16 +150,15 @@ export class Player extends Character{
         if (this.collisionData.touchPoints.other.id === "jumpPlatform") {
             // Player is on top of the Jump platform
             if (this.collisionData.touchPoints.this.top) {
-                this.movement.down = false; 
+                this.movement.down = false; // enable movement down without gravity
                 this.gravityEnabled = false;
                 this.setAnimation(this.stashKey); // set animation to direction
             }
         }
         // Fall Off edge of Jump platform
         else if (this.movement.down === false) {
-            this.movement.down = true;             
+            this.movement.down = true;          
             this.gravityEnabled = true;
-            this.isGravityAnimation("w"); // set animation to jump/falling
         }
     }
     
