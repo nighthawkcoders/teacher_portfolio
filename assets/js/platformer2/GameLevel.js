@@ -15,6 +15,8 @@ class GameLevel {
         this.levelObjects = levelObject;        
         // The tag is a friendly name used to identify the level.
         this.tag = levelObject?.tag;
+        // The passive property determines if the level is passive (i.e., not playable).
+        this.passive = levelObject?.passive;
         // The isComplete property is a function that determines if the level is complete.
         // build conditions to make determination of complete (e.g., all enemies defeated, player reached the end of the screen, etc.)
         this.isComplete = levelObject?.callback;

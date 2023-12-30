@@ -13,7 +13,7 @@ image: /images/platformer/backgrounds/hills.png
       z-index: 2; /*Ensure the controls are on top*/
   }
 
-  .sidenav {
+  .sidebar {
       position: fixed;
       height: 100%; /* 100% Full-height */
       width: 0px; /* 0 width - change this with JavaScript */
@@ -22,13 +22,13 @@ image: /images/platformer/backgrounds/hills.png
       left: 0;
       overflow-x: hidden; /* Disable horizontal scroll */
       padding-top: 60px; /* Place content 60px from the top */
-      transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+      transition: 0.5s; /* 0.5-second transition effect to slide in the sidebar */
       background-color: black; 
   }
 </style>
 
 <!-- Prepare DOM elements -->
-<div id="mySidebar" class="sidenav">
+<div id="sidebar" class="sidebar">
   <a href="javascript:void(0)" id="toggleSettingsBar1" class="closebtn">&times;</a>
 </div>
 
@@ -242,9 +242,9 @@ image: /images/platformer/backgrounds/hills.png
     // Start/Home screens
     new GameLevel( {tag: "start", callback: startGameCallback } );
     const homeGameObjects = [
-      { name:'background', id: 'background', class: Background, data: assets.backgrounds.start}
+      { name:'background', id: 'background', class: Background, data: assets.backgrounds.start }
     ];
-    new GameLevel( {tag: "home",  callback: homeScreenCallback, objects: homeGameObjects } );
+    new GameLevel( {tag: "home",  callback: homeScreenCallback, objects: homeGameObjects, passive: true } );
     
     // 1st Game Play is Hills Game screen
     const hillsGameObjects = [
@@ -286,11 +286,11 @@ image: /images/platformer/backgrounds/hills.png
      * 4.) The "gameLoop" allows the game player (user) to interact with game objects 
     */
 
-    // create listeners for user events
+    //Create listeners for user events
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
     window.addEventListener('resize', GameEnv.resize);
 
-    // start game loop and activate game objects
+    //Start game loop and activate game objects
     GameControl.gameLoop();
 
     /*  ==========================================
@@ -298,18 +298,23 @@ image: /images/platformer/backgrounds/hills.png
      *  ==========================================
     */
 
-    var myController = new Controller();
-    myController.initialize();
-    var table = myController.levelTable;
-    document.getElementById("mySidebar").append(table);
+    // Initiliaze Game settings controller 
+    var settingsControl = new Controller();
+    settingsControl.initialize();
 
+    // Get/Construct an HTML table/menu from GameEnv.levels[]
+    var table = settingsControl.levelTable;
+    // Add table/menu to sidebar menu
+    document.getElementById("sidebar").append(table);
+
+    // Listener/toggle for sidebar open and close
     var toggle = false;
-      function toggleWidth(){
-        toggle = !toggle;
-        document.getElementById("mySidebar").style.width = toggle?"250px":"0px";
-      }
-      document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
-      document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
+    function toggleWidth(){
+      toggle = !toggle;
+      document.getElementById("sidebar").style.width = toggle?"250px":"0px";
+    }
+    document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
+    document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
 
 
 </script>

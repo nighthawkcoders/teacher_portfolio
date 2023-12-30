@@ -42,7 +42,7 @@ export class Controller extends LocalStorage{
 
     get levelTable(){
         var t = document.createElement("table");
-        //create header
+        //create table header
         var header = document.createElement("tr");
         var th1 = document.createElement("th");
         th1.innerText = "#";
@@ -52,11 +52,14 @@ export class Controller extends LocalStorage{
         header.append(th2);
         t.append(header);
 
-        //create other rows
-        for(let i = 0;i < GameEnv.levels.length;i++){
+        //create table rows/data
+        for(let i = 0, count = 1;i < GameEnv.levels.length;i++){
+            if (GameEnv.levels[i].passive) //skip passive levels
+                continue; 
+            // add level to table
             var row = document.createElement("tr");
             var td1 = document.createElement("td");
-            td1.innerText = String(i);
+            td1.innerText = String(count++); //human counter
             row.append(td1);
             var td2 = document.createElement("td");
             td2.innerText = GameEnv.levels[i].tag;
@@ -69,6 +72,7 @@ export class Controller extends LocalStorage{
 
         return t; //returns <table> element
     }
+
     get speedDiv(){
         var div = document.createElement("div"); //container
 
