@@ -110,8 +110,8 @@ image: /images/platformer/backgrounds/hills.png
      *  ==========================================
     */
 
-    // Define assets for the game
-    var assets = {
+    // Define assets and properties for the Game Objects in JSON text
+    const assets = {
       obstacles: {
         tube: { src: "/images/platformer/obstacles/tube.png" },
       },
@@ -184,7 +184,7 @@ image: /images/platformer/backgrounds/hills.png
       }
     };
 
-    // add File to assets, ensure valid site.baseurl
+    // Defile File location in assets, ensure valid site.baseurl
     Object.keys(assets).forEach(category => {
       Object.keys(assets[category]).forEach(assetName => {
         assets[category][assetName]['file'] = "{{site.baseurl}}" + assets[category][assetName].src;
@@ -194,45 +194,56 @@ image: /images/platformer/backgrounds/hills.png
     /*  ==========================================
      *  ========== Game Level setup ==============
      *  ==========================================
-     * Start/Homme sequence
-     * a.) the start level awaits for button selection
-     * b.) the start level automatically cycles to the home level
-     * c.) the home advances to 1st game level when button selection is made
+     * Game Level sequence as defined in code below
+     * a.) tag: "start" level defines button selection and cycles to the home screen
+     * b.) tag: "home" defines background and awaits "start" button selection and cycles to 1st game level
+     * c.) tag: "hills" and other levels before the tag: "end" define key gameplay levels
+     * d.) tag: "end"  concludes levels with game-over-screen background and replay selections
+     * 
+     * Definitions of new Object creations and JSON text
+     * 1.) "new GameLevel" adds game objects to the game environment.
+     * * JSON key/value "tag" is for readability
+     * * JSON "callback" contains function references defined above that terminate a GameLevel
+     * * JSON "objects" contain zero to many "GameObject"(s)
+     * 2.) "GameObject"(s) are defined using JSON text and include name, id, class, and data.  
+     * * JSON key/value "name" is for readability
+     * * JSON "id" is a GameObject classification and may have program significance
+     * * JSON "class" is the JavaScript class that defines the GameObject
+     * * JSON "data" contains assets and properties for the GameObject
     */
+
     // Start/Home screens
-    
     new GameLevel( {tag: "start", callback: startGameCallback } );
-    var homeGameObjects = [
+    const homeGameObjects = [
       { name:'background', id: 'background', class: Background, data: assets.backgrounds.start}
     ];
     new GameLevel( {tag: "home",  callback: homeScreenCallback, objects: homeGameObjects } );
     
-    // Hills Game screens
-    var hillsGameObjects = [
+    // 1st Game Play is Hills Game screen
+    const hillsGameObjects = [
       // GameObject order is important
       { name: 'mountains', id: 'background', class: BackgroundMountains,  data: assets.backgrounds.mountains },
       { name: 'hills', id: 'background', class: BackgroundHills, data: assets.backgrounds.hills },
-      { name: 'platform', id: 'platform', class: Platform, data: assets.platforms.grass },
-      { name: 'jumpPlatform', id: 'jumpPlatform', class: JumpPlatform, data: assets.platforms.bricks },
+      { name: 'grass', id: 'platform', class: Platform, data: assets.platforms.grass },
+      { name: 'bricks', id: 'jumpPlatform', class: JumpPlatform, data: assets.platforms.bricks },
       { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba },
       { name: 'mario', id: 'player', class: Player, data: assets.players.mario },
       { name: 'tube', id: 'tube', class: Tube, data: assets.obstacles.tube },
     ];
     new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
 
-    // Avenida Game screens
-    var avenidaGameObjects = [
+    // 2nd Game Play is Avenida Game screen
+    const avenidaGameObjects = [
       // GameObject order is important
       { name: 'avenida', id: 'background', class: Background, data: assets.backgrounds.avenida },
-      { name: 'platform', id: 'platform', class: Platform, data: assets.platforms.grass },
+      { name: 'grass', id: 'platform', class: Platform, data: assets.platforms.grass },
       { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba },
       { name: 'lopez', id: 'player', class: Player, data: assets.players.lopez },
     ];
-    new GameLevel( {tag: "lopez", callback: playerOffScreenCallBack, objects: avenidaGameObjects } );
-
+    new GameLevel( {tag: "avenida", callback: playerOffScreenCallBack, objects: avenidaGameObjects } );
 
     // Game Over screen
-    var endGameObjects = [
+    const endGameObjects = [
       { name:'background', class: Background, id: 'background', data: assets.backgrounds.end}
     ];
     new GameLevel( {tag: "end",  callback: gameOverCallBack, objects: endGameObjects } );
@@ -247,7 +258,7 @@ image: /images/platformer/backgrounds/hills.png
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
     window.addEventListener('resize', GameEnv.resize);
 
-    // start game
+    // start game loop
     GameControl.gameLoop();
 
 </script>
