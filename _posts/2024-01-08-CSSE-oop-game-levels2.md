@@ -215,7 +215,7 @@ image: /images/platformer/backgrounds/hills.png
       { name: 'player', class: Player, id: 'player', speedRatio: 0.7, data: assets.players.mario },
       { name: 'tube', class: Tube, id: 'tube', speedRatio: 0, data: assets.obstacles.tube },
     ];
-    //new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
+    new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
 
     // Lopez Game screens
     var lopezGameObjects = [
