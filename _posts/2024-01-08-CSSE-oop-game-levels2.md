@@ -48,7 +48,7 @@ image: /images/platformer/backgrounds/hills.png
      *  ==========================================
     */
 
-    // Level completion tester
+    // Level completion callback, based on Player off screen
     function playerOffScreenCallBack() {
         // console.log(GameEnv.player?.x)
         if (GameEnv.player?.x > GameEnv.innerWidth) {
@@ -59,14 +59,16 @@ image: /images/platformer/backgrounds/hills.png
         }
     }
 
-    // Helper function for button click
+    // Helper function that waits for a button click event
     function waitForButton(buttonName) {
-      // resolve the button click
+      // Returns a promise that resolves when the button is clicked
       return new Promise((resolve) => {
           const waitButton = document.getElementById(buttonName);
+          // Listener function to resolve the promise when the button is clicked
           const waitButtonListener = () => {
               resolve(true);
           };
+          // Add the listener to the button's click event
           waitButton.addEventListener('click', waitButtonListener);
       });
     }
@@ -74,10 +76,12 @@ image: /images/platformer/backgrounds/hills.png
     // Start button callback
     async function startGameCallback() {
       const id = document.getElementById("gameBegin");
+      // Unhide the gameBegin button
       id.hidden = false;
       
-      // Use waitForRestart to wait for the restart button click
+      // Wait for the startGame button to be clicked
       await waitForButton('startGame');
+      // Hide the gameBegin button after it is clicked
       id.hidden = true;
       
       return true;
@@ -95,7 +99,7 @@ image: /images/platformer/backgrounds/hills.png
       const id = document.getElementById("gameOver");
       id.hidden = false;
       
-      // Use waitForRestart to wait for the restart button click
+      // Wait for the restart button to be clicked
       await waitForButton('restartGame');
       id.hidden = true;
       
@@ -252,13 +256,18 @@ image: /images/platformer/backgrounds/hills.png
     /*  ==========================================
      *  ========== Game Control ==================
      *  ==========================================
+     * Game Control manages the Game Environment
+     * 1.) There are one-to-many GameLevels under control
+     * 2.) GameControl cycles through GameLevels when the "callback" condition is true
+     * 3.) Each GameLevel is on a looping timer, called the "gameLoop"
+     * 4.) The "gameLoop" allows the game player (user) to interact with game objects 
     */
 
-    // create listeners
+    // create listeners for user events
     toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
     window.addEventListener('resize', GameEnv.resize);
 
-    // start game loop
+    // start game loop and activate game objects
     GameControl.gameLoop();
 
 </script>

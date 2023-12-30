@@ -1,37 +1,57 @@
 import GameEnv from './GameEnv.js';
 
+/**
+ * The GameLevel class represents a level in the game.
+ * Each instance of GameLevel contains all the game objects that make up a level,
+ * and provides methods to load the images for these objects and create instances of them.
+ */
 class GameLevel {
+    /**
+     * Creates a new GameLevel.
+     * @param {Object} levelObject - An object containing the properties for the level.
+     */
     constructor(levelObject) {
-        this.tag = levelObject?.tag; // friendly name used to identify level
-        this.isComplete = levelObject?.callback; // function that determines if level is complete
-        // assign game objects
+        // The levelObjects property stores the levelObject parameter.
         this.levelObjects = levelObject;        
+        // The tag is a friendly name used to identify the level.
+        this.tag = levelObject?.tag;
+        // The isComplete property is a function that determines if the level is complete.
+        // build conditions to make determination of complete (e.g., all enemies defeated, player reached the end of the level)
+        this.isComplete = levelObject?.callback;
+        // The gameObjects property is an array of the game objects for this level.
         this.gameObjects = this.levelObjects?.objects || [];
-        // store GameLevel instance in GameEnv
+        // Each GameLevel instance is stored in the GameEnv.levels array.
         GameEnv.levels.push(this);
     }
 
-    // load each image and create a new instance of the game element
+    /**
+     * Loads the images for the game objects and creates new instances of them.
+     * If any image fails to load, an error is logged and the game is halted.
+     */
     async load() {
         try {
             for (const obj of this.gameObjects) {
                 if (obj.data.file) {
-                    // load image
+                    // Load the image for the game object.
                     obj.image = await this.loadImage(obj.data.file);
+                    // Create a new canvas for the game object.
                     const canvas = document.createElement("canvas");
                     canvas.id = obj.id;
                     document.querySelector("#canvasContainer").appendChild(canvas);
-                    // game element instance
+                    // Create a new instance of the game object.
                     new obj.class(canvas, obj.image, obj.data);
                 }
             }
-        // halt game if any images or new objects fail
         } catch (error) {
             console.error('Failed to load one or more GameLevel objects:', error);
         }
     }
 
-    // image loader
+    /**
+     * Loads an image from a given source.
+     * @param {string} src - The source of the image.
+     * @returns {Promise} A promise that resolves with the loaded image.
+     */
     async loadImage(src) {
         return new Promise((resolve, reject) => {
             const image = new Image();
