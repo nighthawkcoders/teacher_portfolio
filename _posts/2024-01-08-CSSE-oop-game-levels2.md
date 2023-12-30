@@ -8,25 +8,46 @@ image: /images/platformer/backgrounds/hills.png
 ---
 
 <style>
-    #gameBegin, #controls, #gameOver {
-        position: relative;
-        z-index: 2; /*Ensure the controls are on top*/
-    }
+  #gameBegin, #controls, #gameOver, #settings {
+      position: relative;
+      z-index: 2; /*Ensure the controls are on top*/
+  }
+
+  .sidenav {
+      position: fixed;
+      height: 100%; /* 100% Full-height */
+      width: 0px; /* 0 width - change this with JavaScript */
+      z-index: 3; /* Stay on top */
+      top: 0; /* Stay at the top */
+      left: 0;
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 60px; /* Place content 60px from the top */
+      transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+      background-color: black; 
+  }
 </style>
 
 <!-- Prepare DOM elements -->
+<div id="mySidebar" class="sidenav">
+  <a href="javascript:void(0)" id="toggleSettingsBar1" class="closebtn">&times;</a>
+</div>
+
 <!-- Wrap both the canvas and controls in a container div -->
 <div id="canvasContainer">
-    <div id="gameBegin" hidden>
-        <button id="startGame">Start Game</button>
-    </div>
-    <div id="controls"> <!-- Controls -->
-        <!-- Background controls -->
-        <button id="toggleCanvasEffect">Invert</button>
-    </div>
-    <div id="gameOver" hidden>
-        <button id="restartGame">Restart</button>
-    </div>
+  <div id="gameBegin" hidden>
+      <button id="startGame">Start Game</button>
+  </div>
+  <div id="controls"> <!-- Controls -->
+      <!-- Background controls -->
+      <button id="toggleCanvasEffect">Invert</button>
+  </div>
+  <div id="settings"> <!-- Controls -->
+      <!-- Background controls -->
+      <button id="toggleSettingsBar">Settings</button>
+  </div>
+  <div id="gameOver" hidden>
+      <button id="restartGame">Restart</button>
+  </div>
 </div>
 
 <script type="module">
@@ -34,6 +55,8 @@ image: /images/platformer/backgrounds/hills.png
     import GameEnv from '{{site.baseurl}}/assets/js/platformer2/GameEnv.js';
     import GameLevel from '{{site.baseurl}}/assets/js/platformer2/GameLevel.js';
     import GameControl from '{{site.baseurl}}/assets/js/platformer2/GameControl.js';
+    import Controller from '{{site.baseurl}}/assets/js/platformer2/Controller.js';
+
     import Background from '{{site.baseurl}}/assets/js/platformer2/Background.js'
     import BackgroundHills from '{{site.baseurl}}/assets/js/platformer2/BackgroundHills.js';
     import BackgroundMountains from '{{site.baseurl}}/assets/js/platformer2/BackgroundMountains.js';
@@ -269,5 +292,24 @@ image: /images/platformer/backgrounds/hills.png
 
     // start game loop and activate game objects
     GameControl.gameLoop();
+
+    /*  ==========================================
+     *  ========== Settings Control ==============
+     *  ==========================================
+    */
+
+    var myController = new Controller();
+    myController.initialize();
+    var table = myController.levelTable;
+    document.getElementById("mySidebar").append(table);
+
+    var toggle = false;
+      function toggleWidth(){
+        toggle = !toggle;
+        document.getElementById("mySidebar").style.width = toggle?"250px":"0px";
+      }
+      document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
+      document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
+
 
 </script>
