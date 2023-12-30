@@ -16,7 +16,7 @@ class GameLevel {
         // The tag is a friendly name used to identify the level.
         this.tag = levelObject?.tag;
         // The isComplete property is a function that determines if the level is complete.
-        // build conditions to make determination of complete (e.g., all enemies defeated, player reached the end of the level)
+        // build conditions to make determination of complete (e.g., all enemies defeated, player reached the end of the screen, etc.)
         this.isComplete = levelObject?.callback;
         // The gameObjects property is an array of the game objects for this level.
         this.gameObjects = this.levelObjects?.objects || [];
