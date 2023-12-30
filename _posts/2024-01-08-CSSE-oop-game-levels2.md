@@ -43,6 +43,67 @@ image: /images/platformer/backgrounds/hills.png
     import Tube from '{{site.baseurl}}/assets/js/platformer2/Tube.js';
     import Goomba from '{{site.baseurl}}/assets/js/platformer2/Goomba.js';
 
+    /*  ==========================================
+     *  ===== Game Level Call Backs ==============
+     *  ==========================================
+    */
+
+    // Level completion tester
+    function playerOffScreenCallBack() {
+        // console.log(GameEnv.player?.x)
+        if (GameEnv.player?.x > GameEnv.innerWidth) {
+            GameEnv.player = null; // reset for next level
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Helper function for button click
+    function waitForButton(buttonName) {
+      // resolve the button click
+      return new Promise((resolve) => {
+          const waitButton = document.getElementById(buttonName);
+          const waitButtonListener = () => {
+              resolve(true);
+          };
+          waitButton.addEventListener('click', waitButtonListener);
+      });
+    }
+
+    // Start button callback
+    async function startGameCallback() {
+      const id = document.getElementById("gameBegin");
+      id.hidden = false;
+      
+      // Use waitForRestart to wait for the restart button click
+      await waitForButton('startGame');
+      id.hidden = true;
+      
+      return true;
+    }
+
+    // Home screen exits on the Game Begin button
+    function homeScreenCallback() {
+      // gameBegin hidden means the game has started
+      const id = document.getElementById("gameBegin");
+      return id.hidden;
+    }
+
+    // Game Over callback
+    async function gameOverCallBack() {
+      const id = document.getElementById("gameOver");
+      id.hidden = false;
+      
+      // Use waitForRestart to wait for the restart button click
+      await waitForButton('restartGame');
+      id.hidden = true;
+      
+      // Change currentLevel to start/restart value of null
+      GameEnv.currentLevel = null;
+
+      return true;
+    }
 
     /*  ==========================================
      *  ======= Data Definitions =================
@@ -131,68 +192,6 @@ image: /images/platformer/backgrounds/hills.png
     });
 
     /*  ==========================================
-     *  ===== Game Level Call Backs ==============
-     *  ==========================================
-    */
-
-    // Level completion tester
-    function playerOffScreenCallBack() {
-        // console.log(GameEnv.player?.x)
-        if (GameEnv.player?.x > GameEnv.innerWidth) {
-            GameEnv.player = null; // reset for next level
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // Helper function for button click
-    function waitForButton(buttonName) {
-      // resolve the button click
-      return new Promise((resolve) => {
-          const waitButton = document.getElementById(buttonName);
-          const waitButtonListener = () => {
-              resolve(true);
-          };
-          waitButton.addEventListener('click', waitButtonListener);
-      });
-    }
-
-    // Start button callback
-    async function startGameCallback() {
-      const id = document.getElementById("gameBegin");
-      id.hidden = false;
-      
-      // Use waitForRestart to wait for the restart button click
-      await waitForButton('startGame');
-      id.hidden = true;
-      
-      return true;
-    }
-
-    // Home screen exits on the Game Begin button
-    function homeScreenCallback() {
-      // gameBegin hidden means the game has started
-      const id = document.getElementById("gameBegin");
-      return id.hidden;
-    }
-
-    // Game Over callback
-    async function gameOverCallBack() {
-      const id = document.getElementById("gameOver");
-      id.hidden = false;
-      
-      // Use waitForRestart to wait for the restart button click
-      await waitForButton('restartGame');
-      id.hidden = true;
-      
-      // Change currentLevel to start/restart value of null
-      GameEnv.currentLevel = null;
-
-      return true;
-    }
-
-    /*  ==========================================
      *  ========== Game Level setup ==============
      *  ==========================================
      * Start/Homme sequence
@@ -204,32 +203,32 @@ image: /images/platformer/backgrounds/hills.png
     
     new GameLevel( {tag: "start", callback: startGameCallback } );
     var homeGameObjects = [
-      { name:'background', class: Background, id: 'background', data: assets.backgrounds.start}
+      { name:'background', id: 'background', class: Background, data: assets.backgrounds.start}
     ];
     new GameLevel( {tag: "home",  callback: homeScreenCallback, objects: homeGameObjects } );
     
     // Hills Game screens
     var hillsGameObjects = [
       // GameObject order is important
-      { name: 'backgroundMountains', class: BackgroundMountains, id: 'background', data: assets.backgrounds.mountains },
-      { name: 'backgroundHills', class: BackgroundHills, id: 'background', data: assets.backgrounds.hills },
-      { name: 'platform', class: Platform, id: 'platform', data: assets.platforms.grass },
-      { name: 'jumpPlatform', class: JumpPlatform, id: 'jumpPlatform', data: assets.platforms.bricks },
-      { name: 'goomba', class: Goomba, id: 'goomba', data: assets.enemies.goomba },
-      { name: 'player', class: Player, id: 'player', data: assets.players.mario },
-      { name: 'tube', class: Tube, id: 'tube', data: assets.obstacles.tube },
+      { name: 'mountains', id: 'background', class: BackgroundMountains,  data: assets.backgrounds.mountains },
+      { name: 'hills', id: 'background', class: BackgroundHills, data: assets.backgrounds.hills },
+      { name: 'platform', id: 'platform', class: Platform, data: assets.platforms.grass },
+      { name: 'jumpPlatform', id: 'jumpPlatform', class: JumpPlatform, data: assets.platforms.bricks },
+      { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba },
+      { name: 'mario', id: 'player', class: Player, data: assets.players.mario },
+      { name: 'tube', id: 'tube', class: Tube, data: assets.obstacles.tube },
     ];
     new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
 
-    // Lopez Game screens
-    var lopezGameObjects = [
+    // Avenida Game screens
+    var avenidaGameObjects = [
       // GameObject order is important
-      { name: 'avenida', class: Background, id: 'background', data: assets.backgrounds.avenida },
-      { name: 'platform', class: Platform, id: 'platform', data: assets.platforms.grass },
-      { name: 'goomba', class: Goomba, id: 'goomba', data: assets.enemies.goomba },
-      { name: 'lopez', class: Player, id: 'player', data: assets.players.lopez },
+      { name: 'avenida', id: 'background', class: Background, data: assets.backgrounds.avenida },
+      { name: 'platform', id: 'platform', class: Platform, data: assets.platforms.grass },
+      { name: 'goomba', id: 'goomba', class: Goomba, data: assets.enemies.goomba },
+      { name: 'lopez', id: 'player', class: Player, data: assets.players.lopez },
     ];
-    new GameLevel( {tag: "lopez", callback: playerOffScreenCallBack, objects: lopezGameObjects } );
+    new GameLevel( {tag: "lopez", callback: playerOffScreenCallBack, objects: avenidaGameObjects } );
 
 
     // Game Over screen
