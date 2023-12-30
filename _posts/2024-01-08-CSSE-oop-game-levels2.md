@@ -62,6 +62,7 @@ image: /images/platformer/backgrounds/hills.png
       backgrounds: {
         start: { src: "/images/platformer/backgrounds/home.png" },
         hills: { src: "/images/platformer/backgrounds/hills.png" },
+        avenida: { src: "/images/platformer/backgrounds/avenida.png" },
         mountains: { src: "/images/platformer/backgrounds/mountains.jpg" },
         planet: { src: "/images/platformer/backgrounds/planet.jpg" },
         castles: { src: "/images/platformer/backgrounds/castles.png" },
@@ -91,6 +92,18 @@ image: /images/platformer/backgrounds/hills.png
           a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } },
           s: { row: 12, frames: 15 },
           d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
+        },
+        lopez: {
+          src: "/images/platformer/lopezanimation.png", 
+          width: 46,
+          height: 52.5,
+          scaleSize: 80,
+          idle: { row: 6, frames: 1, idleFrame: {column: 1, frames: 0} },
+          a: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Right Movement
+          d: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Left Movement 
+          runningLeft: { row: 5, frames: 4, idleFrame: {column: 1, frames: 0} },
+          runningRight: { row: 4, frames: 4, idleFrame: {column: 1, frames: 0} },
+          s: {}, // Stop the movement 
         }
       },
       enemies: {
@@ -119,6 +132,7 @@ image: /images/platformer/backgrounds/hills.png
     function playerOffScreenCallBack() {
         // console.log(GameEnv.player?.x)
         if (GameEnv.player?.x > GameEnv.innerWidth) {
+            GameEnv.player = null; // reset for next level
             return true;
         } else {
             return false;
@@ -199,6 +213,16 @@ image: /images/platformer/backgrounds/hills.png
       { name: 'tube', class: Tube, id: 'tube', speedRatio: 0, data: assets.obstacles.tube },
     ];
     new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
+
+    // Lopez Game screens
+    var lopezGameObjects = [
+      // GameObject order is important
+      { name: 'avenida', class: Background, id: 'background', speedRatio: 0, data: assets.backgrounds.avenida },
+      { name: 'platform', class: Platform, id: 'platform', speedRatio: 0, data: assets.platforms.grass },
+      { name: 'goomba', class: Goomba, id: 'goomba', speedRatio: 0.7, data: assets.enemies.goomba },
+      //{ name: 'lopez', class: Lopez, id: 'player', speedRatio: 0.7, data: assets.players.lopez },
+    ];
+    new GameLevel( {tag: "lopez", callback: playerOffScreenCallBack, objects: lopezGameObjects } );
 
 
     // Game Over screen
