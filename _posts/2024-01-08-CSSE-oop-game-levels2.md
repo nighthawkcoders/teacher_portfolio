@@ -94,10 +94,13 @@ image: /images/platformer/backgrounds/hills.png
           d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
         },
         lopez: {
-          src: "/images/platformer/lopezanimation.png", 
+          src: "/images/platformer/sprites/lopezanimation.png", 
           width: 46,
           height: 52.5,
-          scaleSize: 80,
+          scaleSize: 60,
+          w: {row: 1, frames: 4},
+          wa: {row: 1, frames: 4},
+          wd: {row: 2, frames: 4},
           idle: { row: 6, frames: 1, idleFrame: {column: 1, frames: 0} },
           a: { row: 1, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Right Movement
           d: { row: 2, frames: 4, idleFrame: { column: 1, frames: 0 } }, // Left Movement 
@@ -212,7 +215,7 @@ image: /images/platformer/backgrounds/hills.png
       { name: 'player', class: Player, id: 'player', speedRatio: 0.7, data: assets.players.mario },
       { name: 'tube', class: Tube, id: 'tube', speedRatio: 0, data: assets.obstacles.tube },
     ];
-    new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
+    //new GameLevel( {tag: "hills", callback: playerOffScreenCallBack, objects: hillsGameObjects } );
 
     // Lopez Game screens
     var lopezGameObjects = [
@@ -220,7 +223,7 @@ image: /images/platformer/backgrounds/hills.png
       { name: 'avenida', class: Background, id: 'background', speedRatio: 0, data: assets.backgrounds.avenida },
       { name: 'platform', class: Platform, id: 'platform', speedRatio: 0, data: assets.platforms.grass },
       { name: 'goomba', class: Goomba, id: 'goomba', speedRatio: 0.7, data: assets.enemies.goomba },
-      //{ name: 'lopez', class: Lopez, id: 'player', speedRatio: 0.7, data: assets.players.lopez },
+      { name: 'lopez', class: Player, id: 'player', speedRatio: 0.7, data: assets.players.lopez },
     ];
     new GameLevel( {tag: "lopez", callback: playerOffScreenCallBack, objects: lopezGameObjects } );
 

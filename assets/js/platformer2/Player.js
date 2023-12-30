@@ -3,15 +3,16 @@ import Character from './Character.js';
 
 export class Player extends Character{
     // constructors sets up Character object 
-    constructor(canvas, image, speedRatio, playerData){
+    constructor(canvas, image, speedRatio, data){
         super(canvas, 
             image, 
             speedRatio,
-            playerData.width, 
-            playerData.height, 
+            data.width, 
+            data.height, 
+            data.scaleSize, 
         );
         // Player Data is required for Animations
-        this.playerData = playerData;
+        this.playerData = data;
 
         // Player control data
         this.pressedKeys = {};
