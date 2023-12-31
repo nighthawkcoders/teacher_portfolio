@@ -1,12 +1,17 @@
 export class GameEnv {
+    
     // game managed object
     static currentLevel = null;
     static player = null;
     static levels = [];
     static gameObjects = [];
 
-    // game attributes
+    // game speed controls
     static gameSpeed = 2;
+    static backgroundHillsSpeed = 0;
+    static backgroundMountainsSpeed = 0;
+
+    // game attributes
     static gravity = 3;
     static innerWidth;
     static prevInnerWidth;
@@ -14,14 +19,10 @@ export class GameEnv {
     static top;
     static bottom;
     static prevBottom
-    static floor;
-    static prevFloor;
-    // background speed control
-    static backgroundHillsSpeed = 0;
-    static backgroundMountainsSpeed = 0;
-    // calculated size properties
-    static backgroundHeight = 0;
-    static platformHeight = 0;
+    
+    // timer properties
+    static time = 0; // Initialize time variable
+    static timerInterval; // Variable to hold the interval reference
 
     // canvas filter property
     static isInverted = true;
@@ -95,6 +96,7 @@ export class GameEnv {
             const gameObject = GameEnv.gameObjects[i];
             gameObject.destroy();
         }
+        GameEnv.gameObjects = [];
     }
 
     // Toggle "canvas filter property" between alien and normal
