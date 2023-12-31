@@ -1,5 +1,5 @@
 export class GameEnv {
-    
+
     // game managed object
     static currentLevel = null;
     static player = null;
@@ -7,12 +7,12 @@ export class GameEnv {
     static gameObjects = [];
 
     // game speed controls
-    static gameSpeed = 2;
+    static gameSpeed = 2; //localstorage key
     static backgroundHillsSpeed = 0;
     static backgroundMountainsSpeed = 0;
 
     // game attributes
-    static gravity = 3;
+    static gravity = 3; //localstorage key
     static innerWidth;
     static prevInnerWidth;
     static innerHeight;
@@ -25,7 +25,7 @@ export class GameEnv {
     static timerInterval; // Variable to hold the interval reference
 
     // canvas filter property
-    static isInverted = true;
+    static isInverted = true; // localstorage key
 
     // Make the constructor private to prevent instantiation
     constructor() {

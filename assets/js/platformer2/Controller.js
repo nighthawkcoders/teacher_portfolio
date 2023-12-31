@@ -3,8 +3,13 @@ import GameEnv from "./GameEnv.js";
 import GameControl from "./GameControl.js";
 
 export class Controller extends LocalStorage{
-    constructor(){
-        var keys = {currentLevel:"currentLevel",gameSpeed:"gameSpeed"}; //default keys for localStorage
+    constructor(){ //default keys for localStorage
+        var keys = {
+            currentLevel:"currentLevel",
+            gameSpeed:"gameSpeed",
+            gravity:"gravity",
+            isInverted:"isInverted",
+        }; 
         super(keys); //creates this.keys
         
     }
@@ -26,14 +31,28 @@ export class Controller extends LocalStorage{
         else{ //if not gameSpeedthen set this.gameSpeed to GameEnv.gameSpeed (default)
             this[this.keys.gameSpeed] = GameEnv.gameSpeed;
         }
+
+        if(this[this.keys.gravity]){ //update to custom gravity
+            GameEnv.gravity = Number(this[this.keys.gravity]);
+        }
+        else{ //if not gravity then set this.gravity to GameEnv.gravity (default)
+            this[this.keys.gravity] = GameEnv.gravity;
+        }
+
+        if(this[this.keys.isInverted]){ //update to custom isInverted   
+            GameEnv.isInverted = Boolean(this[this.keys.isInverted]);   
+        }
+        else{ //if not isInverted then set this.isInverted to GameEnv.isInverted (default)
+            this[this.keys.isInverted] = GameEnv.isInverted;
+        }
         
         window.addEventListener("resize",()=>{ //updates this.currentLevel when the level changes
             this[this.keys.currentLevel] = GameEnv.levels.indexOf(GameEnv.currentLevel);
             this.save(this.keys.currentLevel); //save to local storage
         });
 
-        window.addEventListener("speed",(e)=>{ //updates this.gameSpeed when a speed event is fired
-            this[this.keys.gameSpeed] = e.detail.speed();
+        window.addEventListener("gameSpeed",(e)=>{ //updates this.gameSpeed when a speed event is fired
+            this[this.keys.gameSpeed] = e.detail.gameSpeed();
             GameEnv.gameSpeed = this[this.keys.gameSpeed]; //reload or change levels to see effect
             this.save(this.keys.gameSpeed); //save to local storage
         });
@@ -73,22 +92,27 @@ export class Controller extends LocalStorage{
         return t; //returns <table> element
     }
 
-    get speedDiv(){
-        var div = document.createElement("div"); //container
-
-        var a = document.createElement("a"); //create text
-        a.innerText = "Game Speed";
-        div.append(a);
-
-        var input1 = document.createElement("input"); //create inputfeild
-        input1.type = "number"; //type number (1234...)
-        const event = new CustomEvent("speed", { detail: {speed:()=>input1.value} });
-        input1.addEventListener("input",()=>{ //after input feild is edited
-            window.dispatchEvent(event); //dispatch event to update game speed
-        })
-        div.append(input1);
-        
-        return div; //returns <div> element
+    get gameSpeedInput() {
+        const div = document.createElement("div");
+        div.innerHTML = "Game Speed: "; // label
+    
+        const gameSpeed = document.createElement("input");  // get user defined game speed
+        gameSpeed.type = "number";
+        gameSpeed.min = 1.0;
+        gameSpeed.max = 8.0;
+        gameSpeed.step = 0.1;
+        gameSpeed.default = 2.0; // customed property for default value
+        gameSpeed.value = GameEnv.gameSpeed; // GameEnv contains latest game speed
+        gameSpeed.className = "input gameSpeed";    // custom style in teacher-styles.scss
+    
+        gameSpeed.addEventListener("change", () => { // use change event to prevent user from entering invalid values
+            const value = parseFloat(gameSpeed.value).toFixed(1);
+            gameSpeed.value = (value < gameSpeed.min || value > gameSpeed.max || isNaN(value)) ? gameSpeed.default : value;
+            window.dispatchEvent(new CustomEvent("gameSpeed", { detail: {gameSpeed:()=>gameSpeed.value} }));
+        });
+    
+        div.append(gameSpeed); // wrap input element in div
+        return div;
     }
 }
 

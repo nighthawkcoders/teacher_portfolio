@@ -82,3 +82,19 @@
     @extend .button;
     background-color: #e70f0f;
   }
+
+  // mixin used as a template for input
+@mixin input {
+  // your styles here
+  width: 40px;
+  height: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: right; // right-align the text inside the input field
+}
+
+/* define class for redefined input */
+.input.gameSpeed {
+  @include input;
+}

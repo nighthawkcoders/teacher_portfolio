@@ -298,9 +298,13 @@ image: /images/platformer/backgrounds/hills.png
     settingsControl.initialize();
 
     // Get/Construct an HTML table/menu from GameEnv.levels[]
-    var table = settingsControl.levelTable;
+    var levels = settingsControl.levelTable;
     // Add table/menu to sidebar menu
-    document.getElementById("sidebar").append(table);
+    document.getElementById("sidebar").append(levels);
+
+    // Get/Construct HTML input and event update for game speed 
+    var gameSpeed = settingsControl.gameSpeedInput;
+    document.getElementById("sidebar").append(gameSpeed);
 
     // Listener/toggle for sidebar open and close
     var toggle = false;
