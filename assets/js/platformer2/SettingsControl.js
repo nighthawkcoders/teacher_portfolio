@@ -2,7 +2,7 @@ import LocalStorage from "./LocalStorage.js";
 import GameEnv from "./GameEnv.js";
 import GameControl from "./GameControl.js";
 
-export class Controller extends LocalStorage{
+export class SettingsControl extends LocalStorage{
     constructor(){ //default keys for localStorage
         var keys = {
             currentLevel:"currentLevel",
@@ -116,4 +116,4 @@ export class Controller extends LocalStorage{
     }
 }
 
-export default Controller;
+export default SettingsControl;

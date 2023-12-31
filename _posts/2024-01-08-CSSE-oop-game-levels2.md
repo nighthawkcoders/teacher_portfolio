@@ -55,7 +55,7 @@ image: /images/platformer/backgrounds/hills.png
     import GameEnv from '{{site.baseurl}}/assets/js/platformer2/GameEnv.js';
     import GameLevel from '{{site.baseurl}}/assets/js/platformer2/GameLevel.js';
     import GameControl from '{{site.baseurl}}/assets/js/platformer2/GameControl.js';
-    import Controller from '{{site.baseurl}}/assets/js/platformer2/Controller.js';
+    import SettingsControl from '{{site.baseurl}}/assets/js/platformer2/SettingsControl.js';
 
     import Background from '{{site.baseurl}}/assets/js/platformer2/Background.js'
     import BackgroundHills from '{{site.baseurl}}/assets/js/platformer2/BackgroundHills.js';
@@ -83,10 +83,10 @@ image: /images/platformer/backgrounds/hills.png
     }
 
     // Helper function that waits for a button click event
-    function waitForButton(buttonName) {
+    function waitForButton(reference) {
       // Returns a promise that resolves when the button is clicked
       return new Promise((resolve) => {
-          const waitButton = document.getElementById(buttonName);
+          const waitButton = document.getElementById(reference);
           // Listener function to resolve the promise when the button is clicked
           const waitButtonListener = () => {
               resolve(true);
@@ -213,8 +213,8 @@ image: /images/platformer/backgrounds/hills.png
 
     // Defile File location in assets, ensure valid site.baseurl
     Object.keys(assets).forEach(category => {
-      Object.keys(assets[category]).forEach(assetName => {
-        assets[category][assetName]['file'] = "{{site.baseurl}}" + assets[category][assetName].src;
+      Object.keys(assets[category]).forEach(item => {
+        assets[category][item]['file'] = "{{site.baseurl}}" + assets[category][item].src;
       });
     });
 
@@ -294,7 +294,7 @@ image: /images/platformer/backgrounds/hills.png
      *  ==========================================
     */
     // Initiliaze Game settings controller 
-    var settingsControl = new Controller();
+    var settingsControl = new SettingsControl();
     settingsControl.initialize();
 
     // Get/Construct an HTML table/menu from GameEnv.levels[]
