@@ -25,7 +25,7 @@ export class GameEnv {
     static timerInterval; // Variable to hold the interval reference
 
     // canvas filter property
-    static isInverted = true; // localstorage key
+    static isInverted = false; // localstorage key
 
     // Make the constructor private to prevent instantiation
     constructor() {
@@ -99,18 +99,18 @@ export class GameEnv {
         GameEnv.gameObjects = [];
     }
 
-    // Toggle "canvas filter property" between alien and normal
-    static toggleInvert() {
+    // Toggle "canvas filter property" between inverted and normal
+    static setInvert() {
         for (var gameObject of GameEnv.gameObjects){
-            if (gameObject.invert && this.isInverted) {  // toggle off
+            if (gameObject.invert && !this.isInverted) {  // toggle off
                 gameObject.canvas.style.filter = "none";  // remove filter
-            } else if (gameObject.invert) { // toggle on
+            } else if (gameObject.invert && this.isInverted) { // toggle on
                 gameObject.canvas.style.filter = "invert(100%)";  // remove filter
             } else {
                 gameObject.canvas.style.filter = "none";  // remove filter
             }
         }
-        this.isInverted = !this.isInverted;  // switch boolean value
+        //this.isInverted = !this.isInverted;  // switch boolean value
     }
 }
 

@@ -25,6 +25,13 @@ export class SettingsControl extends LocalStorage{
             this[this.keys.currentLevel] = 0;
         }
 
+        if(this[this.keys.isInverted]){ //update to custom isInverted   
+            GameEnv.isInverted = this[this.keys.isInverted] === "true";
+        }
+        else{ //if not isInverted then set this.isInverted to GameEnv.isInverted (default)
+            this[this.keys.isInverted] = GameEnv.isInverted;
+        }
+
         if(this[this.keys.gameSpeed]){ //update to custom gameSpeed
            GameEnv.gameSpeed = Number(this[this.keys.gameSpeed]);
         }
@@ -38,24 +45,23 @@ export class SettingsControl extends LocalStorage{
         else{ //if not gravity then set this.gravity to GameEnv.gravity (default)
             this[this.keys.gravity] = GameEnv.gravity;
         }
-
-        if(this[this.keys.isInverted]){ //update to custom isInverted   
-            GameEnv.isInverted = Boolean(this[this.keys.isInverted]);   
-        }
-        else{ //if not isInverted then set this.isInverted to GameEnv.isInverted (default)
-            this[this.keys.isInverted] = GameEnv.isInverted;
-        }
         
         window.addEventListener("resize",()=>{ //updates this.currentLevel when the level changes
             this[this.keys.currentLevel] = GameEnv.levels.indexOf(GameEnv.currentLevel);
             this.save(this.keys.currentLevel); //save to local storage
         });
 
+        window.addEventListener("isInverted", (e)=>{ //updates this.isInverted when an invert event is fired
+            this[this.keys.isInverted] = e.detail.isInverted();
+            GameEnv.isInverted = this[this.keys.isInverted]; //reload or change levels to see effect
+            this.save(this.keys.isInverted); //save to local storage
+        });
+
         window.addEventListener("gameSpeed",(e)=>{ //updates this.gameSpeed when a speed event is fired
             this[this.keys.gameSpeed] = e.detail.gameSpeed();
             GameEnv.gameSpeed = this[this.keys.gameSpeed]; //reload or change levels to see effect
             this.save(this.keys.gameSpeed); //save to local storage
-        });
+d        });
  
     }
 
@@ -92,6 +98,23 @@ export class SettingsControl extends LocalStorage{
         return t; //returns <table> element
     }
 
+    get isInvertedInput() {
+        const div = document.createElement("div");
+        div.innerHTML = "Invert: "; // label
+    
+        const isInverted = document.createElement("input");  // get user defined invert boolean
+        isInverted.type = "checkbox";
+        isInverted.checked = GameEnv.isInverted; // GameEnv contains latest isInverted state
+    
+        isInverted.addEventListener("change", () => { 
+            //`dispatch event to update isInverted
+            window.dispatchEvent(new CustomEvent("isInverted", { detail: {isInverted:()=>isInverted.checked} }));
+        });
+    
+        div.append(isInverted); // wrap input element in div
+        return div;
+    }
+
     get gameSpeedInput() {
         const div = document.createElement("div");
         div.innerHTML = "Game Speed: "; // label
@@ -105,15 +128,19 @@ export class SettingsControl extends LocalStorage{
         gameSpeed.value = GameEnv.gameSpeed; // GameEnv contains latest game speed
         gameSpeed.className = "input gameSpeed";    // custom style in teacher-styles.scss
     
-        gameSpeed.addEventListener("change", () => { // use change event to prevent user from entering invalid values
+        gameSpeed.addEventListener("change", () => { 
+            // check values are within range
             const value = parseFloat(gameSpeed.value).toFixed(1);
             gameSpeed.value = (value < gameSpeed.min || value > gameSpeed.max || isNaN(value)) ? gameSpeed.default : value;
+            // dispatch event to update game speed
             window.dispatchEvent(new CustomEvent("gameSpeed", { detail: {gameSpeed:()=>gameSpeed.value} }));
         });
     
         div.append(gameSpeed); // wrap input element in div
         return div;
     }
+
+    
 }
 
 export default SettingsControl;

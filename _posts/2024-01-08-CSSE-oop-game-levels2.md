@@ -37,10 +37,6 @@ image: /images/platformer/backgrounds/hills.png
   <div id="gameBegin" hidden>
       <button id="startGame">Start Game</button>
   </div>
-  <div id="controls"> <!-- Controls -->
-      <!-- Background controls -->
-      <button id="toggleCanvasEffect">Invert</button>
-  </div>
   <div id="settings"> <!-- Controls -->
       <!-- Background controls -->
       <button id="toggleSettingsBar">Settings</button>
@@ -302,10 +298,14 @@ image: /images/platformer/backgrounds/hills.png
     // Add table/menu to sidebar menu
     document.getElementById("sidebar").append(levels);
 
+    // Get/Construct HTML input and event update for invert
+    var invertControl = settingsControl.isInvertedInput;
+    document.getElementById("sidebar").append(invertControl); 
+
     // Get/Construct HTML input and event update for game speed 
     var gameSpeed = settingsControl.gameSpeedInput;
     document.getElementById("sidebar").append(gameSpeed);
-
+    
     // Listener/toggle for sidebar open and close
     var toggle = false;
     function toggleWidth(){
@@ -319,7 +319,6 @@ image: /images/platformer/backgrounds/hills.png
      *  ========== Event / Listeners =============
      *  ==========================================
     */    
-    toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
     window.addEventListener('resize', GameEnv.resize);
 
 </script>
