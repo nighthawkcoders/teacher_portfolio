@@ -23,6 +23,10 @@ export class GameEnv {
     // canvas filter property
     static isInverted = true;
 
+    // timer properties
+    static time = 0; // Initialize time variable
+    static timerInterval; // Variable to hold the interval reference
+
     // Make the constructor private to prevent instantiation
     constructor() {
         throw new Error('GameEnv is a static class and cannot be instantiated.');
@@ -107,6 +111,7 @@ export class GameEnv {
         }
         this.isInverted = !this.isInverted;  // switch boolean value
     }
+
 }
 
 export default GameEnv;

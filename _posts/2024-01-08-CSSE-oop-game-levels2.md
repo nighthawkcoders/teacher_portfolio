@@ -286,10 +286,6 @@ image: /images/platformer/backgrounds/hills.png
      * 4.) The "gameLoop" allows the game player (user) to interact with game objects 
     */
 
-    //Create listeners for user events
-    toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
-    window.addEventListener('resize', GameEnv.resize);
-
     //Start game loop and activate game objects
     GameControl.gameLoop();
 
@@ -297,7 +293,6 @@ image: /images/platformer/backgrounds/hills.png
      *  ========== Settings Control ==============
      *  ==========================================
     */
-
     // Initiliaze Game settings controller 
     var settingsControl = new Controller();
     settingsControl.initialize();
@@ -316,5 +311,11 @@ image: /images/platformer/backgrounds/hills.png
     document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
     document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
 
+    /*  ==========================================
+     *  ========== Event / Listeners =============
+     *  ==========================================
+    */    
+    toggleCanvasEffect.addEventListener('click', GameEnv.toggleInvert);
+    window.addEventListener('resize', GameEnv.resize);
 
 </script>
