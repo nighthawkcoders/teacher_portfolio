@@ -16,57 +16,80 @@ export class SettingsControl extends LocalStorage{
 
     //separated from constructor so that class can be created before levels are added
     initialize(){ 
-        this.loadAll(); // load data
+        // Load all keys from local storage
+        this.loadAll();
+
+        /**
+         * Handles a key by checking if it exists in local storage and parsing its value.
+         * If the key does not exist in local storage, it sets the key to the current value of the game environment variable.
+         *
+         * @param {string} key - The localstorae key.
+         * @param {*} gameEnvVariable - The corresponding game environment variable.
+         * @param {function} [parser=(val) => val] - An optional function to parse the value from local storage.
+         * If no parser parameter/function is provided, (val) => val is unchanged.
+         * Else if parser is provided, the value is parsed ... e.g.: 
+         * * (val) => vall === "true" parses the value as a boolean
+         * * (val) =>  Number(val) parses the value as a number
+         */
+        const handleKey = (key, gameEnvVariable, parser = (val) => val) => {
+            if (this[this.keys[key]]) {
+                gameEnvVariable = parser(this[this.keys[key]]);
+            } else {
+                this[this.keys[key]] = gameEnvVariable;
+            }
+        };
+
+        /* Call the handleKey function to set up each game environment variable
+         * The handleKey function takes three parameters:
+            * * key - the local storage key
+            * * gameEnvVariable - the corresponding game environment variable
+            * * parser - an optional function to parse the value extracted from local storage
+        */
+        // 'currentLevel', the value is parsed as a an index into the GameEnv.levels array
+        handleKey('currentLevel', GameEnv.levels[Number(this[this.keys.currentLevel])]);
+        // 'isInverted', the value is parsed as a boolean
+        handleKey('isInverted', GameEnv.isInverted, (val) => val === "true");
+        // 'gameSpeed', the value is parsed as a number
+        handleKey('gameSpeed', GameEnv.gameSpeed, Number);
+        // 'gravity', the value is parsed as a number
+        handleKey('gravity', GameEnv.gravity, Number);
+
         
-        if(this[this.keys.currentLevel]){ //update to active level
-            GameControl.transitionToLevel(GameEnv.levels[Number(this[this.keys.currentLevel])]);
-        }
-        else{ //if not currentLevel then set this.currentLevel to 0 (default)
-            this[this.keys.currentLevel] = 0;
-        }
-
-        if(this[this.keys.isInverted]){ //update to custom isInverted   
-            GameEnv.isInverted = this[this.keys.isInverted] === "true";
-        }
-        else{ //if not isInverted then set this.isInverted to GameEnv.isInverted (default)
-            this[this.keys.isInverted] = GameEnv.isInverted;
-        }
-
-        if(this[this.keys.gameSpeed]){ //update to custom gameSpeed
-           GameEnv.gameSpeed = Number(this[this.keys.gameSpeed]);
-        }
-        else{ //if not gameSpeedthen set this.gameSpeed to GameEnv.gameSpeed (default)
-            this[this.keys.gameSpeed] = GameEnv.gameSpeed;
-        }
-
-        if(this[this.keys.gravity]){ //update to custom gravity
-            GameEnv.gravity = Number(this[this.keys.gravity]);
-        }
-        else{ //if not gravity then set this.gravity to GameEnv.gravity (default)
-            this[this.keys.gravity] = GameEnv.gravity;
-        }
-        
-        window.addEventListener("resize",()=>{ //updates this.currentLevel when the level changes
+        // Listen for the 'resize' update event
+        window.addEventListener("resize",()=>{ 
+            // Update the current level index when the level changes
             this[this.keys.currentLevel] = GameEnv.levels.indexOf(GameEnv.currentLevel);
-            this.save(this.keys.currentLevel); //save to local storage
+            // Save the current level index to local storage
+            this.save(this.keys.currentLevel); 
         });
 
-        window.addEventListener("isInverted", (e)=>{ //updates this.isInverted when an invert event is fired
+        // Listen for the 'isInverted' update event
+        window.addEventListener("isInverted", (e)=>{ 
+            // Update the isInverted value when an invert event is fired
             this[this.keys.isInverted] = e.detail.isInverted();
-            GameEnv.isInverted = this[this.keys.isInverted]; //reload or change levels to see effect
-            this.save(this.keys.isInverted); //save to local storage
+            // Update the isInverted value in the game environment
+            GameEnv.isInverted = this[this.keys.isInverted]; 
+            // Save the isInverted value to local storage
+            this.save(this.keys.isInverted); 
         });
 
-        window.addEventListener("gameSpeed",(e)=>{ //updates this.gameSpeed when a speed event is fired
+        // Listen for the 'gameSpeed' update event
+        window.addEventListener("gameSpeed",(e)=>{ 
+            // Update the gameSpeed value when a speed event is fired
             this[this.keys.gameSpeed] = e.detail.gameSpeed();
-            GameEnv.gameSpeed = this[this.keys.gameSpeed]; //reload or change levels to see effect
-            this.save(this.keys.gameSpeed); //save to local storage
-d        });
+            // Update the gameSpeed value in the game environment
+            GameEnv.gameSpeed = this[this.keys.gameSpeed]; 
+            // Save the gameSpeed value to local storage
+            this.save(this.keys.gameSpeed); 
+        });
  
     }
 
+    // Getter for the level table
     get levelTable(){
+        // create table element
         var t = document.createElement("table");
+        t.className = "table levels";
         //create table header
         var header = document.createElement("tr");
         var th1 = document.createElement("th");
@@ -77,8 +100,8 @@ d        });
         header.append(th2);
         t.append(header);
 
-        //create table rows/data
-        for(let i = 0, count = 1;i < GameEnv.levels.length;i++){
+        // Create table rows/data
+        for(let i = 0, count = 1; i < GameEnv.levels.length; i++){
             if (GameEnv.levels[i].passive) //skip passive levels
                 continue; 
             // add level to table
@@ -86,12 +109,16 @@ d        });
             var td1 = document.createElement("td");
             td1.innerText = String(count++); //human counter
             row.append(td1);
+            // place level name in button   
             var td2 = document.createElement("td");
             td2.innerText = GameEnv.levels[i].tag;
-            td2.addEventListener("click",()=>{ // when player clicks on level name
-                GameControl.transitionToLevel(GameEnv.levels[i]); //transition to that level
-            })
             row.append(td2);
+            // listen for row click
+            row.addEventListener("click",()=>{ // when player clicks on the row
+                //transition to selected level
+                GameControl.transitionToLevel(GameEnv.levels[i]); // resize event is triggered in transitionToLevel
+            })
+            // add level row to table
             t.append(row);
         }
 

@@ -1,0 +1,29 @@
+// mixin used as a template for input
+@mixin input {
+  // your styles here
+  width: 40px;
+  height: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: right; // right-align the text inside the input field
+}
+
+/* define class for redefined input */
+.input.gameSpeed {
+  @include input;
+}
+
+.table.levels {
+  tr {
+    cursor: pointer; // Change the cursor to a pointer when it hovers over a row
+
+    &:hover {
+      background-color: #512a2a; // Change the background color when a row is hovered over
+
+      td {
+        background-color: inherit; // Make the background color of the td elements the same as the tr element
+      }
+    }
+  }
+}
