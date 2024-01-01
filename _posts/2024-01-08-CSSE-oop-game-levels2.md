@@ -53,30 +53,35 @@ image: /images/platformer/backgrounds/hills.png
     import GameControl from '{{site.baseurl}}/assets/js/platformer2/GameControl.js';
     import SettingsControl from '{{site.baseurl}}/assets/js/platformer2/SettingsControl.js';
 
-    /*  ==========================================
-     *  ========== Game Setup ====================
-     *  ==========================================
+    /* ==========================================
+     * ========== Game Setup ====================
+     * ==========================================
      * Game Setup prepares the Game Levels and Objects
      * 1.) There are one-to-many GameLevels in a Game
      * 2.) Each GameLevel has one-to-many GameObjects
-     *  ==========================================
+     * ==========================================
     */
     GameSetup.initLevels("{{site.baseurl}}"); 
 
-    /*  ==========================================
-     *  ========== Game Control ==================
-     *  ==========================================
+    /* ==========================================
+     * ========== Game Control ==================
+     * ==========================================
      * Game Control starts the game loop and activates game objects
      * 1.) GameControl cycles through GameLevels
      * 2.) Each GameLevel is on a looping timer, called within the game loop 
      * 3.) The game loop allows the game player (user), to interact with the game objects 
-     *  ==========================================
+     * ==========================================
     */
     GameControl.gameLoop();
 
-    /*  ==========================================
-     *  ========== Settings Control ==============
-     *  ==========================================
+    /* ==========================================
+     * ========== Settings Control ==============
+     * ==========================================
+     * Settings Control provides the ability to select game level and change game settings
+     * 1.) SettingsControl must be after GameControl, it depends on GameLevels 
+     * 2.) GameControl extends and implements LocalStorage for settings modifications
+     * 3.) Invert moved into Settings; GameSpeed and Gravity can be customized
+     * ==========================================
     */
     SettingsControl.sidebar();
 

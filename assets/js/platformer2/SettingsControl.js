@@ -1,20 +1,57 @@
+// The primary purpose of SettingsControl is to manage keys/values for settings.
 import LocalStorage from "./LocalStorage.js";
 import GameEnv from "./GameEnv.js";
 import GameControl from "./GameControl.js";
 
+/* Coding Style Notes
+ *
+ * SettingsControl is defined as a Class
+ * * SettingsControl contains a constructor.
+ * * SettingsControl.constructor() is called when SettingsControl is instantiated.
+ * * SettingsControl is instantiated in SettingsControl.sidebar().
+ * * This coding style allows multiple instances of SettingsControl.
+ * * This coding style is a common pattern in JavaScript and is very similar to Java.
+ * * Methods are defined as ES6 shorthand
+ * 
+ * 
+ * * Observe, instantiation/scoping/encapulation of this.keys 
+ * * * The constructor makes an instance of this.keys by calling super(keys). 
+ * * * * Observe the super(keys) call, this calls extended LocalStorage class constructor.
+ * * * * Review LocalStorage.js for more details.
+ * 
+ * * SettingsControl manages keys following Model-View-Control (MVC) design pattern.
+ * *  * Model is the LocalStorage class, which enables persistence of settings between sessions.
+ * *  * View is the HTML/CSS sidebar, which displays and stores document elements in the DOM.
+ * *  * Control is the SettingsControl class, which manages exchange of data between Model and View.
+ * 
+ * 
+ * Usage Notes
+ * * call SettingsControl.sidebar() to run the settings sidebar.
+ * * * the remainder of SettingsControl supports the sidebar and MVC design for settings keys/values. 
+ * 
+*/
+
+// define the SettingsControl class
 export class SettingsControl extends LocalStorage{
     constructor(){ //default keys for localStorage
         var keys = {
             currentLevel:"currentLevel",
+            isInverted:"isInverted",
             gameSpeed:"gameSpeed",
             gravity:"gravity",
-            isInverted:"isInverted",
         }; 
         super(keys); //creates this.keys
-        
     }
 
-    //separated from constructor so that class can be created before levels are added
+    /**
+     * Note. Separated from constructor so that class can be created before levels are addeda
+     * 
+     * Initializes the SettingsControl instance.
+     * Loads all keys from local storage.
+     * For each key, 
+     * * If it exists in local storage, loads and parses its value.
+     * * Else when the key does not exist in local storage, sets key to the corresponding GameEnv.js variable.
+     */
     initialize(){ 
         // Load all keys from local storage
         this.loadAll();
@@ -96,7 +133,13 @@ export class SettingsControl extends LocalStorage{
  
     }
 
-    // Getter for the level table
+    /**
+     * Getter for the levelTable property.
+     * Creates a table with a row for each game level.
+     * Each row contains the level number and the level tag.
+     * Passive levels are skipped and not added to the table.
+     * @returns {HTMLTableElement} The table containing the game levels.
+     */
     get levelTable(){
         // create table element
         var t = document.createElement("table");
@@ -136,6 +179,12 @@ export class SettingsControl extends LocalStorage{
         return t; //returns <table> element
     }
 
+    /**
+     * Getter for the isInvertedInput property.
+     * Creates a div with a checkbox input for the user to invert the game controls.
+     * The checkbox's checked state is bound to the GameEnv's isInverted state.
+     * @returns {HTMLDivElement} The div containing the isInverted checkbox.
+     */
     get isInvertedInput() {
         const div = document.createElement("div");
         div.innerHTML = "Invert: "; // label
@@ -153,6 +202,12 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
+    /**
+     * Getter for the gameSpeedInput property.
+     * Creates a div with a number input for the user to adjust the game speed.
+     * The input's value is bound to the GameEnv's gameSpeed state.
+     * @returns {HTMLDivElement} The div containing the gameSpeed input.
+     */
     get gameSpeedInput() {
         const div = document.createElement("div");
         div.innerHTML = "Game Speed: "; // label
@@ -178,6 +233,12 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
+    /**
+     * Getter for the gravityInput property.
+     * Creates a div with a number input for the user to adjust the game gravity.
+     * The input's value is bound to the GameEnv's gravity state.
+     * @returns {HTMLDivElement} The div containing the gravity input.
+     */
     get gravityInput() {
         const div = document.createElement("div");
         div.innerHTML = "Gravity: "; // label
@@ -203,6 +264,12 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
+    /**
+     * Static method to initialize the game settings controller and add the settings controls to the sidebar.
+     * Constructs an HTML table/menu from GameEnv.levels[] and HTML inputs for invert, game speed, and gravity.
+     * Each input has an event update associated with it.
+     * All elements are appended to the sidebar.
+     */
     static sidebar(){
         // Initiliaze Game settings controller 
         var settingsControl = new SettingsControl();
