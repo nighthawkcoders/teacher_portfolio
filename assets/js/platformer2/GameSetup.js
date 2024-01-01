@@ -11,39 +11,80 @@ import Player from './Player.js';
 import Tube from './Tube.js';
 import Goomba from './Goomba.js';
 
-// Define the GameSetup object
+/* Coding Style Notes
+ *
+ * GameSetup is defined as an object literal in in Name Function Expression (NFE) style
+ * * const GameSetup = function() { ... } is an NFE
+ * * NFEs are a common pattern in JavaScript, reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function 
+ *
+ * * Informerly, inside of GameSetup it looks like defining keys and values that are functions.
+ * * * GameSetup is a singleton object, object literal, without a constructor.
+ * * * This coding style ensures one instance, thus the term object literal.
+ * * * Inside of GameSetup, the keys are functions, and the values are references to the functions.
+ * * * * The keys are the names of the functions.
+ * * * * The values are the functions themselves.
+ *
+ * * Observe, encapulation of this.assets and sharing data between methods.
+ * * * this.assets is defined in the object literal scope.
+ * * * this.assets is shared between methods.
+ * * * this.assets is not accessible outside of the object literal scope.
+ * * * this.assets is not a global variable.
+ * 
+ * * Observe, the use of bind() to bind methods to the GameSetup object.
+ * * * * bind() ensures "this" inside of methods binds to "GameSetup"
+ * * * * this avoids "Temporal Dead Zone (TDZ)" error...
+ * 
+ * 
+ * Usage Notes
+ * * call GameSetup.initLevels() to setup the game levels and assets.
+ * * * the remainder of GameSetup supports initLevels()
+ * 
+*/
+
+// Define the GameSetup object literal
 const GameSetup = {
+
+    /*  ==========================================
+     *  ===== Game Level Methods +++==============
+     *  ==========================================
+     * Game Level methods support Game Play, and Game Over
+     * * Helper functions assist the Callback methods
+     * * Callback methods are called by the GameLevel objects
+     */ 
+
+    /**
+     * Helper function that waits for a button click event.
+     * @param {string} id - The HTML id or name of the button.
+     * @returns {Promise<boolean>} - A promise that resolves when the button is clicked.
+     * References:
+     * * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+     * *  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve
+     */
+    waitForButton: function(id) {
+        // Returns a promise that resolves when the button is clicked
+        return new Promise((resolve) => {
+            const waitButton = document.getElementById(id);
+            // Listener function to resolve the promise when the button is clicked
+            const waitButtonListener = () => {
+                resolve(true);
+            };
+            // Add the listener to the button's click event
+            waitButton.addEventListener('click', waitButtonListener);
+        });
+      },
+  
     /*  ==========================================
      *  ===== Game Level Call Backs ==============
      *  ==========================================
+     * Game Level callbacks are functions that return true or false
      */
-
-    // Level completion callback, based on Player off screen
-    playerOffScreenCallBack: function() {
-        // console.log(GameEnv.player?.x)
-        if (GameEnv.player?.x > GameEnv.innerWidth) {
-            GameEnv.player = null; // reset for next level
-            return true;
-        } else {
-            return false;
-        }
-    },
-
-    // Helper function that waits for a button click event
-    waitForButton: function(reference) {
-      // Returns a promise that resolves when the button is clicked
-      return new Promise((resolve) => {
-          const waitButton = document.getElementById(reference);
-          // Listener function to resolve the promise when the button is clicked
-          const waitButtonListener = () => {
-              resolve(true);
-          };
-          // Add the listener to the button's click event
-          waitButton.addEventListener('click', waitButtonListener);
-      });
-    },
-
-    // Start button callback
+    
+    /**
+     * Start button callback.
+     * Unhides the gameBegin button, waits for it to be clicked, then hides it again.
+     * @async
+     * @returns {Promise<boolean>} Always returns true.
+     */    
     startGameCallback: async function() {
         const id = document.getElementById("gameBegin");
         // Unhide the gameBegin button
@@ -57,14 +98,41 @@ const GameSetup = {
         return true;
     }, 
 
-    // Home screen exits on the Game Begin button
+    /**
+     * Home screen exits on the Game Begin button.
+     * Checks if the gameBegin button is hidden, which means the game has started.
+     * @returns {boolean} Returns true if the gameBegin button is hidden, false otherwise.
+     */
     homeScreenCallback: function() {
       // gameBegin hidden means the game has started
       const id = document.getElementById("gameBegin");
       return id.hidden;
     },
 
-    // Game Over callback
+    /**
+     * Level completion callback, based on Player off screen.
+     * Checks if the player's x position is greater than the innerWidth of the game environment.
+     * If it is, resets the player for the next level and returns true.
+     * If it's not, returns false.
+     * @returns {boolean} Returns true if the player's x position is greater than the innerWidth, false otherwise.
+     */
+    playerOffScreenCallBack: function() {
+        // console.log(GameEnv.player?.x)
+        if (GameEnv.player?.x > GameEnv.innerWidth) {
+            GameEnv.player = null; // reset for next level
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    /**
+     * Game Over callback.
+     * Unhides the gameOver button, waits for it to be clicked, then hides it again.
+     * Also sets the currentLevel of the game environment to null.
+     * @async
+     * @returns {Promise<boolean>} Always returns true.
+     */    
     gameOverCallBack: async function() {
       const id = document.getElementById("gameOver");
       id.hidden = false;
@@ -77,14 +145,19 @@ const GameSetup = {
       GameEnv.currentLevel = null;
 
       return true;
-    },
+    },    
 
     /*  ==========================================
      *  ======= Data Definitions =================
      *  ==========================================
+     * Assets for the Game Objects defined in nested JSON key/value pairs
+     *
+     * * assets: contains definitions for all game objects, images, and properties
+     * * * 1st level: category (obstacles, platforms, backgrounds, players, enemies)
+     * * * 2nd level: item (tube, grass, mario, goomba)
+     * * * 3rd level: property (src, width, height, scaleSize, speedRatio, w, wa, wd, a, s, d)
     */
 
-    // Define assets and properties for the Game Objects in JSON text
     assets: {
       obstacles: {
         tube: { src: "/images/platformer/obstacles/tube.png" },
@@ -161,43 +234,45 @@ const GameSetup = {
     /*  ==========================================
      *  ========== Game Level init ===============
      *  ==========================================
+     * 
      * Game Level sequence as defined in code below
-     * a.) tag: "start" level defines button selection and cycles to the home screen
-     * b.) tag: "home" defines background and awaits "start" button selection and cycles to 1st game level
-     * c.) tag: "hills" and other levels before the tag: "end" define key gameplay levels
-     * d.) tag: "end"  concludes levels with game-over-screen background and replay selections
+     * * a.) tag: "start" level defines button selection and cycles to the home screen
+     * * b.) tag: "home" defines background and awaits "start" button selection and cycles to 1st game level
+     * * c.) tag: "hills" and other levels before the tag: "end" define key gameplay levels
+     * * d.) tag: "end"  concludes levels with game-over-screen background and replay selections
      * 
      * Definitions of new Object creations and JSON text
-     * 1.) "new GameLevel" adds game objects to the game environment.
-     * * JSON key/value "tag" is for readability
-     * * JSON "callback" contains function references defined above that terminate a GameLevel
-     * * JSON "objects" contain zero to many "GameObject"(s)
-     * 2.) "GameObject"(s) are defined using JSON text and include name, id, class, and data.  
-     * * JSON key/value "name" is for readability
-     * * JSON "id" is a GameObject classification and may have program significance
-     * * JSON "class" is the JavaScript class that defines the GameObject
-     * * JSON "data" contains assets and properties for the GameObject
+     * * 1.) "new GameLevel" adds game objects to the game environment.
+     * * * JSON key/value "tag" is for readability
+     * * * JSON "callback" contains function references defined above that terminate a GameLevel
+     * * * JSON "objects" contain zero to many "GameObject"(s)
+     * * 2.) "GameObject"(s) are defined using JSON text and include name, id, class, and data.  
+     * * * JSON key/value "name" is for readability
+     * * * JSON "id" is a GameObject classification and may have program significance
+     * * * JSON "class" is the JavaScript class that defines the GameObject
+     * * J* SON "data" contains assets and properties for the GameObject
     */
 
     initLevels: function(path) {  // ensure valid {{site.baseurl}} for path
-        // Defile File location in assets
+
+        // Add File location in assets relative to the root of the site
         Object.keys(this.assets).forEach(category => {
             Object.keys(this.assets[category]).forEach(item => {
             this.assets[category][item]['file'] = path + this.assets[category][item].src;
             });
         });
 
-        // Start/Home screens
+        // Home screen added to the GameEnv ...
         new GameLevel( {tag: "start", callback: this.startGameCallback } );
         const homeGameObjects = [
         { name:'background', id: 'background', class: Background, data: this.assets.backgrounds.start }
         ];
-        // Create a new GameLevel for the Home screen
+        // Home Screen Background added to the GameEnv, "passive" means complementary, not an interactive level..
         new GameLevel( {tag: "home",  callback: this.homeScreenCallback, objects: homeGameObjects, passive: true } );
         
-        // 1st Game Play is Hills Game screen
+        // Hills Game Level defintion...
         const hillsGameObjects = [
-        // GameObject order is important
+        // GameObject(s), the order is important to z-index...
         { name: 'mountains', id: 'background', class: BackgroundMountains,  data: this.assets.backgrounds.mountains },
         { name: 'hills', id: 'background', class: BackgroundHills, data: this.assets.backgrounds.hills },
         { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
@@ -206,31 +281,31 @@ const GameSetup = {
         { name: 'mario', id: 'player', class: Player, data: this.assets.players.mario },
         { name: 'tube', id: 'tube', class: Tube, data: this.assets.obstacles.tube },
         ];
-        // Create a new GameLevel for the Hills game screen
+        // Hills Game Level added to the GameEnv ...
         new GameLevel( {tag: "hills", callback: this.playerOffScreenCallBack, objects: hillsGameObjects } );
 
-        // 2nd Game Play is Avenida Game screen
+        // Avenida Game Level definition...
         const avenidaGameObjects = [
-        // GameObject order is important
+        // GameObject(s), the order is important to z-index...
         { name: 'avenida', id: 'background', class: Background, data: this.assets.backgrounds.avenida },
         { name: 'grass', id: 'platform', class: Platform, data: this.assets.platforms.grass },
         { name: 'goomba', id: 'goomba', class: Goomba, data: this.assets.enemies.goomba },
         { name: 'lopez', id: 'player', class: Player, data: this.assets.players.lopez },
         ];
-        // Create a new GameLevel for the Avenida game screen
+        // Avenida Game Level added to the GameEnv ...
         new GameLevel( {tag: "avenida", callback: this.playerOffScreenCallBack, objects: avenidaGameObjects } );
 
-        // Game Over screen game objects
+        // Game Over Level definition...
         const endGameObjects = [
         { name:'background', class: Background, id: 'background', data: this.assets.backgrounds.end}
         ];
-        // Create a new GameLevel for the Game Over screen
+        // Game Over screen added to the GameEnv ...
         new GameLevel( {tag: "end",  callback: this.gameOverCallBack, objects: endGameObjects } );
     }
 } 
-// Bind the methods to the GameSetup object, ensures "this" inside methods refers to GameSetup
+// Bind the methods to the GameSetup object, ensures "this" inside of methods binds to "GameSetup"
 // * * this avoids "Temporal Dead Zone (TDZ)" error... 
-// * * * * "Cannot access 'GameSetup' before initialization", light reading ha ha...
+// * * * * "Cannot access 'GameSetup' before initialization", light reading TDZ (ha ha)...
 // * * * * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone
 GameSetup.startGameCallback = GameSetup.startGameCallback.bind(GameSetup);
 GameSetup.gameOverCallBack = GameSetup.gameOverCallBack.bind(GameSetup);

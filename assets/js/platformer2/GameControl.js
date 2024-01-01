@@ -1,16 +1,40 @@
 import GameEnv from './GameEnv.js';
 
-/* GameControl is an object literal.
- *   Informerly GameControl looks like defining a variable with methods.
- *   By definition GameControl is a singleton object, without a constructor.
- *   This style of definition ensures one instance, an object literal.
- *   
- *   Observe, encapulation of this.inTransition and sharing between methods.
+/* Coding Style Notes
+ *
+ * GameControl is defined as an object literal
+ * * GameControl is a singleton object, without a constructor.
+ * * This coding style ensures one instance, thus the term object literal.
+ * * Informerly, GameControl looks like defining a variable with methods contained inside.
+ * * The object literal style is a common pattern in JavaScript.
+ * 
+ * * Observe, definition style of methods with GameControl.methodName = function() { ... }
+ * * * Example: transitionToLevel(newLevel) { ... } versus transitionToLevel: function(newLevel) { ... }
+ * * * Methods are defined as ES6 shorthand, versus the traditional function() style.
+ * * * The shorthand style is a common pattern in JavaScript, more concise, and readable as it common to other coding languages.
+ * * * But, it does not look like key-value pairs, which is the traditional object literal style.
+ * * * This shorthand is part of ES6, and is supported by all modern browsers. references: https://caniuse.com/#feat=es6, https://www.w3schools.com/js/js_versions.asp
+ * 
+ * * Observe, scoping/encapulation of this.inTransition and sharing data between methods.
+ * * * this.inTransition is defined in the object literal scope.
+ * * * this.inTransition is shared between methods.
+ * * * this.inTransition is not accessible outside of the object literal scope.
+ * * * this.inTransition is not a global or static variable.
+ * 
+ * 
+ * Usage Notes
+ * * call GameControl.gameLoop() to run the game levels.
+ * * * the remainder of GameControl supports the gameLoop.
+ * 
 */
 
+// define the GameControl object literal
 const GameControl = {
 
-    // Level transition method (destroy then newlevel)
+    /**
+     * Transitions to a new level. Destroys the current level and loads the new level.
+     * @param {Object} newLevel - The new level to transition to.
+     */
     async transitionToLevel(newLevel) {
         this.inTransition = true;
 
@@ -30,7 +54,13 @@ const GameControl = {
         this.inTransition = false;
     },
 
-    // Game control loop
+    /**
+     * The main game control loop.
+     * Checks if the game is in transition. If it's not, it updates the game environment,
+     * checks if the current level is complete, and if it is, transitions to the next level.
+     * If the current level is null, it transitions to the beginning of the game.
+     * Finally, it calls itself again using requestAnimationFrame to create a loop.
+     */    
     gameLoop() {
         // Turn game loop off during transitions
         if (!this.inTransition) {

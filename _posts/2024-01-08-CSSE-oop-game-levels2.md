@@ -58,7 +58,8 @@ image: /images/platformer/backgrounds/hills.png
      *  ==========================================
      * Game Setup prepares the Game Levels and Objects
      * 1.) There are one-to-many GameLevels in a Game
-     * 2.) Each GameLevel has one-to-man GameObjects
+     * 2.) Each GameLevel has one-to-many GameObjects
+     *  ==========================================
     */
     GameSetup.initLevels("{{site.baseurl}}"); 
 
@@ -66,9 +67,10 @@ image: /images/platformer/backgrounds/hills.png
      *  ========== Game Control ==================
      *  ==========================================
      * Game Control starts the game loop and activates game objects
-d    * 1.) GameControl cycles through GameLevels
+     * 1.) GameControl cycles through GameLevels
      * 2.) Each GameLevel is on a looping timer, called within the game loop 
      * 3.) The game loop allows the game player (user), to interact with the game objects 
+     *  ==========================================
     */
     GameControl.gameLoop();
 
