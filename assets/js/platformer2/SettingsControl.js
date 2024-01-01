@@ -1,4 +1,4 @@
-// The primary purpose of SettingsControl is to manage keys/values for settings.
+// SettingsControl.js key purpose is key/value management for game settings.
 import LocalStorage from "./LocalStorage.js";
 import GameEnv from "./GameEnv.js";
 import GameControl from "./GameControl.js";

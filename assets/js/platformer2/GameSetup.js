@@ -1,4 +1,4 @@
-// Key objective of setup is to define GameLevel objects
+// GameSehup.js Key objective is to define GameLevel objects and their assets.
 import GameEnv from './GameEnv.js';
 import GameLevel from './GameLevel.js';
 // To build GameLevels, each contains GameObjects from below imports

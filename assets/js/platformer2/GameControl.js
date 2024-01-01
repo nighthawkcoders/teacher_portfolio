@@ -1,3 +1,4 @@
+// GameCoontrol.js key objective is to control the game loop.
 import GameEnv from './GameEnv.js';
 
 /* Coding Style Notes

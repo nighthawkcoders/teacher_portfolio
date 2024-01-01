@@ -1,3 +1,4 @@
+// GameLevel.js key objective is to load and intialize GameObject(s) for a level.
 import GameEnv from './GameEnv.js';
 
 /**
