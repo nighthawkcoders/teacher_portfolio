@@ -29,13 +29,14 @@ export class SettingsControl extends LocalStorage{
          * If no parser parameter/function is provided, (val) => val is unchanged.
          * Else if parser is provided, the value is parsed ... e.g.: 
          * * (val) => vall === "true" parses the value as a boolean
-         * * (val) =>  Number(val) parses the value as a number
+         * * (val) =>  parseFloat(val) parses the value as a floating point number
          */
         const handleKey = (key, gameEnvVariable, parser = (val) => val) => {
             if (this[this.keys[key]]) {
-                gameEnvVariable = parser(this[this.keys[key]]);
+                return parser(this[this.keys[key]]);
             } else {
                 this[this.keys[key]] = gameEnvVariable;
+                return gameEnvVariable;
             }
         };
 
@@ -46,13 +47,13 @@ export class SettingsControl extends LocalStorage{
             * * parser - an optional function to parse the value extracted from local storage
         */
         // 'currentLevel', the value is parsed as a an index into the GameEnv.levels array
-        handleKey('currentLevel', GameEnv.levels[Number(this[this.keys.currentLevel])]);
-        // 'isInverted', the value is parsed as a boolean
-        handleKey('isInverted', GameEnv.isInverted, (val) => val === "true");
-        // 'gameSpeed', the value is parsed as a number
-        handleKey('gameSpeed', GameEnv.gameSpeed, Number);
-        // 'gravity', the value is parsed as a number
-        handleKey('gravity', GameEnv.gravity, Number);
+        GameEnv.currentLevel = handleKey('currentLevel', GameEnv.levels[Number(this[this.keys.currentLevel])]);
+        // 'isInverted', the value is parsed to a boolean
+        GameEnv.isInverted = handleKey('isInverted', GameEnv.isInverted, (val) => val === "true");
+        // 'gameSpeed', the value is parsed to a floating point number
+        GameEnv.gameSpeed = handleKey('gameSpeed', GameEnv.gameSpeed, parseFloat);
+        // 'gravity', the value is parsed to a floating point number
+        GameEnv.gravity = handleKey('gravity', GameEnv.gravity, parseFloat);
 
         
         // Listen for the 'resize' update event
@@ -78,9 +79,19 @@ export class SettingsControl extends LocalStorage{
             // Update the gameSpeed value when a speed event is fired
             this[this.keys.gameSpeed] = e.detail.gameSpeed();
             // Update the gameSpeed value in the game environment
-            GameEnv.gameSpeed = this[this.keys.gameSpeed]; 
+            GameEnv.gameSpeed = parseFloat(this[this.keys.gameSpeed]); 
             // Save the gameSpeed value to local storage
             this.save(this.keys.gameSpeed); 
+        });
+
+        // Listen for the 'gravity' update event
+        window.addEventListener("gravity",(e)=>{ 
+            // Update the gravity value when a gravity event is fired
+            this[this.keys.gravity] = e.detail.gravity();
+            // Update the gravity value in the game environment
+            GameEnv.gravity = parseFloat(this[this.keys.gravity]); 
+            // Save the gravity value to local storage
+            this.save(this.keys.gravity); 
         });
  
     }
@@ -153,7 +164,7 @@ export class SettingsControl extends LocalStorage{
         gameSpeed.step = 0.1;
         gameSpeed.default = 2.0; // customed property for default value
         gameSpeed.value = GameEnv.gameSpeed; // GameEnv contains latest game speed
-        gameSpeed.className = "input gameSpeed";    // custom style in teacher-styles.scss
+        gameSpeed.className = "input gameSpeed";    // custom style in platformer-styles.scss
     
         gameSpeed.addEventListener("change", () => { 
             // check values are within range
@@ -164,6 +175,31 @@ export class SettingsControl extends LocalStorage{
         });
     
         div.append(gameSpeed); // wrap input element in div
+        return div;
+    }
+
+    get gravityInput() {
+        const div = document.createElement("div");
+        div.innerHTML = "Gravity: "; // label
+    
+        const gravity = document.createElement("input");  // get user defined gravity
+        gravity.type = "number";
+        gravity.min = 1.0;
+        gravity.max = 8.0;
+        gravity.step = 0.1;
+        gravity.default = 3.0; // customed property for default value
+        gravity.value = GameEnv.gravity; // GameEnv contains latest gravity
+        gravity.className = "input gravity";    // custom style in platformer-styles.scss
+    
+        gravity.addEventListener("change", () => { 
+            // check values are within range
+            const value = parseFloat(gravity.value).toFixed(1);
+            gravity.value = (value < gravity.min || value > gravity.max || isNaN(value)) ? gravity.default : value;
+            // dispatch event to update gravity
+            window.dispatchEvent(new CustomEvent("gravity", { detail: {gravity:()=>gravity.value} }));
+        });
+    
+        div.append(gravity); // wrap input element in div
         return div;
     }
 

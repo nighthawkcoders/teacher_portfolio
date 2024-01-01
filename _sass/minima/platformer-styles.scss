@@ -10,7 +10,7 @@
 }
 
 /* define class for redefined input */
-.input.gameSpeed {
+.input.gameSpeed, .input.gravity {
   @include input;
 }
 

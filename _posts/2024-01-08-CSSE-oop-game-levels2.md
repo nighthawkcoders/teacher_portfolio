@@ -305,7 +305,11 @@ image: /images/platformer/backgrounds/hills.png
     // Get/Construct HTML input and event update for game speed 
     var gameSpeed = settingsControl.gameSpeedInput;
     document.getElementById("sidebar").append(gameSpeed);
-    
+
+    // Get/Construct HTML input and event update for gravity
+    var gravityInput = settingsControl.gravityInput;
+    document.getElementById("sidebar").append(gravityInput);
+
     // Listener/toggle for sidebar open and close
     var toggle = false;
     function toggleWidth(){
