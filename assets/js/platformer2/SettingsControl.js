@@ -203,6 +203,38 @@ export class SettingsControl extends LocalStorage{
         return div;
     }
 
+    static sidebar(){
+        // Initiliaze Game settings controller 
+        var settingsControl = new SettingsControl();
+        settingsControl.initialize();
+
+        // Get/Construct an HTML table/menu from GameEnv.levels[]
+        var levels = settingsControl.levelTable;
+
+        // Add table/menu to sidebar menu
+        document.getElementById("sidebar").append(levels);
+
+        // Get/Construct HTML input and event update for invert
+        var invertControl = settingsControl.isInvertedInput;
+        document.getElementById("sidebar").append(invertControl); 
+
+        // Get/Construct HTML input and event update for game speed 
+        var gameSpeed = settingsControl.gameSpeedInput;
+        document.getElementById("sidebar").append(gameSpeed);
+
+        // Get/Construct HTML input and event update for gravity
+        var gravityInput = settingsControl.gravityInput;
+        document.getElementById("sidebar").append(gravityInput);
+
+        // Listener/toggle for sidebar open and close
+        var toggle = false;
+        function toggleWidth(){
+            toggle = !toggle;
+            document.getElementById("sidebar").style.width = toggle?"250px":"0px";
+        }
+        document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
+        document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
+    }
     
 }
 
