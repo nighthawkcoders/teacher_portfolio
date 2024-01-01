@@ -1,3 +1,32 @@
+// GameEnv.js key purpose is to manage shared game environment data and methods.
+
+/* Coding Style Notes
+ *
+ * GameEnv is defined as a static class, this ensures that there is only one instance of the class
+    * * static classes do not have a constructor, cannot be instantiated    
+    * * do not have instance variables, only signleton/static variables
+    * * do not have instance methods, only singletong/static methods
+    * * is similar in namespace to an object literal, but is a class
+    * * benefit is it is similar to other coding languages (e.g. Java, C#), thus is more readable to other developers
+ *
+ * 
+ * Purpose of GameEnv 
+    * * stores game objects (e.g. gameObjects, player, levels, etc.)
+    * * stores game attributes (e.g. gravity, speed, width, height, top, bottom, etc.)
+    * * defines methods to update, draw, and destroy game objects
+    * * defines methods to initialize and resize game objects
+* 
+* 
+* Usage Notes - 
+* * GameEnv is used by other classes to manage the game environment.  
+* * It is dangerous to use GameEnv directly, it is not protected from misuse. Be careful.
+* * Here are some methods supported by GameEnv:
+    * * call GameEnv.initialize() to initialize window dimensions
+    * * call GameEnv.resize() to resize game objects
+    * * call GameEnv.update() to update, searlize, and draw game objects
+    * * call GameEnv.destroy() to destroy game objects
+*/
+
 export class GameEnv {
 
     // game managed object
@@ -110,7 +139,6 @@ export class GameEnv {
                 gameObject.canvas.style.filter = "none";  // remove filter
             }
         }
-        //this.isInverted = !this.isInverted;  // switch boolean value
     }
 }
 
