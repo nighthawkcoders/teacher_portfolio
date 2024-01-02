@@ -30,10 +30,10 @@ image: /images/platformer/backgrounds/hills.png
 
 <script type="module">
     // Imports
-    import GameEnv from '{{site.baseurl}}/assets/js/platformer2/GameEnv.js';
     import GameSetup from '{{site.baseurl}}/assets/js/platformer2/GameSetup.js';
     import GameControl from '{{site.baseurl}}/assets/js/platformer2/GameControl.js';
     import SettingsControl from '{{site.baseurl}}/assets/js/platformer2/SettingsControl.js';
+    import GameEnv from '{{site.baseurl}}/assets/js/platformer2/GameEnv.js';
 
     /* ==========================================
      * ========== Game Setup ====================
@@ -70,6 +70,7 @@ image: /images/platformer/backgrounds/hills.png
     /*  ==========================================
      *  ========== Event / Listeners =============
      *  ==========================================
+     * System Event listeners, the other listeners remain near impacting functions
     */    
     window.addEventListener('resize', GameEnv.resize);
 
