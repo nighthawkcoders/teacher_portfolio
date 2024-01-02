@@ -19,7 +19,7 @@
 * 
 * Usage Notes - 
 * * GameEnv is used by other classes to manage the game environment.  
-* * It is dangerous to use GameEnv directly, it is not protected from misuse. Be careful.
+* * It is dangerous to use GameEnv directly, it is not protected from misuse. Comments below show locations of usage
 * * Here are some methods supported by GameEnv:
     * * call GameEnv.initialize() to initialize window dimensions
     * * call GameEnv.resize() to resize game objects
@@ -29,47 +29,37 @@
 
 export class GameEnv {
 
-    // game managed object
-    static currentLevel = null;
-    static player = null;
-    static levels = [];
-    static gameObjects = [];
+    // GameControl properties
+    static currentLevel = null; // used by GameControl
+    static player = null; // used by GameControl
+    static levels = []; // used by GameControl
+    static gameObjects = []; // used by GameControl
+    static isInverted = false; // localstorage key, canvas filter property, used by GameControl
 
     // game speed controls
-    static gameSpeed = 2; //localstorage key
-    static backgroundHillsSpeed = 0;
-    static backgroundMountainsSpeed = 0;
+    static gameSpeed = 2; //localstorage key, used by platformer objects
+    static backgroundHillsSpeed = 0;  // used by background objects
+    static backgroundMountainsSpeed = 0; // used by background objects
 
     // game attributes
-    static gravity = 3; //localstorage key
-    static innerWidth;
-    static prevInnerWidth;
-    static innerHeight;
-    static top;
-    static bottom;
-    static prevBottom
+    static gravity = 3; //localstorage key, used by platformer objects
+    static innerWidth; // used by platformer objects
+    static prevInnerWidth; // used by platformer objects
+    static innerHeight; // used by platformer objects
+    static top;  // used by platformer objects
+    static bottom; // used by platformer objects
+    static prevBottom; // used by platformer objects
     
     // timer properties
-    static time = 0; // Initialize time variable
-    static timerInterval; // Variable to hold the interval reference
-
-    // canvas filter property
-    static isInverted = false; // localstorage key
-
-    // Make the constructor private to prevent instantiation
+    static time = 0; // Initialize time variable, used by timer objects
+    static timerInterval; // Variable to hold the interval reference, used by timer objects
+    
+    // Make the constructor throw an error, or effectively make it private
     constructor() {
         throw new Error('GameEnv is a static class and cannot be instantiated.');
     }
 
-    static update() {
-        // Update game state, including all game objects
-        for (const gameObject of GameEnv.gameObjects) {
-            gameObject.update();
-            gameObject.draw();
-        }
-    }
-
-     // Setter for Top position
+     // Setter for Top position, called by initialize in GameEnv
      static setTop() {
         // set top of game as header height
         const header = document.querySelector('header');
@@ -78,14 +68,14 @@ export class GameEnv {
         }
     }
 
-    // Setter for Bottom position
+    // Setter for Bottom position, called by resize in GameEnv
     static setBottom() {
         // sets the bottom or gravity 0
         this.bottom =
         this.top + this.backgroundHeight;
     }
 
-    // Setup for Game Environment 
+    // Setup for Game Environment, called by transitionToLevel in GameControl
     static initialize() {
         // store previous for ratio calculatins on resize
         this.prevInnerWidth = this.innerWidth;
@@ -99,7 +89,7 @@ export class GameEnv {
         //this.setBottom(); // must be called in platformer objects
     }
 
-    // Resize for Game Objects
+    // Resize for Game Objects, called by window resize event
     static resize() {
         GameEnv.initialize();  // Update GameEnv dimensions
 
@@ -109,6 +99,7 @@ export class GameEnv {
         }
     }
 
+    // Update for Game Objects, called by gameLoop
     static update() {
         // Update game state, including all game objects
         for (const gameObject of GameEnv.gameObjects) {
@@ -118,7 +109,7 @@ export class GameEnv {
         }
     }
 
-    // Destroy all existing game objects
+    // Destroy all existing game objects, called by transitionToLevel in GameControl
     static destroy() {
         // Destroy objects in reverse order
         for (var i = GameEnv.gameObjects.length - 1; i >= 0; i--) {
@@ -128,7 +119,7 @@ export class GameEnv {
         GameEnv.gameObjects = [];
     }
 
-    // Toggle "canvas filter property" between inverted and normal
+    // Set "canvas filter property" between inverted and normal, called by setInvert in GameControl
     static setInvert() {
         for (var gameObject of GameEnv.gameObjects){
             if (gameObject.invert && !this.isInverted) {  // toggle off
