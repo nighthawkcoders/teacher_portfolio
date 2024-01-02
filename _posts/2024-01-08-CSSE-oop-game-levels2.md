@@ -1,35 +1,17 @@
 ---
 layout: base
 title: Dynamic Game Levels v2.0 
-description: Increasing functionality of game objects and levels through student lessons.  This includes adding goombas, platforms, parallax backgrounds, etc.
+description: Incorporate student lessons goombas, platforms, parallax backgrounds, settings with local storage, etc.  Refactor code introducing GameSetup and SettingsControl.  Style is moved into _sass.
 type: ccc
 courses: { csse: {week: 18} }
 image: /images/platformer/backgrounds/hills.png
 ---
 
-<style>
-  #gameBegin, #controls, #gameOver, #settings {
-      position: relative;
-      z-index: 2; /*Ensure the controls are on top*/
-  }
-
-  .sidebar {
-      position: fixed;
-      height: 100%; /* 100% Full-height */
-      width: 0px; /* 0 width - change this with JavaScript */
-      z-index: 3; /* Stay on top */
-      top: 0; /* Stay at the top */
-      left: 0;
-      overflow-x: hidden; /* Disable horizontal scroll */
-      padding-top: 60px; /* Place content 60px from the top */
-      transition: 0.5s; /* 0.5-second transition effect to slide in the sidebar */
-      background-color: black; 
-  }
-</style>
+<!-- Syle is now located, as of Jan 2024 v2.0, in _sass/minima/platformer-styles.scss -->
 
 <!-- Prepare DOM elements -->
 <div id="sidebar" class="sidebar">
-  <a href="javascript:void(0)" id="toggleSettingsBar1" class="closebtn">&times;</a>
+  <a href="javascript:void(0)" id="toggleSettingsBar1">&times; Settings</a>
 </div>
 
 <!-- Wrap both the canvas and controls in a container div -->
@@ -37,12 +19,12 @@ image: /images/platformer/backgrounds/hills.png
   <div id="gameBegin" hidden>
       <button id="startGame">Start Game</button>
   </div>
+  <div id="gameOver" hidden>
+      <button id="restartGame">Restart</button>
+  </div>
   <div id="settings"> <!-- Controls -->
       <!-- Background controls -->
       <button id="toggleSettingsBar">Settings</button>
-  </div>
-  <div id="gameOver" hidden>
-      <button id="restartGame">Restart</button>
   </div>
 </div>
 

@@ -1,25 +1,35 @@
-// mixin used as a template for input
-@mixin input {
-  // your styles here
-  width: 40px;
-  height: 30px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 5px;
-  text-align: right; // right-align the text inside the input field
+/// Game Begin, Game Over, Settings IDs
+/// @description These IDs style these buttons.
+#gameBegin, #gameOver, #settings {
+  position: relative;
+  z-index: 2; // z-index position ensures these buttons are on top.
 }
 
-/* define class for redefined input */
-.input.gameSpeed, .input.gravity {
-  @include input;
+/// Sidebar class
+/// @description This class styles the sidebar of the page. It is positioned below minima's header.
+.sidebar {
+  z-index: 3; /* Position on Top */
+  position: fixed;
+  background-color: $dt-gray-dark; 
+  top: $spacing-unit * 1.865;  // matches minimaa .site-header height
+  //left: 0;  // removed to allow default
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5-second transition effect to slide in the sidebar */
+  padding-top: 5px; 
+  padding-bottom: 5px;
+  // following are changed by JavaScript
+  padding-left: 0px; 
+  width: 0px;
 }
 
+/// Table class
+/// @description This class styles the levels table.
 .table.levels {
   tr {
     cursor: pointer; // Change the cursor to a pointer when it hovers over a row
 
     &:hover {
-      background-color: #512a2a; // Change the background color when a row is hovered over
+      background-color: $dt-blue; // Change the background color when a row is hovered over
 
       td {
         background-color: inherit; // Make the background color of the td elements the same as the tr element
@@ -27,3 +37,28 @@
     }
   }
 }
+
+/// Input mixin
+/// @description This mixin provides a template for input fields.
+/// @param {Number} width - The width of the input field.
+/// @param {Number} height - The height of the input field.
+/// @param {Color} border - The border color of the input field.
+/// @param {Number} border-radius - The border radius of the input field.
+/// @param {Number} padding - The padding inside the input field.
+/// @param {String} text-align - The text alignment inside the input field.
+@mixin input {
+  // your styles here
+  width: 40px;
+  height: 30px;
+  border: 1px solid $dt-blue;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: right; // right-align the text inside the input field
+}
+
+/// Input class
+/// @description This class styles the gameSpeed and gravity input fields.
+.input.gameSpeed, .input.gravity {
+  @include input;
+}
+
