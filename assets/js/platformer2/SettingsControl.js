@@ -343,6 +343,7 @@ export class SettingsControl extends LocalStorage{
             toggle = !toggle;
             document.getElementById("sidebar").style.width = toggle?"200px":"0px";
             document.getElementById("sidebar").style.paddingLeft = toggle?"10px":"0px";
+            document.getElementById("sidebar").style.paddingRight = toggle?"10px":"0px";
 
         }
         document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
