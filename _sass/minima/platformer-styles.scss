@@ -1,26 +1,35 @@
 /// Game Begin, Game Over, Settings IDs
-/// @description These IDs style these buttons.
+/// @description These IDs are buttons in game screen.  They need to remain on top of other elements.
 #gameBegin, #gameOver, #settings {
   position: relative;
   z-index: 2; // z-index position ensures these buttons are on top.
 }
 
+/// Dark mode mixin
+/// @description This mixin sets the dark mode colors.
+@mixin dark-mode-color {
+  color: $high-emph !important; // use the high-emphasis color for the text
+  background-color: $dark-grey !important; // use the dark grey color for the background
+  border: 1px solid $dt-blue; // from dracula-highlight.scss
+}
+
 /// Sidebar class
 /// @description This class styles the sidebar of the page. It is positioned below minima's header.
 .sidebar {
-  z-index: 3; /* Position on Top */
+  @include dark-mode-color; // use the dark mode color scheme
+  border: none; // remove the border as it leaves residue when collapsed
   position: fixed;
-  background-color: $dt-gray-dark; 
-  top: $spacing-unit * 1.865;  // matches minimaa .site-header height
-  //left: 0;  // removed to allow default
-  overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.5s; /* 0.5-second transition effect to slide in the sidebar */
+  z-index: 3; // Position on Top of other elements, as well as ID buttons above
+  // left: 0; // set the sidebar to be on the left side of the page
+  top: $spacing-unit * 1.865;  // matches minima ".site-header min-height height", reference: https://github.com/jekyll/minima/blob/master/_sass/minima/_layout.scss
   padding-top: 5px; 
   padding-bottom: 5px;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5-second transition effect to slide in the sidebar */
   // following are changed by JavaScript
+  width: 0px;
   padding-left: 0px; 
   padding-right: 0px; 
-  width: 0px;
 }
 
 /// Table class
@@ -28,9 +37,11 @@
 .table.levels {
   tr {
     cursor: pointer; // Change the cursor to a pointer when it hovers over a row
-
-    &:hover {
-      background-color: $dt-blue; // Change the background color when a row is hovered over
+    td {
+      border: 1px solid $dt-blue; // from dracula-highlight.scss
+    }
+    &:hover { // Change the background when a row is hovered over
+      background-color: $dt-blue; // from dracula-highlight.scss
 
       td {
         background-color: inherit; // Make the background color of the td elements the same as the tr element
@@ -40,18 +51,16 @@
 }
 
 /// Input mixin
-/// @description This mixin provides a template for input fields.
-/// @param {Number} width - The width of the input field.
-/// @param {Number} height - The height of the input field.
-/// @param {Color} border - The border color of the input field.
-/// @param {Number} border-radius - The border radius of the input field.
-/// @param {Number} padding - The padding inside the input field.
-/// @param {String} text-align - The text alignment inside the input field.
+/// @description This mixin sets some common styles for input fields, avoiding duplication of common styles in each input class.
+/// @param {Number} width - The width of the input field, how wide it is.
+/// @param {Number} height - The height of the input field, how tall it is.
+/// @param {Color} border - The border color of the input field, the outline color.
+/// @param {Number} border-radius - The border radius of the input field, rounded corners.
+/// @param {Number} padding - The padding inside the input field, space between the border and the text.
+/// @param {String} text-align - The text alignment inside the input field, left, right, or center.
 @mixin input {
-  // your styles here
-  width: 40px;
+  @include dark-mode-color; // use the dark mode color scheme
   height: 30px;
-  border: 1px solid $dt-blue;
   border-radius: 5px;
   padding: 5px;
 }
@@ -60,13 +69,13 @@
 /// @description This class styles the userID input field 
 .input.userID {
   @include input;
-  width: 100px;
+  width: 100px;  // customize width of the input field
 }
 
 /// Input class
 /// @description This class styles the gameSpeed and gravity input fields.
 .input.gameSpeed, .input.gravity {
   @include input;
-  text-align: right; // right-align the text inside the input field
+  width: 40px;  // customize width of the input field
+  text-align: right; // right-align input for numbers
 }
-
