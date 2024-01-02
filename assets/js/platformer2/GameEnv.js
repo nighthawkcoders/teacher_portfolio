@@ -30,9 +30,10 @@
 export class GameEnv {
 
     // GameControl properties
-    static currentLevel = null; // used by GameControl
+    static userID = "Guest"; // localstorage key, used by GameControl
     static player = null; // used by GameControl
     static levels = []; // used by GameControl
+    static currentLevel = null; // used by GameControl
     static gameObjects = []; // used by GameControl
     static isInverted = false; // localstorage key, canvas filter property, used by GameControl
 

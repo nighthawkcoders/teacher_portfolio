@@ -53,12 +53,19 @@
   border: 1px solid $dt-blue;
   border-radius: 5px;
   padding: 5px;
-  text-align: right; // right-align the text inside the input field
+}
+
+/// Input class
+/// @description This class styles the userID input field 
+.input.userID {
+  @include input;
+  width: 100px;
 }
 
 /// Input class
 /// @description This class styles the gameSpeed and gravity input fields.
 .input.gameSpeed, .input.gravity {
   @include input;
+  text-align: right; // right-align the text inside the input field
 }
 

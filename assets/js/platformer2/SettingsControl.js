@@ -35,6 +35,7 @@ import GameControl from "./GameControl.js";
 export class SettingsControl extends LocalStorage{
     constructor(){ //default keys for localStorage
         var keys = {
+            userID:"userID",
             currentLevel:"currentLevel",
             isInverted:"isInverted",
             gameSpeed:"gameSpeed",
@@ -83,6 +84,8 @@ export class SettingsControl extends LocalStorage{
             * * gameEnvVariable - the corresponding game environment variable
             * * parser - an optional function to parse the value extracted from local storage
         */
+        // 'userID', the value is parsed as a string
+        GameEnv.userID = handleKey('userID', GameEnv.userID);
         // 'currentLevel', the value is parsed as a an index into the GameEnv.levels array
         GameEnv.currentLevel = handleKey('currentLevel', GameEnv.levels[Number(this[this.keys.currentLevel])]);
         // 'isInverted', the value is parsed to a boolean
@@ -92,6 +95,15 @@ export class SettingsControl extends LocalStorage{
         // 'gravity', the value is parsed to a floating point number
         GameEnv.gravity = handleKey('gravity', GameEnv.gravity, parseFloat);
 
+        // List for th 'userID' update event
+        window.addEventListener("userID", (e)=>{
+            // Update the userID value when a userID event is fired
+            this[this.keys.userID] = e.detail.userID();
+            // Update the userID value in the game environment
+            GameEnv.userID = this[this.keys.userID];
+            // Save the userID value to local storage
+            this.save(this.keys.userID);
+        });
         
         // Listen for the 'resize' update event
         window.addEventListener("resize",()=>{ 
@@ -131,6 +143,31 @@ export class SettingsControl extends LocalStorage{
             this.save(this.keys.gravity); 
         });
  
+    }
+
+    /**
+     * Getter for the userID property.
+     * Creates a div with a text input for the user to enter a userID.
+     * The input's value is bound to the GameEnv's userID string.
+     * @returns {HTMLDivElement} The div containing the userID input.
+     */
+    get userIDInput() {
+        const div = document.createElement("div");
+        div.innerHTML = "User ID: "; // label
+
+        const userID = document.createElement("input");  // get user defined userID
+        userID.type = "text";
+        userID.value = GameEnv.userID; // GameEnv contains latest userID
+        userID.maxLength = 10; // set maximum length to 10 characters
+        userID.className = "input userID";    // custom style in platformer-styles.scss
+
+        userID.addEventListener("change", () => { 
+            // dispatch event to update userID
+            window.dispatchEvent(new CustomEvent("userID", { detail: {userID:()=>userID.value} }));
+        });
+
+        div.append(userID); // wrap input element in div
+        return div;
     }
 
     /**
@@ -275,10 +312,17 @@ export class SettingsControl extends LocalStorage{
         var settingsControl = new SettingsControl();
         settingsControl.initialize();
 
+        // Get/Construct an HTML input for userID
+        var userID = settingsControl.userIDInput;
+        document.getElementById("sidebar").append(userID);
+
+        // Create a new div element to act as a spacer
+        var spacer = document.createElement("div");
+        spacer.style.height = "20px"; // Set the height of the spacer
+        document.getElementById("sidebar").append(spacer); // Add the spacer to the sidebar
+
         // Get/Construct an HTML table/menu from GameEnv.levels[]
         var levels = settingsControl.levelTable;
-
-        // Add table/menu to sidebar menu
         document.getElementById("sidebar").append(levels);
 
         // Get/Construct HTML input and event update for invert
