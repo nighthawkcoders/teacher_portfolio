@@ -1,12 +1,29 @@
+/// platformer-styles.scss
+/// @description This stylesheet is used to style the platformer game.
+
+/// Coding Syles in SCCS (Sass), from code below:
+/// @mixin is a block of CSS declarations that can be reused in other classes, see @mixin dark-mode-color below.
+/// @include is used to include a mixin in a class, see @include dark-mode-color below.
+/// @extend is used to extend a class with another class, see %button below.
+/// $variable is used to define a variable, see $spacing-unit, $high-emph, $dark-grey below.
+/// #id is used to define an id, see #gameBegin, #gameOver, #settings below.
+/// .class is used to define a class, see .sidebar below.
+/// & is used to reference the parent selector, see &:hover below.
+/// the double slash comments (//) are considered regular comments in Sass.
+/// the triple slash comments (///) are considered documentation comments in Sass.
+/// comments are not included in the compiled CSS file.
+/// @import is used to import other stylesheets, see @import of this file in "_sass/minima/custom-styles.sccs".
+/// see https://sass-lang.com/documentation/syntax for more information.
+
 /// Game Begin, Game Over, Settings IDs
-/// @description These IDs are buttons in game screen.  They need to remain on top of other elements.
+/// @description These IDs correspond to buttons in game screen. Key styling is to ensure they are on top of other elements. 
 #gameBegin, #gameOver, #settings {
   position: relative;
   z-index: 2; // z-index position ensures these buttons are on top.
 }
 
-/// Dark mode mixin
-/// @description This mixin sets the dark mode colors.
+/// Color mixin 
+/// @description This mixin is defined to share colors with classes in this stylesheet.
 @mixin dark-mode-color {
   color: $high-emph !important; // use the high-emphasis color for the text
   background-color: $dark-grey !important; // use the dark grey color for the background
@@ -14,10 +31,10 @@
 }
 
 /// Sidebar class
-/// @description This class styles the sidebar of the page. It is positioned below minima's header.
+/// @description This class styles the sidebar for settings in the game. It has many style elements (e.g. placing sidebar below header).
 .sidebar {
   @include dark-mode-color; // use the dark mode color scheme
-  border: none; // remove as collapse leaves residue
+  border: none; // remove setting as sidebar collapse leaves residue line
   position: fixed;
   z-index: 3; // Position on Top of other elements, as well as ID buttons above
   // left: 0; // set the sidebar to be on the left side of the page
@@ -33,7 +50,7 @@
 }
 
 /// Table class
-/// @description This class styles the levels table.
+/// @description Key style is to present game levels and make it responsive with hover highlighting.
 .table.levels {
   tr {
     cursor: pointer; // Change the cursor to a pointer when it hovers over a row
@@ -51,7 +68,7 @@
 }
 
 /// Input mixin
-/// @description This mixin sets some common styles for input fields, avoiding duplication of common styles in each input class.
+/// @description This mixin sets some common styles (e.g. color, height) for the input fields, avoiding duplication of common styles in each input class.
 /// @param {Number} width - The width of the input field, how wide it is.
 /// @param {Number} height - The height of the input field, how tall it is.
 /// @param {Color} border - The border color of the input field, the outline color.
@@ -66,14 +83,14 @@
 }
 
 /// Input class
-/// @description This class styles the userID input field 
+/// @description This class styles the userID input field, key style is to make it wider.
 .input.userID {
   @include input;
   width: 100px;  // customize width of the input field
 }
 
 /// Input class
-/// @description This class styles the gameSpeed and gravity input fields.
+/// @description This class styles the gameSpeed and gravity input fields, key style is to right-align the text.
 .input.gameSpeed, .input.gravity {
   @include input;
   width: 40px;  // customize width of the input field
