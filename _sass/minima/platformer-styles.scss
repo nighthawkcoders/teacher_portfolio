@@ -17,7 +17,7 @@
 /// @description This class styles the sidebar of the page. It is positioned below minima's header.
 .sidebar {
   @include dark-mode-color; // use the dark mode color scheme
-  border: none; // remove the border as it leaves residue when collapsed
+  border: none; // remove as collapse leaves residue
   position: fixed;
   z-index: 3; // Position on Top of other elements, as well as ID buttons above
   // left: 0; // set the sidebar to be on the left side of the page
