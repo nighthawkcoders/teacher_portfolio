@@ -33,7 +33,8 @@ export class Player extends Character{
     isFaceRight() { return this.directionKey === "d"; }
     // helper: right action key is pressed
     isKeyActionRight(key) { return key === "d"; }
-
+    // helper: dash key is pressed
+    isKeyActionDash(key) { return key === "s"; }
 
     // helper: action key is in queue 
     isActiveAnimation(key) { return (key in this.pressedKeys) && !this.isIdle; }
@@ -175,7 +176,11 @@ export class Player extends Character{
                 // player active
                 this.isIdle = false;
             }
-            // parallax background speed start
+            // dash action on
+            if (this.isKeyActionDash(key)) {
+                this.canvas.style.filter = 'invert(1)';
+            }
+            // parallax background speed starts on player movement
             if (this.isKeyActionLeft(key)) {
                 GameEnv.backgroundHillsSpeed = -0.4;
                 GameEnv.backgroundMountainsSpeed = -0.1;
@@ -195,8 +200,12 @@ export class Player extends Character{
             }
             this.setAnimation(key);  
             // player idle
-            this.isIdle = true; 
-            // parallax background speed stop
+            this.isIdle = true;
+            // dash action off
+            if (this.isKeyActionDash(key)) {
+                this.canvas.style.filter = 'invert(0)';
+            } 
+            // parallax background speed halts on key up
             if (this.isKeyActionLeft(key) || this.isKeyActionRight(key)) {
                 GameEnv.backgroundHillsSpeed = 0;
                 GameEnv.backgroundMountainsSpeed = 0;
