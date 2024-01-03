@@ -11,7 +11,7 @@ image: /images/platformer/backgrounds/hills.png
 
 <!-- Prepare DOM elements -->
 <div id="sidebar" class="sidebar">
-  <a href="javascript:void(0)" id="toggleSettingsBar1">&times; Settings</a>
+  <a href="javascript:void(0)" id="sidebar-header">&times; Settings</a>
 </div>
 
 <!-- Wrap both the canvas and controls in a container div -->
@@ -24,7 +24,7 @@ image: /images/platformer/backgrounds/hills.png
   </div>
   <div id="settings"> <!-- Controls -->
       <!-- Background controls -->
-      <button id="toggleSettingsBar">Settings</button>
+      <button id="settings-button">Settings</button>
   </div>
 </div>
 

@@ -337,17 +337,21 @@ export class SettingsControl extends LocalStorage{
         var gravityInput = settingsControl.gravityInput;
         document.getElementById("sidebar").append(gravityInput);
 
-        // Listener/toggle for sidebar open and close
-        var toggle = false;
-        function toggleWidth(){
-            toggle = !toggle;
-            document.getElementById("sidebar").style.width = toggle?"200px":"0px";
-            document.getElementById("sidebar").style.paddingLeft = toggle?"10px":"0px";
-            document.getElementById("sidebar").style.paddingRight = toggle?"10px":"0px";
+        // Listener, isOpen, and function for sidebar open and close
+        var isOpen = false; // default sidebar is closed
+        function sidebarPanel(){
+            // toggle isOpen
+            isOpen = !isOpen;
+            // open and close properties for sidebar based on isOpen
+            document.getElementById("sidebar").style.width = isOpen?"200px":"0px";
+            document.getElementById("sidebar").style.paddingLeft = isOpen?"10px":"0px";
+            document.getElementById("sidebar").style.paddingRight = isOpen?"10px":"0px";
 
         }
-        document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
-        document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
+        // settings-button and event listener opens sidebar
+        document.getElementById("settings-button").addEventListener("click",sidebarPanel);
+        // sidebar-header and event listener closes sidebar
+        document.getElementById("sidebar-header").addEventListener("click",sidebarPanel);
     }
     
 }
