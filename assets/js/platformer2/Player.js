@@ -1,6 +1,16 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 
+/**
+ * @class Player class
+ * @description Player.js key objective is to eent the user-controlled character in the game.   
+ * 
+ * The Player class extends the Character class, which in turn extends the GameObject class.
+ * Animations and events are activiated by key presses, collisions, and gravity.
+ * WASD keys are used by user to control The Player object.  
+ * 
+ * @extends Character
+ */
 export class Player extends Character{
     // instantiation: constructor sets up player object 
     constructor(canvas, image, data){
@@ -24,6 +34,11 @@ export class Player extends Character{
 
         GameEnv.player = this;
     }
+
+    /**
+     * Helper methods for checking the state of the player.
+     * Each method checks a specific condition and returns a boolean indicating whether that condition is met.
+     */
 
     // helper: player facing left
     isFaceLeft() { return this.directionKey === "a"; }
@@ -50,7 +65,14 @@ export class Player extends Character{
         return result;
     }
 
-    // helper: animation manager
+    /**
+     * This helper method that acts like an animation manager. Frames are set according to player events.
+     *  - Sets the animation of the player based on the provided key.
+     *  - The key is used to look up the animation frame and idle in the objects playerData.
+     * If the key corresponds to a left or right movement, the directionKey is updated.
+     * 
+     * @param {string} key - The key representing the animation to set.
+     */
     setAnimation(key) {
         // animation comes from playerData
         var animation = this.playerData[key]
@@ -70,8 +92,15 @@ export class Player extends Character{
             this.setMinFrame(animation.idleFrame.frames);
         }
     }
-    
-    // gameLoop: player performs all possible updates in refresh cycle 
+   
+    /**
+     * gameloop: updates the player's state and position.
+     * In each refresh cycle of the game loop, the player-specific movement is updated.
+     * - If the player is moving left or right, the player's x position is updated.
+     * - If the player is dashing, the player's x position is updated at twice the speed.
+     * This method overrides Character.update, which overrides GameObject.update. 
+     * @override
+     */
     update() {
         // Player moving right 
         if (this.isActiveAnimation("a")) {
@@ -99,7 +128,13 @@ export class Player extends Character{
         super.update();
     }
 
-    // gameloop: override destroy() method from GameObject to remove event listeners
+    /**
+     * gameloop:  respoonds to level change and game over destroy player object
+     * This method is used to remove the event listeners for keydown and keyup events.
+     * After removing the event listeners, it calls the parent class's destroy player object. 
+     * This method overrides GameObject.destroy.
+     * @override
+     */
     destroy() {
         // Remove event listeners
         document.removeEventListener('keydown', this.keydownListener);
@@ -109,7 +144,14 @@ export class Player extends Character{
         super.destroy();
     }
 
-    // gameloop: player performs action on collisions
+    /**
+     * gameloop: performs action on collisions
+     * Handles the player's actions when a collision occurs.
+     * This method checks the collision, type of game object, and then to determine action, e.g game over, animation, etc.
+     * Depending on the side of the collision, it performs player action, e.g. stops movement, etc.
+     * This method overrides GameObject.collisionAction. 
+     * @override
+     */
     collisionAction() {
         if (this.collisionData.touchPoints.other.id === "tube") {
             // Collision with the left side of the Tube
@@ -166,7 +208,15 @@ export class Player extends Character{
         }
     }
     
-    // event: listener key down
+    /**
+     * Handles the keydown event.
+     * This method checks the pressed key, then conditionally:
+     * - adds the key to the pressedKeys object
+     * - sets the player's animation
+     * - adjusts the game environment
+     *
+     * @param {Event} event - The keydown event.
+     */    
     handleKeyDown(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
             const key = event.key;
@@ -191,7 +241,12 @@ export class Player extends Character{
         }
     }
 
-    // event: listener key up
+    /**
+     * Handles the keyup event.
+     * This method checks the released key, then conditionally stops actions from formerly pressed key
+     * *
+     * @param {Event} event - The keyup event.
+     */
     handleKeyUp(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
             const key = event.key;
