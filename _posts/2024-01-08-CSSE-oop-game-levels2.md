@@ -9,13 +9,16 @@ image: /images/platformer/backgrounds/hills.png
 
 <!-- Syle is now located, as of Jan 2024 v2.0, in _sass/minima/platformer-styles.scss -->
 
-<!-- Prepare DOM elements -->
+<!-- DOM Settings Panel (sidebar id and div), managed by SettingsContro.js -->
 <div id="sidebar" class="sidebar">
   <a href="javascript:void(0)" id="sidebar-header">&times; Settings</a>
 </div>
 
 <!-- Wrap both the canvas and controls in a container div -->
 <div id="canvasContainer">
+  <div id="score">
+      Timer: <span id="timeScore">0</span>
+  </div>
   <div id="gameBegin" hidden>
       <button id="startGame">Start Game</button>
   </div>
@@ -27,6 +30,8 @@ image: /images/platformer/backgrounds/hills.png
       <button id="settings-button">Settings</button>
   </div>
 </div>
+
+
 
 <script type="module">
     // Imports

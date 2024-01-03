@@ -15,6 +15,15 @@
 /// @import is used to import other stylesheets, see @import of this file in "_sass/minima/custom-styles.sccs".
 /// see https://sass-lang.com/documentation/syntax for more information.
 
+/// Score for the game  
+/// @description This ID is used to style the score for the game, key style is to ensure it is on top of other elements.
+#score { 
+  position: relative; 
+  z-index: 2; // z-index position ensures these buttons are on top.
+  padding: 5px;
+  color: $dt-red !important; // use the high-emphasis color for the text
+}
+
 /// Game Begin, Game Over, Settings IDs
 /// @description These IDs correspond to buttons in game screen. Key styling is to ensure they are on top of other elements. 
 #gameBegin, #gameOver, #settings {
@@ -29,6 +38,7 @@
   background-color: $dark-grey !important; // use the dark grey color for the background
   border: 1px solid $dt-blue; // from dracula-highlight.scss
 }
+
 
 /// Sidebar class
 /// @description This class styles the sidebar for settings in the game. It has many style elements (e.g. placing sidebar below header).
