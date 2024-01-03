@@ -1,40 +1,53 @@
-// GameCoontrol.js key objective is to control the game loop.
+/**
+ * GameControl module.
+ * @module GameControl
+ * @description GameControl.js key objective is to control the game loop.
+ * Usage Notes:
+ * - call GameControl.gameLoop() to run the game levels.
+ * - call or add listener to GameControl.startTimer() to start the game timer.
+ */
 import GameEnv from './GameEnv.js';
 
-/* Coding Style Notes
- *
- * GameControl is defined as an object literal
- * * GameControl is a singleton object, without a constructor.
- * * This coding style ensures one instance, thus the term object literal.
- * * Informerly, GameControl looks like defining a variable with methods contained inside.
- * * The object literal style is a common pattern in JavaScript.
+/**
+ * GameControl is a singleton object that controls the game loop.
+ * @namespace GameControl
  * 
- * * Observe, definition style of methods with GameControl.methodName = function() { ... }
- * * * Example: transitionToLevel(newLevel) { ... } versus transitionToLevel: function(newLevel) { ... }
- * * * Methods are defined as ES6 shorthand, versus the traditional function() style.
- * * * The shorthand style is a common pattern in JavaScript, more concise, and readable as it common to other coding languages.
- * * * But, it does not look like key-value pairs, which is the traditional object literal style.
- * * * This shorthand is part of ES6, and is supported by all modern browsers. references: https://caniuse.com/#feat=es6, https://www.w3schools.com/js/js_versions.asp
+ * Coding Style Notes:
+ * - GameControl is defined as an object literal
+ * - GameControl is a singleton object, without a constructor.
+ * - This coding style ensures one instance, thus the term object literal.
+ * - Informerly, GameControl looks like defining a variable with methods contained inside.
+ * - The object literal style is a common pattern in JavaScript.
+ * - Observe, definition style of methods with GameControl.methodName = function() { ... }
+ *   - Example: transitionToLevel(newLevel) { ... } versus transitionToLevel: function(newLevel) { ... }
+ *   - Methods are defined as ES6 shorthand, versus the traditional function() style.
+ *   - The shorthand style is a common pattern in JavaScript, more concise, and readable as it common to other coding languages.
+ *   - But, it does not look like key-value pairs, which is the traditional object literal style.
+ *   - This shorthand is part of ES6, and is supported by all modern browsers. references: https://caniuse.com/#feat=es6, https://www.w3schools.com/js/js_versions.asp
+ * - Observe, scoping/encapulation of this.inTransition and sharing data between methods.
+ *   - this.inTransition is defined in the object literal scope.
+ *   - this.inTransition is shared between methods.
+ *   - this.inTransition is not accessible outside of the object literal scope.
+ *   - this.inTransition is not a global or static variable.
  * 
- * * Observe, scoping/encapulation of this.inTransition and sharing data between methods.
- * * * this.inTransition is defined in the object literal scope.
- * * * this.inTransition is shared between methods.
- * * * this.inTransition is not accessible outside of the object literal scope.
- * * * this.inTransition is not a global or static variable.
- * 
- * 
- * Usage Notes
- * * call GameControl.gameLoop() to run the game levels.
- * * * the remainder of GameControl supports the gameLoop.
- * 
-*/
-
-// define the GameControl object literal
+ */
 const GameControl = {
-    interval: null, // Variable to hold the interval reference
+    /**
+     * A reference to the interval used for the game timer.
+     * @type {number}
+     */
+    timerInterval: null, // Variable to hold the timer interval reference
+    /**
+     * The start time of the game timer.
+     * @type {number}
+     */
     startTime: null, // Variable to hold the start time
 
-    // Function to update and display the timer
+    /**
+     * Updates and displays the game timer.
+     * @function updateTimer
+     * @memberof GameControl
+     */
     updateTimer() {
         const id = document.getElementById("gameOver");
         if (id.hidden == false) {
@@ -51,18 +64,26 @@ const GameControl = {
         }
     },
 
-    // Function to start the timer
+    /**
+     * Starts the game timer.
+     * @function startTimer
+     * @memberof GameControl
+     */
     startTimer() {
         // Get the current time
         this.startTime = Date.now();
 
         // Start the timer interval, updating the timer every 0.01 second (10 milliseconds)
-        this.interval = setInterval(() => this.updateTimer(), 10);
+        this.timerInterval = setInterval(() => this.updateTimer(), 10);
     },
 
-    // Function to stop the timer
+    /**
+     * Stops the game timer.
+     * @function stopTimer
+     * @memberof GameControl
+     */
     stopTimer() {   
-        clearInterval(this.interval); // Clear the interval to stop the timer
+        clearInterval(this.timerInterval); // Clear the interval to stop the timer
     },
 
     /**

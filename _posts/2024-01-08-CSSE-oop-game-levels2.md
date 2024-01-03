@@ -80,7 +80,9 @@ image: /images/platformer/backgrounds/hills.png
      *  ========== Event / Listeners =============
      *  ==========================================
      * System Event listeners, the other listeners remain near impacting functions
-    */    
+     * 1.) Window resize and GameEnv.resize trigger many system updates
+     * 2.) Starting game provides an entry point for timing game levels
+    */ 
     window.addEventListener('resize', GameEnv.resize);
     document.getElementById('startGame').addEventListener('click', () => {
         GameControl.startTimer(); // Start the timer when the game starts
