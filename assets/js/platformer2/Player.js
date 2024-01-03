@@ -2,7 +2,7 @@ import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 
 export class Player extends Character{
-    // constructors sets up Character object 
+    // instantiation: constructor sets up player object 
     constructor(canvas, image, data){
         super(canvas, image, data);
         // Player Data is required for Animations
@@ -25,22 +25,31 @@ export class Player extends Character{
         GameEnv.player = this;
     }
 
-    // helper methods for facing left/right  
+    // helper: player facing left
     isFaceLeft() { return this.directionKey === "a"; }
+    // helper: left action key is pressed
     isKeyActionLeft(key) { return key === "a"; }
+    // helper: player facing right  
     isFaceRight() { return this.directionKey === "d"; }
+    // helper: right action key is pressed
     isKeyActionRight(key) { return key === "d"; }
 
-    // check for matching animation
-    isAnimation(key) {
-        var result = false;
-        if (key in this.pressedKeys) {
-            result = !this.isIdle;
+
+    // helper: action key is in queue 
+    isActiveAnimation(key) { return (key in this.pressedKeys) && !this.isIdle; }
+    // helper: gravity action key is in queue
+    isActiveGravityAnimation(key) {
+        var result = this.isActiveAnimation(key) && (this.bottom <= this.y || this.movement.down === false);
+    
+        // return to directional animation (direction?)
+        if (this.bottom <= this.y || this.movement.down === false) {
+            this.setAnimation(this.directionKey);
         }
-        
+    
         return result;
     }
 
+    // helper: animation manager
     setAnimation(key) {
         // animation comes from playerData
         var animation = this.playerData[key]
@@ -61,57 +70,45 @@ export class Player extends Character{
         }
     }
     
-    // check for gravity based animation
-    isGravityAnimation(key) {
-        var result = false;
-    
-        // verify key is in active animations
-        if (key in this.pressedKeys) {
-            result = (!this.isIdle && (this.bottom <= this.y || this.movement.down === false));
-        }
-
-        // make sure jump has some velocity
-        if (result) {
-            // Adjust horizontal position during the jump
-            const horizontalJumpFactor = 0.1; // Adjust this factor as needed
-            this.x += this.speed * horizontalJumpFactor;  
-        }
-    
-        // return to directional animation (direction?)
-        if (this.bottom <= this.y || this.movement.down === false) {
-            this.setAnimation(this.directionKey);
-        }
-    
-        return result;
-    }
-    
-
-    // Player updates
+    // gameLoop: player performs all possible updates in refresh cycle 
     update() {
-        if (this.isAnimation("a")) {
+        // Player moving right 
+        if (this.isActiveAnimation("a")) {
             if (this.movement.left) this.x -= this.speed;  // Move to left
         }
-        if (this.isAnimation("d")) {
+        // Player moving left
+        if (this.isActiveAnimation("d")) {
             if (this.movement.right) this.x += this.speed;  // Move to right
         }
-        if (this.isGravityAnimation("w")) {
+        // Player moving at dash speed left or right 
+        if (this.isActiveAnimation("s")) {
+            const moveSpeed = this.speed * 2;
+            this.x += this.isFaceLeft() ? -moveSpeed : moveSpeed;
+        }
+        // Player jumping
+        if (this.isActiveGravityAnimation("w")) {
             if (this.gravityEnabled) {
                 this.y -= (this.bottom * .50);  // bottom jump height
             } else if (this.movement.down===false) {
                 this.y -= (this.bottom * .30);  // platform jump height
             }
         }
-        // Dash speed or double speed, ignores obstacles (ie tube)
-        if (this.isAnimation("s")) {
-            const moveSpeed = this.speed * 2;
-            this.x += this.isFaceLeft() ? -moveSpeed : moveSpeed;
-        }
 
         // Perform super update actions
         super.update();
     }
 
-    // Player action on collisions
+    // gameloop: override destroy() method from GameObject to remove event listeners
+    destroy() {
+        // Remove event listeners
+        document.removeEventListener('keydown', this.keydownListener);
+        document.removeEventListener('keyup', this.keyupListener);
+
+        // Call the parent class's destroy method
+        super.destroy();
+    }
+
+    // gameloop: player performs action on collisions
     collisionAction() {
         if (this.collisionData.touchPoints.other.id === "tube") {
             // Collision with the left side of the Tube
@@ -168,7 +165,7 @@ export class Player extends Character{
         }
     }
     
-    // Event listener key down
+    // event: listener key down
     handleKeyDown(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
             const key = event.key;
@@ -189,7 +186,7 @@ export class Player extends Character{
         }
     }
 
-    // Event listener key up
+    // event: listener key up
     handleKeyUp(event) {
         if (this.playerData.hasOwnProperty(event.key)) {
             const key = event.key;
@@ -207,15 +204,7 @@ export class Player extends Character{
         }
     }
 
-    // Override destroy() method from GameObject to remove event listeners
-    destroy() {
-        // Remove event listeners
-        document.removeEventListener('keydown', this.keydownListener);
-        document.removeEventListener('keyup', this.keyupListener);
-
-        // Call the parent class's destroy method
-        super.destroy();
-    }
+    
 }
 
 
