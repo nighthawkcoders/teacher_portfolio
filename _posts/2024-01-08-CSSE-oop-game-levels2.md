@@ -38,13 +38,14 @@ image: /images/platformer/backgrounds/hills.png
 </div>
 
 <script type="module">
-    // Imports
+    // Imports to drive game
     import GameSetup from '{{site.baseurl}}/assets/js/platformer2/GameSetup.js';
     import GameControl from '{{site.baseurl}}/assets/js/platformer2/GameControl.js';
     import SettingsControl from '{{site.baseurl}}/assets/js/platformer2/SettingsControl.js';
     import GameEnv from '{{site.baseurl}}/assets/js/platformer2/GameEnv.js';
 
-    /* ==========================================
+    /* 
+     * ==========================================
      * ========== Game Setup ====================
      * ==========================================
      * Game Setup prepares the Game Levels and Objects
@@ -52,40 +53,55 @@ image: /images/platformer/backgrounds/hills.png
      * 2.) Each GameLevel has one-to-many GameObjects
      * ==========================================
     */
+
+    // Setup game data, the objects and levels
     GameSetup.initLevels("{{site.baseurl}}"); 
 
-    /* ==========================================
+    /* 
+     * ==========================================
      * ========== Game Control ==================
      * ==========================================
      * Game Control starts the game loop and activates game objects
      * 1.) GameControl cycles through GameLevels
      * 2.) Each GameLevel is on a looping timer, called within the game loop 
      * 3.) The game loop allows the game player (user), to interact with the game objects 
+     * 4.) A timer (or score) tracks the time of user interaction within the game
      * ==========================================
     */
+
+    // Start the PRIMARY game loop
     GameControl.gameLoop();
 
-    /* ==========================================
-     * ========== Settings Control ==============
-     * ==========================================
-     * Settings Control provides the ability to select game level and change game settings
-     * 1.) SettingsControl must be after GameControl, it depends on GameLevels 
-     * 2.) GameControl extends and implements LocalStorage for settings modifications
-     * 3.) Invert moved into Settings; GameSpeed and Gravity can be customized
-     * ==========================================
+    // Create an async event to start the timer when the start game button is pushed
+    document.getElementById('startGame').addEventListener('click', () => {
+        GameControl.startTimer(); 
+    });
+
+    /* 
+    * ==========================================
+    * ========== Settings Control ==============
+    * ==========================================
+    * Settings Control provides the ability to select game level and change game settings
+    * 1.) SettingsControl must be after GameControl, it depends on GameLevels 
+    * 2.) GameControl extends and implements LocalStorage to support the persistence of user data
+    * 3.) Modifications can be made to User ID, GameSpeed, Gravity, and Invert(ing) screen color
+    * ==========================================
     */
+
+    // Construct settings sidebar, MVC variable paradigm, and async events to trigger user interaction
     SettingsControl.sidebar();
 
-    /*  ==========================================
+    /* 
+     * ==========================================
      *  ========== Event / Listeners =============
      *  ==========================================
-     * System Event listeners, the other listeners remain near impacting functions
-     * 1.) Window resize and GameEnv.resize trigger many system updates
-     * 2.) Starting game provides an entry point for timing game levels
-    */ 
+     * System Event listeners
+     * 1.) Window resize and GameEnv.resize trigger system updates
+     * 2.) Most event listeners remain near impacting functions
+     * ==========================================
+    */
+
+    // Game refresh is required when the height and width of the screen are impacted
     window.addEventListener('resize', GameEnv.resize);
-    document.getElementById('startGame').addEventListener('click', () => {
-        GameControl.startTimer(); // Start the timer when the game starts
-    });
 
 </script>
