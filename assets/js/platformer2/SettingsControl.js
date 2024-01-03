@@ -339,19 +339,26 @@ export class SettingsControl extends LocalStorage{
 
         // Listener, isOpen, and function for sidebar open and close
         var isOpen = false; // default sidebar is closed
+        var submenuHeight = 0; // calculated height of submenu
         function sidebarPanel(){
             // toggle isOpen
             isOpen = !isOpen;
             // open and close properties for sidebar based on isOpen
-            document.getElementById("sidebar").style.width = isOpen?"200px":"0px";
-            document.getElementById("sidebar").style.paddingLeft = isOpen?"10px":"0px";
-            document.getElementById("sidebar").style.paddingRight = isOpen?"10px":"0px";
-
+            var sidebar = document.querySelector('.sidebar');
+            sidebar.style.width = isOpen?"200px":"0px";
+            sidebar.style.paddingLeft = isOpen?"10px":"0px";
+            sidebar.style.paddingRight = isOpen?"10px":"0px";
+            sidebar.style.top = `calc(${submenuHeight}px + ${GameEnv.top}px)`;
         }
         // settings-button and event listener opens sidebar
         document.getElementById("settings-button").addEventListener("click",sidebarPanel);
         // sidebar-header and event listener closes sidebar
         document.getElementById("sidebar-header").addEventListener("click",sidebarPanel);
+
+        window.addEventListener('load', function() {
+            var submenu = document.querySelector('.submenu');
+            submenuHeight = submenu.offsetHeight;
+        });
     }
     
 }

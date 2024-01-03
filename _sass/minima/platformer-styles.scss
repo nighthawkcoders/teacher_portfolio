@@ -26,7 +26,7 @@
 
 /// Game Begin, Game Over, Settings IDs
 /// @description These IDs correspond to buttons in game screen. Key styling is to ensure they are on top of other elements. 
-#gameBegin, #gameOver, #settings {
+#gameBegin, #gameOver, #settings, #leaderboard {
   position: relative;
   z-index: 2; // z-index position ensures these buttons are on top.
 }
@@ -39,6 +39,21 @@
   border: 1px solid $dt-blue; // from dracula-highlight.scss
 }
 
+/// Horizontal Submenu
+/// @description This class styles the horizontal submenu for score and buttons in the game. It has many style elements (e.g. placing submenu below header).
+.submenu {
+  @include dark-mode-color; // use the dark mode color scheme
+  border: none; // remove setting as submenu 
+  position: fixed;
+  z-index: 3; // Position on Top of other elements, as well as ID buttons above
+  top: $spacing-unit * 1.865;  // matches minima ".site-header min-height height", reference: https://github.com/jekyll/minima/blob/master/_sass/minima/_layout.scss
+
+  // Styles for the score and buttons
+  #score, #gameBegin, #gameOver, #settings, #leaderboard {
+    display: inline-block; // Make the score and buttons inline
+    margin-right: $spacing-unit; // Add some margin to the right of each item
+  }
+}
 
 /// Sidebar class
 /// @description This class styles the sidebar for settings in the game. It has many style elements (e.g. placing sidebar below header).
@@ -48,7 +63,7 @@
   position: fixed;
   z-index: 3; // Position on Top of other elements, as well as ID buttons above
   // left: 0; // set the sidebar to be on the left side of the page
-  top: $spacing-unit * 1.865;  // matches minima ".site-header min-height height", reference: https://github.com/jekyll/minima/blob/master/_sass/minima/_layout.scss
+  top: 0; // calculated to be below the header and submenu 
   padding-top: 5px; 
   padding-bottom: 5px;
   overflow-x: hidden; /* Disable horizontal scroll */

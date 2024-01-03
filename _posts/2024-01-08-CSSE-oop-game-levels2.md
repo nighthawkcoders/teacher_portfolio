@@ -14,24 +14,27 @@ image: /images/platformer/backgrounds/hills.png
   <a href="javascript:void(0)" id="sidebar-header">&times; Settings</a>
 </div>
 
-<!-- Wrap both the canvas and controls in a container div -->
+<!-- Wrap both the controls and gameplay in a container div -->
 <div id="canvasContainer">
-  <div id="score">
-      Timer: <span id="timeScore">0</span>
+  <div class="submenu">
+    <div id="score">
+        Timer: <span id="timeScore">0</span>
+    </div>
+    <div id="gameBegin" hidden>
+        <button id="startGame">Start Game</button>
+    </div>
+    <div id="gameOver" hidden>
+        <button id="restartGame">Restart</button>
+    </div>
+    <div id="settings"> <!-- Controls -->
+        <!-- Background controls -->
+        <button id="settings-button">Settings</button>
+    </div>
+    <div id="leaderboard"> <!-- Controls -->
+      <button id="leaderboard-button">Leaderboard</button>
+    </div>
   </div>
-  <div id="gameBegin" hidden>
-      <button id="startGame">Start Game</button>
-  </div>
-  <div id="gameOver" hidden>
-      <button id="restartGame">Restart</button>
-  </div>
-  <div id="settings"> <!-- Controls -->
-      <!-- Background controls -->
-      <button id="settings-button">Settings</button>
-  </div>
-  <div id="leaderboardSection"> <!-- Controls -->
-    <button id="leaderboardButton">Leaderboard</button>
-  </div>
+  <!-- JavaScript-generated canvas items are inserted here -->
 </div>
 
 <script type="module">
@@ -163,11 +166,11 @@ image: /images/platformer/backgrounds/hills.png
       document.getElementById('controls').style.display = 'none';
 
       // Create and display leaderboard section
-      const leaderboardSection = document.createElement('div');
-      leaderboardSection.id = 'leaderboardSection';
-      leaderboardSection.innerHTML = '<h1 style="text-align: center; font-size: 18px;">Leaderboard </h1>';
-      document.querySelector(".page-content").appendChild(leaderboardSection)
-      // document.body.appendChild(leaderboardSection);
+      const leaderboard = document.createElement('div');
+      leaderboard.id = 'leaderboard';
+      leaderboard.innerHTML = '<h1 style="text-align: center; font-size: 18px;">Leaderboard </h1>';
+      document.querySelector(".page-content").appendChild(leaderboard)
+      // document.body.appendChild(leaderboard);
 
       const playerScores = localStorage.getItem("playerScores")
       const playerScoresArray = playerScores.split(";")
@@ -200,7 +203,7 @@ image: /images/platformer/backgrounds/hills.png
     }
 
     // Event listener for leaderboard button to be clicked
-    document.getElementById('leaderboardButton').addEventListener('click', showLeaderboard);
+    document.getElementById('leaderboard-button').addEventListener('click', showLeaderboard);
 
 
     /*  ==========================================
@@ -208,6 +211,6 @@ image: /images/platformer/backgrounds/hills.png
      *  ==========================================
      * System Event listeners, the other listeners remain near impacting functions
     */    
-    window.addEventListener('resize', GameEnv.resize);a
+    window.addEventListener('resize', GameEnv.resize);
 
 </script>
