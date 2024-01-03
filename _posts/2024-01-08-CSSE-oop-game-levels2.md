@@ -76,141 +76,14 @@ image: /images/platformer/backgrounds/hills.png
     */
     SettingsControl.sidebar();
 
-    /* ==========================================
-     * ========== Leaderboard ===================
-     * ========================================== 
-     */
-
-    // Leaderboard Team
-    let time = 0; // Initialize time variable
-    let timerInterval; // Variable to hold the interval reference
-
-
-    // Function to update and display the timer
-    function updateTimer() {
-        const id = document.getElementById("gameOver");
-        if (id.hidden == false) {
-            stopTimer()
-            time=-1
-        }
-      time++; // Increment time (you can adjust this based on your game logic)
-
-
-      // Display the updated time in the span element with id 'timeScore'
-      const timeScoreElement = document.getElementById('timeScore');
-      if (timeScoreElement) {
-          timeScoreElement.textContent = time; // Update the displayed time
-      }
-    }
-
-
-    // Function to start the timer
-    function startTimer() {
-      // Start the timer interval, updating the timer every second (1000 milliseconds)
-      timerInterval = setInterval(updateTimer, 1000);
-    }
-
-
-    // Function to stop the timer
-    function stopTimer() {   
-        clearInterval(timerInterval); // Clear the interval to stop the timer
-    }
-
-
-    // Event listener for the start game button click
-    document.getElementById('startGame').addEventListener('click', () => {
-      startTimer(); // Start the timer when the game starts
-    });
-
-
-    // Function to reset the timer
-    function resetTimer() {
-      stopTimer(); // Stop the timer
-      time = 0; // Reset the time variable
-      updateTimer(); // Update the displayed time to show 0
-    }
-
-
-    // Game Over callback
-    async function gameOverCallBack() {
-      const id = document.getElementById("gameOver");
-      id.hidden = false;
-
-
-      // Stop the timer on game over
-      stopTimer();
-
-
-      // Use waitForRestart to wait for the restart button click
-      await waitForButton('restartGame');
-      id.hidden = true;
-
-
-      // Change currentLevel to start/restart value of null
-      GameEnv.currentLevel = null;
-
-
-      // Reset the timer when restarting the game
-      resetTimer();
-
-
-      return true;
-    }
-
-    // Function to switch to the leaderboard screen
-    function showLeaderboard() {
-      const id = document.getElementById("gameOver");
-      id.hidden = false;
-      // Hide game canvas and controls
-      document.getElementById('canvasContainer').style.display = 'none';
-      document.getElementById('controls').style.display = 'none';
-
-      // Create and display leaderboard section
-      const leaderboard = document.createElement('div');
-      leaderboard.id = 'leaderboard';
-      leaderboard.innerHTML = '<h1 style="text-align: center; font-size: 18px;">Leaderboard </h1>';
-      document.querySelector(".page-content").appendChild(leaderboard)
-      // document.body.appendChild(leaderboard);
-
-      const playerScores = localStorage.getItem("playerScores")
-      const playerScoresArray = playerScores.split(";")
-      const scoresObj = {}
-      const scoresArr = []
-      for(let i = 0; i< playerScoresArray.length-1; i++){
-        const temp = playerScoresArray[i].split(",")
-        scoresObj[temp[0]] = parseInt(temp[1])
-        scoresArr.push(parseInt(temp[1]))
-      }
-
-      scoresArr.sort()
-
-      const finalScoresArr = []
-      for (let i = 0; i<scoresArr.length; i++) {
-        for (const [key, value] of Object.entries(scoresObj)) {
-          if (scoresArr[i] ==value) {
-            finalScoresArr.push(key + "," + value)
-            break;
-          }
-        }
-      }
-      let rankScore = 1;
-      for (let i =0; i<finalScoresArr.length; i++) {
-        const rank = document.createElement('div');
-        rank.id = `rankScore${rankScore}`;
-        rank.innerHTML = `<h2 style="text-align: center; font-size: 18px;">${finalScoresArr[i]} </h2>`;
-        document.querySelector(".page-content").appendChild(rank)    
-      }
-    }
-
-    // Event listener for leaderboard button to be clicked
-    document.getElementById('leaderboard-button').addEventListener('click', showLeaderboard);
-
-
     /*  ==========================================
      *  ========== Event / Listeners =============
      *  ==========================================
      * System Event listeners, the other listeners remain near impacting functions
     */    
     window.addEventListener('resize', GameEnv.resize);
+    document.getElementById('startGame').addEventListener('click', () => {
+        GameControl.startTimer(); // Start the timer when the game starts
+    });
 
 </script>

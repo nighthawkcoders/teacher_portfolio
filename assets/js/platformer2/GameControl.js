@@ -31,6 +31,39 @@ import GameEnv from './GameEnv.js';
 
 // define the GameControl object literal
 const GameControl = {
+    interval: null, // Variable to hold the interval reference
+    startTime: null, // Variable to hold the start time
+
+    // Function to update and display the timer
+    updateTimer() {
+        const id = document.getElementById("gameOver");
+        if (id.hidden == false) {
+            this.stopTimer()
+        }
+
+        // Calculate elapsed time in seconds
+        const elapsedTime = (Date.now() - this.startTime) / 1000;
+
+        // Display the updated time in the span element with id 'timeScore'
+        const timeScoreElement = document.getElementById('timeScore');
+        if (timeScoreElement) {
+            timeScoreElement.textContent = elapsedTime.toFixed(2); // Update the displayed time
+        }
+    },
+
+    // Function to start the timer
+    startTimer() {
+        // Get the current time
+        this.startTime = Date.now();
+
+        // Start the timer interval, updating the timer every 0.01 second (10 milliseconds)
+        this.interval = setInterval(() => this.updateTimer(), 10);
+    },
+
+    // Function to stop the timer
+    stopTimer() {   
+        clearInterval(this.interval); // Clear the interval to stop the timer
+    },
 
     /**
      * Transitions to a new level. Destroys the current level and loads the new level.
