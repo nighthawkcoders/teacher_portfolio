@@ -12,7 +12,7 @@ export class Player extends Character{
         this.pressedKeys = {};
         this.movement = {up: true, down: true, left: true, right: true};
         this.isIdle = true;
-        this.stashKey = "d"; // initial key
+        this.directionKey = "d"; // initially facing right
 
         // Store a reference to the event listener function
         this.keydownListener = this.handleKeyDown.bind(this);
@@ -25,15 +25,31 @@ export class Player extends Character{
         GameEnv.player = this;
     }
 
+    // helper methods for facing left/right  
+    isFaceLeft() { return this.directionKey === "a"; }
+    isKeyActionLeft(key) { return key === "a"; }
+    isFaceRight() { return this.directionKey === "d"; }
+    isKeyActionRight(key) { return key === "d"; }
+
+    // check for matching animation
+    isAnimation(key) {
+        var result = false;
+        if (key in this.pressedKeys) {
+            result = !this.isIdle;
+        }
+        
+        return result;
+    }
+
     setAnimation(key) {
         // animation comes from playerData
         var animation = this.playerData[key]
         // direction setup
-        if (key === "a") {
-            this.stashKey = key;
+        if (this.isKeyActionLeft(key)) {
+            this.directionKey = key;
             this.playerData.w = this.playerData.wa;
-        } else if (key === "d") {
-            this.stashKey = key;
+        } else if (this.isKeyActionRight(key)) {
+            this.directionKey = key;
             this.playerData.w = this.playerData.wd;
         }
         // set frame and idle frame
@@ -45,16 +61,6 @@ export class Player extends Character{
         }
     }
     
-    // check for matching animation
-    isAnimation(key) {
-        var result = false;
-        if (key in this.pressedKeys) {
-            result = !this.isIdle;
-        }
-        
-        return result;
-    }
-
     // check for gravity based animation
     isGravityAnimation(key) {
         var result = false;
@@ -73,7 +79,7 @@ export class Player extends Character{
     
         // return to directional animation (direction?)
         if (this.bottom <= this.y || this.movement.down === false) {
-            this.setAnimation(this.stashKey);
+            this.setAnimation(this.directionKey);
         }
     
         return result;
@@ -94,7 +100,12 @@ export class Player extends Character{
             } else if (this.movement.down===false) {
                 this.y -= (this.bottom * .30);  // platform jump height
             }
-        } 
+        }
+        // Dash speed or double speed, ignores obstacles (ie tube)
+        if (this.isAnimation("s")) {
+            const moveSpeed = this.speed * 2;
+            this.x += this.isFaceLeft() ? -moveSpeed : moveSpeed;
+        }
 
         // Perform super update actions
         super.update();
@@ -147,7 +158,7 @@ export class Player extends Character{
             if (this.collisionData.touchPoints.this.top) {
                 this.movement.down = false; // enable movement down without gravity
                 this.gravityEnabled = false;
-                this.setAnimation(this.stashKey); // set animation to direction
+                this.setAnimation(this.directionKey); // set animation to direction
             }
         }
         // Fall Off edge of Jump platform
@@ -168,11 +179,10 @@ export class Player extends Character{
                 this.isIdle = false;
             }
             // parallax background speed start
-            if (key === "a") {
+            if (this.isKeyActionLeft(key)) {
                 GameEnv.backgroundHillsSpeed = -0.4;
                 GameEnv.backgroundMountainsSpeed = -0.1;
-            }
-            if (key === "d") {
+            } else if (this.isKeyActionRight(key)) {
                 GameEnv.backgroundHillsSpeed = 0.4;
                 GameEnv.backgroundMountainsSpeed = 0.1;
             }
@@ -190,14 +200,10 @@ export class Player extends Character{
             // player idle
             this.isIdle = true; 
             // parallax background speed stop
-            if (key === "a") {
+            if (this.isKeyActionLeft(key) || this.isKeyActionRight(key)) {
                 GameEnv.backgroundHillsSpeed = 0;
                 GameEnv.backgroundMountainsSpeed = 0;
             }
-            if (key === "d") {
-                GameEnv.backgroundHillsSpeed = 0;
-                GameEnv.backgroundMountainsSpeed = 0;
-            }    
         }
     }
 
