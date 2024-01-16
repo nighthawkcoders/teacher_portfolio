@@ -9,7 +9,7 @@ class AndGate extends LogicGate
 
     getOutput()
     {
-        return input1.getOutput() & input2.getOutput();
+        return this.input1.getOutput() & this.input2.getOutput();
     }
 }
 
