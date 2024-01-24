@@ -7,7 +7,7 @@ courses: { csp: {week: 18 }}
 ---
 
 <!-- 
-A simple HTML login form with a Login action when button is pressed.  
+A simple HTML login form with a Login action when the button is pressed.  
 
 The form triggers the login_user function defined in the JavaScript below when the Login button is pressed.
 -->
@@ -38,7 +38,7 @@ The script defines a function when the page loads. This function is triggered wh
         // Set Authenticate endpoint
         const url = uri + '/api/users/authenticate';
 
-        // Set body of request to include login data from DOM
+        // Set the body of the request to include login data from the DOM
         const body = {
             uid: document.getElementById("uid").value,
             password: document.getElementById("password").value,
