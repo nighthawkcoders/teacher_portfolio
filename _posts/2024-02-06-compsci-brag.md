@@ -36,7 +36,7 @@ Classwork with approximately 2-3 hours of homework per week
 - Prerequisites: AP Computer Science Principles 1,2
 - Meets UC/CSU G requirements
 
-![csp]({{site.baseurl}}/images/course-brag/csp.png)
+![csp]({{site.baseurl}}/images/course-brag/csp24.png)
 
 ## Computer Science "A" 1,2 and Data Structures 2; Grades 11-12
 > AP Computer Science A is an in-depth course that focuses on programming, algorithms, and data structures. The AP Computer Science 'A' curriculum is integrated into this course, which covers the Java programming language and topics such as fundamentals of programming, using objects, writing classes, arrays, array lists, 2D arrays, inheritance, and recursion. Students will gain understanding through analysis, coding, and individual and team projects. The course will establish fluency in Java, utilize JavaScript, and work with Linux.
@@ -50,5 +50,5 @@ Classwork with approximately 2-3 hours of homework per week
 - Meets UC/CSU G requirements
 - Data Structures 1,2 receives Articulated College Credit to Mira Costa CC for "CS 113: Basic Data Structures and Algorithms".  Mira Costa CC requires and provides free registration to receive UC college credit.
 
-![csa]({{site.baseurl}}/images/course-brag/csa.png)
+![csa]({{site.baseurl}}/images/course-brag/csa24.png)
 
