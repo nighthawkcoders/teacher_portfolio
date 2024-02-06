@@ -1,7 +1,9 @@
 ---
 title: Course Descriptions
-layout: base
-description: An overview of Computer Science course work at Del Norte High School
+comments: true
+layout: post
+description: An overview of Computer Science pathway at Del Norte High School
+author: John Mortensen, Vivian Ni, Bria Gilliam
 type: ccc
 courses: { csse: {week: 22}, csp: {week: 22 }, csa: {week: 22}}
 ---
