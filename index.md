@@ -5,20 +5,27 @@ image: /images/mario_animation.png
 hide: true
 ---
 
+<!-- Liquid:  statements -->
+
+<!-- Include submenu from _includes to top of pages -->
 {% include nav_home.html %}
+<!--- Concatenation of site URL to frontmatter image  --->
+{% assign sprite_file = site.baseurl | append: page.image %}
+<!--- Has is a list variable containing mario metadata for sprite --->
+{% assign hash = site.data.mario_metadata %}  
+<!--- Size width/height of Sprit images --->
+{% assign pixels = 256 %} 
 
-{% assign sprite_file = site.baseurl | append: page.image %}  <!--- Liquid concatentation --->
-{% assign hash = site.data.mario_metadata %}  <!--- Liquid list variable created from file containing mario metatdata for sprite --->
-{% assign pixels = 256 %} <!--- Liquid integer assignment --->
-
-<!--- HTML for page contains <p> tag named "mario" and class properties for a "sprite"  -->
+<!--- HTML for page contains <p> tag named "Mario" and class properties for a "sprite"  -->
 
 <p id="mario" class="sprite"></p>
   
-<!--- Embedded Cascading Style Sheet (CSS) rules, defines how HTML elements look --->
+<!--- Embedded Cascading Style Sheet (CSS) rules, 
+        define how HTML elements look 
+--->
 <style>
 
-  /*CSS style rules for the elements id and class above...
+  /*CSS style rules for the id and class of the sprite...
   */
   .sprite {
     height: {{pixels}}px;
@@ -36,7 +43,7 @@ hide: true
 
 <!--- Embedded executable code--->
 <script>
-  ////////// convert yml hash to javascript key value objects /////////
+  ////////// convert YML hash to javascript key:value objects /////////
 
   var mario_metadata = {}; //key, value object
   {% for key in hash %}  
@@ -50,7 +57,7 @@ hide: true
 
   {% endfor %}
 
-  ////////// animation control object /////////
+  ////////// game object for player /////////
 
   class Mario {
     constructor(meta_data) {
@@ -181,13 +188,12 @@ hide: true
   });
 
 </script>
-
-## Investing in your Technical Future
+Investing in Your Technical Future
 
 Explore the Computer Science Pathway at Del Norte High School. All Del Norte CompSci classes are designed to provide a real-world development experience. Grading is focused on time invested, analytics, participation with peers, and engagement in learning.
 
 - Project-based learning with teacher support
 - Tech Talks by teacher complimented with Student Teaching
-- Course learning includes Coding Languages, DevOps, GitHub, Research and Ceativity
+- Course learning includes Coding Languages, DevOps, GitHub, Research and Creativity
 - Student teams practice Agile Development Methodologies: planning, communication, collaboration
 - Class lab time provided and approximately 2-3 hours of homework per week
