@@ -2,8 +2,8 @@
 layout: base
 title: Dynamic Game Levels v2.0 
 description: Incorporate student lessons goombas, platforms, parallax backgrounds, settings with local storage, etc.  Refactor code introducing GameSetup and SettingsControl.  Style is moved into _sass.
-type: collab
-courses: { csse: {week: 18} }
+type: ccc
+courses: { csse: {week: 13} }
 image: /images/platformer/backgrounds/hills.png
 ---
 
