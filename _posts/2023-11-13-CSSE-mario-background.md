@@ -3,13 +3,13 @@ layout: base
 title: Mario Hills Background
 description: Early step in turning Mario game into OOP
 type: ccc
-courses: { csse: {week: 13} }
+courses: { csse: {week: 44} }
 image: /images/platformer/backgrounds//hills.png
 images:
   background:
     src: /images/platformer/backgrounds//hills.png
 ---
-<!-- Liquid code, run by Jekyll, used to define location of asset(s) -->
+<!-- Liquid code, run by Jekyll, used to define the location of the asset(s) -->
 {% assign backgroundFile = site.baseurl | append: page.images.background.src %}
 
 <style>
@@ -88,7 +88,7 @@ images:
     // Call and wait for Game Objects to be ready
     await setupGame();
 
-    // Trigger a resize at start up
+    // Trigger a resize at the start-up
     window.dispatchEvent(new Event('resize'));
     toggleCanvasEffect.dispatchEvent(new Event('click'));
 
