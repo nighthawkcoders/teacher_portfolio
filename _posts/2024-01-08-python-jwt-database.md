@@ -1,8 +1,8 @@
 ---
 layout: base
-title: Database Get
+title: Python JWT Login 
 hide: true
-description: An advanced example of database CRUD (Create, Read, Update, Delete).  This articles is focussed on Read.  Each operation works asynchronously between JavaScript and a Python/Flask backend Database.  This requires a set of Python RESTful API services for Get, Put, Delete, and Update.
+description: This fetches a Python RESTful API Get method to return a table 
 permalink: /data/database
 ---
 

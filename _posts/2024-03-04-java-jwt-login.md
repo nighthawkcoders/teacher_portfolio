@@ -5,7 +5,7 @@ description: A login screen that interacts with Java and obtains a JWT
 permalink: /java/login
 ---
 
-
+<!-- Login Form -->
 <form action="javascript:login_user()">
     <p><label>
         User ID:
@@ -22,12 +22,20 @@ permalink: /java/login
 </form>
 
 <script>
-    // URL for deployment
-    var url = "https://spring.nighthawkcodingsociety.com"
-    // Comment out the next line for local testing
-    // url = "http://localhost:8085"
-    // Authenticate endpoint
-    const login_url = url + '/authenticate';
+    // URI identifies the resource
+    let URI = '';
+    if (location.hostname === "localhost") {  // location.hostname is built-in JavaScript property
+        URI = "http://localhost:8085";
+    } else if (location.hostname === "127.0.0.1") {
+            URI = "http://127.0.0.1:8085";
+    } else {
+            URI = "https://spring.nighthawkcodingsociety.com";
+    }
+    // URL identifies the web address login
+    const URL = URI + '/authenticate';
+    // The redirect constant identifies the web page to open on login success
+    const redirect_prefix = "{{ site.baseurl }}"; // Use a Liquid tag to get the baseurl
+    const redirect = redirect_prefix + '/java/database'; 
 
 
     function login_user(){
@@ -38,7 +46,7 @@ permalink: /java/login
         };
 
         // Set Headers to support cross-origin
-        const requestOptions = {
+        const options = {
             method: 'POST',
             mode: 'cors', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -52,7 +60,7 @@ permalink: /java/login
         document.getElementById("error-message").textContent = "";
 
         // Fetch JWT
-        fetch(login_url, requestOptions)
+        fetch(URL, options)
         .then(response => {
             // trap error response from Web API
             if (!response.ok) {
@@ -63,7 +71,7 @@ permalink: /java/login
             }
             // Success!!!
             // Redirect to Database location
-            window.location.href = "/teacher_portfolio/java/database";
+            window.location.href = redirect;
         })
         .catch(error => {
             // Handle network errors

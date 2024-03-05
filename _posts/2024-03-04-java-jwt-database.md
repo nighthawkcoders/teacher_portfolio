@@ -20,17 +20,25 @@ permalink: /java/database
   </tbody>
 </table>
 
-<!-- Script is layed out in a sequence (no function) and will execute when page is loaded -->
+<!-- Script sequence (has no function) and will executed when the page is loaded -->
 <script>
-  // prepare HTML result container for new output
+  // Prepare HTML result container for new output
   const resultContainer = document.getElementById("result");
 
+  // URI identifies the resource
+  let URI = '';
+  if (location.hostname === "localhost") {
+      URI = "http://localhost:8085";
+  } else if (location.hostname === "127.0.0.1") {
+          URI = "http://127.0.0.1:8085";
+  } else {
+          URI = "https://spring.nighthawkcodingsociety.com";
+  }
+  // URL identifies the web address login
   // prepare URL
-  var url = "https://spring.nighthawkcodingsociety.com/api/person/";
-  // Uncomment next line for localhost testing
-  //url = "http://localhost:8085/api/person/";
+  const URL = URI + '/api/person/';
 
-  // set options for cross origin header request
+  // Set options for cross-origin header request
   const options = {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
@@ -42,10 +50,10 @@ permalink: /java/database
   };
 
   // fetch the API
-  fetch(url, options)
+  fetch(URL, options)
     // response is a RESTful "promise" on any successful fetch
     .then(response => {
-      // check for response errors and display
+      // Check for response errors and display
       if (response.status !== 200) {
           const errorMsg = 'Database response error: ' + response.status;
           console.log(errorMsg);
@@ -56,7 +64,7 @@ permalink: /java/database
           resultContainer.appendChild(tr);
           return;
       }
-      // valid response will contain json data
+      // valid response will contain JSON data
       response.json().then(data => {
           console.log(data);
           for (const row of data) {
