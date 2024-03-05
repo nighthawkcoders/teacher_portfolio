@@ -1,29 +1,24 @@
 /*-----------------------------------*/
-/*--- IMPORT STYLES FOR Mortpages ---*/
-@import "minima/Nighthawkpages-styles";   
-
-/*-----------------------------------*/
-/*--- CUSTOM STYLES FOR Nighthawkpages ---*/
 // Uncomment out the following themes to use them 
 
-// @import "minima/hacker/jekyll-theme-hacker"; //Hacker theme 
-// @import "minima/minimal-mistakes"; //Minimal Mistakes theme 
-// @import "minima/monophase/main"; //Monophase theme 
-// @import "minima/leaf/_leaf";  //Leaf theme 
-// @import "minima/hamilton/main"; //Hamilton theme
+@import "minima/dark-mode"; 
 
-/*-----------------------------------*/
-/*----- ADD YOUR STYLES BELOW -------*/
+/*--- CUSTOM STYLES FOR Nighthawkpages ---*/
+@import "minima/Nighthawkpages-styles"; 
+@import "minima/Nighthawkpages-button-styles"; // calculator, binary math styles 
+@import "minima/dracula/color-highlight-styles";  // platformer game styles 
+@import "minima/dracula/platformer-styles";  // platformer game styles 
 
-// If you want to turn off dark background for syntax highlighting, comment or delete the below line.
-// If you want to use dark themes uncomment out the following lines
-@import "minima/Nighthawkpages-dracula-highlight"; 
-@import "minima/dark-mode"; // Dracula Highlight recommended for dark mode
-@import "minima/platformer-styles"; 
-@import "minima/teacher-styles"; 
+
+/*--- CUSTOM STYLES FOR Minma ---*/
+//@import "minima/leaf/_leaf";  //Leaf theme 
+//@import "minima/minimal-mistakes"; //Minimal Mistakes theme 
+//@import "minima/hacker/jekyll-theme-hacker"; //Hacker theme 
+//@import "minima/monophase/main"; //Monophase theme 
+//@import "minima/hamilton/main"; //Hamilton theme
 
 // FOR HAMILTON
-// @import "minima/hamilton/skins/daylight";
-// @import "minima/hamilton/skins/midnight";
-// @import "minima/hamilton/skins/sunrise";
-// @import "minima/hamilton/skins/sunset"
+//@import "minima/hamilton/skins/daylight";
+//@import "minima/hamilton/skins/midnight";
+//@import "minima/hamilton/skins/sunrise";
+//@import "minima/hamilton/skins/sunset"
