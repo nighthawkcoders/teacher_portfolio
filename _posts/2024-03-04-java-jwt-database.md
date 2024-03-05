@@ -20,7 +20,7 @@ permalink: /java/database
   </tbody>
 </table>
 
-<!-- Script sequence (has no function) and will executed when the page is loaded -->
+<!-- Script sequence (has no function) and will execute when the page is loaded -->
 <script>
   // Prepare HTML result container for new output
   const resultContainer = document.getElementById("result");
