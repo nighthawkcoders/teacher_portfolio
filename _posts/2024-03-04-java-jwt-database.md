@@ -5,7 +5,7 @@ description: This fetches a Java RESTful API Get method to return a table
 permalink: /java/database
 ---
 
-## SQL Database
+## SQL Database Fetch (Java)
 <!-- HTML table fragment for page -->
 <table>
   <thead>

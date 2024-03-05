@@ -3,10 +3,10 @@ layout: base
 title: Python JWT Login 
 hide: true
 description: This fetches a Python RESTful API Get method to return a table 
-permalink: /data/database
+permalink: /python/database
 ---
 
-## SQL Database Fetch
+## SQL Database Fetch (Python)
 
 <!-- HTML table layout for page.  The table is filled by JavaScript below. 
 -->

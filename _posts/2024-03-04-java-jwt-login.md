@@ -5,6 +5,8 @@ description: A login screen that interacts with Java and obtains a JWT
 permalink: /java/login
 ---
 
+## Login Page (Java)
+
 <!-- Login Form -->
 <form action="javascript:login_user()">
     <p><label>
