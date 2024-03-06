@@ -1,14 +1,14 @@
-title: Teacher 2.0
+title: Tri 3 CSSE
 description: "August 2023 to June 2024"
-owner_name: John Mortensen
-github_username: nighthawkcoders
-github_repo: "teacher_portfolio"
-baseurl: "/teacher_portfolio"
+owner_name: Trevor Vick
+github_username: tvick22
+github_repo: "tri3CSSE"
+baseurl: "/tri3CSSE"
 future: true
 remote_theme: jekyll/minima
 minima:
   social_links:
-    - { platform: github, user_url: "https://github.com/nighthawkcoders/teacher_portfolio"}
+    - { platform: github, user_url: "https://github.com/nighthawkcoders/tri3CSSE"}
     - { platform: x, user_url: "https://x.com/NighthawkCoding/" }
     - { platform: youtube, user_url: "https://www.youtube.com/@nighthawkcodingsociety2868" }      
 # remote_theme: pages-themes/dinky@v0.2.0
