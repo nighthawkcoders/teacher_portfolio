@@ -32,8 +32,9 @@ $ bundle exec jekyll serve
 #     observe web site in the opened browser
 comment
 
+GITHUB_LOCATION=${1:-$(pwd)}
 #### Setup CompSci / GitHub Pages Tool Requirements
-~/vscode/teacher/scripts/setup_macos.sh
+$GITHUB_LOCATION/setup_macos.sh
 #### Show instructions
-head -32 ~/vscode/teacher/scripts/activate_macos.sh
+head -32 $GITHUB_LOCATION/activate_macos.sh
 echo "=== !!!Start a new Terminal!!! ==="
