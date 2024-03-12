@@ -187,6 +187,12 @@ export class GameEnv {
       let playerX = 0;
       let playerY = 0;
     }
+
+    // Play a sound by its ID
+    static playSound(id) {
+        const sound = document.getElementById(id);
+        sound.play();
+    }
   }
   
   export default GameEnv;

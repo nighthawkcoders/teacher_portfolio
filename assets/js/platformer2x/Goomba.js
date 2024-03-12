@@ -1,6 +1,5 @@
 import Character from './Character.js';
 import GameEnv from './GameEnv.js';
-import playGoombaDeath from './Audio.js';
 import GameControl from './GameControl.js';
 
 export class Goomba extends Character {
@@ -113,7 +112,7 @@ export class Goomba extends Character {
                 this.canvas.style.transformOrigin = "bottom"; // Set the transform origin to the bottom
                 this.canvas.style.transform = "scaleY(0)"; // Make the Goomba flat
                 this.speed = 0;
-                playGoombaDeath();
+                GameEnv.playSound("goombaDeath");
 
                 setTimeout((function() {
                     GameEnv.invincible = false;

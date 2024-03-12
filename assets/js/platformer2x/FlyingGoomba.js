@@ -1,6 +1,5 @@
 import Character from './Character.js';
 import GameEnv from './GameEnv.js';
-import playGoombaDeath from './Audio.js';
 
 export class FlyingGoomba extends Character {
   
@@ -99,8 +98,7 @@ export class FlyingGoomba extends Character {
             if (this.collisionData.touchPoints.other.bottom && this.immune == 0) {
                 GameEnv.invincible = true;
                 this.speed = 0;
-                playGoombaDeath();
-
+                GameEnv.playSound("goombaDeath");
                 setTimeout((function() {
                     GameEnv.invincible = false;
                     this.destroy();

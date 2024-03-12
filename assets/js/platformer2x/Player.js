@@ -1,9 +1,6 @@
 import GameEnv from './GameEnv.js';
 import Character from './Character.js';
 import GameControl from './GameControl.js';
-import playJump from './Audio1.js';
-import playPlayerDeath from './Audio2.js';
-import Socket from './Multiplayer.js';
 
 /**
  * @class Player class
@@ -84,7 +81,7 @@ export class Player extends Character {
             if (GameEnv.difficulty === "normal" || GameEnv.difficulty === "hard") {
                 this.canvas.style.transition = "transform 0.5s";
                 this.canvas.style.transform = "rotate(-90deg) translate(-26px, 0%)";
-                playPlayerDeath();
+                GameEnv.playSound("PlayerDeath");
 
                 if (this.isDying == false) {
                     this.isDying = true;
@@ -165,7 +162,7 @@ export class Player extends Character {
 
         // Player jumping
         if (this.isActiveGravityAnimation("w")) {
-            playJump();
+            GameEnv.playSound("PlayerJump");
             if (this.gravityEnabled) {
                 if (GameEnv.difficulty === "easy") {
                     this.y -= (this.bottom * .50);  // bottom jump height
