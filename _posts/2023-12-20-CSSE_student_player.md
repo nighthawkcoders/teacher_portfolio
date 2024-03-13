@@ -2,13 +2,13 @@
 comments: true
 toc: true
 layout: post
-title: RPG Elements | Student
+title: Player | Student
 type: collab
-courses: { csse: {week: 17} }
+courses: { csse: {week: 15} }
 authors: Maryam Abdul-Aziz, Zidane Ahmed, Abi Besufekad, Gavin Ireland
 ---
 
-## RPG Elements
+## Player
 
 Add different features to your Mario game to make it appear more like an RPG (role-playing game).
 
