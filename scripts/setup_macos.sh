@@ -45,11 +45,6 @@ yes | brew install python
 echo "=== Install Jupyter Notebook ==="
 yes | brew install jupyter
 
-# Setup Python libraries for Notebook conversion
-pip install nbconvert  # library for notebook conversion
-pip install nbformat  # notebook file utility
-pip install pyyaml  # notebook frontmatter
-
 #### Github Pages Local Build
 echo "=== GitHub pages build tools  ==="
 export GEM_HOME="$HOME/gems"

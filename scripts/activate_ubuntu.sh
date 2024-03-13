@@ -9,22 +9,24 @@
 
 # Start a terminal for commands
 $ mdkir vscode
-$ cd vscode
-$ git clone https://github.com/nighthawkcoders/teacher.git
-$ ~/vscode/teacher/scripts/activate_ubuntu.sh
+cd vscode
+git clone https://github.com/nighthawkcoders/teacher_portfolio.git
+cd ~/vscode/teacher_portfolio/scripts
+./activate_ubuntu.sh
 
 # Run the head command, leave this terminal open ...
 #    the head command shows remaining instructions  ...
 #    find this spot and continue on
-$ head -32 ~/vscode/teacher/scripts/activate_ubuntu.sh
+head -34 ~/vscode/teacher_portfolio/scripts/activate_ubuntu.sh
 
 # Start a new terminal ...
 #    the "new" terminal is the command terminal ...
 #    the "original" terminal shows commands ...
 #    type commands in "new" terminal
-$ cd ~/vscode/teacher
-$ bundle install
-$ bundle exec jekyll serve
+cd ~/vscode/teacher_portfolio
+pip install -r requirements.txt
+bundle install
+make
 
 # End
 # The build execution is complete ...
@@ -33,7 +35,8 @@ $ bundle exec jekyll serve
 comment
 
 #### Setup CompSci / GitHub Pages Tool Requirements
-~/vscode/teacher/scripts/setup_ubuntu.sh
+GITHUB_LOCATION=${1:-$(pwd)}
+#### Setup CompSci / GitHub Pages Tool Requirements
+$GITHUB_LOCATION/setup_macos.sh
 #### Show instructions
-head -32 ~/vscode/teacher/scripts/activate_ubuntu.sh
-echo "=== !!!Start a new Terminal!!! ==="
+head -34 $GITHUB_LOCATION/activate_ubuntu.sh
