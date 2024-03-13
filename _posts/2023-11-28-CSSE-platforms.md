@@ -8,13 +8,13 @@ type: ccc
 courses: { csse: {week: 15} }
 ---
 
-### Spawning and Synchronization
-Make a lesson and code around jumping onto platforms.  Integrate ideas so they can be adapted by Teacher project. 
+### Platforms and Walls
+Make a lesson and code around jumping onto platforms, and jumping over walls.  There were a lot of challenges with Platform and how it stops/interacts with Gravity.  Altering techniques used could be part of the investigation.  Integrate ideas so they can be adapted by the Teacher project. 
 
-Provided in code is the beginning of a tube obstacle.   This is a new GameObject class.  Review logic to detect when the player interacts with the obstacle.  This ultimately triggers a Callback that ends the level.
+Provided is the code for Platform.js, JumpPlatform.js, BlockPlatform.js.   These all inherit properties from the GameObject class.  Review logic to detect when the player interacts with the platform.
 
-Introduce platforms for jumping and avoiding enemies.  Obtain coins and scoring points.
+Use platforms to avoid enemies or obtain points by capturing coins, etc.  There could be advancements like floating platforms.  
 
 ## Resources
-
+As an idea for enhancement is 
 [ptatformer spawing platforms](https://www.google.com/search?q=ptatformer+spawing+platforms&oq=ptatformer+spawing+platforms&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIJCAEQIRgKGKAB0gEJMTQxMjRqMWo5qAIAsAIA&sourceid=chrome&ie=UTF-8)
