@@ -5,7 +5,7 @@ layout: post
 title: Leaderboard
 description: Provide a lesson on making a leaderboard.
 type: ccc
-courses: { csse: {week: 17} }
+courses: { csse: {week: 15} }
 ---
 
 ## Player Selection Screens
