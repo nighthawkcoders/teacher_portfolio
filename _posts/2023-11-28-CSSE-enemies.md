@@ -9,19 +9,20 @@ courses: { csse: {week: 15} }
 ---
 
 ### Spawning and Synchronization
-Make a lesson and code around Enemies and Obstacles.  Integrate ideas so they can be adapted by Teacher project. 
+Make a lesson and code around Enemies and Obstacles.  Explain or try ideas so they can be adapted to the Teacher's project. 
 
-Provided in code is the beginning of a tube obstacle.   This is a new GameObject class.  Review logic to detect when the player interacts with the obstacle.  This ultimately triggers a Callback that ends the level.
+NPC Characters should extend Character, see Goomba.js.  Introduce a new NPC GameObject class for another NPC.  Implement game logic for NPC movement and collision with the player.
 
-NPC Characters shoud extend Character
-Introduce new NPC GameObject class for Goombas.  Implement game logic for NPC movement and collision with the player.
+Obstacles should extend GameObject, the Tube.js, Coin.js, and Tree.js files.   Review logic to detect when the player interacts with the obstacle.  The obstacles can be used to gain points or trigger a Callback that ends the level.
 
 Collision Detection:
-- Implement collision detection between the player and enemies.
+- Implement collision detection between the player, enemies or obstacles.
 Assign points based on successful interactions, considering the type of interaction (e.g., jumping on a Goomba versus colliding with a Gomba).
 
 ## Google searches
+Think about behaviors to add, then think about what to do to change code.
 
-[Super Mario Glitches](https://www.mariowiki.com/List_of_Super_Mario_Bros._glitches
+Perhaps looking at glitches can provide some ideas for behaviors. [Super Mario Glitches](https://www.mariowiki.com/List_of_Super_Mario_Bros._glitches
 )
-[Spawning and Synchronization](https://www.reddit.com/r/MarioMaker/comments/3lcrqb/super_mario_maker_science_spawning_despawning_and/?rdt=43064)
+
+To date we have not come up with [Spawning and Synchronization](https://www.reddit.com/r/MarioMaker/comments/3lcrqb/super_mario_maker_science_spawning_despawning_and/?rdt=43064)
