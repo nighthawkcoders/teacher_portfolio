@@ -37,6 +37,6 @@ comment
 #### Setup CompSci / GitHub Pages Tool Requirements
 GITHUB_LOCATION=${1:-$(pwd)}
 #### Setup CompSci / GitHub Pages Tool Requirements
-$GITHUB_LOCATION/setup_macos.sh
+$GITHUB_LOCATION/setup_ubuntu.sh
 #### Show instructions
 head -34 $GITHUB_LOCATION/activate_ubuntu.sh
