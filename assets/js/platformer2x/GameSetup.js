@@ -234,13 +234,13 @@ const GameSetup = {
           height: 52.5,
           scaleSize: 60,
           speedRatio: 0.7,
-          w: {row: 1, frames: 3},
-          wa: {row: 1, frames: 3},
-          wd: {row: 2, frames: 3},
+          w: {row: 1, frames: 3}, // Up Movement
+          wa: {row: 1, frames: 3}, // Up-Left Movement 
+          wd: {row: 2, frames: 3}, // Up-Right Movement
           idle: { row: 6, frames: 1, idleFrame: {column: 1, frames: 0} },
-          a: { row: 1, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Right Movement
+          a: { row: 1, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Left Movement
           s: {row: 1, frames: 3}, // Stop the movement 
-          d: { row: 2, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Left Movement 
+          d: { row: 2, frames: 3, idleFrame: { column: 1, frames: 0 } }, // Right Movement 
           runningLeft: { row: 5, frames: 3, idleFrame: {column: 1, frames: 0} },
           runningRight: { row: 4, frames: 3, idleFrame: {column: 1, frames: 0} },
         }
