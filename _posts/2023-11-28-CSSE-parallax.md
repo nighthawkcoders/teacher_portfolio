@@ -10,7 +10,7 @@ courses: { csse: {week: 15} }
 
 
 ## Parallax and Scrolling Effects
-Make a lesson and code around look and feel of the Game, things like Parallax scrolling and assets and how they look and feel.  Integrate ideas so they can be adapted by the Teacher project.  Add elements to improve screens and characters.  Below are a couple of ideas, but there should be many more.
+Make a lesson and code around the look and feel of the Game, things like Parallax scrolling and assets and how they look and feel.  Integrate ideas so they can be adapted by the Teacher project.  Add elements to improve screens and characters.  Below are a couple of ideas, but there should be many more.
 
 - Crossover reviews.  The Animation team and your team can should coordinate together, to minimize overlap.  
 
