@@ -157,9 +157,11 @@ class GameObject {
     
         // Calculate center points of rectangles
         const thisCenterX = (thisRect.left + thisRect.right) / 2;
-        //const thisCenterY = (thisRect.top + thisRect.bottom) / 2;
         const otherCenterX = (otherRect.left + otherRect.right) / 2;
-        //const otherCenterY = (otherRect.top + otherRect.bottom) / 2;
+
+        // Calculate new center points of rectangles
+        const thisRectWidth = thisRect.right - thisRect.left;
+        const thisRectLeftNew = otherCenterX - thisRectWidth / 2;
     
         // Calculate hitbox constants
         var widthPercentage = this.widthPercentage;
@@ -187,6 +189,7 @@ class GameObject {
     
         // Determine hit and touch points of hit
         this.collisionData = {
+            newX: thisRectLeftNew, // proportionally adjust left to center over other object
             hit: (
                 thisLeft < otherRect.right &&
                 thisRight > otherRect.left &&
@@ -208,7 +211,6 @@ class GameObject {
                     bottom: (thisRect.bottom >= otherRect.top) && !(Math.abs(thisRect.bottom - otherRect.bottom) <= GameEnv.gravity),
                     left: thisCenterX < otherCenterX, 
                     right: thisCenterX > otherCenterX,
-                    x: otherRect.left,
                 },
             },
         };
