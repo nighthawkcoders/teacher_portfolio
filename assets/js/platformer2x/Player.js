@@ -117,6 +117,7 @@ export class Player extends Character {
         }
         // set frame and idle frame
         this.setFrameY(animation.row);
+        this.setMinFrame(animation.min ? animation.min : 0);
         this.setMaxFrame(animation.frames);
         if (this.isIdle && animation.idleFrame) {
             this.setFrameX(animation.idleFrame.column)

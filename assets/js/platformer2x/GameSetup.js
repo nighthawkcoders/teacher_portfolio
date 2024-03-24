@@ -208,7 +208,6 @@ const GameSetup = {
           height: 256,
           scaleSize: 80,
           speedRatio: 0.7,
-          w: { row: 10, frames: 15 },
           wa: { row: 11, frames: 15 },
           wd: { row: 10, frames: 15 },
           a: { row: 3, frames: 7, idleFrame: { column: 7, frames: 0 } },
@@ -221,9 +220,8 @@ const GameSetup = {
           height: 40,
           scaleSize: 80,
           speedRatio: 0.7,
-          w: { row: 9, frames: 15 },
-          wa: { row: 9, frames: 15 },
-          wd: { row: 9, frames: 15 },
+          wa: { row: 9, min: 8, frames: 15 },
+          wd: { row: 9, min: 0, frames: 7 },
           a: { row: 1, frames: 15, idleFrame: { column: 7, frames: 0 } },
           s: { row: 12, frames: 15 },
           d: { row: 0, frames: 15, idleFrame: { column: 7, frames: 0 } }
@@ -234,7 +232,6 @@ const GameSetup = {
           height: 52.5,
           scaleSize: 60,
           speedRatio: 0.7,
-          w: {row: 1, frames: 3}, // Up Movement
           wa: {row: 1, frames: 3}, // Up-Left Movement 
           wd: {row: 2, frames: 3}, // Up-Right Movement
           idle: { row: 6, frames: 1, idleFrame: {column: 1, frames: 0} },
