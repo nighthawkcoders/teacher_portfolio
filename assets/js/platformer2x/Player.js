@@ -229,7 +229,7 @@ export class Player extends Character {
      * @override
      */
     collisionAction() {
-        // Tube collision check
+        // Tube or Tree collision check
         if (this.collisionData.touchPoints.other.id === "tube" 
             || this.collisionData.touchPoints.other.id === "tree") {
 
