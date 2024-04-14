@@ -58,17 +58,17 @@ Sprint3:
   start: 7
   end: 12
 Sprint4:
-  title: OOP Programming Fundamentals
-  description: Students, in trios, will work on converting the Mario game into their blogs and learning OOP. There will be a lot of code and some former Tech Talks to support learning and teaching activity.
+  title: Planning, Exploration, and OOP Programming Fundamentals
+  description: Students, in trios, will work on converting the Mario game into their blogs and learning OOP. There will be a lot of code and some former Tech Talks provided to support learning and teaching activity.
   start: 13
   end: 15
 Sprint5:
-  title: Research, Teaching, and Game Innovation
-  description: The "Student Team" will have an algorithmic teaching assignment. The Teacher will be providing topics. During "Student Teach" weeks, all teams will be doing hacks and forming a more complete Mario game.
+  title: Prgramming Structures and Game Development 
+  description: The Teacher will be providing topics.  All teams will be doing hacks and forming a more complete Mario game.
   start: 16
   end: 17
 Sprint6:
-  title: Create a Final Project and N@tM 
+  title: Create a Final Project, "Student Teaching Teams", and N@tM 
   description: Trimester 2 concludes with students presenting their project at N@tM. Each person within "Student Teams" will have their own specialty feature within the student project. Students should be able to talk about design, coding, and present features of their portion of the system.
   start: 18
   end: 24

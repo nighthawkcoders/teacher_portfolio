@@ -1,3 +1,4 @@
 nbconvert
 nbformat
 pyyaml
+notebook
