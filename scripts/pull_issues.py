@@ -120,7 +120,7 @@ def create_issues():
             'created_at': issue["createdAt"][:10],
             'week': math.floor(week - 3)
         }
-        generate_markdown_file(issue_data, f"_posts/{issue['createdAt'][:10]}-{issue['title'].replace(' ', '-').replace('/', ' ')}_GithubIssue_.md")
+        generate_markdown_file(issue_data, f"_posts/{dueDate}-{issue['title'].replace(' ', '-').replace('/', ' ')}_GithubIssue_.md")
 
 def getToken():
     # Replace 'YOUR_API_ENDPOINT' with the actual HTTP API endpoint URL
