@@ -36,6 +36,8 @@ jobs:
           # Add any other necessary package installations here
       - name: Execute conversion script
         run: python scripts/convert_notebooks.py
+      - name: Execute Issues Script
+        run: python scripts/pull_issues.py
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
