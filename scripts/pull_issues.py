@@ -109,7 +109,8 @@ def create_issues():
       issue = issue["content"]
       if issue:
         print(issue["createdAt"])
-        year, month, day = map(int, issue["createdAt"][:10].split("-"))
+        dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
+        year, month, day = map(int, dueDate.split("-"))
         date2 = datetime(year,month,day)
         difference = date2 - date1
         week = difference.days/7
