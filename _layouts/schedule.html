@@ -51,6 +51,7 @@ Load all posts
 <table>
   <tr>
     <th>Week</th>
+    <th>Issues/Plans</th>
     <th>Code, Code, Code</th>
     <th>Tools and DevOps</th>
     <th>Collaboration</th>
@@ -69,6 +70,7 @@ Load all posts
   {% assign deli = sym | compact %} 
 
   {% for index in (start..end) -%}
+    {% assign issues = null | compact %}
     {% assign ccc = null | compact %}
     {% assign devops = null | compact %}
     {% assign collab = null | compact %}
@@ -95,7 +97,10 @@ Load all posts
   {%comment%} 
   <!-- organizing blogs by type -->
   {%endcomment%}
-          {% if post.type == "ccc" %}
+          {% if post.type == "issues" %}
+              {% assign issues = issues | unshift: title %}
+              {% assign issues = issues | unshift: url %}  
+          {% elsif post.type == "ccc" %}
               {% assign ccc = ccc | unshift: title %}
               {% assign ccc = ccc | unshift: url %}  
           {% elsif post.type == "devops" %}
@@ -116,7 +121,7 @@ Load all posts
   {%comment%} 
   <!-- ordering units and inserting column delimiters -->
   {%endcomment%}
-  {% assign units = units | concat:ccc | concat:deli | concat:devops | concat:deli | concat:collab %}
+  {% assign units = units | concat:issues | concat:deli | concat:ccc | concat:deli | concat:devops | concat:deli | concat:collab %}
 
   {%comment%} 
   <!-- Forever Loop with base condition break processes units and build html for each type-->
