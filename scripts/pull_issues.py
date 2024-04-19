@@ -21,11 +21,10 @@ def generate_markdown_file(issue_data, file_path):
         file.write('layout: post\n')  # Adjust layout as needed
         
         file.write('tags: [github, issue]\n')  # Add relevant tags
-        file.write("courses: {ToC: {week: " + str(issue_data['week']) + "}}\n")
-        file.write("type : plans\n")
+        file.write("courses: {csa: {week: " + str(issue_data['week']) + "}}\n")
+        file.write("type : issues\n")
         file.write("description : Automatically Populated Github Issue\n")
         file.write('---\n\n')
-        
         # Write issue body
         file.write(issue_data['body'] + '\n\n')
         
