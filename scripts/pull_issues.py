@@ -250,12 +250,10 @@ def create_issues():
   token = getToken()["GithubApi"] 
   
   issues_data = get_github_repository_issues(token)["data"]["organization"]["projectsV2"]["nodes"][0]["items"]["nodes"]
-#   print(issues_data)
   date1 = datetime(2023, 8, 21)
   for issue in issues_data:
       issue = issue["content"]
       if issue:
-        print(issue["createdAt"])
         dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
         year, month, day = map(int, dueDate.split("-"))
         date2 = datetime(year,month,day)
