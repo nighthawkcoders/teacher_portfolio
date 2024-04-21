@@ -34,6 +34,7 @@ default: server
 			if ($$0 ~ /_notebooks\/.*\.ipynb/) { system("make convert &") } \
 		} \
 	}') 2>/dev/null &
+	@python -c 'import sys; from scripts.pull_issues import create_issues; create_issues()' "$<"
 	@# start an infinite loop with timeout to check log status
 	@for ((COUNTER = 0; ; COUNTER++)); do \
 		if grep -q "Server address:" $(LOG_FILE); then \
