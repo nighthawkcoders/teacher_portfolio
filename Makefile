@@ -7,7 +7,7 @@ SHELL = /bin/bash -c
 .SHELLFLAGS = -e # Exceptions will stop make, works on MacOS
 
 # Phony Targets, makefile housekeeping for below definitions
-.PHONY: default server convert clean stop
+.PHONY: default server issues convert clean stop
 
 # List all .ipynb files in the _notebooks directory
 NOTEBOOK_FILES := $(wildcard _notebooks/*.ipynb)
@@ -34,7 +34,6 @@ default: server
 			if ($$0 ~ /_notebooks\/.*\.ipynb/) { system("make convert &") } \
 		} \
 	}') 2>/dev/null &
-	@python -c 'import sys; from scripts.pull_issues import create_issues; create_issues()' "$<"
 	@# start an infinite loop with timeout to check log status
 	@for ((COUNTER = 0; ; COUNTER++)); do \
 		if grep -q "Server address:" $(LOG_FILE); then \
@@ -53,15 +52,17 @@ default: server
 	@sed '$$d' $(LOG_FILE)
 
 
-
 # Start the local web server
-server: stop convert
+server: stop issues convert
 	@echo "Starting server..."
 	@@nohup bundle exec jekyll serve -H 127.0.0.1 -P $(PORT) > $(LOG_FILE) 2>&1 & \
 		PID=$$!; \
 		echo "Server PID: $$PID"
 	@@until [ -f $(LOG_FILE) ]; do sleep 1; done
 
+issues:
+	@echo "Pulling issues..."
+	@python -c 'import sys; from scripts.pull_issues import create_issues; create_issues()' "$<"
 
 # Convert .ipynb files to Markdown with front matter
 convert: $(MARKDOWN_FILES)
@@ -69,11 +70,12 @@ convert: $(MARKDOWN_FILES)
 # Convert .md file, if .ipynb file is newer
 $(DESTINATION_DIRECTORY)/%_IPYNB_2_.md: _notebooks/%.ipynb
 	@echo "Converting source $< to destination $@"
-	@python3 -c 'import sys; from scripts.convert_notebooks import convert_single_notebook; convert_single_notebook(sys.argv[1])' "$<"
+	@python -c 'import sys; from scripts.convert_notebooks import convert_single_notebook; convert_single_notebook(sys.argv[1])' "$<"
 
 # Clean up project derived files, to avoid run issues stop is dependency
 clean: stop
 	@echo "Cleaning converted IPYNB files..."
+	@@rm -f _posts/*_GithubIssue_.md
 	@@rm -f _posts/*_IPYNB_2_.md
 	@rm -rf _site
 
