@@ -1,5 +1,6 @@
 _site
-scripts/__pycache__/convert_notebooks.cpython-311.pyc
+*.pyc
+__pycache__/
 _posts/*_IPYNB_2_.md
 _posts/*_GithubIssue_.md
 nohup.out
