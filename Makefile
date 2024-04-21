@@ -62,7 +62,8 @@ server: stop issues convert
 
 issues:
 	@echo "Pulling issues..."
-	@python -c 'import sys; from scripts.pull_issues import create_issues; create_issues()' "$<"
+	@@rm -f _posts/*_GithubIssue_.md
+	@python -c 'import sys; from scripts.pull_issues import create_issues; create_issues()'
 
 # Convert .ipynb files to Markdown with front matter
 convert: $(MARKDOWN_FILES)

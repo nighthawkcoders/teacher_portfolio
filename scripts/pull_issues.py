@@ -22,8 +22,8 @@ def generate_markdown_file(issue_data, file_path):
         
         file.write('tags: [github, issue]\n')  # Add relevant tags
         file.write("courses: {'csa': {'week': " + str(issue_data['week']) + "}}\n")
-        file.write("type : issues\n")
-        file.write("description : Automatically Populated Github Issue\n")
+        file.write("type: issues\n")
+        file.write("description: Automatically Populated Github Issue\n")
         file.write('---\n\n')
         # Write issue body
         file.write(issue_data['body'] + '\n\n')
@@ -97,8 +97,6 @@ def get_github_repository_issues(token=None):
         return None
 
 def create_issues():
-  owner = "John-scc"
-  repo_name = "jcc_frontend"
   token = getToken()["GithubApi"] 
   
   issues_data = get_github_repository_issues(token)["data"]["organization"]["projectsV2"]["nodes"][0]["items"]["nodes"]
