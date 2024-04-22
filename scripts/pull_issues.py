@@ -39,7 +39,8 @@ def generate_markdown_file(issue_data, file_path):
 # generate_markdown_file(issue_data, '_posts/sample_issue.md')
 
 def get_github_repository_issues(token=None):
-    # Construct the GraphQL query
+    # we need to move the query logic in yml file in order to support multiple queries, specificallly for CSP and CSSE
+    # Construct the GraphQL query, using multiple lines for readability
     query = """
     query {
     organization(login: "nighthawkcoders") {
@@ -97,9 +98,13 @@ def get_github_repository_issues(token=None):
         return None
 
 def create_issues():
+  # extract the GitHub API token from the secrets in AWS Secrets Manager
   token = getToken()["GithubApi"] 
   
+  # Call the function to get the issues data, then extract a nested data structure from the response, this corresonds to an array of issues
+  # we need to extract the specific project data, perhaps "projectsV2" in the code to yml file, so we can run CSP and CSSE with same python script
   issues_data = get_github_repository_issues(token)["data"]["organization"]["projectsV2"]["nodes"][0]["items"]["nodes"]
+  # we need to move the data logic into yml file in order to have accurate week calculation
   date1 = datetime(2023, 8, 21)
   for issue in issues_data:
       issue = issue["content"]
@@ -118,7 +123,7 @@ def create_issues():
         generate_markdown_file(issue_data, f"_posts/{dueDate}-{issue['title'].replace(' ', '-').replace('/', ' ')}_GithubIssue_.md")
 
 def getToken():
-    # Replace 'YOUR_API_ENDPOINT' with the actual HTTP API endpoint URL
+    # confirm that this endpoing is storing key that works for all nighthawkcoders repos 
     api_endpoint = 'https://7vybv54v24.execute-api.us-east-2.amazonaws.com/GithubSecret'
 
     # Define headers if needed
