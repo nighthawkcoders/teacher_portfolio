@@ -36,7 +36,7 @@ function uncomment_file()
         return 2
     fi
 
-    temp_file="/tmp/uncomment_tool/$1_uncomment"
+    temp_file="/tmp/uncomment_tool/${1##*/}_uncomment"
 
     # Check if the /tmp/uncomment_tool file exists and make it if it doesn't
     if [[ ! -d "/tmp/uncomment_tool" ]];
@@ -53,7 +53,7 @@ function uncomment_file()
     touch "$temp_file"
 
     # Initialize all of the possible comment options for js and py
-    begining_comment_patterns=("([^\/\/]*)\/\/.*" "([^\#]*)\#.*" "([^\/\*]*)\/\*.*" "([^\"\"\"]*)\"\"\".*" "([^\`\`\`]*)\'\'\'.*")
+    begining_comment_patterns=("(\t*[^\/\/]*)\/\/.*" "(\t*[^\#]*)\#.*" "(\t*[^\/\*]*)\/\*.*" "(\t*[^\"\"\"]*)\"\"\".*" "(\t*[^\`\`\`]*)\'\'\'.*")
 
     end_comment_patterns=(".*\*\/(.*)" ".*\"\"\"(.*)" ".*\'\'\'(.*)")
 
@@ -112,7 +112,7 @@ function uncomment_file()
     done < "$1"
 
     # Switch the temp file with the current file so the provided file is uncommented
-    in_between_file="/tmp/uncomment_tool/$1_in_between"
+    in_between_file="/tmp/uncomment_tool/${1##*/}_in_between"
 
     touch "$in_between_file"
 
@@ -166,7 +166,7 @@ function uncomment_directory()
 #       Exit 5: The undo file was not found in /tmp/uncomment_tool/{filename}_uncomment
 function undo()
 {
-    temp_file="/tmp/uncomment_tool/$1_uncomment"
+    temp_file="/tmp/uncomment_tool/${1##*/}_uncomment"
 
     # Check to see if the temp file exists to undo with
     if [[ ! -f "$temp_file" ]];
@@ -176,7 +176,7 @@ function undo()
     fi
 
     # Swap the provided file with the saved temp file
-    in_between_file="/tmp/uncomment_tool/$1_in_between"
+    in_between_file="/tmp/uncomment_tool/${1##*/}_in_between"
 
     touch "$in_between_file"
 
@@ -222,22 +222,25 @@ echo -e "1. Uncomment File\n2. Uncomment Directory\n3. Undo\n4. Clean"
 read -p ": " menu_selection
 
 case $menu_selection in
-    1)
+    1) # Uncomment file
         read -e -p "File name: " filename
+        filename="${filename/#\~/$HOME}"
         uncomment_file "$filename" "true"
         ;;
-    2)
+    2) # Uncomment directory
         read -e -p "Directory name: " directory
+        directory="${directory/#\~/$HOME}"
         uncomment_directory "$directory"
         ;;
-    3)
+    3) # Undo
         read -e -p "File name: " filename
+        filename="${filename/#\~/$HOME}"
         undo "$filename"
         ;;
-    4)
+    4) # Clean
         clean
         ;;
-    *)
+    *) # invalid
         echo "Invalid selection"
         ;;
 esac
