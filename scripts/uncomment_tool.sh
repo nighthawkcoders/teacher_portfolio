@@ -53,7 +53,7 @@ function uncomment_file()
     touch "$temp_file"
 
     # Initialize all of the possible comment options for js and py
-    begining_comment_patterns=("(\t*[^\/\/]*)\/\/.*" "(\t*[^\#]*)\#.*" "(\t*[^\/\*]*)\/\*.*" "(\t*[^\"\"\"]*)\"\"\".*" "(\t*[^\`\`\`]*)\'\'\'.*")
+    begining_comment_patterns=("([^\/\/]*)\/\/.*" "([^\#]*)\#.*" "([^\/\*]*)\/\*.*\/\*" "([^\"\"\"]*)\"\"\".*\"\"\"" "([^\'\'\']*)\'\'\'*.\'\'\'" "([^\/\*]*)\/\*.*" "([^\"\"\"]*)\"\"\".*" "([^\`\`\`]*)\'\'\'.*")
 
     end_comment_patterns=(".*\*\/(.*)" ".*\"\"\"(.*)" ".*\'\'\'(.*)")
 
@@ -61,7 +61,7 @@ function uncomment_file()
     block_comment="false"
 
     # Loop through the provided file to uncomment
-    while read -r line;
+    while IFS= read line;
     do
         match_found="false"
         # Check to see if we are currently in a block comment
@@ -76,10 +76,11 @@ function uncomment_file()
                 then
                     match_found="true"
                     # The patterns after index one in the pattern list are block comments so we need to set block_comment to true
-                    if [[ $counter -gt 1 ]];
+                    if [[ $counter -gt 4 ]];
                     then
                         block_comment="true"
                     fi
+
                     # Copy the line without the commented section into the temp file
                     echo "${BASH_REMATCH[1]}" >> "$temp_file"
                     break
@@ -97,6 +98,7 @@ function uncomment_file()
                     # Set the block comment to false so we start copying lines into the temp file again
                     match_found="true"
                     block_comment="false"
+
                     # Copy the line without the commented section into the temp file
                     echo "${BASH_REMATCH[1]}" >> "$temp_file"
                     break
