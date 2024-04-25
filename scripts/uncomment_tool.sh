@@ -26,7 +26,7 @@ function uncomment_file()
         fi
         return 1
     # Check if file extension is valid
-    elif [[ ! $1 =~ .*\.(js|py) ]];
+    elif [[ ! $1 =~ .*\.(js|py|md) ]];
     then
         # Suppress error if function is being called by uncomment_directory function
         if [[ $2 == true ]];
@@ -53,9 +53,9 @@ function uncomment_file()
     touch "$temp_file"
 
     # Initialize all of the possible comment options for js and py
-    begining_comment_patterns=("([^\/\/]*)\/\/.*" "([^\#]*)\#.*" "([^\/\*]*)\/\*.*\/\*" "([^\"\"\"]*)\"\"\".*\"\"\"" "([^\'\'\']*)\'\'\'*.\'\'\'" "([^\/\*]*)\/\*.*" "([^\"\"\"]*)\"\"\".*" "([^\`\`\`]*)\'\'\'.*")
+    begining_comment_patterns=("([^\/\/]*)\/\/.*" "([^\#]*)\#.*" "([^\/\*]*)\/\*.*\/\*" "([^\"\"\"]*)\"\"\".*\"\"\"" "([^\'\'\']*)\'\'\'*.\'\'\'" "([^\/\*]*)\/\*.*" "([^\"\"\"]*)\"\"\".*" "([^\`\`\`]*)\'\'\'.*" "^---")
 
-    end_comment_patterns=(".*\*\/(.*)" ".*\"\"\"(.*)" ".*\'\'\'(.*)")
+    end_comment_patterns=(".*\*\/(.*)" ".*\"\"\"(.*)" ".*\'\'\'(.*)" "^---")
 
     # A flag that will set when a block comment is detected so everything in between the markers gets deleted
     block_comment="false"
