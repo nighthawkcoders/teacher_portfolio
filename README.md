@@ -23,7 +23,7 @@ This is a general help for NightHawk pages. This is a project to assist students
   - GitHub Projects integration, new in April 2024, to author weekly plans for student and teacher projects.
 - Notable contributions ...
   - September 2023 Tirth Thakker, Mirza Beg supporting Nighthawk pages break from Fastpages: theme, search and tags. 
-  - April 2024 Toby Ledder supporting GitHub API work, GitHub action, and scripts to bring GitHub projects into GitHub pages.
+  - April 2024 Toby Ledder supported GitHub API work, GitHub action, and scripts to bring GitHub Projects into GitHub pages.
 
 ## GitHub Pages setup
 To get started you need to activate and configure GitHub Actions with a Theme.
@@ -66,7 +66,8 @@ To get started you need to activate and configure GitHub Actions with a Theme.
 
 ### NAVIGATION BAR
 
-- To add pages to the navigation bar add them to the general main directory then add the alpha tag that will order them in the way that you desire such as AA Being the first page and ZZ being the last page.
+- To add pages to the navigation bar add them to the general main directory then add the alpha tag that will order them in the way that you desire such as AA Being the first page and ZZ being the last page. 
+- A better option is to use config.yml to order and determine which menus you want and how to order.
 
 ### BLOG PAGE
 
