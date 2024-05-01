@@ -13,7 +13,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         javaURI = "http://127.0.0.1:8085";
 } else {
-        javaURI = "https://flask2.nighthawkcodingsociety.com";
+        javaURI = "https://spring.nighthawkcodingsociety.com";
 }
 
 export const options = {
