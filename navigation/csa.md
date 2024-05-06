@@ -24,6 +24,7 @@ course: csa
     <p id="login-message" style="color: red;"></p>
 </form>
 
+<!-- Data Table Layout -->
 <table>
   <thead>
   <tr>
@@ -85,7 +86,10 @@ course: csa
         });
     }
 
-    var database = function() {
+    function database() {
+        // Define the loginForm and dataTable variables
+        const loginForm = document.querySelector('form');
+        const dataTable = document.querySelector('table');
 
         // prepare HTML result container for new output
         const resultContainer = document.getElementById("result");
@@ -100,8 +104,12 @@ course: csa
         fetch(data_URL, options)
             // response is a RESTful "promise" on any successful fetch
             .then(response => {
-            //Check for response errors and display
+            // check for response errors and display
             if (response.status !== 200) {
+                // fails, show login form and hide data
+                loginForm.style.display = 'block';
+                dataTable.style.display = 'none';
+
                 const errorMsg = 'Database response error: ' + response.status;
                 console.log(errorMsg);
                 const tr = document.createElement("tr");
@@ -112,6 +120,9 @@ course: csa
                 return;
             }
             // valid response will contain JSON data
+            loginForm.style.display = 'none';
+            dataTable.style.display = 'block';
+
             response.json().then(data => {
                 console.log(data);
                 for (const row of data) {
@@ -135,6 +146,10 @@ course: csa
         })
         // catch fetch errors (ie ACCESS to server blocked)
         .catch(err => {
+           // fails, show login form and hide data
+            loginForm.style.display = 'block';
+            dataTable.style.display = 'none'; 
+
             console.error(err);
             const tr = document.createElement("tr");
             const td = document.createElement("td");
@@ -144,4 +159,5 @@ course: csa
         });
     }
 
+    window.onload = database;
 </script>
