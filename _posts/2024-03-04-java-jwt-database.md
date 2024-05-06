@@ -22,7 +22,7 @@ permalink: /java/database
 
 <!-- Script sequence (has no function) and will execute when the page is loaded -->
 <script type="module">
-  import { javaURI, options } from '/teacher_portfolio/assets/js/api/config.js';
+  import { javaURI, fetchOptions } from '/teacher_portfolio/assets/js/api/config.js';
 
     const resultContainer = document.getElementById("result");
 
@@ -30,7 +30,7 @@ permalink: /java/database
   const URL = javaURI + '/api/person/';
 
   // fetch the API
-  fetch(URL, options)
+  fetch(URL, fetchOptions)
     // response is a RESTful "promise" on any successful fetch
     .then(response => {
       // Check for response errors and display

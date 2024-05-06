@@ -39,69 +39,38 @@ course: csa
 </table>
 
 <script type="module">
-    import { javaURI, options } from '/teacher_portfolio/assets/js/api/config.js';
-
-    // Set the URLs for the endpoints used in this script.
-    const login_URL = javaURI + '/authenticate';
-    const data_URL = javaURI + '/api/person/';
+    import { login, javaURI, fetchOptions } from '/teacher_portfolio/assets/js/api/config.js';
 
     // Method to login user
     window.login_user = function() {
-
-        // Set body to include login data from HTML form
-        const body = {
+        // Set login options
+        const options = {};
+        // Authentication endpoint
+        options.URL = javaURI + '/authenticate';
+        options.callback = database;  // method to call on success
+        options.message = "login-message"; 
+        // Set fetch options
+        options.method = "POST";
+        options.cache = "no-cache";
+        options.body = {
             email: document.getElementById("uid").value,
             password: document.getElementById("password").value,
         };
-
-        // Modify the options to use the POST method and include the request body.
-        const authOptions = {
-            ...options, // This will copy all properties from options
-            method: 'POST', // Override the method property
-            cache: 'no-cache', // Set the cache property
-            body: JSON.stringify(body)
-        };
-
-        document.getElementById("login-message").textContent = "";
-
-        // Fetch JWT
-        fetch(login_URL, authOptions)
-        .then(response => {
-            // trap error response from Web API
-            if (!response.ok) {
-                const errorMsg = 'Login error: ' + response.status;
-                console.log(errorMsg);
-                document.getElementById("login-message").textContent = errorMsg;
-                return;
-            }
-            // Success!!!
-            // Redirect to the Database location
-            document.getElementById("login-message").textContent = "Success: " + document.getElementById("uid").value 
-            database();
-        })
-        .catch(error => {
-            // Handle network errors
-            console.log('Possible CORS or service down error: ' + error);
-            document.getElementById("login-message").textContent = 'Possible CORS or service down error: ' + error;
-        });
+        login(options);
     }
 
     function database() {
-        // Define the loginForm and dataTable variables
-        const loginForm = document.querySelector('form');
-        const dataTable = document.querySelector('table');
+       const URL = javaURI + '/api/person/';
+       // Define the loginForm and dataTable variables
+       const loginForm = document.querySelector('form');
+       const dataTable = document.querySelector('table');
 
         // prepare HTML result container for new output
         const resultContainer = document.getElementById("result");
-
-        // Modify the options to use the POST method and include the request body.
-        const authOptions = {
-            ...options, // This will copy all properties from the options
-            method: 'GET', // Override the method property
-        };
+        resultContainer.innerHTML = ''; // clear each access
 
         // fetch the API
-        fetch(data_URL, options)
+        fetch(URL, fetchOptions)
             // response is a RESTful "promise" on any successful fetch
             .then(response => {
             // check for response errors and display
