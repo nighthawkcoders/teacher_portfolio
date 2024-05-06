@@ -6,7 +6,7 @@ search_exclude: true
 course: csa
 ---
 
-## Login Page (Java)
+## Data Table Page (Java)
 
 <!-- Login Form -->
 <form action="javascript:login_user()">
