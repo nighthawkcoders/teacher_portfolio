@@ -4,7 +4,7 @@ title: Login
 search_exclude: true
 ---
 
-## Data Table Page (Java)
+## User Page (Java)
 
 <!-- Login Form -->
 <form action="javascript:login_user()">
