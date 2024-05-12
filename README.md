@@ -1,4 +1,4 @@
-## README
+# README
 
 This is a general help for NightHawk pages. This is a project to assist students on their learning journey in Computer Science and Software Engineering (CSSE), AP Computer Science Principles (CSP), and AP Computer Science A (CSA).   
 
