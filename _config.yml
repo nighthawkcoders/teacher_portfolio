@@ -21,5 +21,8 @@ plugins:
 header_pages:
   - navigation/blog.md
   - navigation/search.html
+  - navigation/game1.html
+  - navigation/game2.html
+  - navigation/login.md
 
 
