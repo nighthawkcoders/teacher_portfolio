@@ -24,7 +24,7 @@ permalink: /java/login
 </form>
 
 <script type="module">
-    import { javaURI, options } from '/teacher_portfolio/assets/js/api/config.js';
+    import { javaURI, fetchOptions } from '/teacher_portfolio/assets/js/api/config.js';
 
     // Set the URLs for the endpoints used in this script.
     const URL = javaURI + '/authenticate';
@@ -41,7 +41,7 @@ permalink: /java/login
 
         // Modify the options to use the POST method and include the request body.
         const authOptions = {
-            ...options, // This will copy all properties from options
+            ...fetchOptions, // This will copy all properties from options
             method: 'POST', // Override the method property
             cache: 'no-cache', // Set the cache property
             body: JSON.stringify(body)
