@@ -1,10 +1,10 @@
-export var uri;
+export var pythonURI;
 if (location.hostname === "localhost") {
-        uri = "http://localhost:8086";
+        pythonURI = "http://localhost:8086";
 } else if (location.hostname === "127.0.0.1") {
-        uri = "http://127.0.0.1:8086";
+        pythonURI = "http://127.0.0.1:8086";
 } else {
-        uri = "https://flask2.nighthawkcodingsociety.com";
+        pythonURI = "https://flask2.nighthawkcodingsociety.com";
 }
 
 export var javaURI;
