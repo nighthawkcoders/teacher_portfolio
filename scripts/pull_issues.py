@@ -5,7 +5,7 @@ import requests
 import json
 
 
-def generate_markdown_file(issue_data, file_path):
+def generate_markdown_file(issue_data, file_path, course):
     """
     Generate a Markdown file for a GitHub issue.
     
@@ -21,7 +21,7 @@ def generate_markdown_file(issue_data, file_path):
         file.write('layout: post\n')  # Adjust layout as needed
         
         file.write('tags: [github, issue]\n')  # Add relevant tags
-        file.write("courses: {'csa': {'week': " + str(issue_data['week']) + "}}\n")
+        file.write("courses: {'"+ course + "': {'week': " + str(issue_data['week']) + "}}\n")
         file.write("type : issues\n")
         file.write("description : Automatically Populated Github Issue\n")
         file.write('---\n\n')
@@ -43,7 +43,7 @@ def get_github_repository_issues(token=None):
     query = """
     query {
     organization(login: "nighthawkcoders") {
-        projectsV2(first: 1) {
+        projectsV2(first: 2) {
         nodes {
             items(first: 100) {
             nodes {
@@ -101,9 +101,9 @@ def create_issues():
   repo_name = "jcc_frontend"
   token = getToken()["GithubApi"] 
   
-  issues_data = get_github_repository_issues(token)["data"]["organization"]["projectsV2"]["nodes"][0]["items"]["nodes"]
+  csa_data = get_github_repository_issues(token)["data"]["organization"]["projectsV2"]["nodes"][0]["items"]["nodes"]
   date1 = datetime(2023, 8, 21)
-  for issue in issues_data:
+  for issue in csa_data:
       issue = issue["content"]
       if issue:
         dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
@@ -117,7 +117,27 @@ def create_issues():
             'created_at': issue["createdAt"][:10],
             'week': math.floor(week - 3)
         }
-        generate_markdown_file(issue_data, f"_posts/{dueDate}-{issue['title'].replace(' ', '-').replace('/', ' ')}_GithubIssue_.md")
+        generate_markdown_file(issue_data, f"_posts/{dueDate}-{issue['title'].replace(' ', '-').replace('/', ' ')}_GithubIssue_.md", "csa")
+
+  # Recieves the CSP data through searching the second project entry rather than the first
+  csp_data = get_github_repository_issues(token)["data"]["organization"]["projectsV2"]["nodes"][1]["items"]["nodes"]
+  date1 = datetime(2023, 8, 21)
+  for issue in csp_data:
+      issue = issue["content"]
+      if issue:
+        dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
+        year, month, day = map(int, dueDate.split("-"))
+        date2 = datetime(year,month,day)
+        difference = date2 - date1
+        week = difference.days/7
+        issue_data = {
+            'title': issue["title"],
+            'body': issue["body"],
+            'created_at': issue["createdAt"][:10],
+            'week': math.floor(week - 3)
+        }
+        generate_markdown_file(issue_data, f"_posts/{dueDate}-{issue['title'].replace(' ', '-').replace('/', ' ')}_GithubIssue_.md", "csp")
+
 
 def getToken():
     # Replace 'YOUR_API_ENDPOINT' with the actual HTTP API endpoint URL
