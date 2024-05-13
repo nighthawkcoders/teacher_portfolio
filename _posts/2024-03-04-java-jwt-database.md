@@ -21,36 +21,16 @@ permalink: /java/database
 </table>
 
 <!-- Script sequence (has no function) and will execute when the page is loaded -->
-<script>
-  // Prepare HTML result container for new output
-  const resultContainer = document.getElementById("result");
+<script type="module">
+  import { javaURI, fetchOptions } from '/teacher_portfolio/assets/js/api/config.js';
 
-  // URI identifies the resource
-  let URI = '';
-  if (location.hostname === "localhost") {
-      URI = "http://localhost:8085";
-  } else if (location.hostname === "127.0.0.1") {
-          URI = "http://127.0.0.1:8085";
-  } else {
-          URI = "https://spring.nighthawkcodingsociety.com";
-  }
-  // URL identifies the web address login
+    const resultContainer = document.getElementById("result");
+
   // prepare URL
-  const URL = URI + '/api/person/';
-
-  // Set options for cross-origin header request
-  const options = {
-    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'include', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+  const URL = javaURI + '/api/person/';
 
   // fetch the API
-  fetch(URL, options)
+  fetch(URL, fetchOptions)
     // response is a RESTful "promise" on any successful fetch
     .then(response => {
       // Check for response errors and display

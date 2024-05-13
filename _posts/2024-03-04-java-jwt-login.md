@@ -23,46 +23,34 @@ permalink: /java/login
     <p id="error-message" style="color: red;"></p>
 </form>
 
-<script>
-    // URI identifies the resource
-    let URI = '';
-    if (location.hostname === "localhost") {  // location.hostname is built-in JavaScript property
-        URI = "http://localhost:8085";
-    } else if (location.hostname === "127.0.0.1") {
-            URI = "http://127.0.0.1:8085";
-    } else {
-            URI = "https://spring.nighthawkcodingsociety.com";
-    }
-    // URL identifies the web address login
-    const URL = URI + '/authenticate';
-    // The redirect constant identifies the web page to open on login success
-    const redirect_prefix = "{{ site.baseurl }}"; // Use a Liquid tag to get the baseurl
-    const redirect = redirect_prefix + '/java/database'; 
+<script type="module">
+    import { javaURI, fetchOptions } from '/teacher_portfolio/assets/js/api/config.js';
 
+    // Set the URLs for the endpoints used in this script.
+    const URL = javaURI + '/authenticate';
+    const redirect =  "{{site.baseurl}}" + '/java/database'; 
 
-    function login_user(){
-        // Set body to include login data
+    // Method to login user
+    window.login_user = function() {
+
+        // Set body to include login data from HTML form
         const body = {
             email: document.getElementById("uid").value,
             password: document.getElementById("password").value,
         };
 
-        // Set Headers to support cross-origin
-        const options = {
-            method: 'POST',
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'include', // include, *same-origin, omit
-            body: JSON.stringify(body),
-            headers: {
-                "content-type": "application/json",
-            },
+        // Modify the options to use the POST method and include the request body.
+        const authOptions = {
+            ...fetchOptions, // This will copy all properties from options
+            method: 'POST', // Override the method property
+            cache: 'no-cache', // Set the cache property
+            body: JSON.stringify(body)
         };
 
         document.getElementById("error-message").textContent = "";
 
         // Fetch JWT
-        fetch(URL, options)
+        fetch(URL, authOptions)
         .then(response => {
             // trap error response from Web API
             if (!response.ok) {
