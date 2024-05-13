@@ -122,7 +122,7 @@ search_exclude: true
                 loginForm.style.display = 'block';
                 dataTable.style.display = 'none';
 
-                const errorMsg = 'Database response error: ' + response.status;
+                const errorMsg = "Spring server response: " + response.status;
                 console.log(errorMsg);
                 const tr = document.createElement("tr");
                 const td = document.createElement("td");
@@ -162,7 +162,7 @@ search_exclude: true
             loginForm.style.display = 'block';
             dataTable.style.display = 'none'; 
 
-            console.error(err);
+            console.error("Network error: " + err);
             const tr = document.createElement("tr");
             const td = document.createElement("td");
             td.innerHTML = err + ": " + URL;
@@ -209,7 +209,7 @@ search_exclude: true
                 loginForm.style.display = 'block';
                 dataTable.style.display = 'none';
 
-                const errorMsg = 'Database response error: ' + response.status;
+                const errorMsg = "Flask server response: " + response.status;
                 console.log(errorMsg);
                 const tr = document.createElement("tr");
                 const td = document.createElement("td");
@@ -249,7 +249,7 @@ search_exclude: true
             loginForm.style.display = 'block';
             dataTable.style.display = 'none'; 
 
-            console.error(err);
+            console.error("Network error: " + err);
             const tr = document.createElement("tr");
             const td = document.createElement("td");
             td.innerHTML = err + ": " + URL;
