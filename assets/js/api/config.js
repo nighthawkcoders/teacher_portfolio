@@ -4,7 +4,7 @@ if (location.hostname === "localhost") {
 } else if (location.hostname === "127.0.0.1") {
         pythonURI = "http://127.0.0.1:8086";
 } else {
-        pythonURI = "https://flask2.nighthawkcodingsociety.com";
+        pythonURI = "https://flask.nighthawkcodingsociety.com";
 }
 
 export var javaURI;
