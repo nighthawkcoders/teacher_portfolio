@@ -3,6 +3,7 @@ from datetime import datetime
 import math
 import requests
 import json
+from datetime import date
 
 
 def generate_markdown_file(issue_data, file_path, course):
@@ -110,7 +111,10 @@ def create_issues():
   for issue in csa_data:
       issue = issue["content"]
       if issue:
-        dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
+        try:
+          dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
+        except:
+          dueDate = date.today().strftime('%Y-%m-%d')
         year, month, day = map(int, dueDate.split("-"))
         date2 = datetime(year,month,day)
         difference = date2 - date1
@@ -129,7 +133,10 @@ def create_issues():
   for issue in csp_data:
       issue = issue["content"]
       if issue:
-        dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
+        try:
+          dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
+        except:
+          dueDate = date.today().strftime('%Y-%m-%d')
         year, month, day = map(int, dueDate.split("-"))
         date2 = datetime(year,month,day)
         difference = date2 - date1
