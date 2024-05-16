@@ -27,6 +27,8 @@ def generate_markdown_file(issue_data, file_path, course):
         file.write("description : Automatically Populated Github Issue\n")
         file.write('---\n\n')
         # Write issue body
+        file.write("[Issue Link](" + issue_data['url'] + ")\n\n")
+
         file.write(issue_data['body'] + '\n\n')
         
         # Write comments if available
@@ -111,10 +113,13 @@ def create_issues():
   for issue in csa_data:
       issue = issue["content"]
       if issue:
-        try:
-          dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
-        except:
-          dueDate = date.today().strftime('%Y-%m-%d')
+        dueDate = date.today().strftime('%Y-%m-%d')  # default value
+        for i in [4, 3]:
+            try:
+                dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][i]["date"]
+                break  # if the date is found, exit the loop
+            except:
+                pass  # if the date is not found, continue with the next index
         year, month, day = map(int, dueDate.split("-"))
         date2 = datetime(year,month,day)
         difference = date2 - date1
@@ -122,6 +127,7 @@ def create_issues():
         issue_data = {
             'title': issue["title"],
             'body': issue["body"],
+            'url': issue["url"],
             'created_at': issue["createdAt"][:10],
             'week': math.floor(week - 3)
         }
@@ -133,10 +139,13 @@ def create_issues():
   for issue in csp_data:
       issue = issue["content"]
       if issue:
-        try:
-          dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][4]["date"]
-        except:
-          dueDate = date.today().strftime('%Y-%m-%d')
+        dueDate = date.today().strftime('%Y-%m-%d')  # default value
+        for i in [4, 3]:
+            try:
+                dueDate = issue["projectItems"]["nodes"][0]["fieldValues"]["nodes"][i]["date"]
+                break  # if the date is found, exit the loop
+            except:
+                pass  # if the date is not found, continue with the next index
         year, month, day = map(int, dueDate.split("-"))
         date2 = datetime(year,month,day)
         difference = date2 - date1
@@ -144,6 +153,7 @@ def create_issues():
         issue_data = {
             'title': issue["title"],
             'body': issue["body"],
+            'url': issue["url"],
             'created_at': issue["createdAt"][:10],
             'week': math.floor(week - 3)
         }
