@@ -7,18 +7,52 @@ search_exclude: true
 .login-container {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;  /* allows the cards to wrap onto the next line if the screen is too small */
 }
 
-.login-form {
+.login-card {
+    margin-top: 0;  /* remove the top margin */
     width: 45%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+}
+
+.login-card h1 {
+    margin-bottom: 20px;
+}
+
+.login-card table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.details-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;  /* center the text */
+}
+
+.details-button:hover {
+    background-color: #0056b3;
 }
 </style>
+
 
 <div class="login-container">
 
 <!-- Java Login Form -->
-<div class="login-form">
-    <h1>User Login (Java)</h1>
+<div class="login-card">
+    <h1 id="javaTitle"> User Login (Java)</h1>
     <form id="javaForm" action="javascript:javaLogin()">
         <p><label>
             User ID:
@@ -46,11 +80,12 @@ search_exclude: true
             <!-- javascript generated data -->
         </tbody>
     </table>
+    <a href="#" id="javaButton" class="details-button">Java Details</a>
 </div>
 
 <!-- Python Login Form -->
-<div class="login-form">
-    <h1>User Login (Python)</h1>
+<div class="login-card">
+    <h1 id="pythonTitle">User Login (Python)</h1>
     <form id="pythonForm" action="javascript:pythonLogin()">
         <p><label>
             User ID:
@@ -77,6 +112,7 @@ search_exclude: true
             <!-- javascript generated data -->
         </tbody>
     </table>
+    <a href="#" id="pythonButton" class="details-button">Python Details</a>
 </div>
 
 
@@ -107,6 +143,7 @@ search_exclude: true
        // Define the loginForm and dataTable variables
        const loginForm = document.getElementById('javaForm');
        const dataTable = document.getElementById('javaTable');
+       const dataButton = document.getElementById('javaButton');
 
         // prepare HTML result container for new output
         const resultContainer = document.getElementById("javaResult");
@@ -121,6 +158,7 @@ search_exclude: true
                 // fails, show login form and hide data
                 loginForm.style.display = 'block';
                 dataTable.style.display = 'none';
+                dataButton.style.display = 'none';
 
                 const errorMsg = "Spring server response: " + response.status;
                 console.log(errorMsg);
@@ -134,6 +172,7 @@ search_exclude: true
             // valid response will contain JSON data
             loginForm.style.display = 'none';
             dataTable.style.display = 'block';
+            dataButton.style.display = 'block';
 
             response.json().then(data => {
                 console.log(data);
@@ -161,6 +200,7 @@ search_exclude: true
            // fails, show login form and hide data
             loginForm.style.display = 'block';
             dataTable.style.display = 'none'; 
+            dataButton.style.display = 'none'; 
 
             console.error("Network error: " + err);
             const tr = document.createElement("tr");
@@ -194,6 +234,7 @@ search_exclude: true
        // Define the loginForm and dataTable variables
        const loginForm = document.getElementById('pythonForm');
        const dataTable = document.getElementById('pythonTable');
+       const dataButton = document.getElementById('pythonButton');
 
         // prepare HTML result container for new output
         const resultContainer = document.getElementById("pythonResult");
@@ -208,6 +249,7 @@ search_exclude: true
                 // fails, show login form and hide data
                 loginForm.style.display = 'block';
                 dataTable.style.display = 'none';
+                dataButton.style.display = 'none';
 
                 const errorMsg = "Flask server response: " + response.status;
                 console.log(errorMsg);
@@ -221,6 +263,7 @@ search_exclude: true
             // valid response will contain JSON data
             loginForm.style.display = 'none';
             dataTable.style.display = 'block';
+            dataButton.style.display = 'block';
 
             response.json().then(data => {
                 console.log(data);
@@ -248,6 +291,7 @@ search_exclude: true
            // fails, show login form and hide data
             loginForm.style.display = 'block';
             dataTable.style.display = 'none'; 
+            dataButton.style.display = 'none';
 
             console.error("Network error: " + err);
             const tr = document.createElement("tr");
