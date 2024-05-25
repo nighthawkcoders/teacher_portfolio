@@ -216,7 +216,7 @@ search_exclude: true
         // Set login options
         const options = {};
         // Authentication endpoint
-        options.URL = pythonURI + '/api/users/authenticate';
+        options.URL = pythonURI + '/api/authenticate';
         options.callback = pythonDatabase;  // method to call on success
         options.message = "python-message"; 
         // Set fetch options
@@ -230,7 +230,7 @@ search_exclude: true
     }
 
     function pythonDatabase() {
-       const URL = pythonURI + '/api/users/';
+       const URL = pythonURI + '/api/users';
        // Define the loginForm and dataTable variables
        const loginForm = document.getElementById('pythonForm');
        const dataTable = document.getElementById('pythonTable');
