@@ -106,6 +106,7 @@ search_exclude: true
             <th>Name</th>
             <th>ID</th>
             <th>Age</th>
+            <th>Role</th>
         </tr>
         </thead>
         <tbody id="pythonResult">
@@ -230,7 +231,7 @@ search_exclude: true
     }
 
     function pythonDatabase() {
-       const URL = pythonURI + '/api/users';
+       const URL = pythonURI + '/api/id';
        // Define the loginForm and dataTable variables
        const loginForm = document.getElementById('pythonForm');
        const dataTable = document.getElementById('pythonTable');
@@ -267,23 +268,7 @@ search_exclude: true
 
             response.json().then(data => {
                 console.log(data);
-                for (const row of data) {
-                    // tr and td build out for each row
-                    const tr = document.createElement("tr");
-                    const name = document.createElement("td");
-                    const id = document.createElement("td");
-                    const age = document.createElement("td");
-                    // data is specific to the API
-                    name.innerHTML = row.name; 
-                    id.innerHTML = row.uid; 
-                    age.innerHTML = row.age; 
-                    // this builds td's into tr
-                    tr.appendChild(name);
-                    tr.appendChild(id);
-                    tr.appendChild(age);
-                    // append the row to table
-                    resultContainer.appendChild(tr);
-                }
+                resultContainer.appendChild(displayRow(data));
             })
         })
         // catch fetch errors (ie ACCESS to server blocked)
@@ -300,6 +285,23 @@ search_exclude: true
             tr.appendChild(td);
             resultContainer.appendChild(tr);
         });
+    }
+
+    function displayRow(row) {
+        const tr = document.createElement("tr");
+        const name = document.createElement("td");
+        const id = document.createElement("td");
+        const age = document.createElement("td");
+        const role = document.createElement("td");
+        name.innerHTML = row.name;
+        id.innerHTML = row.uid;
+        age.innerHTML = row.age;
+        role.innerHTML = row.role;
+        tr.appendChild(name);
+        tr.appendChild(id);
+        tr.appendChild(age);
+        tr.appendChild(role);
+        return tr;
     }
 
     window.onload = function() {
