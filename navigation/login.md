@@ -18,6 +18,7 @@ search_exclude: true
     padding: 20px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     margin-bottom: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling */
 }
 
 .login-card h1 {
@@ -74,6 +75,7 @@ search_exclude: true
             <th>Name</th>
             <th>ID</th>
             <th>Age</th>
+            <th>Roles</th>
         </tr>
         </thead>
         <tbody id="javaResult">
@@ -140,7 +142,7 @@ search_exclude: true
     }
 
     function javaDatabase() {
-       const URL = javaURI + '/api/person/';
+       const URL = javaURI + '/api/person';
        // Define the loginForm and dataTable variables
        const loginForm = document.getElementById('javaForm');
        const dataTable = document.getElementById('javaTable');
@@ -177,23 +179,24 @@ search_exclude: true
 
             response.json().then(data => {
                 console.log(data);
-                for (const row of data) {
-                    // tr and td build out for each row
-                    const tr = document.createElement("tr");
-                    const name = document.createElement("td");
-                    const id = document.createElement("td");
-                    const age = document.createElement("td");
-                    // data is specific to the API
-                    name.innerHTML = row.name; 
-                    id.innerHTML = row.email; 
-                    age.innerHTML = row.age; 
-                    // this builds td's into tr
-                    tr.appendChild(name);
-                    tr.appendChild(id);
-                    tr.appendChild(age);
-                    // append the row to table
-                    resultContainer.appendChild(tr);
-                }
+                // tr and td build out for each row
+                const tr = document.createElement("tr");
+                const name = document.createElement("td");
+                const id = document.createElement("td");
+                const age = document.createElement("td");
+                const roles = document.createElement("td");
+                // data is specific to the API
+                name.innerHTML = data.name; 
+                id.innerHTML = data.email; 
+                age.innerHTML = data.age; 
+                roles.innerHTML = data.roles.map(role => role.name).join(', ');                 
+                // this builds td's into tr
+                tr.appendChild(name);
+                tr.appendChild(id);
+                tr.appendChild(age);
+                tr.appendChild(roles);
+                // append the row to table
+                resultContainer.appendChild(tr);
             })
         })
         // catch fetch errors (ie ACCESS to server blocked)
