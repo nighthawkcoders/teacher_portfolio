@@ -1,7 +1,6 @@
 // SettingsControl.js key purpose is key/value management for game settings.
 import LocalStorage from "./LocalStorage.js";
 import GameEnv from "./GameEnv.js";
-import GameControl from "./GameControl.js";
 import { enableLightMode, enableDarkMode } from './Document.js';
 
 
@@ -68,10 +67,7 @@ export class SettingsControl extends LocalStorage{
     constructor(){ //default keys for localStorage
         var keys = {
             userID:"userID",
-            currentLevel:"currentLevel",
             isInverted:"isInverted",
-            gameSpeed:"gameSpeed",
-            gravity:"gravity",
             difficulty: "difficulty",
         }; 
         super(keys); //creates this.keys
@@ -140,14 +136,8 @@ export class SettingsControl extends LocalStorage{
         */
         // 'userID', the value is parsed as a string
         GameEnv.userID = handleKey('userID', GameEnv.userID);
-        // 'currentLevel', the value is parsed as a an index into the GameEnv.levels array
-        GameEnv.currentLevel = handleKey('currentLevel', GameEnv.levels[Number(this[this.keys.currentLevel])]);
         // 'isInverted', the value is parsed to a boolean
         GameEnv.isInverted = handleKey('isInverted', GameEnv.isInverted, (val) => val === "true");
-        // 'gameSpeed', the value is parsed to a floating point number
-        GameEnv.gameSpeed = handleKey('gameSpeed', GameEnv.gameSpeed, parseFloat);
-        // 'gravity', the value is parsed to a floating point number
-        GameEnv.gravity = handleKey('gravity', GameEnv.gravity, parseFloat);
         // 'difficulty', the value is parsed to a floating point number
         GameEnv.difficulty = handleKey('difficulty', GameEnv.difficulty);
 
@@ -163,14 +153,6 @@ export class SettingsControl extends LocalStorage{
             this.save(this.keys.userID);
         });
         
-        // Listen for the 'resize' update event
-        window.addEventListener("resize",()=>{ 
-            // Update the current level index when the level changes
-            this[this.keys.currentLevel] = GameEnv.levels.indexOf(GameEnv.currentLevel);
-            // Save the current level index to local storage
-            this.save(this.keys.currentLevel); 
-        });
-
         // Listen for the 'isInverted' update event
         window.addEventListener("isInverted", (e)=>{ 
             // Update the isInverted value when an invert event is fired
@@ -179,36 +161,6 @@ export class SettingsControl extends LocalStorage{
             GameEnv.isInverted = this[this.keys.isInverted]; 
             // Save the isInverted value to local storage
             this.save(this.keys.isInverted); 
-        });
-
-        // Listen for the 'gameSpeed' update event
-        window.addEventListener("gameSpeed",(e)=>{ 
-            // Update the gameSpeed value when a speed event is fired
-            this[this.keys.gameSpeed] = e.detail.gameSpeed();
-            // Update the gameSpeed value in the game environment
-            GameEnv.gameSpeed = parseFloat(this[this.keys.gameSpeed]); 
-            // Save the gameSpeed value to local storage
-            this.save(this.keys.gameSpeed); 
-        });
-
-        // Listen for the 'gravity' update event
-        window.addEventListener("gravity",(e)=>{ 
-            // Update the gravity value when a gravity event is fired
-            this[this.keys.gravity] = e.detail.gravity();
-            // Update the gravity value in the game environment
-            GameEnv.gravity = parseFloat(this[this.keys.gravity]); 
-            // Save the gravity value to local storage
-            this.save(this.keys.gravity); 
-        });
-
-        // Listen for the 'gravity' update event
-        window.addEventListener("difficulty",(e)=>{ 
-            // Update the gravity value when a gravity event is fired
-            this[this.keys.difficulty] = e.detail.difficulty();
-            // Update the gravity value in the game environment
-            GameEnv.difficulty = parseFloat(this[this.keys.difficulty]); 
-            // Save the gravity value to local storage
-            this.save(this.keys.difficulty); 
         });
 
         window.addEventListener("isTheme", (e)=>{ 
@@ -245,52 +197,6 @@ export class SettingsControl extends LocalStorage{
 
         div.append(userID); // wrap input element in div
         return div;
-    }
-
-    /**
-     * Getter for the levelTable property.
-     * Creates a table with a row for each game level.
-     * Each row contains the level number and the level tag.
-     * Passive levels are skipped and not added to the table.
-     * @returns {HTMLTableElement} The table containing the game levels.
-     */
-    get levelTable(){
-        // create table element
-        var t = document.createElement("table");
-        t.className = "table levels";
-        //create table header
-        var header = document.createElement("tr");
-        var th1 = document.createElement("th");
-        th1.innerText = "#";
-        header.append(th1);
-        var th2 = document.createElement("th");
-        th2.innerText = "Level Tag";
-        header.append(th2);
-        t.append(header);
-
-        // Create table rows/data
-        for(let i = 0, count = 1; i < GameEnv.levels.length; i++){
-            if (GameEnv.levels[i].passive) //skip passive levels
-                continue; 
-            // add level to table
-            var row = document.createElement("tr");
-            var td1 = document.createElement("td");
-            td1.innerText = String(count++); //human counter
-            row.append(td1);
-            // place level name in button   
-            var td2 = document.createElement("td");
-            td2.innerText = GameEnv.levels[i].tag;
-            row.append(td2);
-            // listen for row click
-            row.addEventListener("click",()=>{ // when player clicks on the row
-                //transition to selected level
-                GameControl.transitionToLevel(GameEnv.levels[i]); // resize event is triggered in transitionToLevel
-            })
-            // add level row to table
-            t.append(row);
-        }
-
-        return t; //returns <table> element
     }
 
     /**
@@ -359,69 +265,6 @@ export class SettingsControl extends LocalStorage{
         // document.getElementById('settingsContainer').appendChild(div);
     }
 
-    /**
-     * Getter for the gameSpeedInput property.
-     * Creates a div with a number input for the user to adjust the game speed.
-     * The input's value is bound to the GameEnv's gameSpeed state.
-     * @returns {HTMLDivElement} The div containing the gameSpeed input.
-     */
-
-    get gameSpeedInput() {
-        const div = document.createElement("div");
-        div.innerHTML = "Game Speed: "; // label
-    
-        const gameSpeed = document.createElement("input");  // get user defined game speed
-        gameSpeed.type = "number";
-        gameSpeed.min = 1.0;
-        gameSpeed.max = 8.0;
-        gameSpeed.step = 0.1;
-        gameSpeed.default = 2.0; // customed property for default value
-        gameSpeed.value = GameEnv.gameSpeed; // GameEnv contains latest game speed
-        gameSpeed.className = "input gameSpeed";    // custom style in platformer-styles.scss
-    
-        gameSpeed.addEventListener("change", () => { 
-            // check values are within range
-            const value = parseFloat(gameSpeed.value).toFixed(1);
-            gameSpeed.value = (value < gameSpeed.min || value > gameSpeed.max || isNaN(value)) ? gameSpeed.default : value;
-            // dispatch event to update game speed
-            window.dispatchEvent(new CustomEvent("gameSpeed", { detail: {gameSpeed:()=>gameSpeed.value} }));
-        });
-    
-        div.append(gameSpeed); // wrap input element in div
-        return div;
-    }
-
-    /**
-     * Getter for the gravityInput property.
-     * Creates a div with a number input for the user to adjust the game gravity.
-     * The input's value is bound to the GameEnv's gravity state.
-     * @returns {HTMLDivElement} The div containing the gravity input.
-     */
-    get gravityInput() {
-        const div = document.createElement("div");
-        div.innerHTML = "Gravity: "; // label
-    
-        const gravity = document.createElement("input");  // get user defined gravity
-        gravity.type = "number";
-        gravity.min = 1.0;
-        gravity.max = 8.0;
-        gravity.step = 0.1;
-        gravity.default = 3.0; // customed property for default value
-        gravity.value = GameEnv.gravity; // GameEnv contains latest gravity
-        gravity.className = "input gravity";    // custom style in platformer-styles.scss
-    
-        gravity.addEventListener("change", () => { 
-            // check values are within range
-            const value = parseFloat(gravity.value).toFixed(1);
-            gravity.value = (value < gravity.min || value > gravity.max || isNaN(value)) ? gravity.default : value;
-            // dispatch event to update gravity
-            window.dispatchEvent(new CustomEvent("gravity", { detail: {gravity:()=>gravity.value} }));
-        });
-    
-        div.append(gravity); // wrap input element in div
-        return div;
-    }
-
 
     /**
      * Getter for the difficultyInput property.
@@ -455,7 +298,7 @@ export class SettingsControl extends LocalStorage{
     
     /**
      * Static method to initialize the game settings controller and add the settings controls to the sidebar.
-     * Constructs an HTML table/menu from GameEnv.levels[] and HTML inputs for invert, game speed, and gravity.
+     * Constructs an HTML table/menu from HTML inputs for invert, theme, etc.
      * Each input has an event update associated with it.
      * All elements are appended to the sidebar.
      */
@@ -464,21 +307,9 @@ export class SettingsControl extends LocalStorage{
         var settingsControl = new SettingsControl();
         settingsControl.initialize();
 
-       // Get/Construct an HTML table/menu from GameEnv.levels[]
-       var levels = settingsControl.levelTable;
-       document.getElementById("sidebar").append(levels);
-
        // Get/Construct HTML input and event update for invert
        var invertControl = settingsControl.isInvertedInput;
        document.getElementById("sidebar").append(invertControl); 
-
-       // Get/Construct HTML input and event update for game speed 
-       var gameSpeed = settingsControl.gameSpeedInput;
-       document.getElementById("sidebar").append(gameSpeed);
-
-       // Get/Construct HTML input and event update for gravity
-       var gravityInput = settingsControl.gravityInput;
-       document.getElementById("sidebar").append(gravityInput);
 
        // Get/Construct HTML input and event update for difficulty
        var difficultyInput = settingsControl.difficultyInput;
