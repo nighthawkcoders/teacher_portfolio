@@ -82,7 +82,7 @@ search_exclude: true
             <!-- javascript generated data -->
         </tbody>
     </table>
-    <a href="#" id="javaButton" class="details-button">Java Details</a>
+    <a href="{{site.baseurl}}/javaUI" id="javaButton" class="details-button">Java Details</a>
 </div>
 
 <!-- Python Login Form -->
