@@ -50,33 +50,14 @@ const GameSetup = {
 
 
   /**
-   * Start button callback.
-   * Unhides the gameBegin button, waits for it to be clicked, then hides it again.
-   * @async
-   * @returns {Promise<boolean>} Always returns true.
-   */
-  startGameCallback: async function () {
-    const id = document.getElementById("gameBegin");
-    // Unhide the gameBegin button
-    id.hidden = false;
-
-    // Wait for the startGame button to be clicked
-    await this.waitForButtonStart('startGame');
-    // Hide the gameBegin button after it is clicked
-    id.hidden = true;
-
-    return true;
-  },
-
-  /**
    * Home screen exits on the Game Begin button.
    * Checks if the gameBegin button is hidden, which means the game has started.
    * @returns {boolean} Returns true if the gameBegin button is hidden, false otherwise.
    */
   homeScreenCallback: function () {
     // gameBegin hidden means the game has started
-    const id = document.getElementById("gameBegin");
-    return id.hidden;
+    //const id = document.getElementById("gameBegin");
+    ////return id.hidden;
   },
 
   /*  ==========================================

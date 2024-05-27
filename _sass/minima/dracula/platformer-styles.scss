@@ -22,12 +22,6 @@
   padding: 5px;
   color: $dt-red !important; // use the high-emphasis color for the text
 }
-/// Game Begin, Game Over, Settings IDs
-/// @description These IDs correspond to buttons in game screen. Key styling is to ensure they are on top of other elements.
-#gameBegin, #gameOver, #settings, #leaderboard {
-  position: relative;
-  z-index: 2; // z-index position ensures these buttons are on top.
-}
 #addRow, #backToGame {
   position: relative;
   z-index: 2; // z-index position ensures these buttons are on top.
@@ -51,9 +45,11 @@
   top: $spacing-unit * 1.865;  // matches minima “.site-header min-height height”, reference: https://github.com/jekyll/minima/blob/master/_sass/minima/_layout.scss
   width: fit-content;
   // Styles for the score and buttons
-  #score, #gameBegin, #gameOver, #settings, #leaderboard {
+  .submenu-item {
     display: inline-block; // Make the score and buttons inline
     margin-right: $spacing-unit; // Add some margin to the right of each item
+    position: relative;
+    z-index: 2; // z-index position ensures these buttons are on top.
   }
 }
 /// Sidebar class

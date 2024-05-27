@@ -18,23 +18,16 @@ permalink: /javaUI
 
   <!-- Wrap both the controls and gameplay in a container div -->
   <div id="canvasContainer">
-    <div class="submenu">
-      <div id="gameBegin" hidden>
-          <button id="startGame">Start Game</button>
-      </div>
-      <div id="gameOver" hidden>
-          <button id="restartGame">Restart</button>
-      </div>
-      <div id="settings"> <!-- Controls -->
-          <!-- Background controls -->
-          <button id="settings-button">Settings</button>
-      </div>
-      <div id="leaderboard"> <!-- Controls -->
-          <button id="leaderboard-button">Leaderboard</button>
-      </div>
+        <div class="submenu">
+        <div class="submenu-item"> <!-- Controls -->
+            <button id="settings-button">Settings</button>
+        </div>
+        <div class="submenu-item"> <!-- Controls -->
+            <button id="leaderboard-button">Database</button>
+        </div>
+        </div>
+        <!-- JavaScript-generated canvas items are inserted here -->
     </div>
-    <!-- JavaScript-generated canvas items are inserted here -->
-  </div>
   
   <script type="module">
       // Imports to drive game
