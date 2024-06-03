@@ -20,8 +20,8 @@ plugins:
 - jekyll-remote-theme
 header_pages:
   - navigation/blog.md
+  - navigation/backend.md
   - navigation/game2.html
   - navigation/search.html
-  - navigation/login.md
 
 
